@@ -4,6 +4,7 @@
 <html>
 <head>
 
+
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -15,9 +16,6 @@
 <script type="text/javascript" src="../lang/summernote-ko-KR.js"></script>
 
 <!-- <link rel="stylesheet" href="//mail1.daumcdn.net/mail_static/mint/dist/5f135a6/css/style-main.css" class="daumMailCss"> -->
-
-
-
 
 
 <style>
@@ -35,10 +33,13 @@
     display: flex;
 }
 
+</style> 
+
+<style>
 
 
 .side_menu{
-    position:fixed;
+    position:relative;
     top:15px;
     left:0;
     bottom:0;
@@ -54,22 +55,18 @@
 	list-style: none;
 }
 
-li{
+mail_gruop >li{
 	margin-top: 20px;
 }
 
 div#right_window{
-	position: absolute;
+	position: relative;
 	top:15px;
 	left:230px;
 	/* background-color: maroon; */
 	
 }
 
-</style>
-
-
- <style>
 
             table, td, th{
                 border : 1px solid black;
@@ -117,10 +114,7 @@ div#right_window{
 
 
 
-
-<script>
-
-$(function(){
+<!-- $(function(){
 	$("#li1").on("click",function(){
 		$ .ajax
 		url: "write.jsp",
@@ -133,15 +127,9 @@ $(function(){
 		$("#div").html(a);
 	})
 }
+ -->
 
-</script>
-
-
-
-
-
-
-	<script>
+<script>
 		$(document).ready(function() {
 			// Side menu 클릭 이벤트 바인딩
 			$(".side-menu-item").click(function() {
@@ -161,12 +149,18 @@ $(function(){
 				});
 			});
 		});
-	</script>
+	</script> 
 
 
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
 
 </head>
+
+
+
+
 
 
 <body>
@@ -177,9 +171,7 @@ $(function(){
 		 <div class="side_menu">
 	            
 	            <div class="write_mail">
-	          	  <!-- <button id="edit" class="btn btn-primary" onclick="edit()" type="button">Edit 1</button> -->
-	            
-	
+	          	  
 	                <button id="edit" class="btn btn-primary" onclick="edit()" type="button">
 	                	<span class="img_mail">메일쓰기</span>
 	               	</button>
@@ -222,12 +214,6 @@ $(function(){
 			    	</th>
 			    	<th>읽음</th>
 			    	<th>삭제</th>
-			    	
-			    	
-			    	
-			    	
-			    	
-			    	
 			    	
     	<div class="mail_toolbar">
 				    	<div class="mail_toolbar_count">
