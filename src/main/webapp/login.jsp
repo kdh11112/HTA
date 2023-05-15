@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,5 +15,11 @@
 		<input type="button" value="로그인" />
 		<input type="button" value="회원가입" />
 	</div>
+=======
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 </body>
 </html>
