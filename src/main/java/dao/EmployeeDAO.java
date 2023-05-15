@@ -101,7 +101,7 @@ public class EmployeeDAO {
 
 	}
 	
-	//아이디 중복체크
+	//회원가입 시 아이디 중복체크
 	public EmployeeVO getOne(String id) {
 		EmployeeVO vo = null;
 		sb.append("SELECT * FROM employee WHERE e_id=?");
@@ -137,6 +137,44 @@ public class EmployeeDAO {
 		
 	}	//getOne() end
 	
+	
+	// 로그인 시 IP와 PW 입력하면 vo 객체를 리턴
+		public EmployeeVO getOne(String e_id, String e_password) {
+			EmployeeVO vo = null;
+			sb.setLength(0);
+			sb.append("SELECT * FROM employee WHERE e_id=? and e_password=?");
+			
+			try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1,e_id);
+			pstmt.setString(2,e_password);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int e_number = rs.getInt("e_number");
+				String e_name = rs.getString("e_name");
+				String e_phone_number = rs.getString("e_phone_number");
+				int e_postal_code = rs.getInt("e_postal_code");
+				String e_address1 = rs.getString("e_address1");
+				String e_address2 = rs.getString("e_address2");
+				String e_birth = rs.getString("e_birth");
+				String e_date_joining_company = rs.getString("e_date_joining_company");
+				String e_retirement_date = rs.getString("e_retirement_date");
+				String e_gender = rs.getString("e_gender");
+				String e_official_responsibilities = rs.getString("e_official_responsibilities");
+				int e_total_vacation = rs.getInt("e_total_vacation");
+				String e_serving = rs.getString("e_serving");
+				String d_name = rs.getString("d_name");
+				vo= new EmployeeVO(e_number, e_name, e_id, e_password, e_phone_number, e_postal_code, e_address1, e_address2, e_birth, e_date_joining_company, e_retirement_date, e_retirement_date, e_gender, e_official_responsibilities, e_total_vacation, e_serving, d_name);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return vo;
+			
+		}	//getOne() end
+		
 	public void close() {
 		if(rs!=null)
 			try {
