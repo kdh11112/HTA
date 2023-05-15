@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +70,6 @@ function startTime() {
 	console.dir(now);
 	$("input[value='출근']").on("click", function() {
 		console.log("출근");
-		$("#external-events-list").html(now);
 	})
 
 	var year = now.getFullYear();
