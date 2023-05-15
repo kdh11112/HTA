@@ -1,4 +1,4 @@
-<%@page import="vo.MemberVO"%>
+<%@page import="vo.cm_MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
 	Object obj = session.getAttribute("vo");
 	String name = null;
 	if(obj != null){
-		MemberVO vo = (MemberVO)obj;
+		cm_MemberVO vo = (cm_MemberVO)obj;
 		name = vo.getName();
 	}
 %>
