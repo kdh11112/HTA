@@ -7,7 +7,7 @@
 String id = request.getParameter("id");
 //2.ID가 null이 아니면 
 if(id!=null){
-//3. MemberDAO
+//3. EmployeeDAO
 	EmployeeDAO dao = new EmployeeDAO();
 //4. dao.getOne(aaa)
 	EmployeeVO vo = dao.getOne(id);
