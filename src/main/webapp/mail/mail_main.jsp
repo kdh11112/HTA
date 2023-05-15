@@ -96,7 +96,7 @@ div#right_window{
             #name{width: 20%;}
             #email{width: 30%;}
             #addrs{width: 30%;}
-            
+             
             /* 선택자 
             1. tag
             2. id
