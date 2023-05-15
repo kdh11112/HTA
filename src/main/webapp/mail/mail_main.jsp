@@ -66,7 +66,7 @@ div#right_window{
 	/* background-color: maroon; */
 	
 }
-
+/*save*/
 
             table, td, th{
                 border : 1px solid black;
