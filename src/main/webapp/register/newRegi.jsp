@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
+
+	<!-- 추가할것 :
+	1. 전화번호 숫자만 입력 가능하게
+	2. 상세주소 무조건 입력하게
+	3. d_name 가입시 기본값?
+	4. datepicker 값 넘기기
+	
+ -->
 <style>
 * {
 	margin: 0px;
@@ -357,7 +365,7 @@ button {
 	    		document.getElementById("passwordError").innerHTML = "";
 	    		document.getElementById("passwordCheckError").innerHTML = "";
 	    		document.getElementById("genderError").innerHTML = "";
-		g		console.log("check : " + check);
+				console.log("check : " + check);
 				
 	    		$.ajax({
 	    			type: "POST",
