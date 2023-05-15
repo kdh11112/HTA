@@ -14,6 +14,7 @@ body, input, textarea, select, button, table {
 	font-size: 12px
 }
 
+
 img, fieldset {
 	border: 0
 }
@@ -10863,7 +10864,10 @@ html>body .view_memorialday_layer .memorialday_list .tx .ts table {
 	zoom: 1;
 	z-index: 1
 }
-
+#month_frame{
+	margin-left:100px;
+	width:900px;
+}
 .edit_calender_layer .calendar_btns {
 	padding: 12px 0 20px 14px;
 	z-index: 2

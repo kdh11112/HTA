@@ -35,6 +35,7 @@
 	                            
 	                            
 	                        <a class="nav-link" href="../mail/mail_main.jsp">사내메일함</a>
+	                        <a class="nav-link" href="../attendance/test2.jsp">근태관리</a>
 	                            
 	                            
 	                  <!--       <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError_1" aria-expanded="false" aria-controls="pagesCollapseError_1">
