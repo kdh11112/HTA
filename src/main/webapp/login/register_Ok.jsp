@@ -1,5 +1,5 @@
-<%@page import="hj.EmployeeVO"%>
-<%@page import="hj.EmployeeDAO"%>
+<%@page import="vo.EmployeeVO"%>
+<%@page import="dao.EmployeeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

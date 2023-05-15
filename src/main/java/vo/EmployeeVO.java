@@ -1,4 +1,4 @@
-package hj;
+package vo;
 
 public class EmployeeVO {
 	private int e_number;
