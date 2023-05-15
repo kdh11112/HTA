@@ -1,3 +1,6 @@
+<%@page import="vo.ApprovalVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.ApprovalDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,6 +18,12 @@
 		<link rel="shortcut icon" href="#">
     </head>
     <body class="sb-nav-fixed">
+    <%
+    	ApprovalDAO dao = new ApprovalDAO();
+    	
+    	
+    	
+    %>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
         <div id="layoutSidenav"> 
         <div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
@@ -27,26 +36,62 @@
                                 여기에 뭘 넣어볼까?
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table class="table table-striped .w-auto">
                                     <thead>
                                         <tr>
                                             <th>문서번호</th>
                                             <th>제목</th>
-                                            <th>문서종류</th>
+                                            <th>작성자</th>
                                             <th>기안일</th>
                                             <th>상태</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                        </tr>
-                                    </tbody>
+                                    <%
+                                    	ArrayList<ApprovalVO> list = dao.selectAll();
+                                    	for(ApprovalVO vo : list){
+                                    		
+                                    	
+                                    %>
+                                    	<tr style="line-height: 2;">
+                                    		<td><%=vo.getA_number() %></td>
+                                    		<td><%=vo.getA_title() %></td>
+                                    		<td><%=vo.getA_name() %></td>
+                                    		<td><%=vo.getA_end_date() %></td>
+                                    		<td><%=vo.getA_status() %></td>
+                                    	</tr>
+                                    <%
+                                    	}
+                                    %>
                                 </table>
+                                <tr>
+                                	<td colspan="4">
+                                	<nav aria-label="Page navigation example">
+									  <ul class="pagination">
+									    <li class="page-item">
+									      <a class="page-link" href="#" aria-label="Previous">
+									        <span aria-hidden="true">&laquo;</span>
+									      </a>
+									    </li>
+                                	<%
+                                		for(int i=0; i<10; i++){
+                                			
+                                	%>
+									    <li class="page-item">
+									  <a class="page-link" href="approvalList.jsp?pageNum=<%=i%>"> <%=i %></a>
+									    </li>
+                                	<%
+                                		}
+                                	%>
+									    <li class="page-item">
+									      <a class="page-link" href="#" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									      </a>
+									    </li>
+									  </ul>
+									</nav>
+                                			
+                                	</td>
+                                </tr>
                             </div>
                         </div>
                     </div>
