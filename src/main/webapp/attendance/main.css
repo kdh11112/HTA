@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script>
-   $(function(){
-      $("._month_cell").on("click",function(){
-         console.log("test");
-      })
-   })
-</script>
-<style>
+
 html, body {
 	height: 100%
-}
-._month_cell {
-	cursor: pointer;
-	color: blue;
 }
 
 body, p, h1, h2, h3, h4, h5, h6, menu, ul, ol, li, dl, dt, dd, table, th,
@@ -3451,6 +3433,7 @@ span.intercalary em {
 :root .dh_bubble .showagain input {
 	position: relative;
 	top: -1px\0
+
 }
 
 div.fadeout_skin {
@@ -22484,11 +22467,11 @@ div.sl_ex ul {
 	padding-top: 0
 }
 
-@
--moz-document url-prefix() { .layer_works .attendee .attendee_body
+
+/* -moz-document url-prefix() { .layer_works .attendee .attendee_body
 	.attendee_body_table .expand_left { width:71px
 	
-}
+} */
 
 .layer_works .attendee .attendee_header {
 	overflow-y: auto;
@@ -22507,7 +22490,7 @@ div.sl_ex ul {
 	width: 131px
 }
 
-}
+
 _::-webkit-full-page-media .attendee_header, _::-webkit-full-page-media .attendee_body,
 	_:future .attendee_header, _:future .attendee_body, :root .attendee_header,
 	:root .attendee_body {
@@ -31454,6 +31437,7 @@ div.scrl {
 	position: relative;
 	margin: 0;
 	margin-top: -1px\9
+
 }
 
 .grid_time_wrapper .grid_time {
@@ -31537,6 +31521,7 @@ div.scrl {
 	height: 59px;
 	overflow: hidden;
 	border-top: 1px solid #e3e4e7 \0
+
 }
 
 .weekly_calendar .day_schedule .settime_area.top {
@@ -31742,7 +31727,7 @@ div.scrl {
 .monthly_calendar .grid .today_area .outline {
 	width: auto;
 	background: #f5fbfd;
-	border: 1px solid #222
+	/* border: 1px solid #222 */
 }
 
 .monthly_calendar .grid .select_area {
@@ -34193,13 +34178,13 @@ div.scrl {
 	line-height: 50px
 }
 
-@
--moz-document url-prefix() { .view_history .cal_header_wrapper { height:26px;
+
+/* -moz-document url-prefix() { .view_history .cal_header_wrapper { height:26px;
 	padding-right: 17px;
 	background-color: #f9f9f9
 }
+ */
 
-}
 .ly_quick_wrap .ly_pop_history .ly_footer {
 	display: none
 }
@@ -36367,12 +36352,12 @@ div.scrl {
 	color: #157efd
 }
 
-@
--moz-document url-prefix() { :root .cp_ch_top .cp_info { line-height:14px
-	
-}
 
-}
+/* -moz-document url-prefix() { :root .cp_ch_top .cp_info { line-height:14px
+	
+} */
+
+
 .dh_widget .dh_widget_head .svc_ico, .dh_widget .dh_cmn_task button,
 	.dh_widget .ico_imp, .dh_widget .dh_selectbox .dh_selectbox_current:before,
 	.wdg_mail_list .check_imp label, .dh_widget_layer:before,
@@ -36858,6 +36843,7 @@ div.scrl {
 
 :root .widget_setting_layer .menu_count input[type="radio"] {
 	top: 1px\0
+
 }
 
 .widget_setting_layer .menu_count label {
@@ -36906,6 +36892,7 @@ div.scrl {
 
 :root .widget_setting_layer .widget_setitem li {
 	line-height: 28px\0
+
 }
 
 .nanum .widget_setting_layer .widget_setitem li {
@@ -37692,6 +37679,7 @@ div.scrl {
 	left: 100%;
 	top: 1px;
 	top: 0\0
+
 }
 
 .dh_widget .search_wrap {
@@ -38463,6 +38451,7 @@ div.scrl {
 	position: relative;
 	color: #000;
 	top: 1px\0
+
 }
 
 .svc_todo .wdg_task .ico_check:before {
@@ -39059,6 +39048,7 @@ div.scrl {
 	text-align: left;
 	border-radius: 3px;
 	border-radius: 4px\0
+
 }
 
 .dh_widget.svc_band .dh_selectbox_current .elps_txt {
@@ -39309,6 +39299,7 @@ div.atch_media li {
 .nanum .dh_widget .dh_selectbox_current .elps_txt {
 	line-height: 23px;
 	line-height: 22px\0
+
 }
 
 .nanum .dh_widget .btn_type {
@@ -39876,231 +39867,4 @@ button.close {
 	background: 0;
 	border: 0
 }
-</style>
 
-
-
-</head>
-
-
-<body>
-
-
-	<div id="month_frame" class="frame" onselectstart="return false;"
-		ondragstart="return false;" style="top: 101px; display: block;">
-		<h3 class="blind">월간 일정 보기</h3>
-		<div class="monthly_calendar">
-			<table cellpadding="0" cellspacing="0" class="week">
-
-				<tbody>
-					<tr class="_grid_header">
-						<th class="sun" title="일">일</th>
-						<th title="월">월</th>
-						<th title="화">화</th>
-						<th title="수">수</th>
-						<th title="목">목</th>
-						<th title="금">금</th>
-						<th title="토">토</th>
-					</tr>
-				</tbody>
-			</table>
-
-			<div class="month_table fifth">
-				<div class="_schedule_container table_container">
-					<div class="month_row" style="height: 20%">
-						<table cellpadding="0" cellspacing="0" class="grid">
-							<tbody>
-								<tr>
-									<td class="_month_cell month_schedule_drop" dayindex="0">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="1">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="2">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="3">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="4">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="5">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="6">&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						<table cellpadding="0" cellspacing="0" class="schedule_list">
-							<tbody>
-								<tr class="date">
-									<td dayindex="0" class="sun disable"><strong
-										class="_move_day_view" dayindex="0">30</strong></td>
-									<td dayindex="1" class=""><strong class="_move_day_view"
-										dayindex="1">1</strong></td>
-									<td dayindex="2" class=""><strong class="_move_day_view"
-										dayindex="2">2</strong></td>
-									<td dayindex="3" class=""><strong class="_move_day_view"
-										dayindex="3">3</strong></td>
-									<td dayindex="4" class=""><strong class="_move_day_view"
-										dayindex="4">4</strong> <span class="day_info"><span>(음)</span>
-											03.15</span></td>
-									<td dayindex="5" class="holiday"><strong
-										class="_move_day_view" dayindex="5">5</strong> <span
-										class="day_info">어린이날</span></td>
-									<td dayindex="6" class=""><strong class="_move_day_view"
-										dayindex="6">6</strong> <span class="day_info">입하</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="month_row" style="height: 20%">
-						<table cellpadding="0" cellspacing="0" class="grid">
-							<tbody>
-								<tr>
-									<td class="_month_cell month_schedule_drop" dayindex="7">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="8">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="9">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="10">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="11">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="12">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="13">&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						<table cellpadding="0" cellspacing="0" class="schedule_list">
-							<tbody>
-								<tr class="date">
-									<td dayindex="7" class="sun"><strong
-										class="_move_day_view" dayindex="7">7</strong></td>
-									<td dayindex="8" class=""><strong class="_move_day_view"
-										dayindex="8">8</strong></td>
-									<td dayindex="9" class=""><strong class="_move_day_view"
-										dayindex="9">9</strong></td>
-									<td dayindex="10" class=""><strong class="_move_day_view"
-										dayindex="10">10</strong> <span class="day_info"><span>(음)</span>
-											03.21</span></td>
-									<td dayindex="11" class=""><strong class="_move_day_view"
-										dayindex="11">11</strong></td>
-									<td dayindex="12" class=""><strong class="_move_day_view"
-										dayindex="12">12</strong></td>
-									<td dayindex="13" class=""><strong class="_move_day_view"
-										dayindex="13">13</strong></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="month_row" style="height: 20%">
-						<table cellpadding="0" cellspacing="0" class="grid">
-							<tbody>
-								<tr>
-									<td class="_month_cell month_schedule_drop" dayindex="14">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop today_area"
-										dayindex="15"><div class="outline" style="height: 138px">&nbsp;</div></td>
-									<td class="_month_cell month_schedule_drop" dayindex="16">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="17">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="18">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="19">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="20">&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						<table cellpadding="0" cellspacing="0" class="schedule_list">
-							<tbody>
-								<tr class="date">
-									<td dayindex="14" class="sun"><strong
-										class="_move_day_view" dayindex="14">14</strong></td>
-									<td dayindex="15" class=""><strong class="_move_day_view"
-										dayindex="15">15</strong></td>
-									<td dayindex="16" class=""><strong class="_move_day_view"
-										dayindex="16">16</strong></td>
-									<td dayindex="17" class=""><strong class="_move_day_view"
-										dayindex="17">17</strong></td>
-									<td dayindex="18" class=""><strong class="_move_day_view"
-										dayindex="18">18</strong></td>
-									<td dayindex="19" class=""><strong class="_move_day_view"
-										dayindex="19">19</strong></td>
-									<td dayindex="20" class=""><strong class="_move_day_view"
-										dayindex="20">20</strong> <span class="day_info"><span>(음)</span>
-											04.01</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="month_row" style="height: 20%">
-						<table cellpadding="0" cellspacing="0" class="grid">
-							<tbody>
-								<tr>
-									<td class="_month_cell month_schedule_drop" dayindex="21">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="22">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="23">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="24">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="25">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="26">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="27">&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						<table cellpadding="0" cellspacing="0" class="schedule_list">
-							<tbody>
-								<tr class="date">
-									<td dayindex="21" class="sun"><strong
-										class="_move_day_view" dayindex="21">21</strong> <span
-										class="day_info">소만</span></td>
-									<td dayindex="22" class=""><strong class="_move_day_view"
-										dayindex="22">22</strong></td>
-									<td dayindex="23" class=""><strong class="_move_day_view"
-										dayindex="23">23</strong></td>
-									<td dayindex="24" class=""><strong class="_move_day_view"
-										dayindex="24">24</strong></td>
-									<td dayindex="25" class=""><strong class="_move_day_view"
-										dayindex="25">25</strong></td>
-									<td dayindex="26" class=""><strong class="_move_day_view"
-										dayindex="26">26</strong> <span class="day_info"><span>(음)</span>
-											04.07</span></td>
-									<td dayindex="27" class="holiday"><strong
-										class="_move_day_view" dayindex="27">27</strong> <span
-										class="day_info">부처님 오신 날</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="month_row" style="height: 20%">
-						<table cellpadding="0" cellspacing="0" class="grid">
-							<tbody>
-								<tr>
-									<td class="_month_cell month_schedule_drop" dayindex="28">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="29">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="30">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="31">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="32">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="33">&nbsp;</td>
-									<td class="_month_cell month_schedule_drop" dayindex="34">&nbsp;</td>
-								</tr>
-							</tbody>
-						</table>
-						<table cellpadding="0" cellspacing="0" class="schedule_list">
-							<tbody>
-								<tr class="date">
-									<td dayindex="28" class="sun"><strong
-										class="_move_day_view" dayindex="28">28</strong></td>
-									<td dayindex="29" class="holiday"><strong
-										class="_move_day_view" dayindex="29">29</strong> <span
-										class="day_info">대체공휴일(부처님 오신 날)</span></td>
-									<td dayindex="30" class=""><strong class="_move_day_view"
-										dayindex="30">30</strong></td>
-									<td dayindex="31" class=""><strong class="_move_day_view"
-										dayindex="31">31</strong></td>
-									<td dayindex="32" class="disable"><strong
-										class="_move_day_view" dayindex="32">1</strong></td>
-									<td dayindex="33" class="disable"><strong
-										class="_move_day_view" dayindex="33">2</strong></td>
-									<td dayindex="34" class="disable"><strong
-										class="_move_day_view" dayindex="34">3</strong> <span
-										class="day_info"><span>(음)</span> 04.15</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="_big_sticker_container"></div>
-
-			</div>
-
-		</div>
-	</div>
-
-
-</body>
-</html>

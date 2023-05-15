@@ -150,7 +150,10 @@ body {
 
 					<div id='loading'>loading...</div>
 
-					<div id='calendar'></div>
+					<div id='calendar'>
+					
+					
+					</div>
 
 					<div id="span"></div>
 					<div id="endTime">퇴근시간</div>
