@@ -14,5 +14,10 @@
 		<input type="button" value="로그인" />
 		<input type="button" value="회원가입" />
 	</div>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 </body>
 </html>

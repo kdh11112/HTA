@@ -147,10 +147,9 @@ button {
 	font-weight: 700;
 }
 </style>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src ="../js/httpRequest.js"></script>
@@ -358,9 +357,12 @@ button {
 	    		document.getElementById("passwordError").innerHTML = "";
 	    		document.getElementById("passwordCheckError").innerHTML = "";
 	    		document.getElementById("genderError").innerHTML = "";
-
+		g		console.log("check : " + check);
+				
 	    		$.ajax({
 	    			type: "POST",
+	               // url: "idCheckup.jsp",
+	                dataType: "html", //전송받을 데이터 html,xml
 	    			url: "register_Ok.jsp",
 	    			data: {
 	    				"name": name,
@@ -375,13 +377,11 @@ button {
 	    				"phone2": phone2,
 	    				"phone3": phone3
 	    			},
+	    			
 	    			success: function(response){
-	    				if(response === "success"){
-	    					console.log("1231");
 	    					alert("가입이 완료되었습니다.");
-	    					location.replace('login.jsp');
-	    				}
-	    			}
+	    					location.replace('../login.jsp');
+	    			} 
 	    		})
 	    		
 	    		//비동기 처리이벤트
@@ -403,7 +403,7 @@ button {
 			<h1 style="font-size: 21px;">회원가입</h1>
 		</div>
 		<div class="name">
-			<input id="name" type="text" placeholder="이름을 입력해주세요.">
+			<input id="name" type="text" placeholder="이름을 입력해주세요." >
 			<div id="nameError" class="error"></div>
 		</div>
 		<div class="gender">
