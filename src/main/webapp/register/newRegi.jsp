@@ -357,7 +357,7 @@ button {
 	    		document.getElementById("passwordError").innerHTML = "";
 	    		document.getElementById("passwordCheckError").innerHTML = "";
 	    		document.getElementById("genderError").innerHTML = "";
-				console.log("check : " + check);
+		g		console.log("check : " + check);
 				
 	    		$.ajax({
 	    			type: "POST",
@@ -381,8 +381,6 @@ button {
 	    			success: function(response){
 	    					alert("가입이 완료되었습니다.");
 	    					location.replace('../login.jsp');
-	    				
-	    				
 	    			} 
 	    		})
 	    		
