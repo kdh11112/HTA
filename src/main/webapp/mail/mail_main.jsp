@@ -35,8 +35,6 @@
     display: flex;
 }
 
-
-
 .side_menu{
     position:fixed;
     top:15px;
@@ -222,12 +220,6 @@ $(function(){
 			    	</th>
 			    	<th>읽음</th>
 			    	<th>삭제</th>
-			    	
-			    	
-			    	
-			    	
-			    	
-			    	
 			    	
     	<div class="mail_toolbar">
 				    	<div class="mail_toolbar_count">
