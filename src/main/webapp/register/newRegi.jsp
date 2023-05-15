@@ -405,7 +405,7 @@ button {
 			<h1 style="font-size: 21px;">회원가입</h1>
 		</div>
 		<div class="name">
-			<input id="name" type="text" placeholder="이름을 입력해주세요." value="힘들다고">
+			<input id="name" type="text" placeholder="이름을 입력해주세요." >
 			<div id="nameError" class="error"></div>
 		</div>
 		<div class="gender">
