@@ -55,21 +55,22 @@ img {
 					//var data2 = data;
 					var dList = data2.split(",");
 					for (var i = 0; i < dList.length; i++) {
+						/* console.log(m); */
 						var m = dList[i];
-						var dList2 = m.split(" ")
+						var dList2 = m.split(" ");
 						if (dList2[7] == "기획") {
-							$("#span").append(m)
-							var date = new Date();
-							var month = date.getMonth();
-							console.log(date.getHours()+":"+date.getMinutes());
-							//$("#span").append(month); ???
-							
+//							$("#list").append("<a href='#'><li>"+m+"</li></a>");
+							$("#list").append("<li onclick='test();'>"+m+"</li>");
 						}
 					}
 				}
 			})
 		})
 	})
+		function test(){
+			/* var name = window.opener.document.getElementById("name").value; */
+			console.log(name);
+		}
 
 	$(function() {
 		$("#devel").on("mousedown", function() {
@@ -134,13 +135,23 @@ img {
 			})
 		})
 	})
+/* 	$(function(){
+		$("#list").on("click",function(){
+			
+			console.log("test")
+		})
+		
+	}) */
+	
 </script>
+<!-- <style>
+#list{
+cursor:pointer;
+}
+</style> -->
 </head>
 <body>
-	<%
-	
-	
-	%>
+
 	
 	<div id="div1">
 	
@@ -151,8 +162,10 @@ img {
 	</div>
 
 	<div>
-		<input type="text" name="txt" id="txt" /></input> <input type="button"
-			value="검색" id="search" /></input> </br><br/> <b>사번 이름 직급 부서명</b><br/> <span id="span"></span>
+		<input type="text" name="txt" id="txt" /></input> 
+		<input type="button" value="검색" id="search" /></input> 
+		</br><br/> <b>사번 이름 직급 부서명</b><br/> 
+		<ol id="list"></ol>
 	</div>
 
 </body>
