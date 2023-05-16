@@ -32,6 +32,9 @@
 	
 		$(".fc-daygrid-day-frame").on("click",function(){
 			console.log("test");
+			$.ajax({
+				
+			})
 		
 		})
 });
