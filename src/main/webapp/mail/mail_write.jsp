@@ -35,7 +35,7 @@
 
 
 
-	<form action="writeOk.jsp" method="get">
+	<form action="mail_writeOk.jsp" method="get">
 		<table class = "table table-striped">
 			<tr>
 				<th>보내는 사람</th>

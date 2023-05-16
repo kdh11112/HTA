@@ -57,12 +57,12 @@ img {
 					for (var i = 0; i < dList.length; i++) {
 						var m = dList[i];
 						var dList2 = m.split(" ")
-						if (dList2[7] == "PLANNING") {
+						if (dList2[7] == "±âÈ¹") {
 							$("#span").append(m)
 							var date = new Date();
 							var month = date.getMonth();
 							console.log(date.getHours()+":"+date.getMinutes());
-							$("#span").append(month);
+							//$("#span").append(month); ???
 							
 						}
 					}
