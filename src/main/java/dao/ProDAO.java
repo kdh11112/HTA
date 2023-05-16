@@ -7,14 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import vo.EmployeeVO;
 import vo.ProVO;
 
 public class ProDAO {
 	
 	String driver ="oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "scott";
-	String password = "tiger";
+	String user = "userhj";
+	String password = "user12";
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet  rs;
@@ -33,22 +34,27 @@ public class ProDAO {
 		
 	}
 	
-	public ArrayList<ProVO> selectAll(){
-		ArrayList<ProVO> list = new ArrayList<ProVO>();
+	public ArrayList<EmployeeVO> selectAll(){
+		ArrayList<EmployeeVO> list = new ArrayList<>();
 		sb.setLength(0); // 길이를 0으로
-		sb.append("SELECT * FROM pro ");
+		sb.append("SELECT * FROM EMPLOYEE ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int empno = rs.getInt("empno");
-				String ename = rs.getString("ename");
-				String job = rs.getString("job");
-				String dname = rs.getString("dname");
+				int empno = rs.getInt("e_number");
+				String ename = rs.getString("e_name");
+				String job = rs.getString("e_official_responsibilities");
+				String dname = rs.getString("d_name");
 				
-				ProVO vo = new ProVO(empno,ename,job,dname);
-				
+				EmployeeVO vo = new EmployeeVO();
+				vo.setE_number(empno);
+				vo.setE_name(ename);
+				vo.setE_official_responsibilities(job);
+				vo.setD_name(dname);
+	
 				list.add(vo);
+				
 			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -58,20 +64,25 @@ public class ProDAO {
 	}
 
 	
-	public ProVO getOneName(String ename) {
-		sb.append("SELECT * FROM PRO WHERE ename = ? ");
-		ProVO vo = null;
+	public EmployeeVO getOneName(String ename) {
+		sb.append("SELECT * FROM EMPLOYEE WHERE E_NAME = ? ");
+		EmployeeVO vo = null;
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setString(1, ename);
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {
-				int empno = rs.getInt("empno");
-				String job = rs.getString("job");
-				String dname = rs.getString("dname");
+				int empno = rs.getInt("e_number");
+				String job = rs.getString("e_official_responsibilities");
+				String dname = rs.getString("d_name");
 				
-				vo = new ProVO(empno,ename,job,dname);
+				
+				vo = new EmployeeVO();
+				vo.setE_number(empno);
+				vo.setE_name(ename);
+				vo.setE_official_responsibilities(job);
+				vo.setD_name(dname);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

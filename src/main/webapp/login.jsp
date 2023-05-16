@@ -43,7 +43,7 @@
 </script>
 	</head>
 <body>
-	<form name="frm" action="register/login_Ok.jsp" method="post">
+	<form name="frm" action="./register/login_Ok.jsp" method="post">
 		<table>
 				<tr>
 					<th>ID</th>

@@ -14,8 +14,8 @@ public class ApprovalDAO {
 	
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
-	String user = "project";
-	String password = "project";
+	String user = "userhj";
+	String password = "user12";
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
