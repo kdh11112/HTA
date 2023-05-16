@@ -32,6 +32,7 @@
 					success: function(response){
 						if (response.trim() === 'true') {
 							alert('로그인 완료.');
+							location.replace('index.jsp');
 			          	} else if (response.trim() === 'false') {
 							alert('존재하지 않는 사원입니다.');
 							location.replace('register/newRegi.jsp');
