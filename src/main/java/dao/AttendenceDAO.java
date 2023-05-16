@@ -34,22 +34,15 @@ public class AttendenceDAO {
 			}
 
 		}// 기본생성자 end
-		
-		
+
 		public void addOne(AttendenceVO vo) {
 			
 			sb.setLength(0);
-			sb.append("INSERT INTO ATTENDANCE ");
+			sb.append("INSERT INTO ATTENDANCE (attendanceNo,workingDate)" );
 			sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate)");
 			
 			try {
 				pstmt = conn.prepareStatement(sb.toString());
-
-				String working_date = vo.getWORKING_DATE();
-				
-
-				pstmt.setString(1, working_date);
-				
 				
 				pstmt.executeUpdate();
 			} catch (SQLException e) {

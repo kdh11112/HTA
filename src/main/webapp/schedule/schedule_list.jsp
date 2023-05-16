@@ -15,6 +15,9 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 		<link rel="shortcut icon" href="#">
 		
+
+
+		
 		
     </head>
     <body class="sb-nav-fixed">
@@ -22,12 +25,12 @@
         <div id="layoutSidenav"> 
         <div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
             <div id="layoutSidenav_content">
-            	<main>
+            	
                   
-   					<%@ include file="../mail/mail_main.jsp" %>               
+   					<%@ include file="../schedule/calendar.jsp" %>               
                   
                   
-                 </main>
+                 
 				<footer class="py-4 bg-light mt-auto"><%@ include file="../menu/footer.jsp" %></footer>
             </div>
         </div>

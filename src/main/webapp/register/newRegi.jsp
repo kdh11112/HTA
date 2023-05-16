@@ -462,8 +462,9 @@ button {
 			</div> -->
 			<div class="address">
 				<input id="postcode" type="text" placeholder="주소를 입력해주세요." value="63534"/> <input
-					type="button" value="우편번호찾기" id="addrbtn" /><br /> 도로명: <input
-					type="text" id="address1" size="53" value="제주특별자치도 서귀포시 가가로 14"/><br /> 상세주소: <input type="text"
+					type="button" value="우편번호찾기" id="addrbtn" /><br /> 
+					도로명: <input type="text" id="address1" size="53" value="제주특별자치도 서귀포시 가가로 14"/><br /> 
+					상세주소: <input type="text"
 					id="address2" size="50" />
 				<div id="addressError" class="adress"></div>
 			</div>
