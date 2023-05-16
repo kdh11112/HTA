@@ -8,9 +8,10 @@
 
 	<!-- 추가할것 :
 	1. 전화번호 숫자만 입력 가능하게
-	2. 상세주소 무조건 입력하게
+	2. 상세주소 무조건 입력하게 required = required (나중에추가)
 	3. d_name 가입시 기본값?
-	4. datepicker 값 넘기기
+	4. datepicker 값 넘기기 (완료)
+	5. gender 값 넘기기 (완료)
 	
  -->
 <style>
@@ -77,7 +78,7 @@ div {
 }
 
 .birth input {
-	width: 93%;
+	width: 100%;
 }
 
 .address input {
@@ -163,8 +164,9 @@ button {
 <script src ="../js/httpRequest.js"></script>
 <script>
 	$(function(){
-		$("#datepicker").datepicker({
+	/* 	$("#datepicker").datepicker({
 			showOn: 'button',
+			 //버튼 이미지 경로
 			changeMonth: true,
 			changeYear: true,
 			dateFormat: 'yy.mm.dd',
@@ -177,9 +179,14 @@ button {
 			dayNamesMin: ['일','월','화','수','목','금','토'],
 			showMonthAfterYear: true,
 			yearSuffix: '년'
-			});
+			//버튼 이미지 경로
+			/* buttonImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAAB7CAMAAABjGQ9NAAAAb1BMVEX///85MzX8/Pw0LjA1MTJGQ0QfGBpdWlsLAAA1LTBYVVbp6elkYGJCPT/49/gkHR/w8PDe3t6ura21s7TPzs+dmZqnpabCwMEAAAAbEBQpISRRTU8uKCqHhYYbFBa7uroTAAhtamt3dXaPjY4jFRqHxGiwAAADnUlEQVRoge2ae5uqIBDGRfKCpmiZpWFe6vt/xsOA1zr7dESr3bP8/tmZVnwFh5uDYWg0Go1Go9FoND+XuDiEnZ0UqdnZx2LfX7Mrjp1ppkWylnTispvXipcnljXt7+mJVUVrFxU7pa3dZMwtV9IuGEJuLO0aI5T7wjQdjLAVCTuyuO3IBokyhFi9onY20qZSO/RG2gFCuG2b6MLtNbT9fVFbCG68FXANtHEGG7U2mEiaW/542PGXKscNuzEs7osFG2FvRvbo9434nYjrCa4XxVvIgwYpg90mfK7xBf4mV1cGchSrSlPZePZF/M2pYGTnYJPWRne2rDpWE48sAqXzpvQhzi9JJBB9LBamL+Jc2rGIc1/aNi8YYChOgkhFu4DHZ2cIGNCuHvuYOelj3PaG/o3r2BM3aP527yckFErWIlrKCrOuAmlGcqeNoauNaXfvhuKsHeNMJ8dZaoQ1BGqmEO0NL0jOrcguqPsXl6Km67rmNWi6No2a4NqN834dHOAvH+sQ2c6W9iFULqph2hJDq7uzB5k9XWNchFan++fXTYHwoovnoiOvASueXzcFwrlaPiRjldbzeO901YfEFh96vWM+v/B7aS+VlrP6fG14U9ZikGq9+Xy8FDVtvGz6HPhh2tDm1F4IVdb+WB/Dv3hs+Y3a+n2/X/uhzWOxGXR2nX8Um0CnX9vshe9NlqVr1TupYKNnH3otG/ysf5ZU+sdxmdW0Mxid80FbbH3ooC18ew3thzZ/o/Yn6/0P2pv3tbkLXxXooE3BtwdtCrF2eUm9w1jQr9kj6Udf+Wtqq6DH8x+j/b3a3JTc+V/+e03txHI8zzt334qN49kDv5/HdtJ/zdgi5rHx2HI3j1HyP8xjv1Vbcf6+vabeJ5dzunb+Tvp93B+kP/k2pce1Wdp6Lnm/tm7zliS7m0vEHugyXaeS16xT5bhGn4xrP34e0/uxTrsinPG6BfzbeN3CWeN91+Q+Z5EEZ47Vz1ulJfxhvSb8YKINOQsyO2cBWcFphseMQkHvS7evVHjnAyJXczVmUlKVJ75HLUcVw+baXnhaI4ak5Pzc3DQnqYhiTtJIIJHMtnNjdIS5hWpfVNqugG8aMgetRHIGaaUcdJt7J3ldxv5s4rJhorillHs3fHnAA9sK5y2YLETUDzygBac8xBME6knssKk+dcbEgLM1mc3IfDCzs2Vna4BoX9Tb2dRFqRZkD5izWUdXo9FoNBqNRvNB/gB3W1ody1TYTAAAAABJRU5ErkJggg==",
+			buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함 */
+			//}); 
+		
 		$("input[value='중복확인']").on("click", checkup);
 	});
+	
 		function checkup() {
 			var txt = $("#id").val().trim();
 			if (txt == '') {	//빈칸이라면
@@ -286,6 +293,12 @@ button {
 			document.getElementById("signUpButton").setAttribute("style", "background-color:gray;");
 	    }
 
+		function dateCheck(){
+			const selectedDate = document.getElementById("birth").value;
+			  console.log("선택한 날짜:", selectedDate);
+			  // 선택한 날짜 값에 대한 처리를 수행합니다.
+			
+		}
 	    // 가입부분 체크(여기보고수정)
 	    function signUpCheck() {
 			let name = document.getElementById("name").value;
@@ -293,8 +306,8 @@ button {
 			/* let email = document.getElementById("email").value; */
 			let password = document.getElementById("password").value;
 			let passwordCheck = document.getElementById("passwordCheck").value;
+			let birth = document.getElementById("birth").value;
 			let gender = $("input[name='gender']:checked").val();
-			let datepicker = $("#datepicker").val();
 			let postcode = $("#postcode").val();
 			let address1 = $("#address1").val();
 			let address2 = $("#address2").val();
@@ -377,7 +390,7 @@ button {
 	    				"gender": gender,
 	    				"id": id,
 	    				"password": password,
-	    				"birth": datepicker,
+	    				"birth": birth,
 	    				"postcode": postcode,
 	    				"address1": address1,
 	    				"address2": address2,
@@ -406,71 +419,79 @@ button {
 
 </head>
 <body>
-	<div class="wrapper">
-		<div class="title">
-			<h1 style="font-size: 21px;">회원가입</h1>
-		</div>
-		<div class="name">
-			<input id="name" type="text" placeholder="이름을 입력해주세요." >
-			<div id="nameError" class="error"></div>
-		</div>
-		<div class="gender">
-			<input id="gender_man" type="radio" name="gender">남성 <input
-				id="gender_woman" type="radio" name="gender">여성
-			<div id="genderError" class="error"></div>
-		</div>
-		<div class="id">
-			<input id="id" type="text" placeholder="아이디을 입력해주세요.">
-			<input type="button" value="중복확인" id="idoverlapbtn"/>
-			<div id="idError" class="error"></div>
-		</div>
-		<div class="password">
-			<input id="password" type="password" placeholder="비밀번호를 입력해주세요.">
-			<div id="passwordError" class="error"></div>
-		</div>
-		<div class="passwordCheck">
-			<input id="passwordCheck" type="password"
-				placeholder="비밀번호를 다시 입력해주세요.">
-			<div id="passwordCheckError" class="error"></div>
+	
+		<div class="wrapper">
+			<div class="title">
+				<h1 style="font-size: 21px;">회원가입</h1>
+			</div>
+			<div class="name">
+				<input id="name" type="text" placeholder="이름을 입력해주세요." value="id/pw:test">
+				<div id="nameError" class="error"></div>
+			</div>
+			<form action="register_Ok.jsp" method="post">
+			<div class="gender">
+				<input id="gender_man" type="radio" name="gender" value="남">남성 
+				<input id="gender_woman" type="radio" name="gender" value="여">여성
+				<div id="genderError" class="error"></div>
+			</div>
+			</form>
+			<div class="id">
+				<input id="id" type="text" placeholder="아이디을 입력해주세요." value="test">
+				<input type="button" value="중복확인" id="idoverlapbtn"/>
+				<div id="idError" class="error"></div>
+			</div>
+			<div class="password">
+				<input id="password" type="password" placeholder="비밀번호를 입력해주세요." value="test">
+				<div id="passwordError" class="error"></div>
+			</div>
+			<div class="passwordCheck">
+				<input id="passwordCheck" type="password"
+					placeholder="비밀번호를 다시 입력해주세요." value="test">
+				<div id="passwordCheckError" class="error"></div>
+			</div>
+			<form action="register_Ok.jsp" method="post">
+			<div class="birth">
+				<input id="birth" type="date" placeholder="생년월일을 선택해주세요." onchange="dateCheck()">
+				<!-- <input id="datepicker" type="text" placeholder="생년월일을 선택해주세요."> -->
+				<div id="birthError" class="error"></div>
+			</div>
+			</form>
+			<!-- <div class="email">
+				<input id="email" type="text" placeholder="이메일을 입력해주세요.">
+				<div id="emailError" class="error"></div>
+			</div> -->
+			<div class="address">
+				<input id="postcode" type="text" placeholder="주소를 입력해주세요." value="63534"/> <input
+					type="button" value="우편번호찾기" id="addrbtn" /><br /> 도로명: <input
+					type="text" id="address1" size="53" value="제주특별자치도 서귀포시 가가로 14"/><br /> 상세주소: <input type="text"
+					id="address2" size="50" />
+				<div id="addressError" class="adress"></div>
+			</div>
+			<div class="phone">
+				<input id="phone1" type="text" size="1" maxlength="3"
+					oninput="changePhone1()" value="010"> - <input id="phone2" type="text"
+					size="3" maxlength="4" oninput="changePhone2()" value="1234"> - <input
+					id="phone3" type="text" size="3" maxlength="4"
+					oninput="changePhone3()" >
+			</div>
+			<div class="auth">
+				<div id="certificationNumber">000000</div>
+				<button disabled id="sendMessage" onclick="getToken()">인증번호
+					전송</button>
+					
+					
+			</div>
+			<div class="timer">
+				<div id="timeLimit">03:00</div>
+				<button disabled id="completion" onclick="checkCompletion()">인증확인</button>
+			</div>
+			<div class="line">
+				<hr>
+			</div>
+			<div class="signUp">
+				<button id="signUpButton" disabled onclick="signUpCheck()">가입하기</button>
+			</div>
 		</div>
 
-		<div class="birth">
-			<input id="datepicker" type="text" placeholder="생년월일을 선택해주세요.">
-			<div id="birthError" class="error"></div>
-		</div>
-		<!-- <div class="email">
-			<input id="email" type="text" placeholder="이메일을 입력해주세요.">
-			<div id="emailError" class="error"></div>
-		</div> -->
-		<div class="address">
-			<input id="postcode" type="text" placeholder="주소를 입력해주세요." /> <input
-				type="button" value="우편번호찾기" id="addrbtn" /><br /> 도로명: <input
-				type="text" id="address1" size="53" /><br /> 상세주소: <input type="text"
-				id="address2" size="50" />
-			<div id="addressError" class="adress"></div>
-		</div>
-		<div class="phone">
-			<input id="phone1" type="text" size="1" maxlength="3"
-				oninput="changePhone1()"> - <input id="phone2" type="text"
-				size="3" maxlength="4" oninput="changePhone2()"> - <input
-				id="phone3" type="text" size="3" maxlength="4"
-				oninput="changePhone3()">
-		</div>
-		<div class="auth">
-			<div id="certificationNumber">000000</div>
-			<button disabled id="sendMessage" onclick="getToken()">인증번호
-				전송</button>
-		</div>
-		<div class="timer">
-			<div id="timeLimit">03:00</div>
-			<button disabled id="completion" onclick="checkCompletion()">인증확인</button>
-		</div>
-		<div class="line">
-			<hr>
-		</div>
-		<div class="signUp">
-			<button id="signUpButton" disabled onclick="signUpCheck()">가입하기</button>
-		</div>
-	</div>
 </body>
 </html>
