@@ -19,6 +19,7 @@ body, input, textarea, select, button, table {
 	width:1000px;
 	
 }
+
 img, fieldset {
 	border: 0
 }
@@ -31595,7 +31596,9 @@ div.scrl {
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: 0
+	bottom: 0;
+	
+	margin:100px;
 }
 
 .monthly_calendar .calendar_header_wrap {
