@@ -1,3 +1,5 @@
+<%@page import="dao.AttendenceDAO"%>
+<%@page import="vo.AttendenceVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -59,23 +61,37 @@
   function markAttendance(type) {
     // 출근 또는 퇴근 버튼을 클릭했을 때의 동작을 처리
     var currentDate = $('#calendar').fullCalendar('getDate');
+    
     var formattedDate = moment(currentDate).format('YYYY-MM-DD');
   
+    console.log(formattedDate);
     
-    $.ajax({
+   /*  $.ajax({
     	url:"startTime.jsp",
     	success:function(data){
-    		console.log(data.trim());
+    		//console.log(data.trim());
     		var data = data.trim();
-    		
-    		
-    // 시간을 가져와서 해당 날짜의 날짜 요소에 출력
-    var currentTime = moment().format('HH:mm');
-    var attendanceTime = type + ' ' + currentTime;
-    $('[data-date="' + formattedDate + '"]').append('<span class="attendance-time">' + attendanceTime + '</div>');
+
     		
     	}
-    })
+    }) */
+    
+    <%
+	Object obj = session.getAttribute("vo");
+   	int no = 0;
+	String date =null;
+	if(obj!=null){
+		AttendenceVO vo = (AttendenceVO)obj; 
+		no = vo.getAttendanceNo();
+		date = vo.getWorkingDate();
+	}
+	%>
+
+    // 시간을 가져와서 해당 날짜의 날짜 요소에 출력
+    var currentTime = moment().format('HH:mm');
+    console.log(currentTime);
+    var attendanceTime = type + ' ' + currentTime;
+    $('[data-date="' + formattedDate + '"]').append('<span class="attendance-time">' + attendanceTime + '</div>');
     
   }
 </script>
@@ -84,6 +100,27 @@
 
 
 <body>
+
+<%
+	//시간을 받아오는 파라미터
+	
+	String date1 = request.getParameter("workingDate");
+
+	//dao 객체 생성
+	AttendenceDAO dao =  new AttendenceDAO();
+	//vo객체 생성
+	AttendenceVO vo = new AttendenceVO();
+	
+
+	vo.setWorkingDate(date1);
+	
+	dao.addOne(vo);
+	
+	
+	//dao.close();
+%>
+
+
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include
 			file="../menu/navi.jsp"%></nav>
 	<div id="layoutSidenav">
@@ -101,6 +138,18 @@
 					<button onclick="markAttendance('퇴근')">퇴근</button>
 						
 				</div>
+				
+				<div id ="startHour">출근시간</div>
+				<div id ="quitHour">퇴근시간</div>
+				<div id="lateHour">지각시간</div>
+				<div id="overHour">연장근무시간</div>
+				<button>연장근무신청</button>
+				<div id="todayworkingHour">오늘 근무시간</div>
+				<div id="vacationStatus">연차/반차 현황</div>
+				
+				<button>
+					연차신청
+				</button>
 
 			</main>
 			<footer class="py-4 bg-light mt-auto"><%@ include

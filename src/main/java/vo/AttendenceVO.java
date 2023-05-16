@@ -8,12 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AttendenceVO {
-int ATTENDANCE_NO;
-String WORKING_DATE;
-String OFFICE_GOING_HOUR;
-String QUITTING_TIME;
-String ATTENDANCE_STATUS;
+	int attendanceNo;
+	String workingDate;
+	String officeGoingHour;
+	String QuittingTime;
+	String attendanceStatus;
 }
-
 
 //ATTENDANCE_SEQ -- 시퀀스
