@@ -14,7 +14,11 @@ body, input, textarea, select, button, table {
 	font-size: 12px
 }
 
-
+#calendar{
+	margin-left:50px;
+	width:1000px;
+	
+}
 img, fieldset {
 	border: 0
 }
