@@ -140,7 +140,7 @@ div#right_window{
   </div>
   
   <div class="right_main">
-    <%@ include file="../mail/mail_all_inbox.jsp" %>
+    <%@ include file="../mail/inbox_test.jsp" %>
   </div>
 </div>
 
