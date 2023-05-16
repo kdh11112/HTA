@@ -11,7 +11,7 @@ public class AttendenceVO {
 	int attendanceNo;
 	String workingDate;
 	String officeGoingHour;
-	String QuittingTime;
+	String quittingTime;
 	String attendanceStatus;
 }
 
