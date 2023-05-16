@@ -40,7 +40,7 @@
     bottom:0;
     width:220px;
     border-right:1px solid #c7c7c7;
-    background:#fff
+    background:#fff 
 }
 
 .write_mail{
