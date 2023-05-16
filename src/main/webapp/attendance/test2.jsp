@@ -27,22 +27,15 @@
 <link rel="stylesheet" href="../attendance/main.css" />
 <script>
 	
-	
+			//출근시간 출력함수
 			function startTime() {
-				var now = new Date();
+				var now = new Date();//현재 날짜시간을 now에 저장
 				console.log(now);
 				console.dir(now);
 				$("input[value='출근']").on("click", function() {
 					console.log("출근");
 				})
 
-				var year = now.getFullYear();
-				console.log(year);
-
-				var startTime = now.getFullYear() + "년" + (now.getMonth() + 1) + "월"
-						+ now.getDate() + "일" + now.getHours() + "시" + now.getMinutes()
-						+ "분" + now.getSeconds() + "초";
-				console.log(startTime);
 
 				var timeEle = document.getElementById("span");
 				timeEle.value = startTime;
