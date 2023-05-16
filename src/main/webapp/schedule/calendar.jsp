@@ -5,9 +5,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-</style>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 	var calendarEl = document.getElementById('calendar');
@@ -37,6 +39,22 @@
 			})
 		
 		})
+		
+		$("#datepicker").datepicker({
+			showOn: 'button',
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: 'yy.mm.dd',
+			prevText: '이전 달',
+			nextText: '다음 달',
+			monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			dayNames: ['일','월','화','수','목','금','토'],
+			dayNamesShort: ['일','월','화','수','목','금','토'],
+			dayNamesMin: ['일','월','화','수','목','금','토'],
+			showMonthAfterYear: true,
+			yearSuffix: '년'
+			});
 });
 	
 	
@@ -46,6 +64,7 @@
 	<option value="" id="department_schedule">부서일정</option>
 	<option value="" id="company_schedule">회사일정</option>
 </select>
+<input type="text" name="" id="datepicker" />
 <main>
 	<div id='calendar'></div>
 </main>
