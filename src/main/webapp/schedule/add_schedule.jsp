@@ -51,32 +51,63 @@
 <style>
 	#page{
 		width:300px;
-		height:500px;
+		height:400px;
 		border: 1px solid black;
-	}
-	#datepicker{
-		margin-top:100px;
-		margint
 	}
 	#title{
 	font-size:30px;
 	padding-left:90px;
 	}
-	input{
-		width:150px;
+	.date{
+		width:120px;
 	}
-	#start_date{
+	#start_date,#end_date {
+		margin-left:30px;
+		font-weight: bold;
+	}
+	#select{
+		margin-left:200px;
+		margin-top:30px; 
+		font-weight: bold;
+		width:80px;
+		height:30px;
+	}
+	#dates{
+			margin-top:20px;
+	}
+	#end_date{
+		margin-top:10px;
+	}
+	#content_area{
+		margin-top:20px;
+		margin-left:20px;
+		font-weight: bold;
+	}
+	#datepicker.#datepicker{
+		width:100px
+	}
+	.ui-datepicker-trigger{
 		margin-left:10px;
 	}
 </style>
 </head>
 <body>
 	<div id=page><span id="title">일정추가</span>
-	<div id="start_date">시작일
-		<input type="text" name="" id="datepicker" />
-	<div id="end_date">종료일
-		<input type="text" name="" id="datepicker2" />
+		<div>
+			<span><select name="일정선택"   id="select"></span>
+					<option value="" id="personal_schedule">개인일정</option>
+					<option value="" id="department_schedule">부서일정</option>
+					<option value="" id="company_schedule">회사일정</option>
+				  </select>
+		</div>
+		<div id="dates">
+		<div id="start_date">시작일&nbsp;&nbsp;&nbsp;<input type="text" name="" id="datepicker" class="date"/></div>
+		<div id="end_date">종료일&nbsp;&nbsp;&nbsp;<input type="text" name="" id="datepicker2" class="date"/></div>
+		</div>
+		<div id="content_area"><span>일정내용</span>
+			 <p><textarea cols="34" rows="10"></textarea></p>			
+		</div>
 	</div>
-	</div>
+		
 </body>
 </html>

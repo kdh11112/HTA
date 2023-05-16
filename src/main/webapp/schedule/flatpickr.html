@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 날짜 설정 -->
+    <!-- https://flatpickr.js.org/options/ + https://lily-im.tistory.com/23-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+</head>
+
+<style>
+    .dateTime {
+        text-align: center;
+    }
+
+</style>
+
+<body>
+    <!-- 날짜 설정 -->
+    <input class="form-control dateTime" type="datetime-local" required />
+</body>
+
+<script>
+    // 언어 변경
+    flatpickr.localize(flatpickr.l10ns.ko);
+
+    const today = new Date().setHours(0, 0, 0, 0)
+
+    config = {
+    	showOn: 'button',
+        enableTime: true, // 시간 속성 사용 여부
+        dateFormat: "Y-m-d H시 i분", // 달력 입력 포맷
+        altInput: true,
+        altFormat: "Y-m-d H시 i분", // 보여지는 입력 포맷
+        dateFormat: "Y-m-d H시 i분", // 달력 입력 포맷
+        time_24hr: true, // 24시간 사용 여부 (false인 경우 오전, 오후로 설정됨)
+        disable: [ // 해당 날짜 비활성화
+            function (date) {
+                // return true to disable
+                return (date.getDay() === 0 || date.getDay() === 6);
+            }
+        ],
+        local: 'ko', // 언어 설정
+        minDate: today, // 최소 날짜 설정
+        minuteIncrement: 30, // 분 입력(스크롤 포함)의 단계를 조정한다.
+        minTime: "09:00", // 최소 시간
+        maxTime: "18:00", // 최대 시간
+        defaultHour: "09", // 시간 기본값
+        defaultMinute: "00", // 분 기본값
+        clickOpens:true,        
+    }
+
+    flatpickr("input[type=datetime-local]", config);
+</script>
+
+</html>
