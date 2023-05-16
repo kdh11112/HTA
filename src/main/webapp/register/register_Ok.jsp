@@ -8,7 +8,7 @@
 	String gender = request.getParameter("gender");
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
-	String birth = request.getParameter("datepicker");
+	String birth = request.getParameter("birth");
 	String postcode = request.getParameter("postcode");
 	String address1 = request.getParameter("address1");
 	String address2 = request.getParameter("address2");
