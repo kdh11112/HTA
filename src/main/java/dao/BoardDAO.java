@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import dao.EmployeeDAO;
 import vo.BoardVO;
 
 public class BoardDAO {
 	//기본생성자 1~3
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@192.168.0.3:1521:orcl";
+	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 	String user = "userhj";
 	String password = "user12";
 	Connection conn;
@@ -74,18 +74,19 @@ public class BoardDAO {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		
 		sb.setLength(0);
+		/* sb.append("SELECT * FROM BOARD ORDER BY B_NO DESC LIMIT ?,? "); */
 		sb.append("SELECT RN, b_no, b_title, b_content, b_writer, b_regdate, b_view, e_number ");
 		sb.append("FROM(SELECT ROWNUM RN, b_no, b_title, b_content, b_writer, b_regdate, b_view, e_number ");
-		sb.append("FROM(SELECT b_no, b_title, b_content, b_writer, b_regdate, b_view, e_number  )");
+		sb.append("FROM(SELECT b_no, b_title, b_content, b_writer, b_regdate, b_view, e_number ");
 		sb.append("FROM BOARD ");
-		sb.append("ORDER BY BNO DESC) ");
+		sb.append("ORDER BY B_NO DESC) ");
 		sb.append("WHERE ROWNUM <=?) ");
 		sb.append("WHERE RN >= ? ");
 		
 		try {
 			pstmt= conn.prepareStatement(sb.toString());
-			pstmt.setInt(1,endNo);
-			pstmt.setInt(2,startNo);
+			pstmt.setInt(1, endNo);
+	        pstmt.setInt(2, startNo);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -107,24 +108,17 @@ public class BoardDAO {
 	}//selectAll() 끝
 	
 	//게시판 글 작성
-	public void addOne(BoardVO vo) {
+	public void addOne(BoardVO vo, String eId) {
 		sb.setLength(0);
-		sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,0) ");
+		sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,?) ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
 			pstmt.setString(1, vo.getbTitle());
 			pstmt.setString(2, vo.getbContent());
 			pstmt.setString(3, vo.getbWriter());
-			//현재시간
-			//pstmt.setString(4, vo.getRegdate());
-			
-			//입력하면 처음엔 조회수 무조건 0이니까 
-			//pstmt.setInt(5, vo.getHits());
-			
-			//pstmt.setString(4, vo.getIp());
-			//상태정보 : 1정상글 2블라인드처리 3경찰요청 ~~~이라고 설정
-			//pstmt.setInt(7, vo.getStatus());
+			pstmt.setInt(4, vo.geteNumber());	//로그인한 사원의 사원번호 전달
+
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -132,6 +126,27 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 	}//addOne() 끝
+	
+	
+	 //게시판 글 작성 
+	public void addOne(BoardVO vo) { 
+		sb.setLength(0);
+		sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,38) "); 
+		try { 
+			pstmt = conn.prepareStatement(sb.toString());
+	 
+			pstmt.setString(1, vo.getbTitle()); 
+			pstmt.setString(2, vo.getbContent());
+			pstmt.setString(3, vo.getbWriter()); 
+			/* pstmt.setInt(4, vo.geteNumber()); */
+			
+			pstmt.executeUpdate();
+	
+		} catch (SQLException e) { 
+			e.printStackTrace(); 
+			} 
+		}//addOne() 끝
+	 
 	
 	public BoardVO selectOne(int b_no) {
 		BoardVO vo = null; //vo초기화
@@ -198,19 +213,18 @@ public class BoardDAO {
 	//총 갯수
 	public int getTotalCount() {
 		sb.setLength(0);
-		sb.append("SELECT COUNT(*) cnt FROM board ");
-		int cnt = 0;
+		sb.append("SELECT COUNT(*) FROM board ");
+		int count = 0;
 		
 		try {
 			pstmt= conn.prepareStatement(sb.toString());
 			rs = pstmt.executeQuery();
 			rs.next();
-			cnt = rs.getInt("cnt");
+			count = rs.getInt("count(*)");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return cnt;
+		return count;
 	}
 	
 	//자원반납
