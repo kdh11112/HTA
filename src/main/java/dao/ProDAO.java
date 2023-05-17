@@ -48,10 +48,10 @@ public class ProDAO {
 				String dname = rs.getString("d_name");
 				
 				EmployeeVO vo = new EmployeeVO();
-				vo.setE_number(empno);
-				vo.setE_name(ename);
-				vo.setE_official_responsibilities(job);
-				vo.setD_name(dname);
+				vo.seteNumber(empno);
+				vo.seteName(ename);
+				vo.seteOfficialResponsibilities(job);
+				vo.setdName(dname);
 	
 				list.add(vo);
 				
@@ -79,10 +79,10 @@ public class ProDAO {
 				
 				
 				vo = new EmployeeVO();
-				vo.setE_number(empno);
-				vo.setE_name(ename);
-				vo.setE_official_responsibilities(job);
-				vo.setD_name(dname);
+				vo.seteNumber(empno);
+				vo.seteName(ename);
+				vo.seteOfficialResponsibilities(job);
+				vo.setdName(dname);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

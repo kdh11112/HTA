@@ -12,8 +12,8 @@
       
       ArrayList<EmployeeVO> list = dao.selectAll();
       for(EmployeeVO vo : list){
-    	  name = vo.getE_name();
-    	  out.println("사번: " + vo.getE_number() + " 이름: " + vo.getE_name() + " 직급: " + vo.getE_official_responsibilities() + " 부서명: " + vo.getD_name()+",");
+    	  name = vo.geteName();
+    	  out.println("사번: " + vo.geteNumber() + " 이름: " + vo.geteName() + " 직급: " + vo.geteOfficialResponsibilities() + " 부서명: " + vo.getdName()+",");
       }
 
      String text = request.getParameter("txt");
@@ -23,7 +23,7 @@
 
     	  EmployeeVO vo = dao2.getOneName(text);
     	  if(vo != null){
-    		  out.println("사번: " + vo.getE_number() + " 이름: " + vo.getE_name() + " 직급: " + vo.getE_official_responsibilities() + " 부서명: " + vo.getD_name()+"," + "<br/>");
+    		  out.println("사번: " + vo.geteNumber() + " 이름: " + vo.geteName() + " 직급: " + vo.geteOfficialResponsibilities() + " 부서명: " + vo.getdName()+"," + "<br/>");
     	  }
       } 
       

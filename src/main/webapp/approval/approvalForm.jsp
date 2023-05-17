@@ -97,10 +97,10 @@
     	LocalDate now = LocalDate.now();
     	if(obj != null){
     		EmployeeVO vo = (EmployeeVO)obj;
-    		name = vo.getE_name();
-    		dname = vo.getD_name();
-    		position = vo.getE_official_responsibilities();
-    		num = vo.getE_number();
+    		name = vo.geteName();
+    		dname = vo.getdName();
+    		position = vo.geteOfficialResponsibilities();
+    		num = vo.geteNumber();
     		
     	}
     	

@@ -76,18 +76,18 @@ public class ApprovalDAO {
 				String a_save = rs.getString("a_save");
 				String e_number = rs.getString("e_number");
 				ApprovalVO vo = new ApprovalVO();
-				vo.setA_number(a_number);
-				vo.setA_name(a_name);
-				vo.setA_department_name(a_department_name);
-				vo.setA_start_date(a_start_date);
-				vo.setA_end_date(a_end_date);
-				vo.setA_title(a_title);
-				vo.setA_content(a_content);
-				vo.setA_name_1st(a_name_1st);
-				vo.setA_name_2nd(a_name_2nd);
-				vo.setA_status(a_status);
-				vo.setA_save(a_save);
-				vo.setE_number(e_number);
+				vo.setaNumber(a_number);
+				vo.setaName(a_name);
+				vo.setaDepartmentName(a_department_name);
+				vo.setaStartDate(a_start_date);
+				vo.setaEndDate(a_end_date);
+				vo.setaTitle(a_title);
+				vo.setaContent(a_content);
+				vo.setaName1st(a_name_1st);
+				vo.setaName2nd(a_name_2nd);
+				vo.setaStatus(a_status);
+				vo.setaSave(a_save);
+				vo.seteNumber(e_number);
 				list.add(vo);
 			}
 		} catch (SQLException e) {

@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class ApprovalVO {
 	
-	private int a_number;
-	private String a_name;
-	private String a_department_name;
-	private Date a_start_date;
-	private Date a_end_date;
-	private String a_title;
-	private String a_content;
-	private String a_name_1st;
-	private String a_name_2nd;
-	private String a_status;
-	private String a_save;
-	private String e_number;
+	private int aNumber;
+	private String aName;
+	private String aDepartmentName;
+	private Date aStartDate;
+	private Date aEndDate;
+	private String aTitle;
+	private String aContent;
+	private String aName1st;
+	private String aName2nd;
+	private String aStatus;
+	private String aSave;
+	private String eNumber;
 	
 	
 	
@@ -23,192 +23,193 @@ public class ApprovalVO {
 	public ApprovalVO() {}
 
 
+	
 
 
-	public ApprovalVO(int a_number, String a_name, String a_department_name, Date a_start_date, Date a_end_date,
-			String a_title, String a_content, String a_name_1st, String a_name_2nd, String a_status, String a_save,
-			String e_number) {
+	public ApprovalVO(int aNumber, String aName, String aDepartmentName, Date aStartDate, Date aEndDate, String aTitle,
+			String aContent, String aName1st, String aName2nd, String aStatus, String aSave, String eNumber) {
 		super();
-		this.a_number = a_number;
-		this.a_name = a_name;
-		this.a_department_name = a_department_name;
-		this.a_start_date = a_start_date;
-		this.a_end_date = a_end_date;
-		this.a_title = a_title;
-		this.a_content = a_content;
-		this.a_name_1st = a_name_1st;
-		this.a_name_2nd = a_name_2nd;
-		this.a_status = a_status;
-		this.a_save = a_save;
-		this.e_number = e_number;
+		this.aNumber = aNumber;
+		this.aName = aName;
+		this.aDepartmentName = aDepartmentName;
+		this.aStartDate = aStartDate;
+		this.aEndDate = aEndDate;
+		this.aTitle = aTitle;
+		this.aContent = aContent;
+		this.aName1st = aName1st;
+		this.aName2nd = aName2nd;
+		this.aStatus = aStatus;
+		this.aSave = aSave;
+		this.eNumber = eNumber;
 	}
 
 
 
 
-	public int getA_number() {
-		return a_number;
+
+	public int getaNumber() {
+		return aNumber;
 	}
 
 
 
 
-	public void setA_number(int a_number) {
-		this.a_number = a_number;
+	public void setaNumber(int aNumber) {
+		this.aNumber = aNumber;
 	}
 
 
 
 
-	public String getA_name() {
-		return a_name;
+	public String getaName() {
+		return aName;
 	}
 
 
 
 
-	public void setA_name(String a_name) {
-		this.a_name = a_name;
+	public void setaName(String aName) {
+		this.aName = aName;
 	}
 
 
 
 
-	public String getA_department_name() {
-		return a_department_name;
+	public String getaDepartmentName() {
+		return aDepartmentName;
 	}
 
 
 
 
-	public void setA_department_name(String a_department_name) {
-		this.a_department_name = a_department_name;
+	public void setaDepartmentName(String aDepartmentName) {
+		this.aDepartmentName = aDepartmentName;
 	}
 
 
 
 
-	public Date getA_start_date() {
-		return a_start_date;
+	public Date getaStartDate() {
+		return aStartDate;
 	}
 
 
 
 
-	public void setA_start_date(Date a_start_date) {
-		this.a_start_date = a_start_date;
+	public void setaStartDate(Date aStartDate) {
+		this.aStartDate = aStartDate;
 	}
 
 
 
 
-	public Date getA_end_date() {
-		return a_end_date;
+	public Date getaEndDate() {
+		return aEndDate;
 	}
 
 
 
 
-	public void setA_end_date(Date a_end_date) {
-		this.a_end_date = a_end_date;
+	public void setaEndDate(Date aEndDate) {
+		this.aEndDate = aEndDate;
 	}
 
 
 
 
-	public String getA_title() {
-		return a_title;
+	public String getaTitle() {
+		return aTitle;
 	}
 
 
 
 
-	public void setA_title(String a_title) {
-		this.a_title = a_title;
+	public void setaTitle(String aTitle) {
+		this.aTitle = aTitle;
 	}
 
 
 
 
-	public String getA_content() {
-		return a_content;
+	public String getaContent() {
+		return aContent;
 	}
 
 
 
 
-	public void setA_content(String a_content) {
-		this.a_content = a_content;
+	public void setaContent(String aContent) {
+		this.aContent = aContent;
 	}
 
 
 
 
-	public String getA_name_1st() {
-		return a_name_1st;
+	public String getaName1st() {
+		return aName1st;
 	}
 
 
 
 
-	public void setA_name_1st(String a_name_1st) {
-		this.a_name_1st = a_name_1st;
+	public void setaName1st(String aName1st) {
+		this.aName1st = aName1st;
 	}
 
 
 
 
-	public String getA_name_2nd() {
-		return a_name_2nd;
+	public String getaName2nd() {
+		return aName2nd;
 	}
 
 
 
 
-	public void setA_name_2nd(String a_name_2nd) {
-		this.a_name_2nd = a_name_2nd;
+	public void setaName2nd(String aName2nd) {
+		this.aName2nd = aName2nd;
 	}
 
 
 
 
-	public String getA_status() {
-		return a_status;
+	public String getaStatus() {
+		return aStatus;
 	}
 
 
 
 
-	public void setA_status(String a_status) {
-		this.a_status = a_status;
+	public void setaStatus(String aStatus) {
+		this.aStatus = aStatus;
 	}
 
 
 
 
-	public String getA_save() {
-		return a_save;
+	public String getaSave() {
+		return aSave;
 	}
 
 
 
 
-	public void setA_save(String a_save) {
-		this.a_save = a_save;
+	public void setaSave(String aSave) {
+		this.aSave = aSave;
 	}
 
 
 
 
-	public String getE_number() {
-		return e_number;
+	public String geteNumber() {
+		return eNumber;
 	}
 
 
 
 
-	public void setE_number(String e_number) {
-		this.e_number = e_number;
+	public void seteNumber(String eNumber) {
+		this.eNumber = eNumber;
 	}
 
 
@@ -216,11 +217,21 @@ public class ApprovalVO {
 
 	@Override
 	public String toString() {
-		return "ApprovalVO [a_number=" + a_number + ", a_name=" + a_name + ", a_department_name=" + a_department_name
-				+ ", a_start_date=" + a_start_date + ", a_end_date=" + a_end_date + ", a_title=" + a_title
-				+ ", a_content=" + a_content + ", a_name_1st=" + a_name_1st + ", a_name_2nd=" + a_name_2nd
-				+ ", a_status=" + a_status + ", a_save=" + a_save + ", e_number=" + e_number + "]";
+		return "ApprovalVO [aNumber=" + aNumber + ", aName=" + aName + ", aDepartmentName=" + aDepartmentName
+				+ ", aStartDate=" + aStartDate + ", aEndDate=" + aEndDate + ", aTitle=" + aTitle + ", aContent="
+				+ aContent + ", aName1st=" + aName1st + ", aName2nd=" + aName2nd + ", aStatus=" + aStatus + ", aSave="
+				+ aSave + ", eNumber=" + eNumber + "]";
 	}
+
+
+
+
+	
+
+
+
+
+	
 	
 	
 }
