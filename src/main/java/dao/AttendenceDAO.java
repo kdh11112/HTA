@@ -12,15 +12,15 @@ import vo.EmployeeVO;
 public class AttendenceDAO {
 	// 1.환경변수
 
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String user = "userhj";
+		String password = "user12";
+		Connection conn;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		StringBuffer sb = new StringBuffer();
 
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "userhj";
-	String password = "user12";
-	Connection conn;
-	PreparedStatement pstmt;
-	ResultSet rs;
-	StringBuffer sb = new StringBuffer();
 
 
 	public AttendenceDAO() {
@@ -54,7 +54,6 @@ public class AttendenceDAO {
 			sb.append("INSERT INTO ATTENDANCE (attendanceNo,workingDate) " );
 			sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate)");
 
-			/* pstmt.setString(1, vo.getOfficeGoingHour() ); */
 			pstmt.setInt(1, vo.getEnumber() );
 
 			
