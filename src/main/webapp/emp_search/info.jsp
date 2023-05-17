@@ -133,7 +133,7 @@ img {
 	$(function(){
 		$("#search").on("click",function(){
 		var txt = $("#txt").val();
-			$("#span").html("");
+		$("#list").html("");
 			$.ajax({
 				url:"pro.jsp",
 				success:function(data){
@@ -143,7 +143,7 @@ img {
 		            	var m = dList[i];
 		                var dList2 = m.split(" ")
 		                if(txt == dList2[3] ){
-		                	$("#span").append(m)
+		                	$("#list").append("<li class='hovBg' onclick='sendDataToParent(\"" + dList2[1]+","+ dList2[3]+","+ dList2[5] + "\");'>" + m + "</li>");
 		                	
 			            }
 					}
