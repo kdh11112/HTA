@@ -49,8 +49,38 @@
 	color: #888;
 	margin-bottom: 2px;
 }
+.right_cont{
+width:300px;
+border:1px solid black;
+height:500px;
+position:relative;
+left:1300px;
+bottom:800px;
 
+}
 
+.btnOverTime{
+position:relative;
+left:1300px;
+bottom:900px;
+}
+ #todayworkingHour {
+ position:relative;
+left:1300px;
+bottom:900px;
+ }
+ 
+ #vacationStatus
+{
+position:relative;
+left:1300px;
+bottom:900px;
+}
+.btnVacation{
+position:relative;
+left:1300px;
+bottom:900px;	
+}
 
 </style>
 
@@ -169,16 +199,20 @@
 					<div id="calendar"></div>
 
 				</div>
-
-				<div id="startHour">출근시간</div>
-				<div id="quitHour">퇴근시간</div>
-				<div id="lateHour">지각시간</div>
-				<div id="overHour">연장근무시간</div>
-				<button>연장근무신청</button>
+				
+				<div class="right_cont">
+				
+					<div id="startHour">출근시간</div>
+					<div id="quitHour">퇴근시간</div>
+					<div id="lateHour">지각시간</div>
+					<div id="overHour">연장근무시간</div>
+				</div>
+				<button class="btnOverTime">연장근무신청</button>
+				
 				<div id="todayworkingHour">오늘 근무시간</div>
 				<div id="vacationStatus">연차/반차 현황</div>
 
-				<button>연차신청</button>
+				<button class="btnVacation">연차신청</button>
 
 			</main>
 			<footer class="py-4 bg-light mt-auto"><%@ include
