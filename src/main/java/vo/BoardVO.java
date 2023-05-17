@@ -2,69 +2,84 @@ package vo;
 
 public class BoardVO {
 	
-	private int b_no;
-	private String b_title;
-	private String b_content;
-	private String b_writer;
-	private String b_regdate;
-	private int b_view;
-	private int e_number;
+	private int bNo;
+	private String bTitle;
+	private String bContent;
+	private String bWriter;
+	private String bRegdate;
+	private int bView;
+	private int eNumber;
 	
 	public BoardVO() {
 		
 	}
-	public BoardVO(int b_no, String b_title, String b_content, String b_writer, String b_regdate, int b_view,
-			int e_number) {
+
+	public BoardVO(int bNo, String bTitle, String bContent, String bWriter, String bRegdate, int bView, int eNumber) {
 		super();
-		this.b_no = b_no;
-		this.b_title = b_title;
-		this.b_content = b_content;
-		this.b_writer = b_writer;
-		this.b_regdate = b_regdate;
-		this.b_view = b_view;
-		this.e_number = e_number;
+		this.bNo = bNo;
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+		this.bWriter = bWriter;
+		this.bRegdate = bRegdate;
+		this.bView = bView;
+		this.eNumber = eNumber;
 	}
-	public int getB_no() {
-		return b_no;
+
+	public int getbNo() {
+		return bNo;
 	}
-	public void setB_no(int b_no) {
-		this.b_no = b_no;
+
+	public void setbNo(int bNo) {
+		this.bNo = bNo;
 	}
-	public String getB_title() {
-		return b_title;
+
+	public String getbTitle() {
+		return bTitle;
 	}
-	public void setB_title(String b_title) {
-		this.b_title = b_title;
+
+	public void setbTitle(String bTitle) {
+		this.bTitle = bTitle;
 	}
-	public String getB_content() {
-		return b_content;
+
+	public String getbContent() {
+		return bContent;
 	}
-	public void setB_content(String b_content) {
-		this.b_content = b_content;
+
+	public void setbContent(String bContent) {
+		this.bContent = bContent;
 	}
-	public String getB_writer() {
-		return b_writer;
+
+	public String getbWriter() {
+		return bWriter;
 	}
-	public void setB_writer(String b_writer) {
-		this.b_writer = b_writer;
+
+	public void setbWriter(String bWriter) {
+		this.bWriter = bWriter;
 	}
-	public String getB_regdate() {
-		return b_regdate;
+
+	public String getbRegdate() {
+		return bRegdate;
 	}
-	public void setB_regdate(String b_regdate) {
-		this.b_regdate = b_regdate;
+
+	public void setbRegdate(String bRegdate) {
+		this.bRegdate = bRegdate;
 	}
-	public int getB_view() {
-		return b_view;
+
+	public int getbView() {
+		return bView;
 	}
-	public void setB_view(int b_view) {
-		this.b_view = b_view;
+
+	public void setbView(int bView) {
+		this.bView = bView;
 	}
-	public int getE_number() {
-		return e_number;
+
+	public int geteNumber() {
+		return eNumber;
 	}
-	public void setE_number(int e_number) {
-		this.e_number = e_number;
+
+	public void seteNumber(int eNumber) {
+		this.eNumber = eNumber;
 	}
+	
 	
 }

@@ -52,14 +52,14 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				int b_no = rs.getInt("b_no");
-				String b_title = rs.getString("b_title");
-				String b_content = rs.getString("b_content");
-				String b_writer = rs.getString("b_writer");
-				String b_regdate = rs.getString("b_regdate");
-				int b_view = rs.getInt("b_view");
-				int e_number = rs.getInt("e_number");
-				BoardVO vo = new BoardVO(b_no, b_title, b_content, b_writer, b_regdate, b_view, e_number);
+				int bNo = rs.getInt("b_no");
+				String bTitle = rs.getString("b_title");
+				String bContent = rs.getString("b_content");
+				String bWriter = rs.getString("b_writer");
+				String bRegdate = rs.getString("b_regdate");
+				int bView = rs.getInt("b_view");
+				int eNumber = rs.getInt("e_number");
+				BoardVO vo = new BoardVO(bNo, bTitle, bContent, bWriter, bRegdate, bView, eNumber);
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -89,14 +89,14 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				int b_no = rs.getInt("b_no");
-				String b_title = rs.getString("b_title");
-				String b_content = rs.getString("b_content");
-				String b_writer = rs.getString("b_writer");
-				String b_regdate = rs.getString("b_regdate");
-				int b_view = rs.getInt("b_view");
-				int e_number = rs.getInt("e_number");
-				BoardVO vo = new BoardVO(b_no, b_title, b_content, b_writer, b_regdate, b_view, e_number);
+				int bNo = rs.getInt("b_no");
+				String bTitle = rs.getString("b_title");
+				String bContent = rs.getString("b_content");
+				String bWriter = rs.getString("b_writer");
+				String bRegdate = rs.getString("b_regdate");
+				int bView = rs.getInt("b_view");
+				int eNumber = rs.getInt("e_number");
+				BoardVO vo = new BoardVO(bNo, bTitle, bContent, bWriter, bRegdate, bView, eNumber);
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -113,9 +113,9 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
-			pstmt.setString(1, vo.getB_title());
-			pstmt.setString(2, vo.getB_content());
-			pstmt.setString(3, vo.getB_writer());
+			pstmt.setString(1, vo.getbTitle());
+			pstmt.setString(2, vo.getbContent());
+			pstmt.setString(3, vo.getbWriter());
 			//현재시간
 			//pstmt.setString(4, vo.getRegdate());
 			
@@ -145,13 +145,13 @@ public class BoardDAO {
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String b_title = rs.getString("b_title");
-				String b_content = rs.getString("b_content");
-				String b_writer = rs.getString("b_writer");
-				String b_regdate = rs.getString("b_regdate");
-				int b_view = rs.getInt("b_view");
-				int e_number = rs.getInt("e_number");
-				vo = new BoardVO(b_no, b_title, b_content, b_writer, b_regdate, b_view, e_number);
+				String bTitle = rs.getString("b_title");
+				String bContent = rs.getString("b_content");
+				String bWriter = rs.getString("b_writer");
+				String bRegdate = rs.getString("b_regdate");
+				int bView = rs.getInt("b_view");
+				int eNumber = rs.getInt("e_number");
+				vo = new BoardVO(b_no, bTitle, bContent, bWriter, bRegdate, bView, eNumber);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -168,9 +168,9 @@ public class BoardDAO {
 	
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setString(1, vo.getB_title());
-			pstmt.setString(2, vo.getB_content());
-			pstmt.setInt(3, vo.getB_no());
+			pstmt.setString(1, vo.getbTitle());
+			pstmt.setString(2, vo.getbContent());
+			pstmt.setInt(3, vo.getbNo());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -180,13 +180,13 @@ public class BoardDAO {
 	}
 	
 	//게시글 삭제
-	public void deleteOne(int b_no) {
+	public void deleteOne(int bNo) {
 		sb.setLength(0);
 		sb.append("DELETE FROM board WHERE b_no = ? ");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, b_no);
+			pstmt.setInt(1, bNo);
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
