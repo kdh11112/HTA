@@ -10,21 +10,21 @@
 </head>
 <body>
 <%
-	//시간을 받아오는 파라미터
-	String id = request.getParameter("id");
-	String date1 = request.getParameter("workingDate");
-	String startTime = request.getParameter("officeGoingHour");
+	String time = request.getParameter("id");
 	
-	int enumber = Integer.parseInt(id);
-	
+
 	//dao 객체 생성
 	AttendenceDAO dao =  new AttendenceDAO();
 	//vo객체 생성
-	AttendenceVO vo = new AttendenceVO();
+	//AttendenceVO vo = new AttendenceVO();
 	
-	vo.setEnumber(enumber);
 
-	dao.addOne(vo);
+	//vo.setOfficeGoingHour(endTime);
+	int id = Integer.parseInt(time);
+	
+	dao.endTimeAddOne(id);
+	
+	//dao.endTimeAddOne(vo);
 	
 	
 	
