@@ -43,24 +43,24 @@ public class EmployeeDAO {
 			pstmt = conn.prepareStatement(sb.toString());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				int e_number = rs.getInt("e_number");
-				String e_name = rs.getString("e_name");
-				String e_id = rs.getString("e_id");
-				String e_password = rs.getString("e_password");
-				String e_phone_number = rs.getString("e_phone_number");
-				int e_postal_code = rs.getInt("e_postal_code");
-				String e_address1 = rs.getString("e_address1");
-				String e_address2 = rs.getString("e_address2");
-				String e_birth = rs.getString("e_birth");
-				String e_date_joining_company = rs.getString("e_date_joining_company");
-				String e_retirement_date = rs.getString("e_retirement_date");
-				String e_account_information = rs.getString("e_account_information");
-				String e_gender = rs.getString("e_gender");
-				String e_official_responsibilities = rs.getString("e_official_responsibilities");
-				int e_total_vacation = rs.getInt("e_total_vacation");
-				String e_serving = rs.getString("e_serving");
-				String d_name = rs.getString("d_name");
-				EmployeeVO vo = new EmployeeVO(e_number, e_name, e_id, e_password, e_phone_number, e_postal_code, e_address1, e_address2, e_birth, e_date_joining_company, e_retirement_date, e_account_information, e_gender, e_official_responsibilities, e_total_vacation, e_serving, d_name);
+				int eNumber = rs.getInt("e_number");
+				String eName = rs.getString("e_name");
+				String eId = rs.getString("e_id");
+				String ePassword = rs.getString("e_password");
+				String ePhonenumber = rs.getString("e_phone_number");
+				int ePostalCode = rs.getInt("e_postal_code");
+				String eAddress1 = rs.getString("e_address1");
+				String eAddress2 = rs.getString("e_address2");
+				String eBirth = rs.getString("e_birth");
+				String eDateJoiningCompany = rs.getString("e_date_joining_company");
+				String eRetirementDate = rs.getString("e_retirement_date");
+				String eAccountInformation = rs.getString("e_account_information");
+				String eGender = rs.getString("e_gender");
+				String eOfficialResponsibilities = rs.getString("e_official_responsibilities");
+				int eTotalVacation = rs.getInt("e_total_vacation");
+				String eServing = rs.getString("e_serving");
+				String dName = rs.getString("d_name");
+				EmployeeVO vo = new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName);
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -77,16 +77,16 @@ public class EmployeeDAO {
 	    try {
 	        pstmt = conn.prepareStatement(sb.toString());
 
-	        pstmt.setString(1, vo.getE_name());
-	        pstmt.setString(2, vo.getE_id());
-	        pstmt.setString(3, vo.getE_password());
-	        pstmt.setString(4, vo.getE_phone_number());
-	        pstmt.setInt(5, vo.getE_postal_code());
-	        pstmt.setString(6, vo.getE_address1());
-	        pstmt.setString(7, vo.getE_address2());
-	        pstmt.setString(8, vo.getE_birth());
-	        pstmt.setString(9, vo.getE_gender());
-	        pstmt.setString(10, "기획팀"); // 임시 값으로 "N/A" 설정
+	        pstmt.setString(1, vo.geteName());
+	        pstmt.setString(2, vo.geteId());
+	        pstmt.setString(3, vo.getePassword());
+	        pstmt.setString(4, vo.getePhonenumber());
+	        pstmt.setInt(5, vo.getePostalCode());
+	        pstmt.setString(6, vo.geteAddress1());
+	        pstmt.setString(7, vo.geteAddress2());
+	        pstmt.setString(8, vo.geteBirth());
+	        pstmt.setString(9, vo.geteGender());
+	        pstmt.setString(10, "기획"); // 임시 값으로 "N/A" 설정
 
 	        pstmt.executeUpdate();
 
@@ -102,33 +102,34 @@ public class EmployeeDAO {
 	}
 	
 	//회원가입 시 아이디 중복체크
-	public EmployeeVO getOne(String id) {
+	public EmployeeVO getOne(String eId) {
 		EmployeeVO vo = null;
 		sb.append("SELECT * FROM employee WHERE e_id=?");
 		
 		try {
 		pstmt = conn.prepareStatement(sb.toString());
-		pstmt.setString(1,id);
+		pstmt.setString(1,eId);
 		
 		rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
-			int e_number = rs.getInt("e_number");
-			String e_name = rs.getString("e_name");
-			String e_password = rs.getString("e_password");
-			String e_phone_number = rs.getString("e_phone_number");
-			int e_postal_code = rs.getInt("e_postal_code");
-			String e_address1 = rs.getString("e_address1");
-			String e_address2 = rs.getString("e_address2");
-			String e_birth = rs.getString("e_birth");
-			String e_date_joining_company = rs.getString("e_date_joining_company");
-			String e_retirement_date = rs.getString("e_retirement_date");
-			String e_account_information = rs.getString("e_account_information");
-			String e_gender = rs.getString("e_gender");
-			String e_official_responsibilities = rs.getString("e_official_responsibilities");
-			int e_total_vacation = rs.getInt("e_total_vacation");
-			String d_name = rs.getString("d_name");
-			vo= new EmployeeVO(e_number, e_name, id, e_password, e_phone_number, e_postal_code, e_address1, e_address2, e_birth, e_date_joining_company, e_retirement_date, e_account_information, e_gender, e_official_responsibilities, e_total_vacation, e_official_responsibilities, d_name);
+			int eNumber = rs.getInt("e_number");
+			String eName = rs.getString("e_name");
+			String ePassword = rs.getString("e_password");
+			String ePhonenumber = rs.getString("e_phone_number");
+			int ePostalCode = rs.getInt("e_postal_code");
+			String eAddress1 = rs.getString("e_address1");
+			String eAddress2 = rs.getString("e_address2");
+			String eBirth = rs.getString("e_birth");
+			String eDateJoiningCompany = rs.getString("e_date_joining_company");
+			String eRetirementDate = rs.getString("e_retirement_date");
+			String eAccountInformation = rs.getString("e_account_information");
+			String eGender = rs.getString("e_gender");
+			String eOfficialResponsibilities = rs.getString("e_official_responsibilities");
+			int eTotalVacation = rs.getInt("e_total_vacation");
+			String eServing = rs.getString("e_serving");
+			String dName = rs.getString("d_name");
+			vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName);
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -139,35 +140,36 @@ public class EmployeeDAO {
 	
 	
 	// 로그인 시 IP와 PW 입력하면 vo 객체를 리턴
-		public EmployeeVO getOne(String e_id, String e_password) {
-			EmployeeVO vo = null;
-			sb.setLength(0);
-			sb.append("SELECT * FROM employee WHERE e_id=? and e_password=?");
-			
-			try {
-			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setString(1,e_id);
-			pstmt.setString(2,e_password);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				int e_number = rs.getInt("e_number");
-				String e_name = rs.getString("e_name");
-				String e_phone_number = rs.getString("e_phone_number");
-				int e_postal_code = rs.getInt("e_postal_code");
-				String e_address1 = rs.getString("e_address1");
-				String e_address2 = rs.getString("e_address2");
-				String e_birth = rs.getString("e_birth");
-				String e_date_joining_company = rs.getString("e_date_joining_company");
-				String e_retirement_date = rs.getString("e_retirement_date");
-				String e_gender = rs.getString("e_gender");
-				String e_official_responsibilities = rs.getString("e_official_responsibilities");
-				int e_total_vacation = rs.getInt("e_total_vacation");
-				String e_serving = rs.getString("e_serving");
-				String d_name = rs.getString("d_name");
-				vo= new EmployeeVO(e_number, e_name, e_id, e_password, e_phone_number, e_postal_code, e_address1, e_address2, e_birth, e_date_joining_company, e_retirement_date, e_retirement_date, e_gender, e_official_responsibilities, e_total_vacation, e_serving, d_name);
-				}
+	public EmployeeVO getOne(String eId, String ePassword) {
+		EmployeeVO vo = null;
+		sb.setLength(0);
+		sb.append("SELECT * FROM employee WHERE e_id=? and e_password=?");
+		
+		try {
+		pstmt = conn.prepareStatement(sb.toString());
+		pstmt.setString(1,eId);
+		pstmt.setString(2,ePassword);
+		
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			int eNumber = rs.getInt("e_number");
+			String eName = rs.getString("e_name");
+			String ePhonenumber = rs.getString("e_phone_number");
+			int ePostalCode = rs.getInt("e_postal_code");
+			String eAddress1 = rs.getString("e_address1");
+			String eAddress2 = rs.getString("e_address2");
+			String eBirth = rs.getString("e_birth");
+			String eDateJoiningCompany = rs.getString("e_date_joining_company");
+			String eRetirementDate = rs.getString("e_retirement_date");
+			String eAccountInformation = rs.getString("e_account_information");
+			String eGender = rs.getString("e_gender");
+			String eOfficialResponsibilities = rs.getString("e_official_responsibilities");
+			int eTotalVacation = rs.getInt("e_total_vacation");
+			String eServing = rs.getString("e_serving");
+			String dName = rs.getString("d_name");
+			vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -175,6 +177,38 @@ public class EmployeeDAO {
 			
 		}	//getOne() end
 		
+	public String getEmployeeIdByUsername(String eName) {
+        String eId = null;
+        try {
+            String query = "SELECT e_id FROM employee WHERE e_name = ? ";
+            
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, eName);
+            
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                eId = rs.getString("E_ID");
+            }
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+		/*
+		 * sb.setLength(0); sb.append("SELECT e_id FROM employee WHERE e_name = ? ");
+		 * 
+		 * pstmt = conn.prepareStatement(sb.toString()); pstmt.setString(1, eName);
+		 * 
+		 * ResultSet rs = pstmt.executeQuery(); if (rs.next()) { eId =
+		 * rs.getString("e_id"); }
+		 * 
+		 * rs.close();
+		 * 
+		 */
+        return eId;
+    }
+	
 	public void close() {
 		if(rs!=null)
 			try {

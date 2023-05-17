@@ -1,3 +1,8 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Date"%>
+<%@page import="vo.EmployeeVO"%>
+<%@page import="dao.EmployeeDAO"%>
+<%@page import="dao.ApprovalDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,10 +29,11 @@
 		        width: 100%;
 		    }
 		    
-		    #myTable th, #myTable td {
+		    #myTable th, #myTable td{
 		        text-align: center;
 		        padding: 8px;
 		        border: 1px solid black;
+		        width: 200px;
 		    }
 		    
 		    #myTable th {
@@ -37,62 +43,137 @@
 		    #myTable tr:nth-child(even) {
 		        background-color: #f2f2f2;
 		    }
+		    input:focus {
+		    	outline:none;
+
+		    }
+		    input {
+		    	border: none; 
+		    	background: transparent; 
+		    	text-align: center; 
+		    }
+		    
 		</style>
+		<script type="text/javascript">
+				var url = null;
+				var option = null;
+				var title = null;
+			$(function(){
+				$(".position2").on("click",function(){
+					url = "../emp_search/info.jsp";
+					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					title = '자식창1';
+					window.open(url,title,option,"window.opener");
+				})
+
+				
+			})
+			
+			$(function(){
+				$(".position3").on("click",function(){
+					url = "../emp_search/info.jsp";
+					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					title = '자식창2';
+					window.open(url,title,option,"window.opener");
+				})
+			})
+			
+			window.addEventListener("message", receiveMessageFromChild, false);
+	
+				function receiveMessageFromChild(event) {
+				  var dataArray = event.data.split(",");
+					for(var i=0; i<dataArray.length; i++){
+						if(title == '자식창1'){
+					    document.getElementById('data-placeholder1').value = dataArray[1]; 
+					    document.getElementById('data-placeholder2').value = dataArray[2]; 						
+					}else if(title == '자식창2'){
+					    document.getElementById('data-placeholder3').value = dataArray[1]; 
+					    document.getElementById('data-placeholder4').value = dataArray[2]; 	
+					}
+				}
+				}
+			
+		</script>
     </head>
     <body class="sb-nav-fixed">
+    <%
+    	Object obj = session.getAttribute("vo");
+    	String name = null;
+    	String dname = null;
+    	String position = null;
+    	int num = 0;
+    	LocalDate now = LocalDate.now();
+    	if(obj != null){
+    		EmployeeVO vo = (EmployeeVO)obj;
+    		name = vo.geteName();
+    		dname = vo.getdName();
+    		position = vo.geteOfficialResponsibilities();
+    		num = vo.geteNumber();
+    		
+    	}
+    	
+    	
+    
+    %>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
         <div id="layoutSidenav"> 
-        <div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
-            <div id="layoutSidenav_content">
-            	<main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">전자결재 작성</h1>
-							<div class="card mb-4">
-							    <div class="card-header">
-							        <table>
-							            <tr>
-							                <th>기안담당</th>
-							                <th>기안부서</th>
-							                <th>기안일자</th>
-							            </tr> 
-							        </table>
-							    </div>
-							     <table id="myTable">
-								    <tr>
-								        <td rowspan="4">결재</td>
-								    </tr>
-							        <tr>
-							            <th>열 1</th>
-							            <th>열 2</th>
-							            <th>열 3</th>
-							        </tr>
-							        <tr>
-							            <td>행 1, 열 1</td>
-							            <td>행 1, 열 2</td>
-							            <td>행 1, 열 3</td>
-							        </tr>
-							        <tr>
-							            <td>행 2, 열 1</td>
-							            <td>행 2, 열 2</td>
-							            <td>행 2, 열 3</td>
-							        </tr>
-							    </table>
-							</div>
+        	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
+           	 	<div id="layoutSidenav_content">
+            		<form action="approvalFormOk.jsp" method="get">
+		            	<main>
+		                    <div class="container-fluid px-4">
+		                        <h1 class="mt-4">전자결재 작성</h1>
+									<div class="card mb-4">
+									    <div class="card-header">
+									        <table class="table table-striped">
+									            <tr>
+									                <th>기안담당 : <%=name %></th>
+									                <th>기안부서 : <%=dname %></th>
+									                <th>기안일자 : <%=now %></th>
+									            </tr> 
+									        </table>
+									    </div>
+									     <table id="myTable">
+										    <tr>
+										        <td rowspan="4">결재</td>
+										    </tr>
+									        <tr>
+									            <th><%=position %></th>
+									            <!-- <th class="position2" id="data-placeholder2"></th> -->
+									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" readonly></th>
+									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" readonly></th>
+									            <!-- <input type="text" id="data-placeholder2" name="data-placeholder1"> -->
+									        </tr>
+									        <tr>
+									            <td><%=name %></td>
+									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" readonly></td>
+									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" readonly></td>
+									        </tr>
+									        <tr>
+									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
+									            <td class="position2"></td>
+									            <td class="position3"></td>
+									        </tr>
+									    </table>
+									</div>
 
-                            <table class="table table-striped">
-								<tr>
-									<textarea class="summernote" name="contents"></textarea>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input class="btn btn-primary" type="submit" value="제출하기" />
-										<input class="btn btn-primary" type="submit" value="임시저장" />
-										<input class="btn btn-info" type="reset" value="다시쓰기" />
-									</td>
-								</tr>
-                            </table>
-                    </div>
-                 </main>
+		                            <table class="table table-striped">
+		                            	
+			                            	
+		                            	<tr><td>제목 <input class="titles" type="text" name="title" id="title" style="width: 90%; text-align: left;"/></td></tr>
+										<tr>
+											<td><textarea class="summernote" name="contents"></textarea></td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<input class="btn btn-primary" type="submit" value="제출하기" />
+												<input class="btn btn-info" type="submit" value="임시저장" />
+											</td>
+										</tr>
+		                            </table>
+		                    </div>
+		                 </main>
+           			 </form>
 				<footer class="py-4 bg-light mt-auto"><%@ include file="../menu/footer.jsp" %></footer>
             </div>
         </div>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 날짜 설정 -->
+    <!-- https://flatpickr.js.org/options/ + https://lily-im.tistory.com/23-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+</head>
+<script>
+	$(document).ready(function() {
+		$("#select").on("change", function() {
+        // 선택한 옵션에 따라 입력값 초기화
+        resetInputs();
+		});
+	});
+
+	function resetInputs() {
+	    // 입력 요소들을 선택하여 값을 초기화
+	    $("#start_date input").val("");
+	    $("#end_date input").val("");
+	    $("#content_area textarea").val("");
+	}
+	
+	$(function(){
+	    $("#add_button").on("click", function(){
+	        // 입력값 가져오기
+	        var startDate = $("#start_date input").val();
+	        var endDate = $("#end_date input").val();
+	        var content = $("#content_area textarea").val();
+	    })
+	})
+</script>
+
+<style>
+
+    .dateTime {
+        text-align: center;
+    }
+	#page{
+		width:300px;
+		height:450px;
+		border: 1px solid black;
+		background: rgb(220, 251, 254);
+	}
+	#title{
+	font-size:30px;
+	padding-left:90px;
+	}
+	.control_dateTime{
+		width:140px;
+	}
+	#start_date_txt,#end_date_txt {
+		margin-left:30px;
+		font-weight: bold;
+	}
+	#select{
+		margin-left:200px;
+		margin-top:30px; 
+		font-weight: bold;
+		width:80px;
+		height:30px;
+	}
+	#dates{
+			margin-top:20px;
+	}
+	#end_date_txt{
+		margin-top:10px;
+	}
+	#content_area{
+		margin-top:20px;
+		margin-left:20px;
+		font-weight: bold;
+	}
+	#add_button{
+		margin-left: 190px;
+	}
+</style>
+
+<body>
+    <!-- 날짜 설정 -->
+    
+    <div id=page><span id="title">일정추가</span>
+		<div>
+			<span><select name="select"   id="select"></span>
+					<option value="" id="personal_schedule" name="personal_schedule">개인일정</option>
+					<option value="" id="department_schedule" name="department_schedule">부서일정</option>
+					<option value="" id="company_schedule" name="company_schedule">회사일정</option>
+				  </select>
+		</div>
+		<div id="dates">
+		<div id="start_date_txt">시작일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local" name="start_date" required /></div>
+		<div id="end_date_txt">종료일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local"  name="end_date" required /></div>
+		</div>
+		<div id="content_area"><span>일정내용</span>
+			 <p><textarea cols="34" rows="10" name="content"></textarea></p>			
+		</div>
+		<div >
+			<button id="add_button">추가</button>
+			<button id="cancel_button" >취소</button>
+		</div>
+	
+	</div>
+</body>
+
+<script>
+    // 언어 변경
+    flatpickr.localize(flatpickr.l10ns.ko);
+
+    const today = new Date().setHours(0, 0, 0, 0)
+
+    config = {
+    	showOn: 'button',
+        enableTime: true, // 시간 속성 사용 여부
+        dateFormat: "Y-m-d H시 i분", // 달력 입력 포맷
+        altInput: true,
+        altFormat: "Y-m-d H시 i분", // 보여지는 입력 포맷
+        dateFormat: "Y-m-d H시 i분", // 달력 입력 포맷
+        time_24hr: true, // 24시간 사용 여부 (false인 경우 오전, 오후로 설정됨)
+        disable: [ // 해당 날짜 비활성화
+            function (date) {
+                // return true to disable
+                return (date.getDay() === 0 || date.getDay() === 6);
+            }
+        ],
+        local: 'ko', // 언어 설정
+        minDate: today, // 최소 날짜 설정
+        minuteIncrement: 30, // 분 입력(스크롤 포함)의 단계를 조정한다.
+        minTime: "09:00", // 최소 시간
+        maxTime: "18:00", // 최대 시간
+        defaultHour: "09", // 시간 기본값
+        defaultMinute: "00", // 분 기본값
+        clickOpens:true,        
+    }
+
+    flatpickr("input[type=datetime-local]", config);
+</script>
+
+</html>

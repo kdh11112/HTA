@@ -1,3 +1,5 @@
+<%@page import="dao.EmployeeDAO"%>
+<%@page import="vo.EmployeeVO"%>
 <%@page import="vo.ProVO"%>
 <%@page import="dao.ProDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,24 +8,25 @@
       <%
       
       ProDAO dao = new ProDAO();
+      String name = null;
       
-      
-      ArrayList<ProVO> list = dao.selectAll();
-      out.println("<br/>");
-      for(ProVO vo : list){
-    	  out.println("사번: " + vo.getEmpno() + " 이름: " + vo.getEname() + " 직급: " + vo.getJob() + " 부서명: " + vo.getDname()+"," + "<br/>");
+      ArrayList<EmployeeVO> list = dao.selectAll();
+      for(EmployeeVO vo : list){
+    	  name = vo.geteName();
+    	  out.println("사번: " + vo.geteNumber() + " 이름: " + vo.geteName() + " 직급: " + vo.geteOfficialResponsibilities() + " 부서명: " + vo.getdName()+",");
       }
-      
-      
+
      String text = request.getParameter("txt");
 	 out.println(text);
       if(text != null){
-          ProDAO dao2 = new ProDAO();
+    	  ProDAO dao2 = new ProDAO();
 
-    	  ProVO vo = dao2.getOneName(text);
+    	  EmployeeVO vo = dao2.getOneName(text);
     	  if(vo != null){
-    		  out.println("사번: " + vo.getEmpno() + " 이름: " + vo.getEname() + " 직급: " + vo.getJob() + " 부서명: " + vo.getDname()+"," + "<br/>");
+    		  out.println("사번: " + vo.geteNumber() + " 이름: " + vo.geteName() + " 직급: " + vo.geteOfficialResponsibilities() + " 부서명: " + vo.getdName()+"," + "<br/>");
     	  }
       } 
+      
+      
       
    %>

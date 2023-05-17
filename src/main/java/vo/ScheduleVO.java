@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ScheduleVO {
-	int S_NUMBER;
-	String S_CONTENTS;
-	String S_START_DATE;
-	String S_END_DATE;
-	int E_NUMBER;
+	int sNumber;
+	String sContents;
+	String sStarDate;
+	String sEndDate;
+	int eNumber;
 	
 } 

@@ -9,7 +9,8 @@ public class AttendenceVO {
 	int attendanceNo;
 	String workingDate;
 	String officeGoingHour;
-	String QuittingTime;
+	String quittingTime;
 	String attendanceStatus;
+	int enumber;
 }
 //ATTENDANCE_SEQ -- 시퀀스

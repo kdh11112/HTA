@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import vo.ApprovalVO;
+import vo.EmployeeVO;
 
 public class ApprovalDAO {
 	
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
-	String user = "project";
-	String password = "project";
+	String user = "userhj";
+	String password = "user12";
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -76,18 +77,18 @@ public class ApprovalDAO {
 				String a_save = rs.getString("a_save");
 				String e_number = rs.getString("e_number");
 				ApprovalVO vo = new ApprovalVO();
-				vo.setA_number(a_number);
-				vo.setA_name(a_name);
-				vo.setA_department_name(a_department_name);
-				vo.setA_start_date(a_start_date);
-				vo.setA_end_date(a_end_date);
-				vo.setA_title(a_title);
-				vo.setA_content(a_content);
-				vo.setA_name_1st(a_name_1st);
-				vo.setA_name_2nd(a_name_2nd);
-				vo.setA_status(a_status);
-				vo.setA_save(a_save);
-				vo.setE_number(e_number);
+				vo.setaNumber(a_number);
+				vo.setaName(a_name);
+				vo.setaDepartmentName(a_department_name);
+				vo.setaStartDate(a_start_date);
+				vo.setaEndDate(a_end_date);
+				vo.setaTitle(a_title);
+				vo.setaContent(a_content);
+				vo.setaName1st(a_name_1st);
+				vo.setaName2nd(a_name_2nd);
+				vo.setaStatus(a_status);
+				vo.setaSave(a_save);
+				vo.seteNumber(e_number);
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -97,5 +98,25 @@ public class ApprovalDAO {
 		return list;
 	}
 	
+	public void addOne(ApprovalVO vo,EmployeeVO vo2) {
+		sb.setLength(0);
+		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,1,null,?)");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1,vo2.geteName());
+			pstmt.setString(2,vo2.geteOfficialResponsibilities());
+			pstmt.setString(3,vo.getaTitle());
+			pstmt.setString(4,vo.getaContent());
+			pstmt.setString(5,vo.getaName1st());
+			pstmt.setString(6,vo.getaName2nd());
+			pstmt.setInt(7,vo2.geteNumber());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	
+	}
 }

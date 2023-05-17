@@ -30,7 +30,19 @@ div {
 
 .cursor {
 	cursor: pointer;
-	color: blue;
+}
+.cursor:hover {
+
+background-color: lightgray;
+
+}
+
+.hovBg{
+cursor: pointer;
+}
+
+.hovBg:hover{
+background-color: lightgray;
 }
 
 img {
@@ -47,29 +59,33 @@ img {
 
 	$(function() {
 		$("#plan").on("mousedown", function() {
-			$("#span").html("");
+			$("#list").html("");
 			$.ajax({
 				url : "pro.jsp",
 				success : function(data) {
 					var data2 = data.trim();
-					//var data2 = data;
 					var dList = data2.split(",");
+					console.log(dList);
 					for (var i = 0; i < dList.length; i++) {
 						var m = dList[i];
-						var dList2 = m.split(" ")
-						if (dList2[7] == "PLANNING") {
-							$("#span").append(m)
-							var date = new Date();
-							var month = date.getMonth();
-							console.log(date.getHours()+":"+date.getMinutes());
-							$("#span").append(month);
+						var dList2 = m.split(" ");
+						console.log(dList2);
+						if (dList2[7] == "기획") {
+							 $("#list").append("<li class='hovBg' onclick='sendDataToParent(\"" + dList2[1]+","+ dList2[3]+","+ dList2[5] + "\");'>" + m + "</li>");
+							/* window.opener.postMessage(m, "*"); */ 
 							
 						}
 					}
 				}
 			})
 		})
+			
 	})
+		function sendDataToParent(data) {
+		  window.opener.postMessage(data, "*");
+		  window.close();
+		}
+	
 
 	$(function() {
 		$("#devel").on("mousedown", function() {
@@ -90,6 +106,7 @@ img {
 					}
 				}
 			})
+			
 		})
 	})
 	$(function() {
@@ -134,25 +151,36 @@ img {
 			})
 		})
 	})
+/* 	$(function(){
+		$("#list").on("click",function(){
+			
+			console.log("test")
+		})
+		
+	}) */
+	
 </script>
+<!-- <style>
+#list{
+cursor:pointer;
+}
+</style> -->
 </head>
 <body>
-	<%
-	
-	
-	%>
+
 	
 	<div id="div1">
 	
-		<p class="cursor" id="plan"><img src="../images/fo.png" alt="" />기획팀</p>
-		<p class="cursor" id="devel"><img src="../images/fo.png" alt="" />개발팀</p>
-		<p class="cursor" id="human"><img src="../images/fo.png" alt="" />인사팀</p>
-		<p class="cursor" id="ATTENDANCE"><img src="../images/fo.png" alt="" />출근</p>
+		<p class="cursor" id="plan"><img src="../img/folder/fo.png" alt="" />기획팀</p>
+		<p class="cursor" id="devel"><img src="../img/folder/fo.png" alt="" />개발팀</p>
+		<p class="cursor" id="human"><img src="../img/folder/fo.png" alt="" />인사팀</p>
 	</div>
 
 	<div>
-		<input type="text" name="txt" id="txt" /></input> <input type="button"
-			value="검색" id="search" /></input> </br><br/> <b>사번 이름 직급 부서명</b><br/> <span id="span"></span>
+		<input type="text" name="txt" id="txt" /></input> 
+		<input type="button" value="검색" id="search" /></input> 
+		</br><br/> <b>사번 이름 직급 부서명</b><br/> 
+		<ol id="list"></ol>
 	</div>
 
 </body>

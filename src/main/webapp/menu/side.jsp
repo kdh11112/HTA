@@ -16,31 +16,33 @@
 	                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" >
 	                            	<div class="sb-sidenav-menu-heading">결재</div>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="../approval/center.jsp">테스트</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">테스트</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="../approval/approvalForm.jsp">일반결재</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalForm.jsp">일반결재</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="../approval/center.jsp">임시저장함</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">임시저장함</a>
 	                                </nav>
 	                                <div class="sb-sidenav-menu-heading">결재함</div>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="../approval/approvalList.jsp">내 문서함</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalList.jsp">내 문서함</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="../approval/center.jsp">결재완료문서</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">결재완료문서</a>
 	                                </nav>
 	                            </div>
 	                            
 	                            
 
-	                        <a class="nav-link" href="../mail/mail_list.jsp">사내메일함</a>
-	                        <a class="nav-link" href="../attendance/test2.jsp">근태관리</a>
-
+	                        <a class="nav-link" href="/HTA_Project_semi/mail/mail_list.jsp">사내메일함</a>
+	                        <a class="nav-link" href="../attendance/test5.jsp">근태관리</a>
+	                        <a class="nav-link" href="../schedule/schedule_list.jsp">일정관리</a>
+   							<a class="nav-link" href="/HTA_Project_semi/board/boardList.jsp">게시판</a>
+   							<a class="nav-link" href="/HTA_Project_semi/login.jsp">로그인</a>
 	                            
 	                            
-	                  <!--       <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError_1" aria-expanded="false" aria-controls="pagesCollapseError_1">
+	                 <!--  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError_1" aria-expanded="false" aria-controls="pagesCollapseError_1">
                                  전자결재 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
 	                             <div class="collapse" id="pagesCollapseError_1" aria-labelledby="headingOne" >
@@ -48,7 +50,7 @@
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" href="../approval/center.jsp">테스트</a>
 	                                </nav>
-	                             </div>    -->
+	                             </div> -->
 	                            
                         </div>
                     </div>

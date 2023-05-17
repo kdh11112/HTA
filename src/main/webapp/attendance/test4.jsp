@@ -1,3 +1,4 @@
+<%@page import="vo.EmployeeVO"%>
 <%@page import="dao.AttendenceDAO"%>
 <%@page import="vo.AttendenceVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -25,75 +26,108 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <title>Insert title here</title>
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <link rel="stylesheet" href="../attendance/main.css" />
 
 
 <!--  FullCalendar  -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <!--  FullCalendar  -->
 
 <style>
-  .fc-day-top .attendance-time {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 2px;
-  }
+.fc-day-top .attendance-time {
+	font-size: 12px;
+	color: #888;
+	margin-bottom: 2px;
+}
+
+
+
 </style>
 
 <!-- 스크립트 부분 -->
 <script>
-  $(document).ready(function() {
-    // FullCalendar를 초기화합니다.
-    $('#calendar').fullCalendar({
-      // FullCalendar 옵션 설정...
-      dayRender: function(date, cell) {
-        // 날짜 요소에 시간을 추가하기 위해 data-date 속성을 설정합니다.
-        var formattedDate = moment(date).format('YYYY-MM-DD');
-        cell.attr('data-date', formattedDate);
-      }
-    });
-  });
 
-  function markAttendance(type) {
-    // 출근 또는 퇴근 버튼을 클릭했을 때의 동작을 처리
-    var currentDate = $('#calendar').fullCalendar('getDate');
-    
-    var formattedDate = moment(currentDate).format('YYYY-MM-DD');
-  
-    console.log(formattedDate);
-    
-   /*  $.ajax({
-    	url:"startTime.jsp",
-    	success:function(data){
-    		//console.log(data.trim());
-    		var data = data.trim();
-
-    		
-    	}
-    }) */
-    
-    <%
+<%
+	EmployeeVO vo2 = new EmployeeVO();
+	vo2.seteNumber(31);
+	vo2.seteName("hong");
+	session.setAttribute("vo", vo2);
+	
 	Object obj = session.getAttribute("vo");
-   	int no = 0;
-	String date =null;
-	if(obj!=null){
-		AttendenceVO vo = (AttendenceVO)obj; 
-		no = vo.getAttendanceNo();
-		date = vo.getWorkingDate();
-	}
+	if(obj != null){
+	EmployeeVO vo =(EmployeeVO) obj;
 	%>
+	var eNumber = <%=vo.geteNumber() %>; 
+	<%
 
-    // 시간을 가져와서 해당 날짜의 날짜 요소에 출력
-    var currentTime = moment().format('HH:mm');
-    console.log(currentTime);
-    var attendanceTime = type + ' ' + currentTime;
-    $('[data-date="' + formattedDate + '"]').append('<span class="attendance-time">' + attendanceTime + '</div>');
-    
-  }
+}
+
+%>
+	$(document).ready(function() {
+		// FullCalendar를 초기화합니다.
+		$('#calendar').fullCalendar({
+			// FullCalendar 옵션 설정...
+			dayRender : function(date, cell) {
+				// 날짜 요소에 시간을 추가하기 위해 data-date 속성을 설정합니다.
+				var formattedDate = moment(date).format('YYYY-MM-DD');
+				cell.attr('data-date', formattedDate);
+			}
+		});
+	});
+
+	function markAttendance(type) {
+		// 출근 또는 퇴근 버튼을 클릭했을 때의 동작을 처리
+		var currentDate = $('#calendar').fullCalendar('getDate');
+
+		var formattedDate = moment(currentDate).format('YYYY-MM-DD');
+
+		console.log(formattedDate);
+
+		// 시간을 가져와서 해당 날짜의 날짜 요소에 출력
+		var currentTime = moment().format('HH:mm');
+		console.log(currentTime);
+		var attendanceTime = " "+ currentTime;
+		$('[data-date="' + formattedDate + '"]').append(
+				'<span class="attendance-time name="time">' + attendanceTime + '</span>');
+
+		if (type == "1") { //만약 출근 버튼을 누르면 jsp파일에 데이터가 넘어가서 데이터의 값을 가진애의 출근시간이 데이터에 넘어감. 
+
+			$.ajax({
+				url : "startTime.jsp",
+				data:{
+					id:eNumber
+				},
+				success : function(data) {
+					console.log(data.trim());//공백제거
+					var data2 = data.trim();
+
+				}
+			});
+
+		} else {
+		// endtime.jsp?id=141
+			$.ajax({
+				url : "endTime.jsp",
+				data:{
+					id:eNumber
+				},
+				success : function(data) {
+					console.log(data.trim());//공백제거
+					var data2 = data.trim();
+					
+				}
+			});
+		}
+	}
 </script>
 <!-- 스크립트 부분 -->
 </head>
@@ -101,24 +135,7 @@
 
 <body>
 
-<%
-	//시간을 받아오는 파라미터
-	
-	String date1 = request.getParameter("workingDate");
 
-	//dao 객체 생성
-	AttendenceDAO dao =  new AttendenceDAO();
-	//vo객체 생성
-	AttendenceVO vo = new AttendenceVO();
-	
-
-	vo.setWorkingDate(date1);
-	
-	dao.addOne(vo);
-	
-	
-	//dao.close();
-%>
 
 
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include
@@ -127,29 +144,27 @@
 		<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp"%></div>
 		<div id="layoutSidenav_content">
 			<main>
-			
+
 				<h2>근태관리</h2>
 				<div class="container-fluid px-4">
 
 					<div id="calendar"></div>
-							<!-- 출근 버튼 -->
-					<button onclick="markAttendance('출근')">출근</button>
-							<!-- 퇴근 버튼 -->
-					<button onclick="markAttendance('퇴근')">퇴근</button>
-						
+					<!-- 출근 버튼 -->
+					<button onclick="markAttendance('1')">출근</button>
+					<!-- 퇴근 버튼 -->
+					<button onclick="markAttendance('2')">퇴근</button>
+
 				</div>
-				
-				<div id ="startHour">출근시간</div>
-				<div id ="quitHour">퇴근시간</div>
+
+				<div id="startHour">출근시간</div>
+				<div id="quitHour">퇴근시간</div>
 				<div id="lateHour">지각시간</div>
 				<div id="overHour">연장근무시간</div>
 				<button>연장근무신청</button>
 				<div id="todayworkingHour">오늘 근무시간</div>
 				<div id="vacationStatus">연차/반차 현황</div>
-				
-				<button>
-					연차신청
-				</button>
+
+				<button>연차신청</button>
 
 			</main>
 			<footer class="py-4 bg-light mt-auto"><%@ include

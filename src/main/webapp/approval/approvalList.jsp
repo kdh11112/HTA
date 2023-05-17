@@ -53,11 +53,11 @@
                                     	
                                     %>
                                     	<tr style="line-height: 2;">
-                                    		<td><%=vo.getA_number() %></td>
-                                    		<td><%=vo.getA_title() %></td>
-                                    		<td><%=vo.getA_name() %></td>
-                                    		<td><%=vo.getA_end_date() %></td>
-                                    		<td><%=vo.getA_status() %></td>
+                                    		<td><%=vo.getaNumber() %></td>
+                                    		<td><%=vo.getaTitle() %></td>
+                                    		<td><%=vo.getaName() %></td>
+                                    		<td><%=vo.getaEndDate() %></td>
+                                    		<td><%=vo.getaStatus() %></td>
                                     	</tr>
                                     <%
                                     	}
