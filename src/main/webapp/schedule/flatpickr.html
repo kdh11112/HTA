@@ -32,7 +32,6 @@
 	$(function(){
 	    $("#add_button").on("click", function(){
 	        // 입력값 가져오기
-	        var selectedOption = $("#select").val();
 	        var startDate = $("#start_date input").val();
 	        var endDate = $("#end_date input").val();
 	        var content = $("#content_area textarea").val();
@@ -58,7 +57,7 @@
 	.control_dateTime{
 		width:140px;
 	}
-	#start_date,#end_date {
+	#start_date_txt,#end_date_txt {
 		margin-left:30px;
 		font-weight: bold;
 	}
@@ -72,7 +71,7 @@
 	#dates{
 			margin-top:20px;
 	}
-	#end_date{
+	#end_date_txt{
 		margin-top:10px;
 	}
 	#content_area{
@@ -90,18 +89,18 @@
     
     <div id=page><span id="title">일정추가</span>
 		<div>
-			<span><select name="일정선택"   id="select"></span>
-					<option value="" id="personal_schedule">개인일정</option>
-					<option value="" id="department_schedule">부서일정</option>
-					<option value="" id="company_schedule">회사일정</option>
+			<span><select name="select"   id="select"></span>
+					<option value="" id="personal_schedule" name="personal_schedule">개인일정</option>
+					<option value="" id="department_schedule" name="department_schedule">부서일정</option>
+					<option value="" id="company_schedule" name="company_schedule">회사일정</option>
 				  </select>
 		</div>
 		<div id="dates">
-		<div id="start_date">시작일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local" required /></div>
-		<div id="end_date">종료일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local" required /></div>
+		<div id="start_date_txt">시작일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local" name="start_date" required /></div>
+		<div id="end_date_txt">종료일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local"  name="end_date" required /></div>
 		</div>
 		<div id="content_area"><span>일정내용</span>
-			 <p><textarea cols="34" rows="10"></textarea></p>			
+			 <p><textarea cols="34" rows="10" name="content"></textarea></p>			
 		</div>
 		<div >
 			<button id="add_button">추가</button>
