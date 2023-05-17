@@ -12,8 +12,8 @@ public class AttendenceDAO {
 	// 1.환경변수
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-		String user = "scott";
-		String password = "tiger";
+		String user = "userhj";
+		String password = "user12";
 		Connection conn;
 		PreparedStatement pstmt;
 		ResultSet rs;
@@ -38,7 +38,7 @@ public class AttendenceDAO {
 		public void addOne(AttendenceVO vo) {
 			
 			sb.setLength(0);
-			sb.append("INSERT INTO ATTENDANCE (attendanceNo,workingDate)" );
+			sb.append("INSERT INTO ATTENDANCE (attendanceNo,workingDate) " );
 			sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate)");
 			
 			try {
