@@ -38,7 +38,8 @@
 	                        <a class="nav-link" href="../mail/mail_list.jsp">사내메일함</a>
 	                        <a class="nav-link" href="../attendance/test2.jsp">근태관리</a>
 	                        <a class="nav-link" href="../schedule/schedule_list.jsp">일정관리</a>
-   							<a class="nav-link" href="../board/boardList.jsp">게시판</a>
+   							<a class="nav-link" href="/HTA_Project_semi/board/boardList.jsp">게시판</a>
+   							<a class="nav-link" href="/HTA_Project_semi/login.jsp">로그인</a>
 	                            
 	                            
 	                 <!--  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError_1" aria-expanded="false" aria-controls="pagesCollapseError_1">
