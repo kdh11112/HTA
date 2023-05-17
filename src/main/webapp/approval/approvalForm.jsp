@@ -33,6 +33,7 @@
 		        text-align: center;
 		        padding: 8px;
 		        border: 1px solid black;
+		        width: 200px;
 		    }
 		    
 		    #myTable th {
@@ -45,13 +46,45 @@
 		       
 		</style>
 		<script type="text/javascript">
+				var url = null;
+				var option = null;
+				var title = null;
 			$(function(){
-				$("#myTable").on("click",function(){
-					var url = "../emp_search/info.jsp";
-					var option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
-					window.open(url,"선택",option,"_blank");
+				$(".position2").on("click",function(){
+					url = "../emp_search/info.jsp";
+					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					title = '자식창1';
+					window.open(url,title,option,"window.opener");
+				})
+
+				
+			})
+			
+			$(function(){
+				$(".position3").on("click",function(){
+					url = "../emp_search/info.jsp";
+					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					title = '자식창2';
+					window.open(url,title,option,"window.opener");
 				})
 			})
+			
+			window.addEventListener("message", receiveMessageFromChild, false);
+	
+				function receiveMessageFromChild(event) {
+				  console.log(event.data);
+				  var dataArray = event.data.split(",");
+					for(var i=0; i<dataArray.length; i++){
+						if(title == '자식창1'){
+					    document.getElementById('data-placeholder1').innerHTML = dataArray[1]; 
+					    document.getElementById('data-placeholder2').innerHTML = dataArray[2]; 						
+					}else if(title == '자식창2'){
+					    document.getElementById('data-placeholder3').innerHTML = dataArray[1]; 
+					    document.getElementById('data-placeholder4').innerHTML = dataArray[2]; 	
+					}
+				}
+				}
+			
 		</script>
     </head>
     <body class="sb-nav-fixed">
@@ -98,18 +131,18 @@
 										    </tr>
 									        <tr>
 									            <th><%=position %></th>
-									            <th>2</th>
-									            <th>3</th>
+									            <th class="position2" id="data-placeholder2"></th>
+									            <th class="position3" id="data-placeholder4"></th>
 									        </tr>
 									        <tr>
 									            <td><%=name %></td>
-									            <td>행 1, 열 2</td>
-									            <td>행 1, 열 3</td>
+									            <td class="position2" id="data-placeholder1"></td>
+									            <td class="position3" id="data-placeholder3"></td>
 									        </tr>
 									        <tr>
 									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
-									            <td>행 2, 열 2</td>
-									            <td>행 2, 열 3</td>
+									            <td class="position2"></td>
+									            <td class="position3"></td>
 									        </tr>
 									    </table>
 									</div>

@@ -30,7 +30,19 @@ div {
 
 .cursor {
 	cursor: pointer;
-	color: blue;
+}
+.cursor:hover {
+
+background-color: lightgray;
+
+}
+
+.hovBg{
+cursor: pointer;
+}
+
+.hovBg:hover{
+background-color: lightgray;
 }
 
 img {
@@ -47,30 +59,32 @@ img {
 
 	$(function() {
 		$("#plan").on("mousedown", function() {
-			$("#span").html("");
 			$.ajax({
 				url : "pro.jsp",
 				success : function(data) {
 					var data2 = data.trim();
-					//var data2 = data;
 					var dList = data2.split(",");
+					console.log(dList);
 					for (var i = 0; i < dList.length; i++) {
-						/* console.log(m); */
 						var m = dList[i];
 						var dList2 = m.split(" ");
+						console.log(dList2);
 						if (dList2[7] == "±âÈ¹") {
-//							$("#list").append("<a href='#'><li>"+m+"</li></a>");
-							$("#list").append("<li onclick='test();'>"+m+"</li>");
+							 $("#list").append("<li class='hovBg' onclick='sendDataToParent(\"" + dList2[1]+","+ dList2[3]+","+ dList2[5] + "\");'>" + m + "</li>");
+							/* window.opener.postMessage(m, "*"); */ 
+							
 						}
 					}
 				}
 			})
 		})
+			
 	})
-		function test(){
-			/* var name = window.opener.document.getElementById("name").value; */
-			console.log(name);
+		function sendDataToParent(data) {
+		  window.opener.postMessage(data, "*");
+		  window.close();
 		}
+	
 
 	$(function() {
 		$("#devel").on("mousedown", function() {
@@ -91,6 +105,7 @@ img {
 					}
 				}
 			})
+			
 		})
 	})
 	$(function() {
