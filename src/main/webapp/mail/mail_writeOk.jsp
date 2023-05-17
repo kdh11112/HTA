@@ -1,3 +1,5 @@
+<%@page import="vo.MailVO"%>
+<%@page import="dao.MailDAO"%>
 <%@page import="java.lang.ProcessBuilder.Redirect"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,18 +8,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>writeOk.jsp</title>
+<title>mail_writeOk.jsp</title>
 </head>
 <body>
-<%--
+
 
  <%
 
 	//	1. 파라미터값 가져오기
 			String writer = request.getParameter("writer"); 
-			String title =  request.getParameter("title");
+			String reciver = request.getParameter("ww");
+ 			String title =  request.getParameter("title");
 			String contents =  request.getParameter("contents");
-	
+			
 			
 	// 	2. 이 값이 널이면 list.jsp 리다이렉트
 		if(writer == null || title == null || contents == null ||
@@ -26,12 +29,12 @@
          response.sendRedirect("list.jsp");
       }            
 		   else{
-		         BoardDAO dao = new BoardDAO();
-		         BoardVO vo = new BoardVO();
-		         vo.setTitle(title);
+		         MailDAO dao = new MailDAO();
+		         MailVO vo = new MailVO();
+		    /*      vo.setTitle(title);
 		         vo.setWriter(writer);
 		         vo.setContents(contents);
-		         vo.setIp(request.getLocalAddr());
+		         vo.setIp(request.getLocalAddr()); */
 		         
 		         dao.addOne(vo);
 		         

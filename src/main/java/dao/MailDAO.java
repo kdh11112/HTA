@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import vo.ApprovalVO;
+import vo.BoardVO;
 import vo.MailVO;
 
 public class MailDAO {
@@ -95,6 +96,44 @@ public class MailDAO {
 		
 		return list;
 	}
+	
+	
+	 public void addOne(MailVO vo) {
+	      sb.setLength(0);
+	      
+	      sb.append("INSERT INTO MAIL VALUES(BOARD_BNO_SEQ.nextval, ?, ?, ?, ?, sysdate, ?, ?, ?) ");
+	      // 상태정보 : 1 정살글
+	      //         2 블라인드처리
+	      //         3 경찰요청
+	      try {
+	         pstmt=conn.prepareStatement(sb.toString());
+	         
+	         //메일번호는 시퀀스번호로
+	         //pstmt.setInt(1, vo.getMNumber());
+
+	         //2타이틀
+	         pstmt.setString(1, vo.getMTitle());
+	         //3컨텐츠
+	         pstmt.setString(2, vo.getMContent());
+	         //4파일
+	         pstmt.setString(3, vo.getMFile());
+	         //5참조
+	         pstmt.setString(4, vo.getMCc());
+	         //6.regdate
+	         
+	         //7. mBoard
+	         pstmt.setString(5, vo.getMBoard());
+	         //8/.E_number
+	         pstmt.setInt(6,vo.getENumber());
+	         //9.E_number2
+	         pstmt.setInt(7,vo.getENumber2());
+	         
+	         
+	         pstmt.executeUpdate();
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	   }
 	
 	
 }
