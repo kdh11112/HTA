@@ -7,21 +7,12 @@
 <meta charset="UTF-8">
 <title>글쓰기</title>
 
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script type="text/javascript" src="../lang/summernote-ko-KR.js"></script>
-
 
 </head>
 
 <body>
 <%
+		//세션에 잇는 vo(로그인되어있는 계정) 가져오기
 	Object obj = session.getAttribute("vo");
 	String name = null;
 	if(obj != null){
@@ -41,7 +32,6 @@
 				<th>보내는 사람</th>
 				<td><input type="text" name="writer" id="" value="<%=name %>" disabled="disabled" />
 				<input type="hidden" name="writer" value="<%=name %>" />
-				
 				</td>
 			</tr>
 			
@@ -49,7 +39,6 @@
 				<th>받는 사람</th>
 				<td><input type="text" name="writer" id="" value="받는사람 아이디<%-- <%=name %> --%>" />
 				<input type="hidden" name="writer" value="<%=name %>" />
-				
 				</td>
 			</tr>
 		
@@ -72,17 +61,21 @@
 			</tr>
 		
 		</table>
+		
+		<script type="text/javascript">
+			$('.summernote').summernote({
+			  	height: 150,   //set editable area's height
+		 		 codemirror: { // codemirror options
+		    theme: 'monokai'
+		  }
+		});	</script>
+		
+		
 	</form>
 	
 </div>
 
-	<script type="text/javascript">
-		$(".summernote").summernote({
-			height:150,
-			lang:"ko-KR"
-		});
-	</script>
-
+	
 
 </body>
 </html>

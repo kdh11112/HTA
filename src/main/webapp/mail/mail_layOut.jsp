@@ -1,3 +1,4 @@
+<%@page import="dao.MailDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,6 +15,12 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 		<link rel="shortcut icon" href="#">
 	</head>
+<%
+    	MailDAO dao = new MailDAO();
+    	
+%>
+    
+   
    
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
