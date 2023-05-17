@@ -86,7 +86,7 @@ public class EmployeeDAO {
 	        pstmt.setString(7, vo.geteAddress2());
 	        pstmt.setString(8, vo.geteBirth());
 	        pstmt.setString(9, vo.geteGender());
-	        pstmt.setString(10, "기획팀"); // 임시 값으로 "N/A" 설정
+	        pstmt.setString(10, "기획"); // 임시 값으로 "N/A" 설정
 
 	        pstmt.executeUpdate();
 
@@ -177,6 +177,38 @@ public class EmployeeDAO {
 			
 		}	//getOne() end
 		
+	public String getEmployeeIdByUsername(String eName) {
+        String eId = null;
+        try {
+            String query = "SELECT e_id FROM employee WHERE e_name = ? ";
+            
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, eName);
+            
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                eId = rs.getString("E_ID");
+            }
+            
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+		/*
+		 * sb.setLength(0); sb.append("SELECT e_id FROM employee WHERE e_name = ? ");
+		 * 
+		 * pstmt = conn.prepareStatement(sb.toString()); pstmt.setString(1, eName);
+		 * 
+		 * ResultSet rs = pstmt.executeQuery(); if (rs.next()) { eId =
+		 * rs.getString("e_id"); }
+		 * 
+		 * rs.close();
+		 * 
+		 */
+        return eId;
+    }
+	
 	public void close() {
 		if(rs!=null)
 			try {
