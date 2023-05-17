@@ -22,21 +22,6 @@
 		});
 	});
 
-	function resetInputs() {
-	    // 입력 요소들을 선택하여 값을 초기화
-	    $("#start_date input").val("");
-	    $("#end_date input").val("");
-	    $("#content_area textarea").val("");
-	}
-	
-	$(function(){
-	    $("#add_button").on("click", function(){
-	        // 입력값 가져오기
-	        var startDate = $("#start_date input").val();
-	        var endDate = $("#end_date input").val();
-	        var content = $("#content_area textarea").val();
-	    })
-	})
 </script>
 
 <style>
@@ -83,17 +68,22 @@
 		margin-left: 190px;
 	}
 </style>
-
 <body>
     <!-- 날짜 설정 -->
     
     <div id=page><span id="title">일정추가</span>
+		<form action="schedule_add.jsp">
 		<div>
-			<span><select name="select"   id="select"></span>
+				<input type="hidden" name="" />
+				<input type="hidden" name="" />
+				<input type="hidden" name="" />
+			
+			<span><select name="select"   id="select">
 					<option value="" id="personal_schedule" name="personal_schedule">개인일정</option>
 					<option value="" id="department_schedule" name="department_schedule">부서일정</option>
 					<option value="" id="company_schedule" name="company_schedule">회사일정</option>
 				  </select>
+			</span>
 		</div>
 		<div id="dates">
 		<div id="start_date_txt">시작일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local" name="start_date" required /></div>
@@ -102,11 +92,13 @@
 		<div id="content_area"><span>일정내용</span>
 			 <p><textarea cols="34" rows="10" name="content"></textarea></p>			
 		</div>
+		
 		<div >
-			<button id="add_button">추가</button>
+			
+			<input type="submit" value="추가" id="add_button" />
 			<button id="cancel_button" >취소</button>
 		</div>
-	
+	</form>
 	</div>
 </body>
 
@@ -119,10 +111,11 @@
     config = {
     	showOn: 'button',
         enableTime: true, // 시간 속성 사용 여부
-        dateFormat: "Y-m-d H시 i분", // 달력 입력 포맷
+        dateFormat: "Y-m-d:H:i", // 달력 입력 포맷
         altInput: true,
-        altFormat: "Y-m-d H시 i분", // 보여지는 입력 포맷
-        dateFormat: "Y-m-d H시 i분", // 달력 입력 포맷
+        altFormat: "Y-m-d:H:i", // 보여지는 입력 포맷
+        /* dateFormat: "Y-m-d H시 i분", // 달력 입력 포맷 */
+        dateFormat: "Y-m-d:H:i", // 달력 입력 포맷
         time_24hr: true, // 24시간 사용 여부 (false인 경우 오전, 오후로 설정됨)
         disable: [ // 해당 날짜 비활성화
             function (date) {
