@@ -9,21 +9,104 @@
 
     <!-- 날짜 설정 -->
     <!-- https://flatpickr.js.org/options/ + https://lily-im.tistory.com/23-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
 </head>
+<script>
+	$(function(){
+		$("#add_button").on("click",function(){
+			console.log("test");
+		})
+		$("#cancel_button").on("click",function(){
+			console.log("test");
+		})
+	})
+	$(document).ready(function() {
+		$("#select").on("change", function() {
+        // 선택한 옵션에 따라 입력값 초기화
+        resetInputs();
+		});
+	});
+
+	function resetInputs() {
+	    // 입력 요소들을 선택하여 값을 초기화
+	    $("#start_date input").val("");
+	    $("#end_date input").val("");
+	    $("#content_area textarea").val("");
+	}
+</script>
 
 <style>
+
     .dateTime {
         text-align: center;
     }
-
+	#page{
+		width:300px;
+		height:450px;
+		border: 1px solid black;
+		background: rgb(220, 251, 254);
+	}
+	#title{
+	font-size:30px;
+	padding-left:90px;
+	}
+	.control_dateTime{
+		width:140px;
+	}
+	#start_date,#end_date {
+		margin-left:30px;
+		font-weight: bold;
+	}
+	#select{
+		margin-left:200px;
+		margin-top:30px; 
+		font-weight: bold;
+		width:80px;
+		height:30px;
+	}
+	#dates{
+			margin-top:20px;
+	}
+	#end_date{
+		margin-top:10px;
+	}
+	#content_area{
+		margin-top:20px;
+		margin-left:20px;
+		font-weight: bold;
+	}
+	#add_button{
+		margin-left: 190px;
+	}
 </style>
 
 <body>
     <!-- 날짜 설정 -->
-    <input class="form-control dateTime" type="datetime-local" required />
+    
+    <div id=page><span id="title">일정추가</span>
+		<div>
+			<span><select name="일정선택"   id="select"></span>
+					<option value="" id="personal_schedule">개인일정</option>
+					<option value="" id="department_schedule">부서일정</option>
+					<option value="" id="company_schedule">회사일정</option>
+				  </select>
+		</div>
+		<div id="dates">
+		<div id="start_date">시작일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local" required /></div>
+		<div id="end_date">종료일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local" required /></div>
+		</div>
+		<div id="content_area"><span>일정내용</span>
+			 <p><textarea cols="34" rows="10"></textarea></p>			
+		</div>
+		<div >
+			<button id="add_button">추가</button>
+			<button id="cancel_button" >취소</button>
+		</div>
+	
+	</div>
 </body>
 
 <script>
