@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="vo.EmployeeVO"%>
 <%@page import="dao.AttendenceDAO"%>
 <%@page import="vo.AttendenceVO"%>
@@ -57,21 +58,30 @@
 <script>
 
 <%
-	EmployeeVO vo2 = new EmployeeVO();
-	vo2.seteNumber(31);
-	vo2.seteName("hong");
-	session.setAttribute("vo", vo2);
-	
 	Object obj = session.getAttribute("vo");
+	String name = null;
+	String dname = null;
+	String position = null;
+	int num = 0;
+	LocalDate now = LocalDate.now();
+	
 	if(obj != null){
-	EmployeeVO vo =(EmployeeVO) obj;
-	%>
-	var eNumber = <%=vo.geteNumber() %>; 
-	<%
+		EmployeeVO vo = (EmployeeVO)obj;
+		name = vo.geteName();
+		dname = vo.getdName();
+		position = vo.geteOfficialResponsibilities();
+		
+		%>
+		var eNumber = <%=vo.geteNumber() %>; 
+		<%
+		
+	}
 
-}
+
 
 %>
+
+	
 	$(document).ready(function() {
 		// FullCalendar를 초기화합니다.
 		$('#calendar').fullCalendar({
@@ -146,13 +156,17 @@
 			<main>
 
 				<h2>근태관리</h2>
+				
+				<h3><span><%=name %></span><span><%=dname %></span><span><%=now %></span></h3>
+				
+				
 				<div class="container-fluid px-4">
 
-					<div id="calendar"></div>
 					<!-- 출근 버튼 -->
 					<button onclick="markAttendance('1')">출근</button>
 					<!-- 퇴근 버튼 -->
 					<button onclick="markAttendance('2')">퇴근</button>
+					<div id="calendar"></div>
 
 				</div>
 

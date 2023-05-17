@@ -58,11 +58,9 @@ public class AttendenceDAO {
 	public void endTimeAddOne(int id) {
 		
 		sb.setLength(0);
-//		sb.append("INSERT INTO ATTENDANCE (attendance_No,working_Date,QUITTING_TIME) ");
-//		sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate,SYSTIMESTAMP) ");// systemtimestamp -- 시간날짜 시간대까지
 		sb.append("update ATTENDANCE ");
 		sb.append("set  QUITTING_TIME = sysdate ");
-		sb.append("where E_NUMBER = ? and to_char(office_going_hour, 'yyyy/mm/dd') = to_char(sysdate, 'yyyy/mm/dd') ");
+		sb.append("where E_NUMBER = ? and to_char( office_going_hour ,'yyyy/mm/dd') = to_char(sysdate,'yyyy/mm/dd') ");
 		// 저장함.
 		
 		try {
@@ -75,8 +73,7 @@ public class AttendenceDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}// addOne end
+	}// endTimeAddOne end
 
-	
 
 }
