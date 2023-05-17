@@ -1,4 +1,4 @@
-<%@page import="vo.cm_MemberVO"%>
+<%@page import="vo.EmployeeVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,17 +16,15 @@
 	Object obj = session.getAttribute("vo");
 	String name = null;
 	if(obj != null){
-		cm_MemberVO vo = (cm_MemberVO)obj;
-		name = vo.getName();
+		EmployeeVO vo = (EmployeeVO)obj;
+		name = vo.geteName();
 	}
-%>
+%>  
 
 
 <div class="conteiner">
 
-
-
-	<form action="mail_writeOk.jsp" method="get">
+	<form action="mail_writeOk.jsp" method="post">
 		<table class = "table table-striped">
 			<tr>
 				<th>보내는 사람</th>
@@ -49,14 +47,14 @@
 		
 			<tr>
 				<th>내용</th>
-				<td><textarea class="summernote" name="contents" id="" cols="30" rows="10"></textarea></td>
+				<td><textarea class="summernote" name="contents" id="" cols="30" rows="30"></textarea></td>
 			</tr>
 		
 			<tr>
 				<td colspan="2">
-					<input class="btn btn-success" type="button" value="목록" />
-					<input class="btn btn-primary" type="submit" value="작성" />
-					<input class="btn btn-outlin-primary" type="reset" value="다시쓰기" />
+					<input class="btn btn-primary" type="submit" value="보내기" />
+					<input class="btn btn-primary" type="submit" value="예약" />
+					<input class="btn btn-primary" type="submit" value="임시저장" />
 				</td>
 			</tr>
 		
@@ -64,7 +62,8 @@
 		
 		<script type="text/javascript">
 			$('.summernote').summernote({
-			  	height: 150,   //set editable area's height
+			  	height: 450,   // 서머노트 에디터 높이
+			  	width: 1500,
 		 		 codemirror: { // codemirror options
 		    theme: 'monokai'
 		  }

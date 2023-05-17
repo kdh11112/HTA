@@ -15,6 +15,10 @@
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" ></script>
 		<link rel="shortcut icon" href="#">
+		<script src="../js/summernote/summernote-lite.js"></script>
+<script src="../js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="../css/summernote/summernote-lite.css">
+		
 
     </head>
 

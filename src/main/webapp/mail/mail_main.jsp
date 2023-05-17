@@ -12,11 +12,11 @@
 			
 <style>
 .right_main{
-	position: absolute;
+	position: relative;
     display: inline-table;
     width: 100%;
-    height: 800px;
-    background: aqua;
+    height: 730px;
+    
 }
 .mail_toolbar {
   	background-color: burlywood;
