@@ -6,7 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$("#addrList").click(function(){
+			var url = "../emp_search/info.jsp";
+			var option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+			var title = '자식창1';
+			window.open(url,title,option,"window.opener");
+		})
+
+	
+});
+
+</script>
 
 </head>
 
@@ -36,13 +52,14 @@
 			<tr>
 				<th>받는 사람</th>
 				<td><input type="text" name="writer" id="" value="받는사람 아이디<%-- <%=name %> --%>" />
+				<input id="addrList" class="btn btn-primary" type="button" style="margin-left: 10px" value="주소록" />
 				<input type="hidden" name="writer" value="<%=name %>" />
 				</td>
 			</tr>
 		
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" id="" /></td>
+				<td><input type="text" name="title" id="" style="width: 1500px" /></td>
 			</tr>
 		
 			<tr>
@@ -69,6 +86,7 @@
 		  }
 		});	</script>
 		
+
 		
 	</form>
 	

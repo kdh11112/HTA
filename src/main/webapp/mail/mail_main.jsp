@@ -81,9 +81,6 @@ div#right_window{
 
 </style>
 
-
-
-
 <script>
 
 $(document).ready(function() {
@@ -116,10 +113,13 @@ $(document).ready(function() {
 	      }
 	    });
 	  });
-  
-  
 });
+  
 </script>
+
+
+
+
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
