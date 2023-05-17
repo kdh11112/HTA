@@ -55,15 +55,15 @@
 
 <%
 	EmployeeVO vo2 = new EmployeeVO();
-	vo2.setE_number(31);
-	vo2.setE_name("hong");
+	vo2.seteNumber(31);
+	vo2.seteName("hong");
 	session.setAttribute("vo", vo2);
 	
 	Object obj = session.getAttribute("vo");
 	if(obj != null){
 	EmployeeVO vo =(EmployeeVO) obj;
 	%>
-	var eNumber = <%=vo.getE_number() %>; 
+	var eNumber = <%=vo.geteNumber() %>; 
 	<%
 
 }
