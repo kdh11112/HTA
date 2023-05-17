@@ -59,12 +59,12 @@ $(document).ready(function() {
 		
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" id="" style="width: 1500px" /></td>
+				<td><input type="text" name="title" id="" style="width: 150px" /></td>
 			</tr>
 		
 			<tr>
 				<th>내용</th>
-				<td><textarea class="summernote" name="contents" id="" cols="30" rows="30"></textarea></td>
+				<td><textarea class="summernote" name="contents" id="" cols="30" rows="10"></textarea></td>
 			</tr>
 		
 			<tr>
@@ -76,16 +76,6 @@ $(document).ready(function() {
 			</tr>
 		
 		</table>
-		
-		<script type="text/javascript">
-			$('.summernote').summernote({
-			  	height: 450,   // 서머노트 에디터 높이
-			  	width: 1500,
-		 		 codemirror: { // codemirror options
-		    theme: 'monokai'
-		  }
-		});	</script>
-		
 
 		
 	</form>
