@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import vo.ApprovalVO;
+import vo.EmployeeVO;
 
 public class ApprovalDAO {
 	
@@ -97,5 +98,25 @@ public class ApprovalDAO {
 		return list;
 	}
 	
+	public void addOne(ApprovalVO vo,EmployeeVO vo2) {
+		sb.setLength(0);
+		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,1,null,?)");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1,vo2.geteName());
+			pstmt.setString(2,vo2.geteOfficialResponsibilities());
+			pstmt.setString(3,vo.getaTitle());
+			pstmt.setString(4,vo.getaContent());
+			pstmt.setString(5,vo.getaName1st());
+			pstmt.setString(6,vo.getaName2nd());
+			pstmt.setInt(7,vo2.geteNumber());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	
+	}
 }
