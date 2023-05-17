@@ -32,39 +32,41 @@
 	});
 	calendar.render();
 	
-		$(".fc-daygrid-day-frame").on("click",function(){
-			console.log("test");
-			$.ajax({
-				
-			})
-		
-		})
-		
-		$("#datepicker").datepicker({
-			showOn: 'button',
-			changeMonth: true,
-			changeYear: true,
-			dateFormat: 'yy.mm.dd',
-			prevText: '이전 달',
-			nextText: '다음 달',
-			monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			dayNames: ['일','월','화','수','목','금','토'],
-			dayNamesShort: ['일','월','화','수','목','금','토'],
-			dayNamesMin: ['일','월','화','수','목','금','토'],
-			showMonthAfterYear: true,
-			yearSuffix: '년'
-			});
 });
-	
+	$(document).ready(function() {
+	    $(".fc-daygrid-day-frame").on("click", function() {
+	        // 작은 윈도우 창 열기
+	        openWindow();
+	    });
+	});
+
+	function openWindow() {
+	    // 작은 윈도우 창 열기
+	    var windowFeatures = "width=320,height=550,scrollbars=yes";
+	    var windowObject = window.open("flatpickr.html", "작은 윈도우 창", windowFeatures);
+	    windowObject.focus();
+	}
 	
 </script>
+<style>
+#window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  background-color: white;
+  z-index: 9999;
+  /* 추가적인 스타일링 요소들 */
+}
+</style>
 <select name="일정선택" id="select">
 	<option value="" id="personal_schedule">개인일정</option>
 	<option value="" id="department_schedule">부서일정</option>
 	<option value="" id="company_schedule">회사일정</option>
 </select>
-<input type="text" name="" id="datepicker" />
 <main>
 	<div id='calendar'></div>
 </main>
