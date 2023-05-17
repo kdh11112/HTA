@@ -170,10 +170,9 @@ cursor:pointer;
 	
 	<div id="div1">
 	
-		<p class="cursor" id="plan"><img src="../images/fo.png" alt="" />±‚»π∆¿</p>
-		<p class="cursor" id="devel"><img src="../images/fo.png" alt="" />∞≥πﬂ∆¿</p>
-		<p class="cursor" id="human"><img src="../images/fo.png" alt="" />¿ŒªÁ∆¿</p>
-		<p class="cursor" id="ATTENDANCE"><img src="../images/fo.png" alt="" />√‚±Ÿ</p>
+		<p class="cursor" id="plan"><img src="../img/folder/fo.png" alt="" />±‚»π∆¿</p>
+		<p class="cursor" id="devel"><img src="../img/folder/fo.png" alt="" />∞≥πﬂ∆¿</p>
+		<p class="cursor" id="human"><img src="../img/folder/fo.png" alt="" />¿ŒªÁ∆¿</p>
 	</div>
 
 	<div>
