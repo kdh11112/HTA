@@ -59,6 +59,7 @@ img {
 
 	$(function() {
 		$("#plan").on("mousedown", function() {
+			$("#list").html("");
 			$.ajax({
 				url : "pro.jsp",
 				success : function(data) {
