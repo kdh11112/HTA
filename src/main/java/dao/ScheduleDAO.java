@@ -12,8 +12,8 @@ import vo.ScheduleVO;
 public class ScheduleDAO {
 	String driver ="oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "scott";
-	String password = "tiger";
+	String user = "userhj";
+	String password = "user12";
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet  rs;
@@ -55,5 +55,22 @@ public class ScheduleDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public void addSchedule(ScheduleVO vo) {
+	    sb.setLength(0);
+	    sb.append("INSERT INTO schedule (SCHEDULE_SEQ.NEXTVAL, S_CONTENTS, S_START_DATE, S_END_DATE, E_NUMBER )");
+	    try {
+			pstmt = conn.prepareStatement(sb.toString());
+			
+			pstmt.setString(1, vo.getSContents());
+			pstmt.setString(2, vo.getSStarDate());
+			pstmt.setString(3, vo.getSEndDate());
+			pstmt.setInt(4, vo.getENumber());
+			
+	        pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+		}
 	}
 }
