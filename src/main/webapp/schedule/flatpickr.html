@@ -15,14 +15,6 @@
     <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
 </head>
 <script>
-	$(function(){
-		$("#add_button").on("click",function(){
-			console.log("test");
-		})
-		$("#cancel_button").on("click",function(){
-			console.log("test");
-		})
-	})
 	$(document).ready(function() {
 		$("#select").on("change", function() {
         // 선택한 옵션에 따라 입력값 초기화
@@ -36,6 +28,16 @@
 	    $("#end_date input").val("");
 	    $("#content_area textarea").val("");
 	}
+	
+	$(function(){
+	    $("#add_button").on("click", function(){
+	        // 입력값 가져오기
+	        var selectedOption = $("#select").val();
+	        var startDate = $("#start_date input").val();
+	        var endDate = $("#end_date input").val();
+	        var content = $("#content_area textarea").val();
+	    })
+	})
 </script>
 
 <style>
