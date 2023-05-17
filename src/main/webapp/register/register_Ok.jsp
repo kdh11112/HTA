@@ -20,15 +20,15 @@
 	EmployeeDAO dao = new EmployeeDAO();
 	EmployeeVO vo = new EmployeeVO();
 	/* String phonenumber = phone1.concat(phone2,phone3); */
-	vo.setE_name(name);
-	vo.setE_gender(gender);
-	vo.setE_id(id);
-	vo.setE_password(password);
-	vo.setE_birth(birth);
-	vo.setE_postal_code(postalcode);
-	vo.setE_address1(address1);
-	vo.setE_address2(address2);
-	vo.setE_phone_number(phonenumber);
+	vo.seteName(name);
+	vo.seteGender(gender);
+	vo.seteId(id);
+	vo.setePassword(password);
+	vo.seteBirth(birth);
+	vo.setePostalCode(postalcode);
+	vo.seteAddress1(address1);
+	vo.seteAddress2(address2);
+	vo.setePhonenumber(phonenumber);
 	
 	dao.empRegister(vo);
 	dao.close();
