@@ -11,14 +11,17 @@ import vo.EmployeeVO;
 
 public class AttendenceDAO {
 	// 1.환경변수
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "userhj";
-	String password = "user12";
-	Connection conn;
-	PreparedStatement pstmt;
-	ResultSet rs;
-	StringBuffer sb = new StringBuffer();
+
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String user = "userhj";
+		String password = "user12";
+		Connection conn;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		StringBuffer sb = new StringBuffer();
+
+
 
 	public AttendenceDAO() {
 		// 2.드라이버 로딩
@@ -46,8 +49,13 @@ public class AttendenceDAO {
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
-			/* pstmt.setString(1, vo.getOfficeGoingHour() ); */
+
+			sb.setLength(0);
+			sb.append("INSERT INTO ATTENDANCE (attendanceNo,workingDate) " );
+			sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate)");
+
 			pstmt.setInt(1, vo.getEnumber() );
+
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
