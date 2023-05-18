@@ -51,7 +51,7 @@
 <!-- 스크립트 부분 -->
 <script>
 
-<%
+	<%
 	Object obj = session.getAttribute("vo");
 	String name = null;
 	String dname = null;
@@ -66,12 +66,11 @@
 		position = vo.geteOfficialResponsibilities();
 		num = vo.geteNumber();
 		
-		%>
-		var eNumber = <%=vo.geteNumber() %>;
-		<%
+	%>
+	var eNumber = <%=vo.geteNumber() %>;
+	<%
 	}
-
-%>
+	%>
 	
 
 	function markAttendance(type) {
@@ -187,9 +186,7 @@
 					file="../menu/footer.jsp"%></footer>
 		</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="../js/scripts.js"></script>
 	<!-- 사이드바 열고 닫기 -->
 </body>
