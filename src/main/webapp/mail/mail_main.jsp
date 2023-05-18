@@ -141,6 +141,30 @@ $(document).ready(function() {
 	    });
 	  }
 	});
+	
+	
+	
+$("#inbox").off("click").on("click", function() {
+    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
+    if (!isMailWriteLoaded) {
+      $.ajax({
+        url: "inbox_test.jsp",
+        dataType: "html",
+        success: function(response) {
+          $(".right_main").html(response);
+          isMailWriteLoaded = true; // 파일이 로드되었음을 표시
+          initializeSummernote(); // Summernote 초기화 함수 호출
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    }
+  });
+	
+	
+	
+	
 </script>
 
 
@@ -158,11 +182,11 @@ $(document).ready(function() {
   <div class="top_menu" >
 	    <div class="mail_gruop" style="flex: 1;">
 	      <ul id="mail_list">
-	        <li><a href="mail_list.jsp">받은 메일함</a></li>
-	        <li><a href="mail_list.jsp">내게 쓴 메일함</a></li>
-	        <li><a href="mail_list.jsp">보낸 메일함</a></li>
-	        <li><a href="mail_list.jsp">임시보관함</a></li>
-	        <li><a href="mail_list.jsp">휴지통</a></li>
+	        <li id="inbox"><a href="">받은 메일함</a></li>
+	        <li id="inbox"><a href="">내게 쓴 메일함</a></li>
+	        <li id="inbox"><a href="">보낸 메일함</a></li>
+	        <li id="inbox"><a href="">임시보관함</a></li>
+	        <li id="inbox"><a href="">휴지통</a></li>
 	      </ul>
 	    </div>
 	   
