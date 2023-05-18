@@ -1,3 +1,5 @@
+<%@page import="dao.MailDAO"%>
+<%@page import="dao.EmployeeDAO"%>
 <%@page import="vo.EmployeeVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,11 +15,27 @@
 $(document).ready(function() {
 
 	$("#addrList").click(function(){
-			var url = "../emp_search/info.jsp";
+			var url = "/HTA_Project_semi/emp_search/info_lcm.jsp";
 			var option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
 			var title = '자식창1';
 			window.open(url,title,option,"window.opener");
 		})
+
+	
+window.addEventListener("message", receiveMessageFromChild, false);
+	
+	
+		
+		function receiveMessageFromChild(event) {
+			var dataArray = event.data.split(",");
+			
+			var reciverId = dataArray[0];
+			var reciverName = dataArray[1];
+			
+			$("#reciverId").val(reciverId); <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
+			$("#reciverName").val(reciverName); <!-- 주소록에서 선택된 수신자 이름을 String으로 value값에 담았음.  -->
+		}
+		
 
 	
 });
@@ -31,10 +49,20 @@ $(document).ready(function() {
 		//세션에 잇는 vo(로그인되어있는 계정) 가져오기
 	Object obj = session.getAttribute("vo");
 	String name = null;
+	int writer = 78 ; //기본값 (78은 현재 kdh)
+	
 	if(obj != null){
 		EmployeeVO vo = (EmployeeVO)obj;
 		name = vo.geteName();
+		writer = vo.geteNumber();
+		 
 	}
+	
+	MailDAO dao = new MailDAO();
+	EmployeeVO reciverVO = new EmployeeVO();
+	
+	
+	
 %>  
 
 
@@ -43,27 +71,29 @@ $(document).ready(function() {
 	<form action="mail_writeOk.jsp" method="post">
 		<table class = "table table-striped">
 			<tr>
-				<th>보내는 사람</th>
-				<td><input type="text" name="writer" id="" value="<%=name %>" disabled="disabled" />
-				<input type="hidden" name="writer" value="<%=name %>" />
+				<th>보내는 사람</th>   <!-- 작성자 e_number -->
+				<td><input type="text" id="" value="<%=name %>" disabled="disabled" />
+					<input type="hidden" name="writer" value="<%=writer %>" />
 				</td>
 			</tr>
 			
 			<tr>
-				<th>받는 사람</th>
-				<td><input type="text" name="writer" id="" value="받는사람 아이디<%-- <%=name %> --%>" />
+				<th>받는 사람</th>   <!-- 수신자 reciver  e_number2 -->
+				<td><input type="text" id="reciverName" name="reciverName" value="" disabled="disabled"/> <!-- 주소록에서 선택된 수신자 이름을 value값에 담았음.  -->
 				<input id="addrList" class="btn btn-primary" type="button" style="margin-left: 10px" value="주소록" />
-				<input type="hidden" name="writer" value="<%=name %>" />
+				<input type="hidden" name="reciver" value="<%=name/* reciver */ %>" />
+				<input type="hidden" id="reciverId" name="reciverId" value=""/> <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
+				
 				</td>
 			</tr>
 		
 			<tr>
-				<th>제목</th>
-				<td><input type="text" name="title" id="" style="width: 150px" /></td>
+				<th>제목</th>  <!-- 제목 title mTitle -->
+				<td><input type="text" name="title" id="" style="width: 350px" /></td>
 			</tr>
 		
 			<tr>
-				<th>내용</th>
+				<th>내용</th> <!--  내용 content mContent -->
 				<td><textarea class="summernote" name="contents" id="" cols="30" rows="10"></textarea></td>
 			</tr>
 		

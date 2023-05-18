@@ -16,7 +16,7 @@ body, input, textarea, select, button, table {
 
 #calendar{
 	margin-left:50px;
-	width:1000px;
+	width:900px;
 	
 }
 
@@ -81,7 +81,8 @@ a:active {
 	right: 0;
 	margin: 0;
 	background-color: #fff;
-	z-index: 20
+	z-index: 20;
+/* 	margin:0 auto; */
 }
 
 #container:after {
@@ -103,7 +104,10 @@ a:active {
 	line-height: normal;
 	z-index: 20
 }
-
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+.scroll::-webkit-scrollbar {
+  display: none;
+}
 #section_cen {
 	position: absolute;
 	margin-left: 0;

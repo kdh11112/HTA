@@ -128,13 +128,7 @@
 			}
 		%>		
 		 --%>
-		<tr>
-			<td colspan="4"></td>
-			<td><a href="write.jsp"><input type="button" value="글쓰기" /></a></td>
-		
-		</tr>
-		<tr>
-			<td colspan="4">
+
 			<%-- 
 			
 			<% for (int i = startPage; i<= endPage ;i++){
