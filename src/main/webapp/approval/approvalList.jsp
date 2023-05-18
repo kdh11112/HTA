@@ -1,3 +1,4 @@
+<%@page import="vo.EmployeeVO"%>
 <%@page import="vo.ApprovalVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.ApprovalDAO"%>
@@ -16,12 +17,44 @@
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 		<link rel="shortcut icon" href="#">
+
+		
     </head>
     <body class="sb-nav-fixed">
     <%
+    
+		Object obj = session.getAttribute("vo");
+    	int eNum = 0;
+    	if(obj != null){
+    		EmployeeVO vo = (EmployeeVO)obj;
+    		eNum = vo.geteNumber();
+    	}
+    	
     	ApprovalDAO dao = new ApprovalDAO();
+    	int totalCount = dao.getTotalCount(eNum);
+    	//페이징 10개씩
+    	int recordPerPage = 10;
+    	int totalPage = (totalCount%recordPerPage == 0) ? totalCount/recordPerPage : totalCount/recordPerPage+1;
     	
+    	String pageNum = request.getParameter("pageNum");
+    	int currentPage = 0;
+    	/* int pageNumInt = Integer.parseInt(pageNum); */
+    	if(pageNum != null){
+    		currentPage = Integer.parseInt(pageNum);
+    	}else{
+    		currentPage = 1;
+    	}
     	
+    	int startNo = (currentPage -1) * recordPerPage +1;
+    	int endNo = currentPage * recordPerPage;
+    	
+    	//시작페이지
+    	int startPage = 1;
+    	//끝페이지
+    	int endPage = totalPage;
+    	
+    	int prevPage = currentPage > 1 ? currentPage - 1 : 1;
+    	int nextPage = currentPage < totalPage ? currentPage + 1 : totalPage;
     	
     %>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
@@ -47,16 +80,16 @@
                                         </tr>
                                     </thead>
                                     <%
-                                    	ArrayList<ApprovalVO> list = dao.selectAll();
+                                    	ArrayList<ApprovalVO> list = dao.selectAll(startNo,endNo,eNum);
                                     	for(ApprovalVO vo : list){
                                     		
                                     	
                                     %>
                                     	<tr style="line-height: 2;">
                                     		<td><%=vo.getaNumber() %></td>
-                                    		<td><%=vo.getaTitle() %></td>
+                                    		<td><a href="approvalModify.jsp?pageNum=<%=vo.getaNumber() %>"> <%=vo.getaTitle() %></a></td>
                                     		<td><%=vo.getaName() %></td>
-                                    		<td><%=vo.getaEndDate() %></td>
+                                    		<td><%=vo.getaStartDate() %></td>
                                     		<td><%=vo.getaStatus() %></td>
                                     	</tr>
                                     <%
@@ -68,12 +101,12 @@
                                 	<nav aria-label="Page navigation example">
 									  <ul class="pagination">
 									    <li class="page-item">
-									      <a class="page-link" href="#" aria-label="Previous">
+									      <a class="page-link" href="approvalList.jsp?pageNum=<%=prevPage %>" aria-label="Previous">
 									        <span aria-hidden="true">&laquo;</span>
 									      </a>
 									    </li>
                                 	<%
-                                		for(int i=0; i<10; i++){
+                                		for(int i=startPage; i<=endPage; i++){
                                 			
                                 	%>
 									    <li class="page-item">
@@ -83,7 +116,7 @@
                                 		}
                                 	%>
 									    <li class="page-item">
-									      <a class="page-link" href="#" aria-label="Next">
+									      <a class="page-link" href="approvalList.jsp?pageNum=<%=nextPage %>" aria-label="Next">
 									        <span aria-hidden="true">&raquo;</span>
 									      </a>
 									    </li>

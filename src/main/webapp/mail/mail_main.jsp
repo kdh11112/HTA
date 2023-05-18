@@ -27,7 +27,7 @@
     right: auto;
     left: auto;
     display: flex;
-}
+} 
 </style> 
 
 <style>
@@ -47,24 +47,32 @@
 	list-style: none;
 }
 
+
 #mail_list{
 	display: inline-flex;; 
 	align-content: flex-start;
 	flex-direction: column; 
 	flex-wrap: wrap;
 	justify-content: space-evenly;
-	flex-direction: row;"
+	flex-direction: row;
+	white-space: nowrap; /* 줄 바꿈 방지 */
 	
 	}
 	
 #mail_list li{
 	list-style: none;
 	margin-left: 30px; 
+	white-space: nowrap;
+  	flex-shrink: 0; /* 크기 변화에 대한 축소 비활성화 */
 	}
 
 .mail_gruop > ul > li{
 	padding-top:10px;
 	margin-top: 15px;
+}
+
+th {
+  white-space: nowrap; /* 줄 바꿈 방지 */
 }
 
 a{
@@ -82,40 +90,83 @@ div#right_window{
 </style>
 
 <script>
-
 $(document).ready(function() {
-  // "메일쓰기" 버튼 클릭 이벤트 처리
-  $("#write").click(function() {
-    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-    $.ajax({
-      url: "mail_write.jsp",
-      dataType: "html",
-      success: function(response) {
-        $(".right_main").html(response);
-      },
-      error: function(xhr, status, error) {
-        console.error(error);
-      }
-    });
-  });
-  
-  
-  $("#me_write").click(function() {
+	  var isMailWriteLoaded = false; // mail_write.jsp 파일이 로드되었는지 여부를 저장하는 변수
+
+	  // "메일쓰기" 버튼 클릭 이벤트 처리
+	  $("#write").off("click").on("click", function() {
 	    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-	    $.ajax({
-	      url: "mail_write.jsp",
-	      dataType: "html",
-	      success: function(response) {
-	        $(".right_main").html(response);
-	      },
-	      error: function(xhr, status, error) {
-	        console.error(error);
+	    if (!isMailWriteLoaded) {
+	      $.ajax({
+	        url: "mail_write.jsp",
+	        dataType: "html",
+	        success: function(response) {
+	          $(".right_main").html(response);
+	          isMailWriteLoaded = true; // 파일이 로드되었음을 표시
+	          initializeSummernote(); // Summernote 초기화 함수 호출
+	        },
+	        error: function(xhr, status, error) {
+	          console.error(error);
+	        }
+	      });
+	    }
+	  });
+
+	  $("#me_write").off("click").on("click", function() {
+	    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
+	    if (!isMailWriteLoaded) {
+	      $.ajax({
+	        url: "mail_write.jsp",
+	        dataType: "html",
+	        success: function(response) {
+	          $(".right_main").html(response);
+	          isMailWriteLoaded = true; // 파일이 로드되었음을 표시
+	          initializeSummernote(); // Summernote 초기화 함수 호출
+	        },
+	        error: function(xhr, status, error) {
+	          console.error(error);
+	        }
+	      });
+	    }
+	  });
+
+	  // Summernote 초기화 함수
+	  function initializeSummernote() {
+	    $('.summernote').summernote({
+	      height: 450, // 서머노트 에디터 높이
+	      width: 1900,
+	      codemirror: {
+	        theme: 'monokai' // codemirror options
 	      }
 	    });
-	  });
-});
-  
+	  }
+	});
+	
+	
+	
+$("#inbox").off("click").on("click", function() {
+    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
+    if (!isMailWriteLoaded) {
+      $.ajax({
+        url: "inbox_test.jsp",
+        dataType: "html",
+        success: function(response) {
+          $(".right_main").html(response);
+          isMailWriteLoaded = true; // 파일이 로드되었음을 표시
+          initializeSummernote(); // Summernote 초기화 함수 호출
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    }
+  });
+	
+	
+	
+	
 </script>
+
 
 
 
@@ -131,11 +182,11 @@ $(document).ready(function() {
   <div class="top_menu" >
 	    <div class="mail_gruop" style="flex: 1;">
 	      <ul id="mail_list">
-	        <li><a href="mail_list.jsp">받은 메일함</a></li>
-	        <li><a href="mail_list.jsp">내게 쓴 메일함</a></li>
-	        <li><a href="mail_list.jsp">보낸 메일함</a></li>
-	        <li><a href="mail_list.jsp">임시보관함</a></li>
-	        <li><a href="mail_list.jsp">휴지통</a></li>
+	        <li id="inbox"><a href="">받은 메일함</a></li>
+	        <li id="inbox"><a href="">내게 쓴 메일함</a></li>
+	        <li id="inbox"><a href="">보낸 메일함</a></li>
+	        <li id="inbox"><a href="">임시보관함</a></li>
+	        <li id="inbox"><a href="">휴지통</a></li>
 	      </ul>
 	    </div>
 	   

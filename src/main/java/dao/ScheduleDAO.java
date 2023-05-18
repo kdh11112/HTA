@@ -32,45 +32,46 @@ public class ScheduleDAO {
 		
 	}
 	
-	public ArrayList<ScheduleVO> selectAll(){
+	public ArrayList<ScheduleVO> selectAll(int eNumber){
 		ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
 		sb.setLength(0); // 길이를 0으로
-		sb.append("SELECT * FROM SCHEDULE Left join EMPLOYEE on E_NUMBER = E_NUMBER ");
+		sb.append("SELECT * FROM SCHEDULE WHERE E_NUMBER =? ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, eNumber);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int S_NUMBER = rs.getInt("S_NUMBER");
-				String S_CONTENTS = rs.getString("S_CONTENTS");
-				String S_START_DATE = rs.getString("S_START_DATE");
-				String S_END_DATE = rs.getString("S_END_DATE");
-				int E_NUMBER = rs.getInt("E_NUMBER");
+				int sNumber = rs.getInt("s_number");
+				String sContents = rs.getString("s_contents");
+				String sStartDate = rs.getString("s_start_date");
+				String sEndDate = rs.getString("s_end_date");
 
-				ScheduleVO vo = new ScheduleVO(S_NUMBER,S_CONTENTS,S_START_DATE,S_END_DATE,E_NUMBER);
+				ScheduleVO vo = new ScheduleVO(sNumber,sContents,sStartDate,sEndDate,eNumber);
 				
 				list.add(vo);
 			}	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
 	}
 	
-	public void addSchedule(ScheduleVO vo) {
+	public void addSchedule(String contents, String start_date, String end_date, int eNumber ) {
 	    sb.setLength(0);
-	    sb.append("INSERT INTO schedule (SCHEDULE_SEQ.NEXTVAL, S_CONTENTS, S_START_DATE, S_END_DATE, E_NUMBER )");
+	    sb.append("INSERT INTO schedule VALUES(SCHEDULE_SEQ.NEXTVAL, ?,TO_date(?,'yyyy-mm-dd:hh24:mi'), TO_date(?,'yyyy-mm-dd:hh24:mi'), ?)" );
 	    try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
-			pstmt.setString(1, vo.getSContents());
-			pstmt.setString(2, vo.getSStarDate());
-			pstmt.setString(3, vo.getSEndDate());
-			pstmt.setInt(4, vo.getENumber());
+			pstmt.setString(1, contents );
+			pstmt.setString(2, start_date);
+			pstmt.setString(3, end_date);
+			pstmt.setInt(4, eNumber );
 			
 	        pstmt.executeUpdate();
 
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
+	
 }

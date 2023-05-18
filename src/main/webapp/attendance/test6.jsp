@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="vo.EmployeeVO"%>
 <%@page import="dao.AttendenceDAO"%>
 <%@page import="vo.AttendenceVO"%>
@@ -22,15 +23,9 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 <link rel="shortcut icon" href="#">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>근태관리</title>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <link rel="stylesheet" href="../attendance/main.css" />
-
-
 <!--  FullCalendar  -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
@@ -56,51 +51,31 @@
 <!-- 스크립트 부분 -->
 <script>
 
-<%
-	EmployeeVO vo2 = new EmployeeVO();
-	vo2.seteNumber(31);
-	vo2.seteName("hong");
-	session.setAttribute("vo", vo2);
-	
-	Object obj = session.getAttribute("vo");
-	if(obj != null){
-	EmployeeVO vo =(EmployeeVO) obj;
-	%>
-	var eNumber = <%=vo.geteNumber() %>; 
 	<%
-
-}
-
-%>
-	$(document).ready(function() {
-		// FullCalendar를 초기화합니다.
-		$('#calendar').fullCalendar({
-			// FullCalendar 옵션 설정...
-			dayRender : function(date, cell) {
-				// 날짜 요소에 시간을 추가하기 위해 data-date 속성을 설정합니다.
-				var formattedDate = moment(date).format('YYYY-MM-DD');
-				cell.attr('data-date', formattedDate);
-			}
-		});
-	});
+	Object obj = session.getAttribute("vo");
+	String name = null;
+	String dname = null;
+	String position = null;
+	int num = 0;
+	LocalDateTime now = LocalDateTime.now();
+	
+	if(obj != null){
+		EmployeeVO vo = (EmployeeVO)obj;
+		name = vo.geteName();
+		dname = vo.getdName();
+		position = vo.geteOfficialResponsibilities();
+		num = vo.geteNumber();
+		
+	%>
+	var eNumber = <%=vo.geteNumber() %>;
+	<%
+	}
+	%>
+	
 
 	function markAttendance(type) {
-		// 출근 또는 퇴근 버튼을 클릭했을 때의 동작을 처리
-		var currentDate = $('#calendar').fullCalendar('getDate');
-
-		var formattedDate = moment(currentDate).format('YYYY-MM-DD');
-
-		console.log(formattedDate);
-
-		// 시간을 가져와서 해당 날짜의 날짜 요소에 출력
-		var currentTime = moment().format('HH:mm');
-		console.log(currentTime);
-		var attendanceTime = " "+ currentTime;
-		$('[data-date="' + formattedDate + '"]').append(
-				'<span class="attendance-time name="time">' + attendanceTime + '</span>');
-
 		if (type == "1") { //만약 출근 버튼을 누르면 jsp파일에 데이터가 넘어가서 데이터의 값을 가진애의 출근시간이 데이터에 넘어감. 
-
+			// db에저장
 			$.ajax({
 				url : "startTime.jsp",
 				data:{
@@ -112,6 +87,21 @@
 
 				}
 			});
+		
+		console.log("-------------------------------------");
+		$.ajax({//db에서 출근 시간 가져오기
+			type:"get",
+			url :"getStartTime.jsp",
+			dataType:"html",
+			data:{
+				id:eNumber
+			},
+			success:function(response,status,request){
+				console.log("성공");
+				console.log(response);
+			$("#startHour").html(response.trim())
+			}
+		});
 
 		} else {
 		// endtime.jsp?id=141
@@ -126,7 +116,25 @@
 					
 				}
 			});
+		
+			
+			$.ajax({//db에서 퇴근 시간 가져오기
+				type:"get",
+				url :"getEndTime.jsp",
+				dataType:"html",
+				data:{
+					id:eNumber
+				},
+				success:function(response,status,request){
+					console.log("성공");
+					console.log(response);
+				$("#quitHour").html(response.trim())
+				}
+			});
 		}
+		//시간정보 넘기기 끝
+		
+		
 	}
 </script>
 <!-- 스크립트 부분 -->
@@ -148,20 +156,27 @@
 				<h2>근태관리</h2>
 				<div class="container-fluid px-4">
 
-					<div id="calendar"></div>
+					
 					<!-- 출근 버튼 -->
-					<button onclick="markAttendance('1')">출근</button>
+					<input type="button" id="btn" value="출근" onclick="markAttendance(1);"/>
 					<!-- 퇴근 버튼 -->
-					<button onclick="markAttendance('2')">퇴근</button>
+					<input type="submit" value="퇴근" onclick="markAttendance(2);" />
 
 				</div>
-
-				<div id="startHour">출근시간</div>
+				<div>출근시간</div>	
+				<div id="startHour">
+				
+				</div>
+				<div>퇴근시간</div>
 				<div id="quitHour">퇴근시간</div>
+				<div>지각시간</div>
 				<div id="lateHour">지각시간</div>
+				<div>연장근무시간</div>
 				<div id="overHour">연장근무시간</div>
 				<button>연장근무신청</button>
+				<div>오늘 근무시간</div>
 				<div id="todayworkingHour">오늘 근무시간</div>
+				<div>연차/반차 현황</div>
 				<div id="vacationStatus">연차/반차 현황</div>
 
 				<button>연차신청</button>
@@ -171,9 +186,7 @@
 					file="../menu/footer.jsp"%></footer>
 		</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="../js/scripts.js"></script>
 	<!-- 사이드바 열고 닫기 -->
 </body>

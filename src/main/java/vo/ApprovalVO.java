@@ -15,7 +15,7 @@ public class ApprovalVO {
 	private String aName2nd;
 	private String aStatus;
 	private String aSave;
-	private String eNumber;
+	private int eNumber;
 	
 	
 	
@@ -23,11 +23,10 @@ public class ApprovalVO {
 	public ApprovalVO() {}
 
 
-	
 
 
 	public ApprovalVO(int aNumber, String aName, String aDepartmentName, Date aStartDate, Date aEndDate, String aTitle,
-			String aContent, String aName1st, String aName2nd, String aStatus, String aSave, String eNumber) {
+			String aContent, String aName1st, String aName2nd, String aStatus, String aSave, int eNumber) {
 		super();
 		this.aNumber = aNumber;
 		this.aName = aName;
@@ -42,7 +41,6 @@ public class ApprovalVO {
 		this.aSave = aSave;
 		this.eNumber = eNumber;
 	}
-
 
 
 
@@ -201,14 +199,14 @@ public class ApprovalVO {
 
 
 
-	public String geteNumber() {
+	public int geteNumber() {
 		return eNumber;
 	}
 
 
 
 
-	public void seteNumber(String eNumber) {
+	public void seteNumber(int eNumber) {
 		this.eNumber = eNumber;
 	}
 
@@ -223,15 +221,5 @@ public class ApprovalVO {
 				+ aSave + ", eNumber=" + eNumber + "]";
 	}
 
-
-
-
-	
-
-
-
-
-	
-	
 	
 }

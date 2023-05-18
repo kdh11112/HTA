@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import vo.ApprovalVO;
+import vo.BoardVO;
+import vo.EmployeeVO;
 import vo.MailVO;
 
 public class MailDAO {
@@ -96,5 +98,82 @@ public class MailDAO {
 		return list;
 	}
 	
+	
+	 public void writeMail(MailVO vo) {
+	      sb.setLength(0);
+	      
+	      sb.append("INSERT INTO MAIL VALUES(MAIL_SEQ.nextval, ?, ?, ?, ?, sysdate, ?, ?, ?) ");
+	      // 상태정보 : 1 정살글
+	      //         2 블라인드처리
+	      //         3 경찰요청
+	      try {
+	         pstmt=conn.prepareStatement(sb.toString());
+	         
+	         //메일번호는 시퀀스번호로
+	         //pstmt.setInt(1, vo.getMNumber());
+
+	         //2타이틀
+	         pstmt.setString(1, vo.getMTitle());
+	         //3컨텐츠
+	         pstmt.setString(2, vo.getMContent());
+	         //4파일
+	         pstmt.setString(3, vo.getMFile());
+	         //5참조
+	         pstmt.setString(4, vo.getMCc());
+	         //6.regdate
+	         
+	         //7. mBoard
+	         pstmt.setString(5, vo.getMBoard());
+	         //8/.E_number
+	         pstmt.setInt(6,vo.getENumber());
+	         //9.E_number2
+	         pstmt.setInt(7,vo.getENumber2());
+	         
+	         
+	         pstmt.executeUpdate();
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	   }
+	
+	 
+	 public EmployeeVO getOneReciver(String eId) {
+			EmployeeVO vo = null;
+			sb.append("SELECT e_number FROM employee WHERE e_id=?");
+			
+			try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1,eId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int eNumber = rs.getInt("e_number");
+				String eName = rs.getString("e_name");
+				String ePassword = rs.getString("e_password");
+				String ePhonenumber = rs.getString("e_phone_number");
+				int ePostalCode = rs.getInt("e_postal_code");
+				String eAddress1 = rs.getString("e_address1");
+				String eAddress2 = rs.getString("e_address2");
+				String eBirth = rs.getString("e_birth");
+				String eDateJoiningCompany = rs.getString("e_date_joining_company");
+				String eRetirementDate = rs.getString("e_retirement_date");
+				String eAccountInformation = rs.getString("e_account_information");
+				String eGender = rs.getString("e_gender");
+				String eOfficialResponsibilities = rs.getString("e_official_responsibilities");
+				int eTotalVacation = rs.getInt("e_total_vacation");
+				String eServing = rs.getString("e_serving");
+				String dName = rs.getString("d_name");
+				vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return vo;
+			
+		}	//getOne() end
+	 
+	 
 	
 }
