@@ -176,8 +176,6 @@ bottom:900px;
 <body>
 
 
-
-
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include
 			file="../menu/navi.jsp"%></nav>
 	<div id="layoutSidenav">
