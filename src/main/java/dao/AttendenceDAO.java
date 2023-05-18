@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import vo.AttendenceVO;
+import vo.BoardVO;
 import vo.EmployeeVO;
 
 public class AttendenceDAO {
@@ -83,5 +85,94 @@ public class AttendenceDAO {
 		}
 	}// endTimeAddOne end
 
+	
+	public ArrayList<AttendenceVO> getDate(int enumber) {
+		//사원별 출퇴근시간가져오기
+		ArrayList<AttendenceVO> list = new ArrayList<AttendenceVO>();
+		sb.setLength(0);
+		sb.append("select OFFICE_GOING_HOUR,QUITTING_TIME,e_number ");
+		sb.append("from attendance ");
+		sb.append("where e_number=? ");
+
+		
+		AttendenceVO vo =null;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, enumber);
+		
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String startTime = rs.getString("office_Going_Hour");
+				String endTime = rs.getString("quitting_Time");
+				
+				vo = new AttendenceVO();
+				
+				vo.setOfficeGoingHour(startTime);
+				vo.setQuittingTime(endTime);
+				list.add(vo);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return list;
+
+	}
+	
+	public AttendenceVO getStartTime(int enumber) {
+		sb.setLength(0);
+		sb.append("select ATTENDANCE_NO,to_char(OFFICE_GOING_HOUR,'HH24:MI:SS') OFFICE_GOING_HOUR  "  );
+		sb.append("from ATTENDANCE "  );
+		sb.append("WHERE E_NUMBER=? "  );
+		sb.append("and to_char(office_going_hour,'yyyy/mm/dd') = to_char(sysdate,'yyyy/mm/dd') "  );
+		AttendenceVO  vo = null;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, enumber);
+			
+			rs =pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String startTime = rs.getString("OFFICE_GOING_HOUR");
+				vo = new AttendenceVO();
+				vo.setOfficeGoingHour(startTime);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return vo;
+	}
+	
+	public AttendenceVO getEndTime(int enumber) {
+		sb.setLength(0);
+		sb.append("select ATTENDANCE_NO,to_char(QUITTING_TIME,'HH24:MI:SS') QUITTING_TIME  "  );
+		sb.append("from ATTENDANCE "  );
+		sb.append("WHERE E_NUMBER=? "  );
+		sb.append("and to_char(QUITTING_TIME,'yyyy/mm/dd') = to_char(sysdate,'yyyy/mm/dd') "  );
+		AttendenceVO  vo = null;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, enumber);
+			
+			rs =pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String endTime = rs.getString("QUITTING_TIME");
+				vo = new AttendenceVO();
+				vo.setQuittingTime(endTime);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return vo;
+	}
 
 }

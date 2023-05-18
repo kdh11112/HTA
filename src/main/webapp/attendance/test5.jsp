@@ -1,3 +1,6 @@
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="vo.EmployeeVO"%>
 <%@page import="dao.AttendenceDAO"%>
@@ -23,12 +26,8 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 <link rel="shortcut icon" href="#">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <title>Insert title here</title>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <link rel="stylesheet" href="../attendance/main.css" />
 
 
@@ -86,7 +85,6 @@ bottom:900px;
 
 <!-- 스크립트 부분 -->
 <script>
-
 <%
 	Object obj = session.getAttribute("vo");
 	String name = null;
@@ -100,83 +98,80 @@ bottom:900px;
 		name = vo.geteName();
 		dname = vo.getdName();
 		position = vo.geteOfficialResponsibilities();
+		num = vo.geteNumber();
 		
 		%>
-		var eNumber = <%=vo.geteNumber() %>; 
+		var eNumber = <%=vo.geteNumber() %>;
 		<%
-		
 	}
-
-
-
 %>
 
-	
-	$(document).ready(function() {
-		// FullCalendar를 초기화합니다.
-		$('#calendar').fullCalendar({
-			// FullCalendar 옵션 설정...
-			dayRender : function(date, cell) {
-				// 날짜 요소에 시간을 추가하기 위해 data-date 속성을 설정합니다.
-				var formattedDate = moment(date).format('YYYY-MM-DD');
-				cell.attr('data-date', formattedDate);
+$(document).ready(function() {
+    $.ajax({
+        url: "test2.jsp",
+        success: function(response) {
+            // 유효한 JSON 형식으로 데이터를 받았다고 가정
+            var data = JSON.parse(response);
+
+            // FullCalendar를 초기화합니다.
+            $('#calendar').fullCalendar({
+                // FullCalendar 옵션 설정...
+                dayRender: function(date, cell) {
+                    // 날짜 요소에 시간을 추가하기 위해 data-date 속성을 설정합니다.
+                    var formattedDate = moment(date).format('YYYY-MM-DD');
+                    cell.attr('data-date', formattedDate);
+                },
+                events: data
+            });
+        }
+    });enumber
+});
+
+function markAttendance(type) {
+	// 출근 또는 퇴근 버튼을 클릭했을 때의 동작을 처리
+	var currentDate = $('#calendar').fullCalendar('getDate');
+	var formattedDate = moment(currentDate).format('YYYY-MM-DD');
+
+	console.log(formattedDate);
+
+	// 시간을 가져와서 해당 날짜의 날짜 요소에 출력
+	var currentTime = moment().format('HH:mm');
+	console.log(currentTime);
+	var attendanceTime = " " + currentTime;
+	$('[data-date="' + formattedDate + '"]').append('<span class="attendance-time" name="time">' + attendanceTime + '</span>');
+
+	if (type == "1") {
+		// 만약 출근 버튼을 누르면 jsp파일에 데이터가 넘어가서 데이터의 값을 가진애의 출근시간이 데이터에 넘어감.
+		$.ajax({
+			url : "startTime.jsp",
+			data: {
+				id: eNumber
+			},
+			success : function(data) {
+				console.log(data.trim()); // 공백 제거
+				var data2 = data.trim();
 			}
 		});
-	});
-
-	function markAttendance(type) {
-		// 출근 또는 퇴근 버튼을 클릭했을 때의 동작을 처리
-		var currentDate = $('#calendar').fullCalendar('getDate');
-
-		var formattedDate = moment(currentDate).format('YYYY-MM-DD');
-
-		console.log(formattedDate);
-
-		// 시간을 가져와서 해당 날짜의 날짜 요소에 출력
-		var currentTime = moment().format('HH:mm');
-		console.log(currentTime);
-		var attendanceTime = " "+ currentTime;
-		$('[data-date="' + formattedDate + '"]').append(
-				'<span class="attendance-time name="time">' + attendanceTime + '</span>');
-
-		if (type == "1") { //만약 출근 버튼을 누르면 jsp파일에 데이터가 넘어가서 데이터의 값을 가진애의 출근시간이 데이터에 넘어감. 
-
-			$.ajax({
-				url : "startTime.jsp",
-				data:{
-					id:eNumber
-				},
-				success : function(data) {
-					console.log(data.trim());//공백제거
-					var data2 = data.trim();
-
-				}
-			});
-
-		} else {
+	} else {
 		// endtime.jsp?id=141
-			$.ajax({
-				url : "endTime.jsp",
-				data:{
-					id:eNumber
-				},
-				success : function(data) {
-					console.log(data.trim());//공백제거
-					var data2 = data.trim();
-					
-				}
-			});
-		}
+		$.ajax({
+			url : "endTime.jsp",
+			data: {
+				id: eNumber
+			},
+			success : function(data) {
+				console.log(data.trim()); // 공백 제거
+				var data2 = data.trim();
+			}
+		});
 	}
+}
 </script>
 <!-- 스크립트 부분 -->
 </head>
 
 
 <body>
-
-
-
 
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include
 			file="../menu/navi.jsp"%></nav>
