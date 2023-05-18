@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="vo.EmployeeVO"%>
 <%@page import="dao.AttendenceDAO"%>
 <%@page import="vo.AttendenceVO"%>
@@ -48,8 +49,38 @@
 	color: #888;
 	margin-bottom: 2px;
 }
+.right_cont{
+width:300px;
+border:1px solid black;
+height:500px;
+position:relative;
+left:1300px;
+bottom:800px;
 
+}
 
+.btnOverTime{
+position:relative;
+left:1300px;
+bottom:900px;
+}
+ #todayworkingHour {
+ position:relative;
+left:1300px;
+bottom:900px;
+ }
+ 
+ #vacationStatus
+{
+position:relative;
+left:1300px;
+bottom:900px;
+}
+.btnVacation{
+position:relative;
+left:1300px;
+bottom:900px;	
+}
 
 </style>
 
@@ -57,21 +88,30 @@
 <script>
 
 <%
-	EmployeeVO vo2 = new EmployeeVO();
-	vo2.seteNumber(31);
-	vo2.seteName("hong");
-	session.setAttribute("vo", vo2);
-	
 	Object obj = session.getAttribute("vo");
+	String name = null;
+	String dname = null;
+	String position = null;
+	int num = 0;
+	LocalDate now = LocalDate.now();
+	
 	if(obj != null){
-	EmployeeVO vo =(EmployeeVO) obj;
-	%>
-	var eNumber = <%=vo.geteNumber() %>; 
-	<%
+		EmployeeVO vo = (EmployeeVO)obj;
+		name = vo.geteName();
+		dname = vo.getdName();
+		position = vo.geteOfficialResponsibilities();
+		
+		%>
+		var eNumber = <%=vo.geteNumber() %>; 
+		<%
+		
+	}
 
-}
+
 
 %>
+
+	
 	$(document).ready(function() {
 		// FullCalendar를 초기화합니다.
 		$('#calendar').fullCalendar({
@@ -146,25 +186,33 @@
 			<main>
 
 				<h2>근태관리</h2>
+				
+				<h3><span><%=name %></span><span><%=dname %></span><span><%=now %></span></h3>
+				
+				
 				<div class="container-fluid px-4">
 
-					<div id="calendar"></div>
 					<!-- 출근 버튼 -->
 					<button onclick="markAttendance('1')">출근</button>
 					<!-- 퇴근 버튼 -->
 					<button onclick="markAttendance('2')">퇴근</button>
+					<div id="calendar"></div>
 
 				</div>
-
-				<div id="startHour">출근시간</div>
-				<div id="quitHour">퇴근시간</div>
-				<div id="lateHour">지각시간</div>
-				<div id="overHour">연장근무시간</div>
-				<button>연장근무신청</button>
+				
+				<div class="right_cont">
+				
+					<div id="startHour">출근시간</div>
+					<div id="quitHour">퇴근시간</div>
+					<div id="lateHour">지각시간</div>
+					<div id="overHour">연장근무시간</div>
+				</div>
+				<button class="btnOverTime">연장근무신청</button>
+				
 				<div id="todayworkingHour">오늘 근무시간</div>
 				<div id="vacationStatus">연차/반차 현황</div>
 
-				<button>연차신청</button>
+				<button class="btnVacation">연차신청</button>
 
 			</main>
 			<footer class="py-4 bg-light mt-auto"><%@ include

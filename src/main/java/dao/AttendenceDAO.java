@@ -11,14 +11,17 @@ import vo.EmployeeVO;
 
 public class AttendenceDAO {
 	// 1.환경변수
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String user = "userhj";
-	String password = "user12";
-	Connection conn;
-	PreparedStatement pstmt;
-	ResultSet rs;
-	StringBuffer sb = new StringBuffer();
+
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+		String user = "userhj";
+		String password = "user12";
+		Connection conn;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		StringBuffer sb = new StringBuffer();
+
+
 
 	public AttendenceDAO() {
 		// 2.드라이버 로딩
@@ -46,8 +49,13 @@ public class AttendenceDAO {
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
-			/* pstmt.setString(1, vo.getOfficeGoingHour() ); */
+
+			sb.setLength(0);
+			sb.append("INSERT INTO ATTENDANCE (attendanceNo,workingDate) " );
+			sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate)");
+
 			pstmt.setInt(1, vo.getEnumber() );
+
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -58,11 +66,9 @@ public class AttendenceDAO {
 	public void endTimeAddOne(int id) {
 		
 		sb.setLength(0);
-//		sb.append("INSERT INTO ATTENDANCE (attendance_No,working_Date,QUITTING_TIME) ");
-//		sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate,SYSTIMESTAMP) ");// systemtimestamp -- 시간날짜 시간대까지
 		sb.append("update ATTENDANCE ");
 		sb.append("set  QUITTING_TIME = sysdate ");
-		sb.append("where E_NUMBER = ? and to_char(office_going_hour, 'yyyy/mm/dd') = to_char(sysdate, 'yyyy/mm/dd') ");
+		sb.append("where E_NUMBER = ? and to_char( office_going_hour ,'yyyy/mm/dd') = to_char(sysdate,'yyyy/mm/dd') ");
 		// 저장함.
 		
 		try {
@@ -75,8 +81,7 @@ public class AttendenceDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}// addOne end
+	}// endTimeAddOne end
 
-	
 
 }
