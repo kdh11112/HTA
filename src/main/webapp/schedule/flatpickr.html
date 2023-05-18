@@ -17,11 +17,16 @@
 <script>
 	$(document).ready(function() {
 		$("#select").on("change", function() {
-        // 선택한 옵션에 따라 입력값 초기화
-        resetInputs();
-		});
+		    $("#start_date_txt input").val("");
+		    $("#end_date_txt input").val("");
+		    $("#content_area textarea").val("");
+		})
+		
+		$("#cancel_button").on("click",function(){
+			window.close();
+		})
 	});
-
+	
 </script>
 
 <style>
@@ -90,13 +95,11 @@
 		<div id="end_date_txt">종료일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local"  name="end_date" required /></div>
 		</div>
 		<div id="content_area"><span>일정내용</span>
-			 <p><textarea cols="34" rows="10" name="content"></textarea></p>			
+			 <p><textarea cols="34" rows="10" name="contents"></textarea></p>			
 		</div>
-		
 		<div >
-			
 			<input type="submit" value="추가" id="add_button" />
-			<button id="cancel_button" >취소</button>
+			<input type="button" value="취소" id="cancel_button" onclick="closeWindow()"/>
 		</div>
 	</form>
 	</div>

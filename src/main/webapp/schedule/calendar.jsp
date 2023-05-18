@@ -9,33 +9,43 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
+<style>
+	.fc-daygrid-day-frame:hover{
+		background: skyblue;
+	}
+</style>
 <script>
 $(document).ready(function() {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    //... 이전 코드 ...
+	  var calendarEl = document.getElementById('calendar');
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
+	    //... 이전 코드 ...
 
-    dateClick: function(info) {
-      var date = info.dateStr;
-      if (date) {
-        // 클릭한 일자 요소를 선택하고 값을 설정
-        var dayElement = info.dayEl;
-        dayElement.innerHTML = date; 
-        openWindow(date); // 수정된 부분: date 값을 인자로 전달
-      }
-    }
-  });
+	    dateClick: function(info) {
+	      var date = info.dateStr;
+	      if (date) {
+	        openWindow(date);
+	      }
+	    },
+	    events: []
+	  });
 
-  calendar.render();
-});
+	  // 일정 데이터를 가져와서 이벤트 설정
+	  $.ajax({
+	    url: "test.jsp",
+	    success: function(response) {
+	      var data = JSON.parse(response);
+	      calendar.setOption('events', data); // 달력의 events 옵션 업데이트
+	      calendar.render(); // 달력 다시 렌더링
+	    }
+	  });
 
-function openWindow(date) {
-    // 작은 윈도우 창 열기
-    var windowFeatures = "width=320,height=550,scrollbars=yes";
-    var windowObject = window.open("flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
-    windowObject.focus();
-}
+	  function openWindow(date) {
+	    // 작은 윈도우 창 열기
+	    var windowFeatures = "width=320,height=550,scrollbars=yes";
+	    var windowObject = window.open("flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
+	    windowObject.focus();
+	  }
+	});
 
 </script>
 
