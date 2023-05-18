@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="vo.EmployeeVO"%>
 <%@page import="dao.AttendenceDAO"%>
 <%@page import="vo.AttendenceVO"%>
@@ -51,17 +52,23 @@
 <script>
 
 <%
-	EmployeeVO vo2 = new EmployeeVO();
-	vo2.seteNumber(31);
-	vo2.seteName("hong");
-	session.setAttribute("vo", vo2);
-	
 	Object obj = session.getAttribute("vo");
+	String name = null;
+	String dname = null;
+	String position = null;
+	int num = 0;
+	LocalDateTime now = LocalDateTime.now();
+	
 	if(obj != null){
-	EmployeeVO vo =(EmployeeVO) obj;
-	%>
-	var eNumber = <%=vo.geteNumber() %>; 
-	<%
+		EmployeeVO vo = (EmployeeVO)obj;
+		name = vo.geteName();
+		dname = vo.getdName();
+		position = vo.geteOfficialResponsibilities();
+		num = vo.geteNumber();
+		
+		%>
+		var eNumber = <%=vo.geteNumber() %>;
+		<%
 	}
 
 %>
