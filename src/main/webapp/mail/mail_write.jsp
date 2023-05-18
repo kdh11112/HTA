@@ -27,9 +27,13 @@ window.addEventListener("message", receiveMessageFromChild, false);
 	
 		
 		function receiveMessageFromChild(event) {
-			var reciverId = event.data;
+			var dataArray = event.data.split(",");
+			
+			var reciverId = dataArray[0];
+			var reciverName = dataArray[1];
 			
 			$("#reciverId").val(reciverId); <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
+			$("#reciverName").val(reciverName); <!-- 주소록에서 선택된 수신자 이름을 String으로 value값에 담았음.  -->
 		}
 		
 
@@ -45,7 +49,7 @@ window.addEventListener("message", receiveMessageFromChild, false);
 		//세션에 잇는 vo(로그인되어있는 계정) 가져오기
 	Object obj = session.getAttribute("vo");
 	String name = null;
-	int writer = 78; //기본값 (78은 현재 kdh)
+	int writer = 78 ; //기본값 (78은 현재 kdh)
 	
 	if(obj != null){
 		EmployeeVO vo = (EmployeeVO)obj;
@@ -75,7 +79,7 @@ window.addEventListener("message", receiveMessageFromChild, false);
 			
 			<tr>
 				<th>받는 사람</th>   <!-- 수신자 reciver  e_number2 -->
-				<td><input type="text" id="reciver" value="<%-- <%=name %> --%>"  disabled="disabled"/>
+				<td><input type="text" id="reciverName" name="reciverName" value="" disabled="disabled"/> <!-- 주소록에서 선택된 수신자 이름을 value값에 담았음.  -->
 				<input id="addrList" class="btn btn-primary" type="button" style="margin-left: 10px" value="주소록" />
 				<input type="hidden" name="reciver" value="<%=name/* reciver */ %>" />
 				<input type="hidden" id="reciverId" name="reciverId" value=""/> <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
@@ -85,7 +89,7 @@ window.addEventListener("message", receiveMessageFromChild, false);
 		
 			<tr>
 				<th>제목</th>  <!-- 제목 title mTitle -->
-				<td><input type="text" name="title" id="" style="width: 150px" /></td>
+				<td><input type="text" name="title" id="" style="width: 350px" /></td>
 			</tr>
 		
 			<tr>

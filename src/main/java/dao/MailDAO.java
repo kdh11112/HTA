@@ -99,10 +99,10 @@ public class MailDAO {
 	}
 	
 	
-	 public void addOne(MailVO vo) {
+	 public void writeMail(MailVO vo) {
 	      sb.setLength(0);
 	      
-	      sb.append("INSERT INTO MAIL VALUES(BOARD_BNO_SEQ.nextval, ?, ?, ?, ?, sysdate, ?, ?, ?) ");
+	      sb.append("INSERT INTO MAIL VALUES(MAIL_SEQ.nextval, ?, ?, ?, ?, sysdate, ?, ?, ?) ");
 	      // 상태정보 : 1 정살글
 	      //         2 블라인드처리
 	      //         3 경찰요청
@@ -131,6 +131,7 @@ public class MailDAO {
 	         
 	         
 	         pstmt.executeUpdate();
+	         
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      }

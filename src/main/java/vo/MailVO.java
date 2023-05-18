@@ -6,21 +6,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class MailVO {
 
-	int mNumber;
-	String mTitle;
-	String mContent;
-	String mFile;
-	String mCc;
-	Date mRegdate;
-	String mBoard;
+	public int mNumber;
+	public String mTitle;
+	public String mContent;
+	public String mFile;
+	public String mCc;
+	public Date mRegdate;
+	public String mBoard;
 	
-	int eNumber;
-	int eNumber2;
+	
+	public int eNumber;
+	public int eNumber2;
 	
 
 	

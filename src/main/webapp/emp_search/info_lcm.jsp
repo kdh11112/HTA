@@ -71,7 +71,8 @@ img {
 						var dList2 = m.split(" ");
 						console.log(dList2[1]);
 						if (dList2[7] == "±‚»π") {
-							 $("#list").append("<li class='hovBg' onclick='sendDataToParent(\"" + dList2[1]+"\");'>" + m + "</li>");
+																								
+							 $("#list").append("<li class='hovBg' onclick='sendDataToParent(\"" + dList2[1]+","+ dList2[3]+"\");'>" + m + "</li>");
 							/* window.opener.postMessage(m, "*"); */ 
 							
 						}
