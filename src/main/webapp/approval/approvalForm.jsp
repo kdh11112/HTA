@@ -151,8 +151,8 @@
 									        </tr>
 									        <tr>
 									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
-									            <td class="position2"></td>
-									            <td class="position3"></td>
+									            <td class="position2" id="stamp1"></td>
+									            <td class="position3" id="stamp2"></td>
 									        </tr>
 									    </table>
 									</div>

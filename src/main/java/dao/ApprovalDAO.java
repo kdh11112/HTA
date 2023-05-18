@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import vo.ApprovalVO;
 import vo.EmployeeVO;
@@ -21,6 +22,8 @@ public class ApprovalDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	StringBuffer sb = new StringBuffer();
+	
+	public static HashMap<String,Object> map = new HashMap<>();
 	
 	public ApprovalDAO() {
 		
@@ -101,15 +104,18 @@ public class ApprovalDAO {
 //	}
 	
 	public ArrayList<ApprovalVO> selectAll(int i, int j, int k){
+//	public ArrayList<ApprovalVO> selectAll(int i, int j, int k,String s,String x){
 		ArrayList<ApprovalVO> list = new ArrayList<>();
 		sb.setLength(0);
 		sb.append("SELECT * FROM (SELECT ROWNUM AS RNUM, A_NUMBER,A_TITLE,A_NAME,A_START_DATE,A_STATUS,E_NUMBER FROM (SELECT * from APPROVAL ORDER BY A_NUMBER DESC) WHERE ROWNUM <=? ) WHERE RNUM >= ?  AND E_NUMBER = ?");
-		
+//		sb.append("SELECT * FROM (SELECT * FROM (SELECT ROWNUM AS RNUM, A_NUMBER,A_TITLE,A_NAME,A_START_DATE,A_STATUS,E_NUMBER,A_NAME_1ST,A_NAME_2ND FROM (SELECT * from APPROVAL ORDER BY A_NUMBER DESC) WHERE ROWNUM <=?) WHERE RNUM >= ?  AND E_NUMBER = ?) WHERE A_NAME_1ST = ? OR A_NAME_2ND = ?");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, j);
 			pstmt.setInt(2, i);
 			pstmt.setInt(3, k);
+//			pstmt.setString(4, s);
+//			pstmt.setString(5, x);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int aNumber = rs.getInt("A_NUMBER");
@@ -125,6 +131,8 @@ public class ApprovalDAO {
 				vo.setaStartDate(aStartDate);
 				vo.setaStatus(aStatus);
 				vo.seteNumber(eNumber);
+//				vo.setaName1st(s);
+//				vo.setaName2nd(x);
 				
 				list.add(vo);
 			}
@@ -137,38 +145,49 @@ public class ApprovalDAO {
 	}
 	
 	public ApprovalVO selectOne(int i) {
-		sb.setLength(0);
-		sb.append("SELECT A_NAME,A_DEPARTMENT_NAME,A_TITLE,A_CONTENT,A_NAME_1ST ,A_NAME_2ND  FROM APPROVAL WHERE A_NUMBER = ?");
-		ApprovalVO vo = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, i);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				String name = rs.getString("A_NAME");
-				String dname = rs.getString("A_DEPARTMENT_NAME");
-				String title = rs.getString("A_TITLE");
-				String contents = rs.getString("A_CONTENT");
-				String name1st = rs.getString("A_NAME_1ST");
-				String name2rd = rs.getString("A_NAME_2ND");
-				vo = new ApprovalVO();
-				vo.setaName(name);
-				vo.setaDepartmentName(dname);
-				vo.setaTitle(title);
-				vo.setaContent(contents);
-				vo.setaName1st(name1st);
-				vo.setaName2nd(name2rd);
-				vo.seteNumber(i);
-				
-					
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return vo;
+	    sb.setLength(0);
+
+	    sb.append("SELECT a.A_NAME,a.A_DEPARTMENT_NAME,a.A_TITLE,a.A_CONTENT,a.A_NAME_1ST,e.E_OFFICIAL_RESPONSIBILITIES AS e1ST,a.A_NAME_2ND,e2.E_OFFICIAL_RESPONSIBILITIES AS e2RD,a.A_START_DATE from APPROVAL a LEFT JOIN EMPLOYEE e ON a.A_NAME_1ST = e.E_NAME LEFT JOIN EMPLOYEE e2 ON a.A_NAME_2ND = e2.E_NAME WHERE a.A_NUMBER = ?");
+	    ApprovalVO vo = null;
+	    EmployeeVO vo2 = new EmployeeVO();
+	    EmployeeVO vo3 = new EmployeeVO();
+	    try {
+	        pstmt = conn.prepareStatement(sb.toString());
+	        pstmt.setInt(1, i);
+	        rs = pstmt.executeQuery();
+	        while(rs.next()) {
+	            String name = rs.getString("A_NAME");
+	            String dname = rs.getString("A_DEPARTMENT_NAME");
+	            String title = rs.getString("A_TITLE");
+	            String contents = rs.getString("A_CONTENT");
+	            String name1st = rs.getString("A_NAME_1ST");
+	            String of1st = rs.getString("e1ST");
+	            String name2rd = rs.getString("A_NAME_2ND");
+	            String of2rd = rs.getString("e2RD");
+	            Date startDate = rs.getDate("A_START_DATE");                    
+	            vo = new ApprovalVO();
+	            vo.setaName(name);
+	            vo.setaDepartmentName(dname);
+	            vo.setaTitle(title);
+	            vo.setaContent(contents);
+	            vo.setaName1st(name1st);
+	            vo.setaName2nd(name2rd);
+	            vo.setaStartDate(startDate);
+	            vo.seteNumber(i);
+	            
+	            vo2.seteOfficialResponsibilities(of1st);
+	            vo3.seteOfficialResponsibilities(of2rd);
+	            
+	            
+	            map.put("of1st", vo2.geteOfficialResponsibilities());
+	            map.put("of2rd", vo3.geteOfficialResponsibilities());
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    
+	    return vo;
 	}
 	
 	

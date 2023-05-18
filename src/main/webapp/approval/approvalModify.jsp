@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="vo.ApprovalVO"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Date"%>
@@ -54,9 +55,9 @@
 		    	text-align: center; 
 		    }
 		    
+		    #con { pointer-events: none !important; }
 		</style>
-		<script type="text/javascript">
-		</script>
+
     </head>
     <body class="sb-nav-fixed">
     <%
@@ -64,6 +65,8 @@
     	String name = null;
     	String dname = null;
     	String position = null;
+    	String of1st = null;
+    	String of2rd = null;
     	int num = 0;
     	LocalDate now = LocalDate.now();
     	if(obj != null){
@@ -83,7 +86,10 @@
     		ApprovalDAO dao = new ApprovalDAO();
     		
     		ApprovalVO vo = dao.selectOne(no);
-    	
+    		
+    		of1st = (String)ApprovalDAO.map.get("of1st");
+    		of2rd = (String)ApprovalDAO.map.get("of2rd");
+    		
     	
     	if(vo != null){
     		
@@ -92,6 +98,11 @@
     	
     
     %>
+    	<script type="text/javascript">
+			$(function(){
+				$("#stamp1").append("<img src='../img/stamp/e_" + <%=num%> + ".png' />");
+			})
+		</script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
         <div id="layoutSidenav"> 
         	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
@@ -118,14 +129,14 @@
 									        	<input type="hidden" name="pageNum" value="<%=vo.getaNumber() %>"/>
 									            <th><%=position %></th>
 									            <!-- <th class="position2" id="data-placeholder2"></th> -->
-									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" readonly></th>
-									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" readonly></th>
+									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" value="<%=of1st %>"  readonly></th>
+									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" value="<%=of2rd %>" readonly></th>
 									            <!-- <input type="text" id="data-placeholder2" name="data-placeholder1"> -->
 									        </tr>
 									        <tr>
 									            <td><%=name %></td>
-									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" readonly></td>
-									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" readonly></td>
+									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" value="<%=vo.getaName1st() %>" readonly></td>
+									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" value="<%=vo.getaName2nd() %>" readonly></td>
 									        </tr>
 									        <tr>
 									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
@@ -138,14 +149,14 @@
 		                            <table class="table table-striped">
 		                            	
 			                            	
-		                            	<tr><td>제목 <input class="titles" type="text" name="title" id="title" style="width: 90%; text-align: left;"/></td></tr>
+		                            	<tr><td>제목 <input class="titles" type="text" name="title" value="<%=vo.getaTitle() %>" id="title" style="width: 90%; text-align: left;" readonly/></td></tr>
 										<tr>
-											<td><textarea class="summernote" name="contents"><%=vo.getaContent()%></textarea></td>
+											<td><textarea class="summernote" id="con" name="contents" readonly="readonly" readonly><%=vo.getaContent()%></textarea></td>
+											<td><input type="hidden" name="contentsHidden" value="<%=vo.getaContent() %>"/></td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<input class="btn btn-primary" type="submit" value="제출하기" />
-												<input class="btn btn-info" type="submit" value="임시저장" />
+												<input class="btn btn-info" type="submit" value="결재" />
 											</td>
 										</tr>
 		                            </table>
@@ -163,26 +174,28 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script><!-- 사이드바 열고 닫기 -->
 
-        <script type="text/javascript">
-        		$('.summernote').summernote({
-        		  disableDragAndDrop: true,
-				  height: 300,                 // 에디터 높이
-				  minHeight: null,             // 최소 높이
-				  maxHeight: null,             // 최대 높이
-				  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-					// 한글 설정
-				  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-				  toolbar: [
-					    ['fontname', ['fontname']],
-					    ['fontsize', ['fontsize']],
-					    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-					    ['color', ['forecolor','color']],
-					    ['para', ['ul', 'ol', 'paragraph']],
-					    ['height', ['height']]
-					  ],
-					  fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-					  fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-			})	
+		<script type="text/javascript">
+		$(document).ready(function() {
+		    $('.summernote').summernote({
+		        disableDragAndDrop: true,
+		        height: 300,
+		        minHeight: null,
+		        maxHeight: null,
+		        focus: true,
+		        placeholder: '최대 2048자까지 쓸 수 있습니다',
+		        toolbar: [
+		            ['fontname', ['fontname']],
+		            ['fontsize', ['fontsize']],
+		            ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+		            ['color', ['forecolor','color']],
+		            ['para', ['ul', 'ol', 'paragraph']],
+		            ['height', ['height']]
+		        ],
+		        fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+		        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+		    });
+		    $('#con').summernote('disable');
+		});
 		</script>
     </body>
 </html>

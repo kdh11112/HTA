@@ -32,6 +32,7 @@
     	
     	ApprovalDAO dao = new ApprovalDAO();
     	int totalCount = dao.getTotalCount(eNum);
+    	ApprovalVO vo2 = new ApprovalVO();
     	//페이징 10개씩
     	int recordPerPage = 10;
     	int totalPage = (totalCount%recordPerPage == 0) ? totalCount/recordPerPage : totalCount/recordPerPage+1;
@@ -80,6 +81,7 @@
                                         </tr>
                                     </thead>
                                     <%
+                                    	/* ArrayList<ApprovalVO> list = dao.selectAll(startNo,endNo,eNum,vo2.getaName1st(),vo2.getaName2nd()); */
                                     	ArrayList<ApprovalVO> list = dao.selectAll(startNo,endNo,eNum);
                                     	for(ApprovalVO vo : list){
                                     		
