@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="calendar.css">
+<link rel="stylesheet" href="../css/calendar.css">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
@@ -31,7 +31,7 @@ $(document).ready(function() {
 
 	  // 일정 데이터를 가져와서 이벤트 설정
 	  $.ajax({
-	    url: "test.jsp",
+	    url: "load_personal_schedule.jsp",
 	    success: function(response) {
 	      var data = JSON.parse(response);
 	      calendar.setOption('events', data); // 달력의 events 옵션 업데이트
@@ -46,7 +46,6 @@ $(document).ready(function() {
 	    windowObject.focus();
 	  }
 	});
-
 </script>
 
 <select name="일정선택" id="select">
