@@ -19,7 +19,6 @@
 
 [<% for (int i = 0; i < list.size(); i++) { %>
   {
-    "id": "<%= list.get(i).getENumber() %>",
     "title": "<%= list.get(i).getSContents() %>",
     "start": "<%= list.get(i).getSStarDate() %>",
     "end": "<%= list.get(i).getSEndDate() %>"
