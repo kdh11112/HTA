@@ -32,19 +32,19 @@ public class ScheduleDAO {
 		
 	}
 	
-	public ArrayList<ScheduleVO> selectAll(){
+	public ArrayList<ScheduleVO> selectAll(int eNumber){
 		ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
 		sb.setLength(0); // 길이를 0으로
-		sb.append("SELECT * FROM SCHEDULE ");
+		sb.append("SELECT * FROM SCHEDULE WHERE E_NUMBER =? ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, eNumber);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int sNumber = rs.getInt("s_number");
 				String sContents = rs.getString("s_contents");
 				String sStartDate = rs.getString("s_start_date");
 				String sEndDate = rs.getString("s_end_date");
-				int eNumber = rs.getInt("e_number");
 
 				ScheduleVO vo = new ScheduleVO(sNumber,sContents,sStartDate,sEndDate,eNumber);
 				
