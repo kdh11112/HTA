@@ -131,14 +131,14 @@ public class BoardDAO {
 	 //게시판 글 작성 
 	public void addOne(BoardVO vo) { 
 		sb.setLength(0);
-		sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,38) "); 
+		sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,?) "); 
 		try { 
 			pstmt = conn.prepareStatement(sb.toString());
 	 
 			pstmt.setString(1, vo.getbTitle()); 
 			pstmt.setString(2, vo.getbContent());
 			pstmt.setString(3, vo.getbWriter()); 
-			/* pstmt.setInt(4, vo.geteNumber()); */
+			pstmt.setInt(4, vo.geteNumber());
 			
 			pstmt.executeUpdate();
 	

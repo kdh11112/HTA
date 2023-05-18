@@ -48,10 +48,12 @@
 	<%
 		Object obj= session.getAttribute("vo");
 		String ename = null;
+		int enumber=0;
+		
 		if(obj != null){
 			EmployeeVO vo = (EmployeeVO)obj;
 			ename = vo.geteName();
-			
+			enumber= vo.geteNumber();
 		}
 	
 	%>
@@ -76,7 +78,8 @@
                    <!-- 글자 수정 못하게 하고싶다면 disabled 줌
 					disabled은 다음 페이지로 값 전달이 안돼서 hidden 넣어서 전달해줘야 함 -->
                    <td><input type="text" name="ename" value="<%=ename %>" disabled="disabled">
-                   <input type="hidden" name="ename" value="<%=ename %>" /></td>
+                   <input type="hidden" name="ename" value="<%=ename %>" />
+                   <input type="hidden" name="enumber" value="<%=enumber %>" disabled="disabled" /></td>
                </tr>
                <tr>
                    <th>첨부파일</th>
