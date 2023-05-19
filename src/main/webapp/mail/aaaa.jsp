@@ -89,7 +89,81 @@ div#right_window{
 
 </style>
 
+<script>
+$(document).ready(function() {
+	  var isMailWriteLoaded = false; // mail_write.jsp 파일이 로드되었는지 여부를 저장하는 변수
 
+	  // "메일쓰기" 버튼 클릭 이벤트 처리
+	  $("#write").off("click").on("click", function() {
+	    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
+	    if (!isMailWriteLoaded) {
+	      $.ajax({
+	        url: "mail_write.jsp",
+	        dataType: "html",
+	        success: function(response) {
+	          $(".right_main").html(response);
+	          isMailWriteLoaded = true; // 파일이 로드되었음을 표시
+	          initializeSummernote(); // Summernote 초기화 함수 호출
+	        },
+	        error: function(xhr, status, error) {
+	          console.error(error);
+	        }
+	      });
+	    }
+	  });
+
+	  // "내게쓰기" 버튼을 클릭하면
+	  $("#me_write").off("click").on("click", function() {
+	    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
+	    if (!isMailWriteLoaded) {
+	      $.ajax({
+	        url: "mail_write.jsp",
+	        dataType: "html",
+	        success: function(response) {
+	          $(".right_main").html(response);
+	          isMailWriteLoaded = true; // 파일이 로드되었음을 표시
+	          initializeSummernote(); // Summernote 초기화 함수 호출
+	        },
+	        error: function(xhr, status, error) {
+	          console.error(error);
+	        }
+	      });
+	    }
+	  });
+
+	  $("#sendMailBox").off("click").on("click", function() {
+		  // AJAX를 사용하여 mailSendBox.jsp 페이지를 로드하여 right_main 클래스 내에 표시
+		  if (!isMailWriteLoaded) {
+		    $.ajax({
+		      url: "mailSendBox.jsp",
+		      dataType: "html",
+		      success: function(response) {
+		        $(".right_main").html(response);
+		        isMailWriteLoaded = true; // 파일이 로드되었음을 표시
+		        initializeSummernote(); // Summernote 초기화 함수 호출
+		      },
+		      error: function(xhr, status, error) {
+		        console.error(error);
+		      }
+		    });
+		  }
+		});
+	  
+	  
+	  // Summernote 초기화 함수
+	  function initializeSummernote() {
+	    $('.summernote').summernote({
+	      height: 450, // 서머노트 에디터 높이
+	      width: 1900,
+	      codemirror: {
+	        theme: 'monokai' // codemirror options
+	      }
+	    });
+	  }
+});
+	
+	
+</script>
 
 
 
@@ -216,11 +290,11 @@ $(document).ready(function() {
 	  <div class="top_menu">
 		  <div class="mail_gruop" style="flex: 1;">
 		    <ul id="mail_list">
-		      <li id="inbox">받은 메일함</li>
-		      <li id="my_inbox">내게 쓴 메일함</li>
-		      <li id="sendMailBox">보낸 메일함</li>
-		      <li id="drafts">임시보관함</li>
-		      <li id="trash">휴지통</li>
+		      <li id="inbox"><a href="#">받은 메일함</a></li>
+		      <li id="my_inbox"><a href="#">내게 쓴 메일함</a></li>
+		      <li id="sendMailBox"><a href="#">보낸 메일함</a></li>
+		      <li id="drafts"><a href="#">임시보관함</a></li>
+		      <li id="trash"><a href="#">휴지통</a></li>
 		    </ul>
 	  </div>
 	   
@@ -240,131 +314,7 @@ $(document).ready(function() {
   </div>
 </div>
 
-   	<script>
-$(document).ready(function() {
-	  var isMailWriteLoaded = false; // mail_write.jsp 파일이 로드되었는지 여부를 저장하는 변수
-
-	  // "메일쓰기" 버튼 클릭 이벤트 처리
-	  $("#write").on("click", function() {
-		  console.log("hahahaha");
-	    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-	    if (!isMailWriteLoaded) {
-	      $.ajax({
-	        url: "mail_write.jsp",
-	        dataType: "html",
-	        success: function(response) {
-	          $(".right_main").html(response);
-	        isMailWriteLoaded = true; // 파일이 로드되었음을 표시
-	          initializeSummernote(); // Summernote 초기화 함수 호출
-	        },
-	        error: function(xhr, status, error) {
-	          console.error(error);
-	        }
-	      });
-	    } 
-	  });
-
-	  // "내게쓰기" 버튼을 클릭하면
-	  $("#me_write").off("click").on("click", function() {
-	    // AJAX를 사용하여 mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-	    if (!isMailWriteLoaded) {
-	      $.ajax({
-	        url: "mail_write.jsp",
-	        dataType: "html",
-	        success: function(response) {
-	          $(".right_main").html(response);
-	          isMailWriteLoaded = true; // 파일이 로드되었음을 표시
-	          initializeSummernote(); // Summernote 초기화 함수 호출
-	          
-	        },
-	        error: function(xhr, status, error) {
-	          console.error(error);
-	        }
-	      });
-	    }  
-	  });
-
-	  
-	  
-	  	//받은 메일함
-	  $("#my_inbox").on("click", function() {
-		    // AJAX를 사용하여 my_mail_inbox.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-		    $.ajax({
-		      url: "my_mail_inbox.jsp",
-		      dataType: "html",
-		      success: function(response) {
-		        $(".right_main").html(response);
-		      },
-		      error: function(xhr, status, error) {
-		        console.error(error);
-		      }
-		    });
-		  });
-
-	  
-	  
-		  // "보낸 메일함" 버튼 클릭 이벤트 처리
-		  $("#sendMailBox").on("click", function() {
-		    // AJAX를 사용하여 mailSendBox.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-		    $.ajax({
-		      url: "mailSendBox.jsp",
-		      dataType: "html",
-		      success: function(response) {
-		        $(".right_main").html(response);
-		        isMailWriteLoaded = true; // 파일이 로드되었음을 표시
-		      },
-		      error: function(xhr, status, error) {
-		        console.error(error);
-		      }
-		    });
-		  });
-
-		  // "임시보관함" 버튼 클릭 이벤트 처리
-		  $("#drafts").off("click").on("click", function() {
-		    // AJAX를 사용하여 drafts_mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-		    $.ajax({
-		      url: "drafts_mail.jsp",
-		      dataType: "html",
-		      success: function(response) {
-		        $(".right_main").html(response);
-		      },
-		      error: function(xhr, status, error) {
-		        console.error(error);
-		      }
-		    });
-		  });
-
-		  // "휴지통" 버튼 클릭 이벤트 처리
-		  $("#trash").off("click").on("click", function() {
-		    // AJAX를 사용하여 trash_mail.jsp 페이지를 로드하여 right_main 클래스 내에 표시
-		    $.ajax({
-		      url: "trash_mail.jsp",
-		      dataType: "html",
-		      success: function(response) {
-		        $(".right_main").html(response);
-		      },
-		      error: function(xhr, status, error) {
-		        console.error(error);
-		      }
-		    });
-		  });
-	  
-	  
-	  // Summernote 초기화 함수
-	  function initializeSummernote() {
-		  console.log("summernote");
-	    $('.summernote').summernote({
-	      height: 450, // 서머노트 에디터 높이
-	      width: 1300,
-	      codemirror: {
-	        theme: 'monokai' // codemirror options
-	      }
-	    });
-	  }
-});
-	
-	
-</script>
+   	
    	
 		
 

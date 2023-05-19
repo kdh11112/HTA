@@ -57,37 +57,45 @@ public class MailDAO {
 		return count;
 	}
 	
-	public ArrayList<MailVO> selectAll(){
+	public ArrayList<MailVO> selectAll(int startNo, int endNo){
+		//최근 데이터 10개만 가져오기
 		ArrayList<MailVO> list = new ArrayList<>();
 		sb.setLength(0);
-		sb.append("SELECT * FROM APPROVAL ORDER BY m_NUMBER DESC");
+		
+		/* sb.append("SELECT * FROM MAIL"); */
+		
+		
+		 sb.append("select rn, m_number, m_title, m_content, m_file, m_cc, m_regdate, m_board, e_number, e_number2 "); 
+		 sb.append("from ( select rownum rn, m_number,  m_title, m_content, m_file, m_cc, m_regdate, m_board, e_number, e_number2 ");
+		 sb.append("from ( select m_number, m_title, m_content, m_file, m_cc, m_regdate, m_board, e_number, e_number2 ");
+		 sb.append("from mail "); sb.append("order by m_number desc ) ");
+		 sb.append("where rownum <= ?) "); sb.append("where rn >= ? ");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, endNo);
+			pstmt.setInt(2, startNo);
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				int mNumber = rs.getInt("m_number");
-				String mTitle = rs.getString("mTitle");
-				String mContent = rs.getString("mContent");
-				String mFile = rs.getString("mFile");					
-				String mCc = rs.getString("mCc");					
-				Date mRegdate = rs.getDate("mRegdate");
-				String mBoard = rs.getString("mBoard");					
+				int mNumber = rs.getInt("M_Number");
+				String mTitle = rs.getString("m_Title");
+				String mContent = rs.getString("m_Content");
+				String mFile = rs.getString("m_File");					
+				String mCc = rs.getString("m_Cc");					
+				Date mRegdate = rs.getDate("m_Regdate");
+				String mBoard = rs.getString("m_Board");					
 				
-				int eNumber = rs.getInt("eNumber");
-				int eNumber2 = rs.getInt("eNumber2");
+				int eNumber = rs.getInt("e_Number");
+				int eNumber2 = rs.getInt("e_Number2");
 				
-				
-				MailVO vo = new MailVO();
-				vo.setMNumber(mNumber);
-				vo.setMTitle(mTitle);
-				vo.setMContent(mContent);
-				vo.setMFile(mFile);
-				vo.setMCc(mCc);
-				vo.setMRegdate(mRegdate);
-				vo.setMBoard(mBoard);
-				vo.setENumber(eNumber);
-				vo.setENumber(eNumber2);
+				MailVO vo = new MailVO(mNumber, mTitle, mContent, mFile, mCc, mRegdate, mBoard, eNumber, eNumber2);
+				/*
+				 * MailVO vo = new MailVO(); vo.setMNumber(mNumber); vo.setMTitle(mTitle);
+				 * vo.setMContent(mContent); vo.setMFile(mFile); vo.setMCc(mCc);
+				 * vo.setMRegdate(mRegdate); vo.setMBoard(mBoard); vo.setENumber(eNumber);
+				 * vo.setENumber(eNumber2);
+				 */		
 				
 				list.add(vo);
 			}
