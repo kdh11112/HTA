@@ -64,7 +64,7 @@ $(document).ready(function() {
 	                calendar.render(); // 달력 다시 렌더링
 	            }
 	        });
-		}else if(selectedValue =="개인"){
+		}else if(selectedValue == "개인"){
 			$.ajax({
 	            url: "load_schedule.jsp",
 	            success: function(response) {
@@ -80,7 +80,7 @@ $(document).ready(function() {
 </script>
 
 <select name="schedule_Type" id="select">
-   <option value="전체" id="personal_schedule">전체일정</option>
+   <option value="전체" id="">전체일정</option>
    <option value="개인" id="personal_schedule">개인일정</option>
    <option value="부서" id="department_schedule">부서일정</option>
    <option value="회사" id="company_schedule">회사일정</option>

@@ -7,14 +7,14 @@
 <%
 
 	Object obj = session.getAttribute("vo");
-	int eNumber = 0;
-	
+	String dName = null;
 	if(obj != null){
 		EmployeeVO vo = (EmployeeVO)obj;
-		eNumber = vo.geteNumber();
+		dName = vo.getdName();
 		String sType = request.getParameter("schedule_Type");
 	    ScheduleDAO dao = new ScheduleDAO();
-	    ArrayList<ScheduleVO> list = dao.departmentLoadSchedule(eNumber,sType);
+	    ArrayList<ScheduleVO> list = dao.departmentLoadSchedule(dName);
+	    out.println(dName);
 	    %>
 
 	    [<% for (int i = 0; i < list.size(); i++) { %>
