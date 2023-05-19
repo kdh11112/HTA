@@ -79,7 +79,7 @@
     	} 
     	
     	String pageNum = request.getParameter("pageNum");
-    	
+
     	if(pageNum != null){
     		int no = Integer.parseInt(pageNum);
     		
@@ -93,12 +93,17 @@
     	
     	if(vo != null){
     		
-
+    		System.out.println(no+"asdas");
     	
     	
     
     %>
     	<script type="text/javascript">
+    	function approvalButton(){
+
+    		console.log("asdsa");
+    		
+    	}
 			$(function(){
 				$("#stamp1").append("<img src='../img/stamp/e_" + <%=num%> + ".png' />");
 			})
@@ -107,7 +112,7 @@
         <div id="layoutSidenav"> 
         	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
            	 	<div id="layoutSidenav_content">
-            		<form action="approvalFormOk.jsp" method="get">
+            		<form action="approvalListWaitReadForm.jsp" method="get">
 		            	<main>
 		                    <div class="container-fluid px-4">
 		                        <h1 class="mt-4">전자결재 작성</h1>
@@ -118,6 +123,7 @@
 									                <th>기안담당 : <%=vo.getaName() %></th>
 									                <th>기안부서 : <%=dname %></th>
 									                <th>기안일자 : <%=vo.getaStartDate() %></th>
+									                <th>남바<%=vo.getaNumber() %></th>
 									            </tr> 
 									        </table>
 									    </div>
@@ -126,7 +132,8 @@
 										        <td rowspan="4">결재</td>
 										    </tr>
 									        <tr>
-									        	<input type="hidden" name="pageNum" value="<%=vo.getaNumber() %>"/>
+									        	<input type="hidden" name="pageNum" value="<%=no %>"/>
+									        	
 									            <th><%=position %></th>
 									            <!-- <th class="position2" id="data-placeholder2"></th> -->
 									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" value="<%=of1st %>"  readonly></th>
@@ -156,7 +163,8 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<input class="btn btn-info" type="submit" value="결재" />
+												<input class="btn btn-info" type="submit" value="결재서브밋" />
+												<input class="btn btn-info" type="button" value="결재버튼" onclick="approvalButton();"/>
 											</td>
 										</tr>
 		                            </table>

@@ -104,18 +104,14 @@ public class ApprovalDAO {
 //	}
 	
 	public ArrayList<ApprovalVO> selectAll(int i, int j, int k){
-//	public ArrayList<ApprovalVO> selectAll(int i, int j, int k,String s,String x){
 		ArrayList<ApprovalVO> list = new ArrayList<>();
 		sb.setLength(0);
 		sb.append("SELECT * FROM (SELECT ROWNUM AS RNUM, A_NUMBER,A_TITLE,A_NAME,A_START_DATE,A_STATUS,E_NUMBER FROM (SELECT * from APPROVAL ORDER BY A_NUMBER DESC) WHERE ROWNUM <=? ) WHERE RNUM >= ?  AND E_NUMBER = ?");
-//		sb.append("SELECT * FROM (SELECT * FROM (SELECT ROWNUM AS RNUM, A_NUMBER,A_TITLE,A_NAME,A_START_DATE,A_STATUS,E_NUMBER,A_NAME_1ST,A_NAME_2ND FROM (SELECT * from APPROVAL ORDER BY A_NUMBER DESC) WHERE ROWNUM <=?) WHERE RNUM >= ?  AND E_NUMBER = ?) WHERE A_NAME_1ST = ? OR A_NAME_2ND = ?");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, j);
 			pstmt.setInt(2, i);
 			pstmt.setInt(3, k);
-//			pstmt.setString(4, s);
-//			pstmt.setString(5, x);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int aNumber = rs.getInt("A_NUMBER");
@@ -131,8 +127,6 @@ public class ApprovalDAO {
 				vo.setaStartDate(aStartDate);
 				vo.setaStatus(aStatus);
 				vo.seteNumber(eNumber);
-//				vo.setaName1st(s);
-//				vo.setaName2nd(x);
 				
 				list.add(vo);
 			}
@@ -143,6 +137,92 @@ public class ApprovalDAO {
 		
 		return list;
 	}
+	
+	public ArrayList<ApprovalVO> selectAll(int i, String s){
+		ArrayList<ApprovalVO> list = new ArrayList<>();
+		sb.setLength(0);
+		sb.append("SELECT a.A_NUMBER, a.A_TITLE, a.A_NAME, a.A_START_DATE, a.A_STATUS, e.E_NUMBER en, a.A_NAME_1ST, e.E_OFFICIAL_RESPONSIBILITIES AS ee, e2.E_NUMBER AS en2, a.A_NAME_2ND, e2.E_OFFICIAL_RESPONSIBILITIES ee2 FROM APPROVAL a LEFT JOIN EMPLOYEE e ON a.A_NAME_1ST = e.E_NAME LEFT JOIN EMPLOYEE e2  ON a.A_NAME_2ND = e2.E_NAME ");
+		if(s.equals("과장")) {			
+			sb.append("WHERE e.E_NUMBER = ? AND a.A_STATUS ='1차결재 대기중' ");
+		}else if(s.equals("차장")) {
+			sb.append("WHERE e2.E_NUMBER = ? AND a.A_STATUS ='2차결재 대기중' ");
+		}else {
+			sb.append("WHERE e2.E_NUMBER = ? ");
+		}
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, i);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int aNumber = rs.getInt("A_NUMBER");
+				String aTitle = rs.getString("A_TITLE");
+				String aName = rs.getString("A_NAME");
+				Date aStartDate = rs.getDate("A_START_DATE");
+				String aStatus = rs.getString("A_STATUS");
+				int eNumber1 = rs.getInt("en");
+				String aName1 = rs.getString("A_NAME_1ST");
+				String eEO1 = rs.getString("ee");
+				int eNumber2 = rs.getInt("en2");
+				String aName2 = rs.getString("A_NAME_2ND");
+				String eEO2 = rs.getString("ee2");
+				ApprovalVO vo = new ApprovalVO();
+				vo.setaNumber(aNumber);
+				vo.setaTitle(aTitle);
+				vo.setaName(aName);
+				vo.setaStartDate(aStartDate);
+				vo.setaStatus(aStatus);
+				vo.seteENumber1(i);
+				vo.seteEname1(aName1);
+				vo.seteEof1(eEO1);
+				
+				list.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+//	public ArrayList<ApprovalVO> selectAll(int i, int j, int k ){
+//		ArrayList<ApprovalVO> list = new ArrayList<>();
+//		sb.setLength(0);
+//		sb.append("SELECT * FROM(SELECT ROWNUM AS RNUM, a.A_NUMBER, a.A_TITLE, a.A_NAME, a.A_START_DATE, a.A_STATUS, en, a.A_NAME_1ST, ee, en2,a.A_NAME_2ND, ee2 ");
+//		sb.append("FROM (SELECT a.A_NUMBER, a.A_TITLE, a.A_NAME, a.A_START_DATE, a.A_STATUS, e.E_NUMBER en, a.A_NAME_1ST, e.E_OFFICIAL_RESPONSIBILITIES AS ee, e2.E_NUMBER AS en2, a.A_NAME_2ND, e2.E_OFFICIAL_RESPONSIBILITIES ee2 ");
+//		sb.append("FROM APPROVAL a LEFT JOIN EMPLOYEE e ON a.A_NAME_1ST = e.E_NAME LEFT JOIN EMPLOYEE e2 ON a.A_NAME_2ND = e2.E_NAME WHERE a.E_NUMBER = 1 AND e.E_NUMBER = 7 AND e2.E_NUMBER = 14 ORDER BY A_NUMBER DESC) a WHERE ROWNUM <=?) WHERE RNUM >=? ");
+//		try {
+//			pstmt = conn.prepareStatement(sb.toString());
+//			pstmt.setInt(1, j);
+//			pstmt.setInt(2, i);
+//			pstmt.setInt(3, k);
+//			pstmt.setInt(1, j);
+//			pstmt.setInt(2, i);
+//			rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//				int aNumber = rs.getInt("A_NUMBER");
+//				String aTitle = rs.getString("A_TITLE");
+//				String aName = rs.getString("A_NAME");
+//				Date aStartDate = rs.getDate("A_START_DATE");
+//				String aStatus = rs.getString("A_STATUS");
+//				int eNumber = rs.getInt("E_NUMBER");
+//				ApprovalVO vo = new ApprovalVO();
+//				vo.setaNumber(aNumber);
+//				vo.setaTitle(aTitle);
+//				vo.setaName(aName);
+//				vo.setaStartDate(aStartDate);
+//				vo.setaStatus(aStatus);
+//				vo.seteNumber(eNumber);
+//				
+//				list.add(vo);
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return list;
+//	}
 	
 	public ApprovalVO selectOne(int i) {
 	    sb.setLength(0);
@@ -193,7 +273,7 @@ public class ApprovalDAO {
 	
 	public void addOne(ApprovalVO vo,EmployeeVO vo2) {
 		sb.setLength(0);
-		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,'대기중',null,?)");
+		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,'1차결재 대기중',null,?)");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -211,6 +291,29 @@ public class ApprovalDAO {
 		}
 		
 	
+	}
+	
+	public void updateOne(ApprovalVO vo,EmployeeVO s) {
+		sb.setLength(0);
+		System.out.println(vo.getaNumber());
+		sb.append("UPDATE APPROVAL SET ");
+		if(s.geteOfficialResponsibilities().equals("과장")) {
+			sb.append("A_STATUS = '2차결재 대기중' WHERE A_NUMBER = ?");
+		}else if(s.geteOfficialResponsibilities().equals("차장") || s.geteOfficialResponsibilities().equals("부사장")) {
+			sb.append("A_STATUS = '결재완료' WHERE A_NUMBER = ?");
+		}else {
+			sb.append("WHERE A_NUMBER = ?");
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, vo.getaNumber());
+			
+			pstmt.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

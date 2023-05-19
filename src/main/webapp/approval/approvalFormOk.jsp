@@ -4,9 +4,6 @@
 <%@page import="dao.ApprovalDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%! String Formdata1 = null; 
-	String Formdata2 = null;
-%>
 <%
 	//approvalForm
 	String data1 = request.getParameter("data-placeholder1");
@@ -16,7 +13,6 @@
 	String contents = request.getParameter("contents");
 	String title = request.getParameter("title");
 
-	Formdata1 = data2;
 	
 	if(data3 == null || data3.equals("")||data1 == null || data1.equals("")||contents == null || contents.equals("")){
 		response.sendRedirect("approvalForm.jsp");
