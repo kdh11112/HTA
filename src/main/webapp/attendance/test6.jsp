@@ -459,7 +459,7 @@ if (obj != null) {
 																			data-pattern="priority-columns" >
 																			<div class="sticky-table-header"
 																				style="visibility: hidden; width: auto; top: -4.40625px;">
-																				<table
+																				<!-- <table
 																					class="table table-nowrap align-middle table-hover mb-0"
 																					id="id3c6e7ddbeb24f-clone">
 																					<tbody>
@@ -692,7 +692,7 @@ if (obj != null) {
 																							</td>
 																						</tr>
 																					</tbody>
-																				</table>
+																				</table> -->
 																			</div>
 																			<table
 																				class="table table-nowrap align-middle table-hover mb-0"
@@ -1129,7 +1129,7 @@ if (obj != null) {
 				<!-- Modal 끝 -->
 
 			</main>
-			<footer class="py-4 bg-light mt-auto"><%@ include
+			<footer class="py-4 bg-light mt-auto" style="bottom:0;"><%@ include
 					file="../menu/footer.jsp"%></footer>
 		</div>
 	</div>
