@@ -1,270 +1,295 @@
-<%@page import="java.time.LocalDateTime"%>
-<%@page import="vo.EmployeeVO"%>
-<%@page import="dao.AttendenceDAO"%>
-<%@page import="vo.AttendenceVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%@ page import = "java.util.Calendar" %>
 <!DOCTYPE html>
 <html>
 <head>
- 
-<script src="assets/libs/jquery/jquery.min.js"></script>
-<meta charset='utf-8' />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<link href='../css/main.css' rel='stylesheet' />
-<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-<link href="../css/styles.css" rel="stylesheet" />
-<link rel="shortcut icon" href="#">
-<script src='../js/main.js'></script>
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-<title>근태관리</title>
-
-<link rel="stylesheet" href="../attendance/main.css" />
-
-<style>
-
-
-</style>
-
-<!-- 스크립트 부분 -->
-
 
 <%
-
-String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
-
+   String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 %>
 
+ 
 <script src="assets/libs/jquery/jquery.min.js"></script>
 
 <script>
+
 function times() {
 var onul = new Date();     /* 로컬컴퓨터에 설정된 표준시간대를 기준으로 한 현재 시간을 추출 */
 
 
- var dd=["Sun","Mon","Tues","Wednes","Thurs","Fri","Satur"];
+    var dd=["Sun","Mon","Tues","Wednes","Thurs","Fri","Satur"];
 
- var y = onul.getFullYear(); //년
+    var y = onul.getFullYear(); //년
+    
+    var m2 = onul.getMonth() +1 ; //월
+    
+    var d2 = onul.getDate();  //일
+    
+    var d=onul.getDay();     /*현재 '요일'을 숫자로 추출 */
+
+    var week = new Array('(일) ', '(월) ', '(화) ', '(수) ', '(목) ', '(금) ', '(토) ');
  
- var m2 = onul.getMonth() +1 ; //월
- 
- var d2 = onul.getDate();  //일
- 
- var d=onul.getDay();     /*현재 '요일'을 숫자로 추출 */
+    var d3 = week[d];
+    
+    var h=onul.getHours();  /*현재 '시'를 숫자로 추출 */
 
- var week = new Array('(일) ', '(월) ', '(화) ', '(수) ', '(목) ', '(금) ', '(토) ');
+    var m=onul.getMinutes();   /*현재 '분'을 숫자로 추출 */
 
- var d3 = week[d];
- 
- var h=onul.getHours();  /*현재 '시'를 숫자로 추출 */
+    var s=onul.getSeconds();     /*현재 '초'를 숫자로 추출 */
 
- var m=onul.getMinutes();   /*현재 '분'을 숫자로 추출 */
+    m = dasi(m);
 
- var s=onul.getSeconds();     /*현재 '초'를 숫자로 추출 */
+    s = dasi(s);
 
- m = dasi(m);
-
- s = dasi(s);
-
- document.getElementById('times').innerHTML = y+"년 " + m2 +"월 "+ d2+"일 "+ d3 +h+":"+m+":"+s;
- document.getElementById('timesm').innerHTML = "🕘근태관리 | "+ m2 +"월"
-
- var t = setTimeout(function(){times()},1000);    /* 1초마다 갱신(refresh)  */
+    document.getElementById('times').innerHTML = y+"년 " + m2 +"월 "+ d2+"일 "+ d3 +h+":"+m+":"+s;
+    document.getElementById('timesm').innerHTML = "🕘근태관리 | "+ m2 +"월"
+   
+    var t = setTimeout(function(){times()},1000);    /* 1초마다 갱신(refresh)  */
 
 }
 
-/*dasi(분,초)에서 숫자를 가져와서 만약 그 수가 10보다 작다면 앞에 "0"을 추가 함 */
+ /*dasi(분,초)에서 숫자를 가져와서 만약 그 수가 10보다 작다면 앞에 "0"을 추가 함 */
 
 function dasi(i) {
 
- if (i<10) {i = "0" + i};
+    if (i<10) {i = "0" + i};
 
- return i;
+    return i;
 
 }
-
+ 
 $(function(){
-	$("#startTime").on("click",function(){
-		
-		$.ajax({
-			type:"post",
-			url:"startTime.jsp"
-			data:{
-				id:eNumber
-			},
-			success:function(data){
-				console.log(data.trim());
-				
-			}
-		});
-		$.ajax({//db에서 출근 시간 가져오기
-			type:"get",
-			url :"getStartTime.jsp",
-			dataType:"html",
-			data:{
-				id:eNumber
-			},
-			success:function(response,status,request){
-				console.log("성공");
-				console.log(response);
-			$("#startHour").html(response.trim())
-			}
-		});
-
-		} else {
-		// endtime.jsp?id=141
+	
+	  // 출근 버튼 클릭시 
+		$("#in").on("click", function(){
+			
+			    
+			//수정 전송
 			$.ajax({
-				url : "endTime.jsp",
-				data:{
-					id:eNumber
-				},
-				success : function(data) {
-					console.log(data.trim());//공백제거
-					var data2 = data.trim();
+			    type: "POST",
+			    url : "/att/attin",
+			    contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			    dataType : "json",
+			    success : function(data){
+			    	console.log("data뭐노?" + data);
+			    	// 성공시 return값 String으로 받아오기 때문에 int로 바꿔주세요옹
+			    	var res = parseInt(data);
+			    	
+			        if(res > 0){
+			        // Sweet Alert
+			          Swal.fire({
+				          icon:'success',
+				          title:'출근완료',
+			       		}).then(function(){
+			       			window.location.reload();
+			       			$('#wcheck').val('wing').prop("selected",true);
+			       		})
+			        }else{
+			        	// Sweet Alert
+				          Swal.fire({
+					          icon:'warning',
+					          title:'이미 처리됨',
+				       		}).then(function(){
+				       			window.location.reload();
+				       		})
+			        }
 					
-				}
+			        
+			    },
+			    error : function(){
+			        //Ajax 실패시
+			    	Swal.fire({
+				          icon:'error',
+				          title:'주말미처리',
+			       		}, function(){
+			       			//새로고침
+			       			window.location.reload();
+			       			});
+			    }
 			});
 		
 			
-			$.ajax({//db에서 퇴근 시간 가져오기
-				type:"get",
-				url :"getEndTime.jsp",
-				dataType:"html",
-				data:{
-					id:eNumber
-				},
-				success:function(response,status,request){
-					console.log("성공");
-					console.log(response);
-				$("#quitHour").html(response.trim())
-				}
+		});
+	  
+		 // 퇴근 버튼 클릭시 
+		$("#out").on("click", function(){
+			
+			//수정 전송
+			$.ajax({
+			    type: "POST",
+			    url : "/att/attout",
+			    contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			    dataType : "json",
+			    success : function(data){
+			    	console.log("data뭐노?" + data);
+			    	// 성공시 return값 String으로 받아오기 때문에 int로 바꿔주세요옹
+			    	var res = parseInt(data);
+			    	
+			        if(res == 1){
+			        // Sweet Alert
+			          Swal.fire({
+				          icon:'success',
+				          title:'퇴근완료',
+			       		}).then(function(){
+			       			window.location.reload();
+			       			$('#wcheck').val('wend').prop("selected",true);
+			       		})
+			        }else if(res == 3){
+			        	// Sweet Alert
+				          Swal.fire({
+					          icon:'warning',
+					          title:'이미 처리됨',
+				       		}).then(function(){
+				       			window.location.reload();
+				       		})
+			        }else if(res == 2){
+			        	// Sweet Alert
+				          Swal.fire({
+					          icon:'error',
+					          title:'출근 미처리됨',
+				       		}).then(function(){
+				       			window.location.reload();
+				       		})
+			        }else{
+			        	"에러";
+			        }
+					
+			        
+			    },
+			    error : function(){
+			        //Ajax 실패시
+			    	Swal.fire({
+				          icon:'error',
+				          title:'주말미처리됨',
+			       		}, function(){
+			       			//새로고침
+			       			window.location.reload();
+			       			});
+			    }
 			});
-		}
-		//시간정보 넘기기 끝
 		
-	})
-})
+			
+		});
 
-var currentDay = new Date();  
-var theYear = currentDay.getFullYear();
-var theMonth = currentDay.getMonth();
-var theDate  = currentDay.getDate();
-var theDayOfWeek = currentDay.getDay();
- 
-var thisWeek = [];
 
-for(var i=0; i<7; i++) {
-	  var resultDay = new Date(theYear, theMonth, theDate + (i - theDayOfWeek));
-	 // var yyyy = resultDay.getFullYear();
-	  var mm = Number(resultDay.getMonth()) + 1;
-	  var dd = resultDay.getDate();
-	  var ddd = resultDay.getDay();
-	  
-	  console.log("theDate: "+ theDate); 
-	  mm = String(mm).length === 1 ? '0' + mm : mm;
-	  dd = String(dd).length === 1 ? '0' + dd : dd;
-	  
-	  if(ddd==1){
-		  ddd='(월)';
-	  }else if(ddd==2){
-		  ddd='(화)'
-	  }else if(ddd==3){
-		  ddd='(수)'
-	  }else if(ddd==4){
-		  ddd='(목)'
-	  }else if(ddd==5){
-		  ddd='(금)'
-	  }else if(ddd==6){
-		  ddd='(토)'
-	  }else if(ddd==0){
-		  ddd='(일)'
-	  }
-	 
-	  thisWeek[i] = mm + '월' + dd+ '일'+ ddd;
-	 
-	}
+		var currentDay = new Date();  
+		var theYear = currentDay.getFullYear();
+		var theMonth = currentDay.getMonth();
+		var theDate  = currentDay.getDate();
+		var theDayOfWeek = currentDay.getDay();
+		 
+		var thisWeek = [];
 
-document.getElementById('week1').innerHTML = thisWeek[1];
-var date1 = thisWeek[1].substr(3, 2);
-console.log("date1  : "+ date1);
+		for(var i=0; i<7; i++) {
+			  var resultDay = new Date(theYear, theMonth, theDate + (i - theDayOfWeek));
+			 // var yyyy = resultDay.getFullYear();
+			  var mm = Number(resultDay.getMonth()) + 1;
+			  var dd = resultDay.getDate();
+			  var ddd = resultDay.getDay();
+			  
+			  console.log("theDate: "+ theDate); 
+			  mm = String(mm).length === 1 ? '0' + mm : mm;
+			  dd = String(dd).length === 1 ? '0' + dd : dd;
+			  
+			  if(ddd==1){
+				  ddd='(월)';
+			  }else if(ddd==2){
+				  ddd='(화)'
+			  }else if(ddd==3){
+				  ddd='(수)'
+			  }else if(ddd==4){
+				  ddd='(목)'
+			  }else if(ddd==5){
+				  ddd='(금)'
+			  }else if(ddd==6){
+				  ddd='(토)'
+			  }else if(ddd==0){
+				  ddd='(일)'
+			  }
+			 
+			  thisWeek[i] = mm + '월' + dd+ '일'+ ddd;
+			 
+			}
+		
+		document.getElementById('week1').innerHTML = thisWeek[1];
+		var date1 = thisWeek[1].substr(3, 2);
+		console.log("date1  : "+ date1);
+		
+		if(theDate == date1){
+			$('#today1').show();
+		}else{
+			$('#today1').hide();
+		}
+		document.getElementById('week2').innerHTML = thisWeek[2];
+		var date2 = thisWeek[2].substr(3, 2);
+		console.log("date2  : "+ date2);
+		
+		if(theDate == date2){
+			$('#today2').show();
+		}else{
+			$('#today2').hide();
+		}
+		document.getElementById('week3').innerHTML = thisWeek[3];
+		var date3 = thisWeek[3].substr(3, 2);
+		console.log("date3  : "+ date3);
+		
+		if(theDate == date3){
+			$('#today3').show();
+		}else{
+			$('#today3').hide();
+		}
+		document.getElementById('week4').innerHTML = thisWeek[4];
+		var date4 = thisWeek[4].substr(3, 2);
+		console.log("date4  : "+ date4);
+		
+		if(theDate == date4){
+			$('#today4').show();
+		}else{
+			$('#today4').hide();
+		}
+		document.getElementById('week5').innerHTML = thisWeek[5];
+		var date5 = thisWeek[5].substr(3, 2);
+		console.log("date5  : "+ date5);
+		
+		if(theDate == date5){
+			$('#today5').show();
+		}else{
+			$('#today5').hide();
+		}
+		document.getElementById('week6').innerHTML = thisWeek[6];
+		var date6 = thisWeek[6].substr(3, 2);
+		console.log("date6  : "+ date6);
+		
+		if(theDate == date6){
+			$('#today6').show();
+		}else{
+			$('#today6').hide();
+		}
+		document.getElementById('week0').innerHTML = thisWeek[0];
+		var date0 = thisWeek[0].substr(3, 2);
+		console.log("date0  : "+ date0);
+		
+		if(theDate == date0){
+			$('#today0').show();
+		}else{
+			$('#today0').hide();
+		}
+		console.log(thisWeek[0]);
+		
+});
 
-if(theDate == date1){
-	$('#today1').show();
-}else{
-	$('#today1').hide();
-}
-document.getElementById('week2').innerHTML = thisWeek[2];
-var date2 = thisWeek[2].substr(3, 2);
-console.log("date2  : "+ date2);
-
-if(theDate == date2){
-	$('#today2').show();
-}else{
-	$('#today2').hide();
-}
-document.getElementById('week3').innerHTML = thisWeek[3];
-var date3 = thisWeek[3].substr(3, 2);
-console.log("date3  : "+ date3);
-
-if(theDate == date3){
-	$('#today3').show();
-}else{
-	$('#today3').hide();
-}
-document.getElementById('week4').innerHTML = thisWeek[4];
-var date4 = thisWeek[4].substr(3, 2);
-console.log("date4  : "+ date4);
-
-if(theDate == date4){
-	$('#today4').show();
-}else{
-	$('#today4').hide();
-}
-document.getElementById('week5').innerHTML = thisWeek[5];
-var date5 = thisWeek[5].substr(3, 2);
-console.log("date5  : "+ date5);
-
-if(theDate == date5){
-	$('#today5').show();
-}else{
-	$('#today5').hide();
-}
-document.getElementById('week6').innerHTML = thisWeek[6];
-var date6 = thisWeek[6].substr(3, 2);
-console.log("date6  : "+ date6);
-
-if(theDate == date6){
-	$('#today6').show();
-}else{
-	$('#today6').hide();
-}
-document.getElementById('week0').innerHTML = thisWeek[0];
-var date0 = thisWeek[0].substr(3, 2);
-console.log("date0  : "+ date0);
-
-if(theDate == date0){
-	$('#today0').show();
-}else{
-	$('#today0').hide();
-}
-console.log(thisWeek[0]);
 </script>
-<!-- 스크립트 부분 -->
+<style>
+.se{
+width: 40%;
+display: inline-block;
+margin-top: 10px;
+}
+
+</style>
 </head>
-
-
 <body onload="times()">
-
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include
-			file="../menu/navi.jsp"%></nav>
-	<div id="layoutSidenav">
-		<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp"%></div>
-		<div id="layoutSidenav_content">
-			<main>
 <div class="row">
      <div class="col-12">
          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -291,13 +316,13 @@ console.log(thisWeek[0]);
                             <div class="col-lg-4">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
-                                        <img src="../images/after.PNG" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                        <img src="${empVO.empImg}" alt="" class="avatar-md rounded-circle img-thumbnail">
                                     </div>
                                     <div class="flex-grow-1 align-self-center">
                                         <div class="text-muted">
                                             <p class="mb-2" id="times"></p>
-                                            <h5 class="mb-1"><%-- ${empVO.empNm} --%>김사원&nbsp;<%-- ${empVO.lelopt} --%>사원직급</h5>
-                                            <p class="mb-0"><%-- ${empVO.dptopt} --%>개발팀바꿔야댕</p>
+                                            <h5 class="mb-1">${empVO.empNm}&nbsp;${empVO.lelopt}</h5>
+                                            <p class="mb-0">${empVO.opt} / ${empVO.dptopt}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -332,7 +357,8 @@ console.log(thisWeek[0]);
             </div>
         </div>
         <!-- end row -->
- <div class="row">
+
+        <div class="row">
           
             
             <div class="col-xl-18">
@@ -348,7 +374,7 @@ console.log(thisWeek[0]);
                                     </div>
                                     <h5 class="font-size-16 mb-0">이번달 근무시간</h5>
                                 </div>
-                               	<h5 class="font-size-15"><%-- ${worksttsVO.sumtm} --%>시간<span class="float-end"><!-- 61% --></span></h5>
+                               	<h5 class="font-size-15">${worksttsVO.sumtm}시간<span class="float-end">61%</span></h5>
                                                         <div class="progress animated-progess progress-md">
                                                             <div class="progress-bar" role="progressbar" style="width: 61%" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
@@ -926,15 +952,6 @@ console.log(thisWeek[0]);
         
     </div>
 </div>
-<!-- Modal 끝 -->    				
-				
-			</main>
-			<footer class="py-4 bg-light mt-auto"><%@ include
-					file="../menu/footer.jsp"%></footer>
-		</div>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-	<script src="../js/scripts.js"></script>
-	<!-- 사이드바 열고 닫기 -->
+<!-- Modal 끝 -->    
 </body>
 </html>
