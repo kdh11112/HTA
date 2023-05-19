@@ -174,5 +174,24 @@ public class AttendenceDAO {
 
 		return vo;
 	}
+	
+	
+	public void lateTime(int id) {
+		sb.setLength(0);
+		sb.append("update attendance set attendance_status = '지각' WHERE office_going_hour > trunc(office_going_hour,'DD')+9/24 and to_char(office_going_hour,'YYYY/MM/DD') = to_char(sysdate,'YYYY/MM/DD') and e_number = ?;");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			
+			pstmt.setInt(1, id);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}// endTimeAddOne end
 
 }
+
+
