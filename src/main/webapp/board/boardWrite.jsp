@@ -14,16 +14,14 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
 		<link rel="shortcut icon" href="#">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script src="../js/summernote/summernote-lite.js"></script>
+		<script src="../js/summernote/lang/summernote-ko-KR.js"></script>
+		<link rel="stylesheet" href="../css/summernote/summernote-lite.css">
 		<title>게시글</title>
-		<link rel="stylesheet" href="../css/board.css">
 		<style type="text/css">
-/* 			a, a:hover {
-				color: #000000;
-				text-decoration: none;
-			} */
+
 			td {
 	        	text-align: left !important;
 	   		} 
@@ -77,11 +75,11 @@
                </tr>
                <tr>
                    <th>내용</th>
-                   <td><textarea class="summernote" name="content" cols="100" rows="15" ></textarea></td>
+                   <td><textarea class="summernote" name="content"  ></textarea></td>
                </tr>
            </table>
            <input name="btn" type="submit" class="btn btn-secondary" value="등록">
-           <input name="btn" type="reset" class="btn btn-secondary" value="다시작성하기">
+           <input name="btn" type="reset" class="btn btn-secondary" value="다시작성하기" onclick=reset();>
            <a href="boardList.jsp">
            <input name="btn" type="button" class="btn btn-secondary" value="취소" ></a>
 		</form>
@@ -91,21 +89,39 @@
 		<footer class="py-4 bg-light mt-auto"><%@ include file="../menu/footer.jsp" %></footer>
 		</div>
         </div>
-        <!--  애니메이션 담당 JQUERY -->
-		<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 		<!--  부트스트랩 JS -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
        	<script src="../js/scripts.js"></script><!-- 사이드바 열고 닫기 -->
-       	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-
+      
        	<script>
-	       /* 	jQuery.noConflict();
-	       	jQuery(document).ready(function($) {
-	       	   $(".summernote").summernote({
-	       	      height: 150,
-	       	      lang: "ko-KR"
-	       	   });
-	       	}); */
+       		$(function(){
+       			$("input[value='다시작성하기']").on("click", function(){
+       				$('#title').val('');
+       				$('#file').val('');
+       				$('.summernote').val('');
+       			})
+       		})
+       	
+	       	$('.summernote').summernote({
+	       		disableDragAndDrop: true,
+				height: 300,                 // 에디터 높이
+				minHeight: null,             // 최소 높이
+				maxHeight: null,             // 최대 높이
+				focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+				// 한글 설정
+				placeholder: '내용을 입력하세요',	//placeholder 설정
+				toolbar: [
+				   ['fontname', ['fontname']],
+				   ['fontsize', ['fontsize']],
+				   ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+				   ['color', ['forecolor','color']],
+				   ['para', ['ul', 'ol', 'paragraph']],
+				   ['height', ['height']]
+				 ],
+				 fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+				 fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+						})	
        	</script>
         	
 </body>

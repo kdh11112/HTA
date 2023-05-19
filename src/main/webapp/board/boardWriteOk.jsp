@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 
 <%
+	request.setCharacterEncoding("UTF-8");
 	//파라미터값 가져오기
 	String title = request.getParameter("title");
 	String ename = request.getParameter("ename");
