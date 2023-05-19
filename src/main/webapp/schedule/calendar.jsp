@@ -15,9 +15,10 @@
    }
 </style>
 <script>
+var calendar;
 $(document).ready(function() {
      var calendarEl = document.getElementById('calendar');
-     var calendar = new FullCalendar.Calendar(calendarEl, {
+     calendar = new FullCalendar.Calendar(calendarEl, {
        //... 이전 코드 ...
 
        dateClick: function(info) {
@@ -45,18 +46,42 @@ $(document).ready(function() {
        var windowObject = window.open("flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
        windowObject.focus();
      }
-   });
-	$(document).ready(function() {
-		  $('#select').change(function() {
-		    var selectedValue = $(this).val(); // 선택된 일정 유형의 값을 가져옴
-		    // 가져온 값으로 원하는 동작 수행
-		    console.log(selectedValue);
-		  });
-		});
+});
+   
+$(document).ready(function() {
+    $("#select").change(function() {
+        var selectedValue = $(this).val(); // 선택된 일정 유형의 값을 가져옴
+        // 가져온 값으로 원하는 동작 수행
+		if(selectedValue == "부서"){
+	        $.ajax({
+	            url: "department_load_schedule.jsp",
+	            data : {
+	            	schedule_Type: selectedValue
+	            },
+	            success: function(response) {
+	                var data = JSON.parse(response);
+	                console.log(response);
+	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
+	                calendar.render(); // 달력 다시 렌더링
+	            }
+	        });
+		}else if(selectedValue =="개인"){
+			$.ajax({
+	            url: "load_schedule.jsp",
+	            success: function(response) {
+	                var data = JSON.parse(response);
+	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
+	                calendar.render(); // 달력 다시 렌더링
+	            }
+	        });
+		}
+    });
+});
 
 </script>
 
-<select name="일정유형" id="select">
+<select name="schedule_Type" id="select">
+   <option value="전체" id="personal_schedule">전체일정</option>
    <option value="개인" id="personal_schedule">개인일정</option>
    <option value="부서" id="department_schedule">부서일정</option>
    <option value="회사" id="company_schedule">회사일정</option>

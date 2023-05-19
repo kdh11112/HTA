@@ -12,9 +12,8 @@
 	if(obj != null){
 		EmployeeVO vo = (EmployeeVO)obj;
 		eNumber = vo.geteNumber();
-		String sType = request.getParameter("schedule_Type");
 	    ScheduleDAO dao = new ScheduleDAO();
-	    ArrayList<ScheduleVO> list = dao.departmentLoadSchedule(eNumber,sType);
+	    ArrayList<ScheduleVO> list = dao.selectAll(eNumber);
 	    %>
 
 	    [<% for (int i = 0; i < list.size(); i++) { %>
@@ -25,3 +24,4 @@
 		      }<%= (i != list.size() - 1) ? ',' : "" %>
 		<% } %>]
 	<%}%>
+>
