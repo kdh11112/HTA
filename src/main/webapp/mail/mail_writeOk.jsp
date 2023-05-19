@@ -57,7 +57,7 @@
 			   	dao.writeMail(vo);
 			   	
 			}
-			
+			 
          response.sendRedirect("mail_layOut.jsp");
  %>	
  
