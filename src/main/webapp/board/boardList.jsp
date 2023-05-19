@@ -106,7 +106,7 @@
 				%>
 					<tr>
                     <td><%=vo.getbNo() %></td>
-                    <td><%=vo.getbTitle() %></td>
+                    <td><a href="boardDetail.jsp?bno=<%=vo.getbNo()%>"><%=vo.getbTitle() %></a></td>
                     <td><%=vo.getbWriter() %></td>
                     <td><%=vo.getbView() %></td>
                     <td><%=vo.getbRegdate() %></td>
@@ -117,6 +117,15 @@
                  </tbody>
                </table>
                <a href="boardWrite.jsp" class="btn btn-primary pull-right">글쓰기</a>
+               
+               <td colspan="4">
+				<% for(int i =startPage;i<=endPage ; i++){
+					%>
+				<a href="boardList.jsp?cp=<%=i%>">[<%=i%>]</a>
+				<%
+					}
+				%>
+				</td>
        	</div>
        </div>
        	</main>
