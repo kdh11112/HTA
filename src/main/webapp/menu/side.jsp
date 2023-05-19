@@ -22,14 +22,17 @@
 	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalForm.jsp">일반결재</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">임시저장함</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalListTemporary.jsp">임시저장함</a>
 	                                </nav>
 	                                <div class="sb-sidenav-menu-heading">결재함</div>
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalList.jsp">내 문서함</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">결재완료문서</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalListWait.jsp">결재 대기함</a>
+	                                </nav>
+	                                <nav class="sb-sidenav-menu-nested nav">
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalListComplete.jsp">결재완료문서</a>
 	                                </nav>
 	                            </div>
 	                            

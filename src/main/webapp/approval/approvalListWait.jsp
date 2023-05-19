@@ -25,9 +25,11 @@
     
 		Object obj = session.getAttribute("vo");
     	int eNum = 0;
+    	String grade = null;
     	if(obj != null){
     		EmployeeVO vo = (EmployeeVO)obj;
     		eNum = vo.geteNumber();
+    		grade = vo.geteOfficialResponsibilities();
     	}
     	
     	ApprovalDAO dao = new ApprovalDAO();
@@ -64,7 +66,7 @@
             <div id="layoutSidenav_content">
             	<main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">내 문서함</h1>
+                        <h1 class="mt-4">내 결재대기함</h1>
                         <div class="card mb-4">
                             <div class="card-header">
                                 여기에 뭘 넣어볼까?
@@ -81,15 +83,14 @@
                                         </tr>
                                     </thead>
                                     <%
-                                    	/* ArrayList<ApprovalVO> list = dao.selectAll(startNo,endNo,eNum,vo2.getaName1st(),vo2.getaName2nd()); */
-                                    	ArrayList<ApprovalVO> list = dao.selectAll(startNo,endNo,eNum);
+                                    	ArrayList<ApprovalVO> list = dao.selectAll(eNum,grade);
                                     	for(ApprovalVO vo : list){
                                     		
                                     	
                                     %>
                                     	<tr style="line-height: 2;">
                                     		<td><%=vo.getaNumber() %></td>
-                                    		<td><a href="approvalRead.jsp?pageNum=<%=vo.getaNumber() %>"> <%=vo.getaTitle() %></a></td>
+                                    		<td><a href="approvalListWaitRead.jsp?pageNum=<%=vo.getaNumber() %>"> <%=vo.getaTitle() %></a></td>
                                     		<td><%=vo.getaName() %></td>
                                     		<td><%=vo.getaStartDate() %></td>
                                     		<td><%=vo.getaStatus() %></td>

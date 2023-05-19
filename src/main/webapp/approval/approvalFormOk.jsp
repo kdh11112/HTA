@@ -12,11 +12,7 @@
 	String data4 = request.getParameter("data-placeholder4");
 	String contents = request.getParameter("contents");
 	String title = request.getParameter("title");
-	
-/* 	out.println(data1);
-	out.println(data2);
-	out.println(data3);
-	out.println(data4); */
+
 	
 	if(data3 == null || data3.equals("")||data1 == null || data1.equals("")||contents == null || contents.equals("")){
 		response.sendRedirect("approvalForm.jsp");
