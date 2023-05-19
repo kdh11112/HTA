@@ -60,7 +60,6 @@ $(document).ready(function() {
 	            },
 	            success: function(response) {
 	                var data = JSON.parse(response);
-	                console.log(response);
 	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
 	                calendar.render(); // 달력 다시 렌더링
 	            }
