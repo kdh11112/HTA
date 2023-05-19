@@ -45,8 +45,10 @@ public class ScheduleDAO {
 				String sContents = rs.getString("s_contents");
 				String sStartDate = rs.getString("s_start_date");
 				String sEndDate = rs.getString("s_end_date");
-
-				ScheduleVO vo = new ScheduleVO(sNumber,sContents,sStartDate,sEndDate,eNumber);
+				String sType = rs.getString("s_type");
+				
+				
+				ScheduleVO vo = new ScheduleVO(sNumber,sContents,sStartDate,sEndDate,eNumber,sType);
 				
 				list.add(vo);
 			}	
@@ -56,9 +58,9 @@ public class ScheduleDAO {
 		return list;
 	}
 	
-	public void addSchedule(String contents, String start_date, String end_date, int eNumber ) {
+	public void addSchedule(String contents, String start_date, String end_date, int eNumber, String sType ) {
 	    sb.setLength(0);
-	    sb.append("INSERT INTO schedule VALUES(SCHEDULE_SEQ.NEXTVAL, ?,TO_date(?,'yyyy-mm-dd:hh24:mi'), TO_date(?,'yyyy-mm-dd:hh24:mi'), ?)" );
+	    sb.append("INSERT INTO schedule VALUES(SCHEDULE_SEQ.NEXTVAL, ?,TO_date(?,'yyyy-mm-dd:hh24:mi'), TO_date(?,'yyyy-mm-dd:hh24:mi'), ?, ?)" );
 	    try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
@@ -66,6 +68,7 @@ public class ScheduleDAO {
 			pstmt.setString(2, start_date);
 			pstmt.setString(3, end_date);
 			pstmt.setInt(4, eNumber );
+			pstmt.setString(5, sType );
 			
 	        pstmt.executeUpdate();
 

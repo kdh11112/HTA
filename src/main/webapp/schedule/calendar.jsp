@@ -46,13 +46,20 @@ $(document).ready(function() {
        windowObject.focus();
      }
    });
+	$(document).ready(function() {
+		  $('#select').change(function() {
+		    var selectedValue = $(this).val(); // 선택된 일정 유형의 값을 가져옴
+		    // 가져온 값으로 원하는 동작 수행
+		    console.log(selectedValue);
+		  });
+		});
 
 </script>
 
-<select name="일정선택" id="select">
-   <option value="" id="personal_schedule">개인일정</option>
-   <option value="" id="department_schedule">부서일정</option>
-   <option value="" id="company_schedule">회사일정</option>
+<select name="일정유형" id="select">
+   <option value="개인" id="personal_schedule">개인일정</option>
+   <option value="부서" id="department_schedule">부서일정</option>
+   <option value="회사" id="company_schedule">회사일정</option>
 </select>
 <main>
    <div id='calendar'></div>
