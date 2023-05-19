@@ -14,17 +14,9 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-		<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="../css/summernote/summernote-lite.css">
-		<!-- include summernote css/js -->
-		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-		<script src="../js/summernote/lang/summernote-ko-KR.js"></script>
-		
+
 		<link rel="shortcut icon" href="#">
-		<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 		<title>게시글</title>
 		<link rel="stylesheet" href="../css/board.css">
 		<style type="text/css">
@@ -41,8 +33,6 @@
 	   			padding: 0px 15px;
 	   		}
 		</style>
-		<!-- <script src ="../js/httpRequest.js"></script> -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	</head>
 	<body class="sb-nav-fixed">
 	<%
@@ -66,7 +56,7 @@
 	         	<h1 class="mt-4">게시판</h1>
 	         	<div class="card mb-4">
       			<h2>게시글 작성</h2>
-			<form action="boardWriteOk.jsp" method="post">
+			<form action="boardWriteOk.jsp" method="post" accept-charset="UTF-8">
        		<input type="hidden" value="board_write" name="command">
            	<table>
                <tr>
@@ -79,7 +69,7 @@
 					disabled은 다음 페이지로 값 전달이 안돼서 hidden 넣어서 전달해줘야 함 -->
                    <td><input type="text" name="ename" value="<%=ename %>" disabled="disabled">
                    <input type="hidden" name="ename" value="<%=ename %>" />
-                   <input type="hidden" name="enumber" value="<%=enumber %>" disabled="disabled" /></td>
+                   <input type="hidden" name="enumber" value="<%=enumber %>"/></td>
                </tr>
                <tr>
                    <th>첨부파일</th>
@@ -101,19 +91,21 @@
 		<footer class="py-4 bg-light mt-auto"><%@ include file="../menu/footer.jsp" %></footer>
 		</div>
         </div>
-        
+        <!--  애니메이션 담당 JQUERY -->
+		<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<!--  부트스트랩 JS -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
        	<script src="../js/scripts.js"></script><!-- 사이드바 열고 닫기 -->
        	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 
        	<script>
-	       	jQuery.noConflict();
+	       /* 	jQuery.noConflict();
 	       	jQuery(document).ready(function($) {
 	       	   $(".summernote").summernote({
 	       	      height: 150,
 	       	      lang: "ko-KR"
 	       	   });
-	       	});
+	       	}); */
        	</script>
         	
 </body>

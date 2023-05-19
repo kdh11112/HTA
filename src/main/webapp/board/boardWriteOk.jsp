@@ -8,8 +8,13 @@
 	String title = request.getParameter("title");
 	String ename = request.getParameter("ename");
 	String content = request.getParameter("content");
+	String enumber = request.getParameter("enumber");
+	int eNumber = 0;
+	/* out.println("writer : "+ename);
+	out.println("enumber : "+enumber); */
+	if(enumber != null)
+		eNumber = Integer.parseInt(enumber);
 	
-	out.println("writer : "+ename);
 	BoardVO vo = new BoardVO();
 	
 	//2. 이 값이 null이면 list.jsp 리다이렉트
@@ -23,7 +28,7 @@
 		vo.setbTitle(title);
 		vo.setbWriter(ename);
 		vo.setbContent(content);
-		/* vo.seteNumber(request.getRemoteAddr()); */
+		vo.seteNumber(eNumber);
 	//4. dao.addOne(vo); //db에 저장
   		dao.addOne(vo);			
 	//5. list.jsp 리다이렉트
