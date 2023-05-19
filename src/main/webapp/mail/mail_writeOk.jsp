@@ -58,7 +58,7 @@
 			   	
 			}
 			
-         response.sendRedirect("mail_list.jsp");
+         response.sendRedirect("mail_layOut.jsp");
  %>	
  
 </body>
