@@ -108,25 +108,20 @@ public class BoardDAO {
 	}//selectAll() 끝
 	
 	//게시판 글 작성
-	public void addOne(BoardVO vo, String eId) {
-		sb.setLength(0);
-		sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,?) ");
-		try {
-			pstmt = conn.prepareStatement(sb.toString());
-			
-			pstmt.setString(1, vo.getbTitle());
-			pstmt.setString(2, vo.getbContent());
-			pstmt.setString(3, vo.getbWriter());
-			pstmt.setInt(4, vo.geteNumber());	//로그인한 사원의 사원번호 전달
-
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}//addOne() 끝
-	
+	/*
+	 * public void addOne(BoardVO vo, String eId) { sb.setLength(0);
+	 * sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,?) "
+	 * ); try { pstmt = conn.prepareStatement(sb.toString());
+	 * 
+	 * pstmt.setString(1, vo.getbTitle()); pstmt.setString(2, vo.getbContent());
+	 * pstmt.setString(3, vo.getbWriter()); pstmt.setInt(4, vo.geteNumber()); //로그인한
+	 * 사원의 사원번호 전달
+	 * 
+	 * pstmt.executeUpdate();
+	 * 
+	 * } catch (SQLException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); } }//addOne() 끝
+	 */	
 	
 	 //게시판 글 작성 
 	public void addOne(BoardVO vo) { 
@@ -138,7 +133,7 @@ public class BoardDAO {
 			pstmt.setString(1, vo.getbTitle()); 
 			pstmt.setString(2, vo.getbContent());
 			pstmt.setString(3, vo.getbWriter()); 
-			pstmt.setInt(4, vo.geteNumber());
+			pstmt.setInt(4, vo.geteNumber()); //로그인한 사원의 사원번호 전달
 			
 			pstmt.executeUpdate();
 	

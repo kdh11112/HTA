@@ -39,7 +39,7 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input type="button" value="로그인" id="loginbtn" />
+									<input type="button" value="로그인" id="loginbtn"/>
 									<a href='register/newRegi.jsp'>
 									<input type="button" value="회원가입" />
 									</a>
@@ -58,9 +58,14 @@
 			<script>
 	
 			$(function(){
-				$("input[value='로그인']").on("click",checklogin);
+			    $("input[value='로그인']").on("click", checklogin);
+			    $('#log_id, #log_pw').on('keypress', function(e){
+			        if (e.keyCode === 13){
+			            $('#loginbtn').click();
+			        }
+			    });
 			});
-			
+				
 				function checklogin(){
 					var itxt = $("#log_id").val().trim();
 					var ptxt = $("#log_pw").val().trim();

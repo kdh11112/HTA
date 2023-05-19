@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<meta charset="utf-8" />
+		<meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -47,36 +47,36 @@
 	    }
 	
 	    int startNo = (currentPage - 1)*recordPerPage + 1;
-	      int endNO = currentPage*recordPerPage;
+	    int endNO = currentPage*recordPerPage;
 	      
-	      //시작페이지번호
-	      int startPage = 1;
-	      
-	      //끝페이지번호
-	      int endPage = totalPage;
-	      
-	      //시작페이지 미세조정
-	      if(currentPage <= 5){
-	         startPage = 1;
-	      }else if(currentPage >= 6){
-	         startPage = currentPage - 4;
-	      }
-	      
-	      //끝페이지 번호
-	      if(totalPage - currentPage <=5){
-	         endPage = totalPage;
-	      }else if(totalPage - currentPage > 5){
-	         if(currentPage<=5){
-	            if(totalPage >10){
-	               endPage = 10;
-	            }else{
-	               endPage = totalPage;
-	            }
-	         }else{
-	            endPage = currentPage+4;
-	         }
-	      }
-	
+		//시작페이지번호
+		int startPage = 1;
+		
+		//끝페이지번호
+		int endPage = totalPage;
+		
+		//시작페이지 미세조정
+		if(currentPage <= 5){
+		   startPage = 1;
+		}else if(currentPage >= 6){
+		   startPage = currentPage - 4;
+		}
+		
+		//끝페이지 번호
+		if(totalPage - currentPage <=5){
+		   endPage = totalPage;
+		}else if(totalPage - currentPage > 5){
+		   if(currentPage<=5){
+		      if(totalPage >10){
+		         endPage = 10;
+		      }else{
+		         endPage = totalPage;
+		      }
+		   }else{
+		      endPage = currentPage+4;
+		   }
+		}
+
 	%>
 	 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
      <div id="layoutSidenav"> 
