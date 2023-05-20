@@ -8,7 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="../js/summernote/summernote-lite.js"></script>
+<script src="../js/summernote/lang/summernote-ko-KR.js"></script>
+<script>
+  $(document).ready(function() {
+    initializeSummernote(); // Summernote 초기화 함수 호출
+  });
+
+  // Summernote 초기화 함수
+  function initializeSummernote() {
+    $('.summernote').summernote({
+      height: 450, // 서머노트 에디터 높이
+      width: 1900,
+      codemirror: {
+        theme: 'monokai' // codemirror options
+      }
+    });
+  }
+</script>
 </head>
+
 <body>
 
 <h2>임시 받은메일함</h2>

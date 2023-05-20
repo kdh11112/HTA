@@ -5,13 +5,16 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="../js/summernote/summernote-lite.js"></script>
+<script src="../js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="../css/summernote/summernote-lite.css">
 
 <script type="text/javascript">
-
 $(document).ready(function() {
 
 	$("#addrList").click(function(){
@@ -41,6 +44,8 @@ window.addEventListener("message", receiveMessageFromChild, false);
 });
 
 </script>
+
+
 
 </head>
 
@@ -111,6 +116,31 @@ window.addEventListener("message", receiveMessageFromChild, false);
 	</form>
 	
 </div>
+
+
+  <script type="text/javascript">
+  $('.summernote').summernote({
+      height: 450,
+      width: 1300,
+      codemirror: {
+        theme: 'monokai'
+      },
+      toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['picture', 'link', 'video']],
+        ['view', ['fullscreen', 'help']]
+      ],
+      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+    });
+</script>
 
 	
 
