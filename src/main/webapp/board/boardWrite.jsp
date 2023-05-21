@@ -54,7 +54,7 @@
 	         	<h1 class="mt-4">게시판</h1>
 	         	<div class="card mb-4">
       			<h2>게시글 작성</h2>
-			<form action="boardWriteOk.jsp" method="post" accept-charset="UTF-8">
+			<form action="boardWriteOk.jsp" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
        		<input type="hidden" value="board_write" name="command">
            	<table>
                <tr>

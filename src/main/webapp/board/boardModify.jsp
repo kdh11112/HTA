@@ -89,7 +89,7 @@
 			<a href="boardList.jsp">
 			<input type="button" value="목록" />
 			</a>
-			<a href="boardModify.jsp">
+			<a href="boardModifyOk.jsp">
 			<input type="submit" value="수정" />
 			</a>
 			</td>

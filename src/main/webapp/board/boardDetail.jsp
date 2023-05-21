@@ -35,16 +35,45 @@
 </head>
 <body class="sb-nav-fixed">
 <%
+	//저장된 쿠키 불러오기
+	Cookie[] cookieFromRequest = request.getCookies();
+	String cookieValue = null;
+	for(int i = 0; i<cookieFromRequest.length; i++){
+		// 요청정보로부터 쿠키를 가져온다.
+		cookieValue = cookieFromRequest[0].getValue();
+	}
+	
+	//글 목록 -> 글 상세 : 글번호
+	String bno = request.getParameter("bno");
+	
+	//쿠키 세션 입력
+	if(session.getAttribute(bno+":cookie") == null){
+		session.setAttribute(bno+":cookie", bno+":"+cookieValue);
+	}else{
+		session.setAttribute(bno+":cookie ex", session.getAttribute(bno+":cookie"));
+		if(!session.getAttribute(bno+":cookie").equals(bno+":"+cookieValue)){
+			session.setAttribute(bno+":cookie", bno+":"+cookieValue);
+		}
+	}
+	BoardVO vo = new BoardVO();
+
+	
 	//1. 전달받은 파라미터의 값 가져오기
 		String b = request.getParameter("bno");
 	//2. bno null 이 아니면
 		if(b != null){
 	//3. 숫자로 형 변환 
-			int bno = Integer.parseInt(b);
+			int bNo = Integer.parseInt(b);
 	//4. dao 객체 
 			BoardDAO dao = new BoardDAO();
 	//5. dao를 통해서 지정한 게시물 가져오기(vo): dao.selectOne(bno);
-			BoardVO vo = dao.selectOne(bno);
+			vo = dao.selectOne(bNo);
+			
+			if(!session.getAttribute(bno+":cookie").equals(session.getAttribute(bno+":cookie ex"))){
+				dao.countUpdate(vo);
+				//가시적으로 조회수 1 +해줌
+				vo.setbView(vo.getbView()+1);
+			}
 	//6. 화면에 출력(테이블 형태로 출력)
 			if(vo!=null){
 	//7. 자원반납 dao.close();
@@ -87,6 +116,7 @@
 						</td>
 					</tr>	
 				</table>
+				<input name="bno" type="hidden" value="<%= vo.getbNo() %>" />
 	<%
 	}
 		}

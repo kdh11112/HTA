@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import dao.EmployeeDAO;
 import vo.BoardVO;
 
 public class BoardDAO {
@@ -155,48 +154,35 @@ public class BoardDAO {
 	
 	}
 	
-	//게시글 조회수
-	public BoardVO getBoardOne(int b_no) {
-		BoardVO vo = null; //vo초기화
-		sb.setLength(0);
-		sb.append("SELECT * FROM board WHERE b_no = ? ");
-		
-		try {
-			pstmt= conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, b_no);
-			
-			rs= pstmt.executeQuery();
-			
-			while(rs.next()) {
-				String bTitle = rs.getString("b_title");
-				String bContent = rs.getString("b_content");
-				String bWriter = rs.getString("b_writer");
-				String bRegdate = rs.getString("b_regdate");
-				int bView = rs.getInt("b_view");
-				int eNumber = rs.getInt("e_number");
-				bView++;
-				countUpdate(bView,b_no);
-				vo = new BoardVO(b_no, bTitle, bContent, bWriter, bRegdate, bView, eNumber);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return vo;
-	}
+	/*
+	 * //게시글 조회수 public BoardVO getBoardOne(int b_no) { BoardVO vo = null; //vo초기화
+	 * sb.setLength(0); sb.append("SELECT * FROM board WHERE b_no = ? ");
+	 * 
+	 * try { pstmt= conn.prepareStatement(sb.toString()); pstmt.setInt(1, b_no);
+	 * 
+	 * rs= pstmt.executeQuery();
+	 * 
+	 * while(rs.next()) { String bTitle = rs.getString("b_title"); String bContent =
+	 * rs.getString("b_content"); String bWriter = rs.getString("b_writer"); String
+	 * bRegdate = rs.getString("b_regdate"); int bView = rs.getInt("b_view"); int
+	 * eNumber = rs.getInt("e_number"); bView++; countUpdate(bView,b_no); vo = new
+	 * BoardVO(b_no, bTitle, bContent, bWriter, bRegdate, bView, eNumber); } } catch
+	 * (SQLException e) { e.printStackTrace(); } return vo; }
+	 */
 	
-	public int countUpdate(int bView, int b_no) {
+	public void countUpdate(BoardVO vo) {
 		sb.setLength(0);
-		sb.append("update board set bView = ? where b_no = ?");
+		sb.append("UPDATE board SET b_view = b_view+1 WHERE b_no = ? " );
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, bView);//물음표의 순서
-			pstmt.setInt(2, b_no);
+			/*pstmt.setInt(1, bView);//물음표의 순서*/			
+			pstmt.setInt(1, vo.getbNo());
 			
 			pstmt.executeUpdate();//insert,delete,update			
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		return -1;//데이터베이스 오류
+		} 
+		//return -1;//데이터베이스 오류
 	}
 	
 	
@@ -204,7 +190,7 @@ public class BoardDAO {
 	//게시글 수정
 	public void updateOne(BoardVO vo) {
 		sb.setLength(0);
-		sb.append("UPDATE board SET title = ? , contents=? , regdate=sysdate where bno = ? ");
+		sb.append("UPDATE board SET b_title = ? , b_content=? , b_regdate=sysdate where b_no = ? ");
 	
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
