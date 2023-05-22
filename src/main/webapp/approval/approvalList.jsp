@@ -31,15 +31,16 @@
     	}
     	
     	ApprovalDAO dao = new ApprovalDAO();
-    	int totalCount = dao.getTotalCount(eNum);
     	ApprovalVO vo2 = new ApprovalVO();
+
+    	int totalCount = dao.getTotalCount(eNum);
+    	
     	//페이징 10개씩
     	int recordPerPage = 10;
     	int totalPage = (totalCount%recordPerPage == 0) ? totalCount/recordPerPage : totalCount/recordPerPage+1;
     	
     	String pageNum = request.getParameter("pageNum");
     	int currentPage = 0;
-    	/* int pageNumInt = Integer.parseInt(pageNum); */
     	if(pageNum != null){
     		currentPage = Integer.parseInt(pageNum);
     	}else{

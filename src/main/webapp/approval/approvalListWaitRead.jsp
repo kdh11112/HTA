@@ -90,20 +90,31 @@
     		of1st = (String)ApprovalDAO.map.get("of1st");
     		of2rd = (String)ApprovalDAO.map.get("of2rd");
     		
+/*     		String level = vo.getaStatus();
+    		// 1 : 기안작성중
+    		// 2 : 1 결제대기
+    		// 3 : 2 보류
+    		// 4 : 2 결제완료 
+    		
+    		// ,, 
+    		
+    		XXXDAO dao3 = new XXXDAO();
+    		
+    		String filePath =   dao3.getImageFilePath(12); */
+    		
+    		
+    		// 사원정보 : 결재도장 파일 경로 
+    		
+    		
     	
     	if(vo != null){
-    		
-    		System.out.println(no+"asdas");
+
     	
     	
     
     %>
     	<script type="text/javascript">
-    	function approvalButton(){
-
-    		console.log("asdsa");
-    		
-    	}
+    	$("approvalButton")
 			$(function(){
 				$("#stamp1").append("<img src='../img/stamp/e_" + <%=num%> + ".png' />");
 			})
@@ -123,7 +134,6 @@
 									                <th>기안담당 : <%=vo.getaName() %></th>
 									                <th>기안부서 : <%=dname %></th>
 									                <th>기안일자 : <%=vo.getaStartDate() %></th>
-									                <th>남바<%=vo.getaNumber() %></th>
 									            </tr> 
 									        </table>
 									    </div>
@@ -147,7 +157,7 @@
 									        </tr>
 									        <tr>
 									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
-									            <td class="position2"></td>
+									            <td class="position2" id="stamp1"></td>
 									            <td class="position3"></td>
 									        </tr>
 									    </table>

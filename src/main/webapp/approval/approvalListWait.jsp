@@ -33,7 +33,7 @@
     	}
     	
     	ApprovalDAO dao = new ApprovalDAO();
-    	int totalCount = dao.getTotalCount(eNum);
+    	int totalCount = dao.getTotalCount("대기중",eNum);
     	ApprovalVO vo2 = new ApprovalVO();
     	//페이징 10개씩
     	int recordPerPage = 10;
@@ -83,7 +83,7 @@
                                         </tr>
                                     </thead>
                                     <%
-                                    	ArrayList<ApprovalVO> list = dao.selectAll(eNum,grade);
+                                    	ArrayList<ApprovalVO> list = dao.selectAll(eNum,grade,startNo,endNo);
                                     	for(ApprovalVO vo : list){
                                     		
                                     	
@@ -104,7 +104,7 @@
                                 	<nav aria-label="Page navigation example">
 									  <ul class="pagination">
 									    <li class="page-item">
-									      <a class="page-link" href="approvalList.jsp?pageNum=<%=prevPage %>" aria-label="Previous">
+									      <a class="page-link" href="approvalListWait.jsp?pageNum=<%=prevPage %>" aria-label="Previous">
 									        <span aria-hidden="true">&laquo;</span>
 									      </a>
 									    </li>
@@ -113,13 +113,13 @@
                                 			
                                 	%>
 									    <li class="page-item">
-									  <a class="page-link" href="approvalList.jsp?pageNum=<%=i%>"> <%=i %></a>
+									  <a class="page-link" href="approvalListWait.jsp?pageNum=<%=i%>"> <%=i %></a>
 									    </li>
                                 	<%
                                 		}
                                 	%>
 									    <li class="page-item">
-									      <a class="page-link" href="approvalList.jsp?pageNum=<%=nextPage %>" aria-label="Next">
+									      <a class="page-link" href="approvalListWait.jsp?pageNum=<%=nextPage %>" aria-label="Next">
 									        <span aria-hidden="true">&raquo;</span>
 									      </a>
 									    </li>
