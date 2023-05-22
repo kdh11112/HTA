@@ -15,6 +15,7 @@
 		String sType = request.getParameter("schedule_Type");
 	    ScheduleDAO dao = new ScheduleDAO();
 	    ArrayList<ScheduleVO> list = dao.personalLoadSchedule(eNumber,sType);
+	    dao.close();
 	    %>
 
 	    [<% for (int i = 0; i < list.size(); i++) { %>

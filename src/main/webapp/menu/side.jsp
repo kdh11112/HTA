@@ -37,7 +37,7 @@
 
 	                        <a class="nav-link" href="/HTA_Project_semi/mail/mail_layOut.jsp">사내메일함</a>
 	                        <a class="nav-link" href="/HTA_Project_semi/attendance/test6.jsp">근태관리</a>
-	                        <a class="nav-link" href="../schedule/schedule_list.jsp">일정관리</a>
+	                        <a class="nav-link" href="/HTA_Project_semi/schedule/schedule_list.jsp">일정관리</a>
 
    							<a class="nav-link" href="/HTA_Project_semi/board/boardList.jsp">게시판</a>
    							<a class="nav-link" href="/HTA_Project_semi/login.jsp">로그인</a>

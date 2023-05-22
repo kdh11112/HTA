@@ -50,17 +50,18 @@ $(document).ready(function() {
      }
 
     calendar.on('eventClick', function (info) { // 이벤트 클릭 핸들러 추가
-       var eventId = info.event.id; // 클릭한 이벤트의 ID 가져오기
+       var eventId = event.id; // 클릭한 이벤트의 ID 가져오기
        if (confirm("일정을 삭제하시겠습니까?")) {
           // 일정 삭제를 위한 AJAX 요청 보내기
           $.ajax({
              url: "delete_schedule.jsp",
              data: {
-                eventId: eventId
+            	 title : info.event._def.title
              },
              success: function (response) {
                 // 삭제 성공 시 처리할 내용 작성
                 console.log("일정이 삭제되었습니다.");
+                console.log(info.event._def.title);	 
                 calendar.refetchEvents(); // 일정 목록 다시 가져오기
              },
              error: function () {
