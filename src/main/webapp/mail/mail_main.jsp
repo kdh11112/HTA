@@ -86,7 +86,8 @@
 
       // 버튼 클릭 이벤트 핸들러 등록
       $("#mail_list li").on("click", handleButtonClick);
-      $("#write, #me_write").on("click", handleWriteButtonClick);
+      $("#write").on("click", handleWriteButtonClick);
+      $("#me_write").on("click", handleWriteMeButtonClick);
 
       function handleButtonClick() {
         var buttonId = $(this).attr("id");
@@ -95,17 +96,17 @@
           case "inbox":
             loadPage("mail_inbox.jsp");
             break;
-          case "my_inbox":
-            loadPage("my_mail_inbox.jsp");
+          case "selfMailBox":
+            loadPage("mailSelfBox.jsp");
             break;
           case "sendMailBox":
             loadPage("mailSendBox.jsp");
             break;
-          case "drafts":
-            loadPage("drafts.jsp");
+          case "tempMailBox":
+            loadPage("mailTempBox.jsp");
             break;
-          case "trash":
-            loadPage("trash.jsp");
+          case "trashMailBox":
+            loadPage("mailTrashBox.jsp");
             break;
           default:
             break;
@@ -116,6 +117,10 @@
         loadPage("mail_write.jsp");
       }
 
+      function handleWriteMeButtonClick() {
+          loadPage("mail_writeMe.jsp");
+        }
+      
       function loadPage(pageUrl) {
         $.ajax({
           url: pageUrl,
@@ -167,10 +172,10 @@
       <div class="mail_gruop" style="flex: 1;">
         <ul id="mail_list">
           <li id="inbox">받은 메일함</li>
-          <li id="my_inbox">내게 쓴 메일함</li>
+          <li id="selfMailBox">내게 쓴 메일함</li>
           <li id="sendMailBox">보낸 메일함</li>
-          <li id="drafts">임시보관함</li>
-          <li id="trash">휴지통</li>
+          <li id="tempMailBox">임시보관함</li>
+          <li id="trashMailBox">휴지통</li>
         </ul>
       </div>
       <div class="write_mail">

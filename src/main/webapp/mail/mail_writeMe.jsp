@@ -14,39 +14,6 @@
 <script src="../js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="../css/summernote/summernote-lite.css">
 
-<script type="text/javascript">
-$(document).ready(function() {
-
-	$("#addrList").click(function(){
-			var url = "/HTA_Project_semi/emp_search/info_lcm.jsp";
-			var option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
-			var title = '자식창1';
-			window.open(url,title,option,"window.opener");
-		})
-
-	
-window.addEventListener("message", receiveMessageFromChild, false);
-	
-	
-		
-		function receiveMessageFromChild(event) {
-			var dataArray = event.data.split(",");
-			
-			var reciverId = dataArray[0];
-			var reciverName = dataArray[1];
-			
-			$("#reciverId").val(reciverId); <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
-			$("#reciverName").val(reciverName); <!-- 주소록에서 선택된 수신자 이름을 String으로 value값에 담았음.  -->
-		}
-		
-
-	
-});
-
-</script>
-
-
-
 </head>
 
 <body>
@@ -84,10 +51,9 @@ window.addEventListener("message", receiveMessageFromChild, false);
 			
 			<tr>
 				<th>받는 사람</th>   <!-- 수신자 reciver  e_number2 -->
-				<td><input type="text" id="reciverName" name="reciverName" value="" disabled="disabled"/> <!-- 주소록에서 선택된 수신자 이름을 value값에 담았음.  -->
-				<input id="addrList" class="btn btn-primary" type="button" style="margin-left: 10px" value="주소록" />
+				<td><input type="text" id="reciverName" name="reciverName" value="<%=name %>" disabled="disabled"/> <!-- 주소록에서 선택된 수신자 이름을 value값에 담았음.  -->
 				<input type="hidden" name="reciver" value="<%=name/* reciver */ %>" />
-				<input type="hidden" id="reciverId" name="reciverId" value=""/> <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
+				<input type="hidden" id="reciverId" name="reciverId" value="<%=writer %>"/> <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
 				
 				</td>
 			</tr>

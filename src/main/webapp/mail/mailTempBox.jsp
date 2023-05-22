@@ -50,7 +50,7 @@
 
 <body>
 
-<h2>받은메일함</h2>
+<h2>임시 메일함</h2>
 	<%
 		Object obj = session.getAttribute("vo");
 		if(obj == null){
@@ -68,7 +68,7 @@
 			
 			// 총게시물 건수 ? :
 			int totalCount = dao.getTotalCount();				
-			// 한 페이지당 게시물 건수 : 10
+			// 한 페이지당 게시물 건수 : 20
 			int recordPerPage = 10;
 			// 총 페이지 수 :						
 			int totalPage = 
@@ -79,7 +79,7 @@
 			
 			String cp = request.getParameter("cp");
 			String mailtype = request.getParameter("mailtpye");
-			int number = vo2.geteNumber();
+			int TempNumber = vo2.geteNumber();
 			
 			
 			
@@ -142,7 +142,7 @@
 				</thead>
 				<tbody>
 		<%
-			ArrayList<MailVO> list = dao.selectAllRecive(startNo, endNo, enumber);
+			ArrayList<MailVO> list = dao.selectAllTempBox(startNo, endNo, TempNumber);
 			for(MailVO vo : list){
 		%> 
 					<tr>
@@ -161,7 +161,7 @@
 			<% for (int i = startPage; i<= endPage ;i++){
 				%>
 				 <%-- <a href="mail_inbox.jsp?cp=<%=i%>">[<%=i %>]</a> --%>
-				 <a href="mail_inbox.jsp?cp=<%=i%>">[<%=i %>]</a>
+				 <a href="mail_inbox.jsp?mailtype=1&cp=<%=i%>">[<%=i %>]</a>
 				 
 				 <%
 			}
