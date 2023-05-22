@@ -9,18 +9,20 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<style>
-   .fc-daygrid-day-frame:hover{
-      background: skyblue;
-   }
-</style>
+
 <script>
 var calendar;
 $(document).ready(function() {
      var calendarEl = document.getElementById('calendar');
      calendar = new FullCalendar.Calendar(calendarEl, {
        //... 이전 코드 ...
-
+		headerToolbar: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+       },
+       slotMinTime: '09:00:00', // 주간 뷰의 시작 시간 설정
+       slotMaxTime: '18:00:00', // 주간 뷰의 종료 시간 설정
        dateClick: function(info) {
          var date = info.dateStr;
          if (date) {
@@ -46,8 +48,30 @@ $(document).ready(function() {
        var windowObject = window.open("flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
        windowObject.focus();
      }
+
+    calendar.on('eventClick', function (info) { // 이벤트 클릭 핸들러 추가
+       var eventId = info.event.id; // 클릭한 이벤트의 ID 가져오기
+       if (confirm("일정을 삭제하시겠습니까?")) {
+          // 일정 삭제를 위한 AJAX 요청 보내기
+          $.ajax({
+             url: "delete_schedule.jsp",
+             data: {
+                eventId: eventId
+             },
+             success: function (response) {
+                // 삭제 성공 시 처리할 내용 작성
+                console.log("일정이 삭제되었습니다.");
+                calendar.refetchEvents(); // 일정 목록 다시 가져오기
+             },
+             error: function () {
+                // 삭제 실패 시 처리할 내용 작성
+                console.log("일정 삭제 중 오류가 발생했습니다.");
+             }
+          });
+       }
+    });
 });
-   
+
 $(document).ready(function() {
     $("#select").change(function() {
         var selectedValue = $(this).val(); // 선택된 일정 유형의 값을 가져옴
