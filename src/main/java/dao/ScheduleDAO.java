@@ -32,13 +32,14 @@ public class ScheduleDAO {
 		
 	}
 	
-	public ArrayList<ScheduleVO> selectAll(int eNumber){
+	public ArrayList<ScheduleVO> selectAll(int eNumber, String dName){
 		ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
 		sb.setLength(0); // 길이를 0으로
-		sb.append("SELECT * FROM SCHEDULE WHERE E_NUMBER =? ");
+		sb.append("SELECT S.S_NUMBER, S.S_CONTENTS, S.S_START_DATE, S.S_END_DATE, S.E_NUMBER, S.S_TYPE, E.D_NAME  FROM SCHEDULE S LEFT JOIN EMPLOYEE E ON E.E_NUMBER = S.E_NUMBER WHERE E.E_NUMBER = ? AND E.D_NAME = ? ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, eNumber);
+			pstmt.setString(2, dName);	
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int sNumber = rs.getInt("s_number");
@@ -58,22 +59,48 @@ public class ScheduleDAO {
 		return list;
 	}
 	
-	public ArrayList<ScheduleVO> departmentLoadSchedule(String dName) {
+	public ArrayList<ScheduleVO> personalLoadSchedule(int eNumber, String sType) {
 	    ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
 	    sb.setLength(0);
-	    sb.append("SELECT S.S_NUMBER, S.S_CONTENTS, S.S_START_DATE, S.S_END_DATE, S.E_NUMBER, S.S_TYPE, E.D_NAME  FROM SCHEDULE S LEFT JOIN EMPLOYEE E ON E.E_NUMBER = S.E_NUMBER WHERE E.D_NAME = ? " );
+	    sb.append("SELECT * FROM SCHEDULE WHERE E_NUMBER = ? AND S_TYPE = ?	 " );
 
 	    try {
 	        pstmt = conn.prepareStatement(sb.toString());
-	        pstmt.setString(1, dName);
+	        pstmt.setInt(1, eNumber);
+	        pstmt.setString(2, sType);
 	        rs = pstmt.executeQuery();
 	        while (rs.next()) {
 	            int sNumber = rs.getInt("s_number");
 	            String sContents = rs.getString("s_contents");
 	            String sStartDate = rs.getString("s_start_date");
 	            String sEndDate = rs.getString("s_end_date");
-	            int eNumber = rs.getInt("eNumber");
-	            String sType = rs.getString("sType");
+
+	            ScheduleVO vo = new ScheduleVO(sNumber, sContents, sStartDate, sEndDate, eNumber, sType);
+
+	            list.add(vo);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
+	
+	public ArrayList<ScheduleVO> departmentLoadSchedule(String dName, String sType) {
+	    ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
+	    sb.setLength(0);
+	    sb.append("SELECT S.S_NUMBER, S.S_CONTENTS, S.S_START_DATE, S.S_END_DATE, S.E_NUMBER, S.S_TYPE, E.D_NAME  FROM SCHEDULE S LEFT JOIN EMPLOYEE E ON E.E_NUMBER = S.E_NUMBER WHERE E.D_NAME = ? AND S.S_TYPE = ? " );
+
+	    try {
+	        pstmt = conn.prepareStatement(sb.toString());
+	        pstmt.setString(1, dName);
+	        pstmt.setString(2, sType);
+	        rs = pstmt.executeQuery();
+	        while (rs.next()) {
+	            int sNumber = rs.getInt("s_number");
+	            String sContents = rs.getString("s_contents");
+	            String sStartDate = rs.getString("s_start_date");
+	            String sEndDate = rs.getString("s_end_date");
+	            int eNumber = rs.getInt("e_number");
 
 	            ScheduleVO vo = new ScheduleVO(sNumber, sContents, sStartDate, sEndDate, eNumber, sType);
 

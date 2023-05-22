@@ -13,8 +13,7 @@
 		dName = vo.getdName();
 		String sType = request.getParameter("schedule_Type");
 	    ScheduleDAO dao = new ScheduleDAO();
-	    ArrayList<ScheduleVO> list = dao.departmentLoadSchedule(dName);
-	    out.println(dName);
+	    ArrayList<ScheduleVO> list = dao.departmentLoadSchedule(dName,sType);
 	    %>
 
 	    [<% for (int i = 0; i < list.size(); i++) { %>

@@ -59,6 +59,7 @@ $(document).ready(function() {
 	            	schedule_Type: selectedValue
 	            },
 	            success: function(response) {
+	            	console.log("부서 : " + response);
 	                var data = JSON.parse(response);
 	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
 	                calendar.render(); // 달력 다시 렌더링
@@ -66,8 +67,22 @@ $(document).ready(function() {
 	        });
 		}else if(selectedValue == "개인"){
 			$.ajax({
+	            url: "personal_load_schedule.jsp",
+	            data : {
+	            	schedule_Type: selectedValue
+	            },
+	            success: function(response) {
+	            	console.log("개인 : " + response);
+	                var data = JSON.parse(response);
+	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
+	                calendar.render(); // 달력 다시 렌더링
+	            }
+	        });
+		}else if(selectedValue == "전체"){
+			$.ajax({
 	            url: "load_schedule.jsp",
 	            success: function(response) {
+	            	console.log("전체 : " + response);
 	                var data = JSON.parse(response);
 	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
 	                calendar.render(); // 달력 다시 렌더링
