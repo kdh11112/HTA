@@ -1,3 +1,5 @@
+<%@page import="vo.EmployeeVO"%>
+<%@page import="java.io.File"%>
 <%@page import="vo.BoardVO"%>
 <%@page import="dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -35,6 +37,7 @@
 </head>
 <body class="sb-nav-fixed">
 <%
+
 	//저장된 쿠키 불러오기
 	Cookie[] cookieFromRequest = request.getCookies();
 	String cookieValue = null;
@@ -106,6 +109,16 @@
 					</tr>
 					<tr>
 						<th>내용</th>
+						<%
+						String real = "D:\\dev\\eclipse\\web_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\HTA_Project_semi\\upload";
+						File viewFile = new File(real+"\\"+bNo+"photo.jpg");
+						if(viewFile.exists()){ 
+						%>
+						<br />
+							<tr>
+								<td colspan="6"><br><br><img src = "../upload/<%=bNo %>photo.jpg" width="300px" height="300px"><br><br><br />
+						<% }
+						else {%><td colspan="6"><br><br><%} %> <br />
 						<td colspan="5"><%=vo.getbContent() %></td>
 					</tr>
 					<tr>

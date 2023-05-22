@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vo.AddfileVO;
+import vo.BoardVO;
+import dao.BoardDAO;
 
 public class AddfileDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -34,15 +36,20 @@ public class AddfileDAO {
 	}
 	
 	public int upload(int bNo, String fName, String fLoc) {
-		sb.append(0);
+		sb.setLength(0);
 		sb.append("INSERT INTO addfile VALUES (?,?,?) " );
-		
+		/*
+		 * BoardDAO dao = new BoardDAO();
+		 *  BoardVO bvo = new BoardVO();
+		 */
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
 			pstmt.setInt(1, bNo);
 			pstmt.setString(2, fName);
 			pstmt.setString(3, fLoc);
+			
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +74,6 @@ public class AddfileDAO {
 				list.add(vo);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;

@@ -108,10 +108,29 @@ public class BoardDAO {
 
 	public void addOne(BoardVO vo) { 
 		sb.setLength(0);
-		sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,?) "); 
+		sb.append("INSERT INTO board VALUES (?, ?,?,?,sysdate,0,?) "); 
 		try { 
 			pstmt = conn.prepareStatement(sb.toString());
-	 
+			
+			pstmt.setInt(1, vo.getbNo()); 
+			pstmt.setString(2, vo.getbTitle()); 
+			pstmt.setString(3, vo.getbContent());
+			pstmt.setString(4, vo.getbWriter()); 
+			pstmt.setInt(5, vo.geteNumber()); //로그인한 사원의 사원번호 전달
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) { 
+			e.printStackTrace(); 
+		} 
+	}
+	
+
+	//addOne() 끝
+		/*sb.append("INSERT INTO board VALUES (board_seq.nextval, ?,?,?,sysdate,0,?) "); 
+		try { 
+			pstmt = conn.prepareStatement(sb.toString());
+			
 			pstmt.setString(1, vo.getbTitle()); 
 			pstmt.setString(2, vo.getbContent());
 			pstmt.setString(3, vo.getbWriter()); 
@@ -122,8 +141,7 @@ public class BoardDAO {
 		} catch (SQLException e) { 
 			e.printStackTrace(); 
 			} 
-		}//addOne() 끝
-	 
+		}//addOne() 끝*/
 	
 	public BoardVO selectOne(int b_no) {
 		BoardVO vo = null; //vo초기화
@@ -185,8 +203,6 @@ public class BoardDAO {
 		//return -1;//데이터베이스 오류
 	}
 	
-	
-	
 	//게시글 수정
 	public void updateOne(BoardVO vo) {
 		sb.setLength(0);
@@ -238,8 +254,23 @@ public class BoardDAO {
 		return count;
 	}
 	
+	//글번호 얻어오기?
+	public int getBseq() {
+		int result = -1;
+		sb.setLength(0);
+		sb.append("SELECT board_seq.nextval FROM dual " );
+		
+		try {
+			pstmt= conn.prepareStatement(sb.toString());
+			rs= pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
-
 	//자원반납
 	public void close() {
 		if(rs!=null)
