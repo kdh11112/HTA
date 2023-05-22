@@ -1,3 +1,4 @@
+<%@page import="dao.AttendanceReasonDAO"%>
 <%@page import="dao.EmployeeDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -27,6 +28,9 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>근태관리</title>
 
 <link rel="stylesheet" href="../attendance/main.css" />
@@ -203,6 +207,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 String name = null;
 String dname = null;
 String position = null;
+
 int num = 0;
 LocalDateTime now = LocalDateTime.now();
 
@@ -210,13 +215,14 @@ if (obj != null) {
 	EmployeeVO vo = (EmployeeVO) obj;
 	name = vo.geteName();
 	dname = vo.getdName();
+	
+	
 	position = vo.geteOfficialResponsibilities();
 	num = vo.geteNumber();%>
-	var eNumber =
-<%=vo.geteNumber()%>
-	;
+	var eNumber = <%=vo.geteNumber()%>;
 <%}%>
-	function attbtn(type) {
+
+	/* function attbtn(type) {
 		if (type == "1") { //만약 출근 버튼을 누르면 jsp파일에 데이터가 넘어가서 데이터의 값을 가진애의 출근시간이 데이터에 넘어감. 
 			// db에저장
 			$.ajax({
@@ -276,8 +282,91 @@ if (obj != null) {
 		}
 		//시간정보 넘기기 끝
 
-	}
+	} */
+	
+	$(function() {
+		  $("#in").on("click", function() {
+		    $.ajax({
+		      type: "post",
+		      url: "startTime.jsp",
+		      data: {
+		        id: eNumber
+		      },
+		      success: function(data) {
+		        console.log(data); 
+		        var data2 = data.trim();// 공백 제거
+
+		        if (data2 == "0") {
+		        	//console.log("하하하");
+		          // 이미 출근한 상태이므로 알림창을 띄웁니다.
+		          $("<div>", {
+		            title: "알림",
+		            text: "이미 출근처리되었습니다."
+		          }).dialog({
+		            modal: true,
+		            buttons: {
+		              OK: function() {
+		                $(this).dialog("close");
+		               
+		              }
+		            }
+		          });
+		          
+		          return; // 더 이상 실행하지 않고 종료합니다.
+		        }else {
+		        	var n = new Date();
+		        	var startTime = n.getHours()+"시"+n.getMinutes()+"분"+n.getSeconds()+"초";
+		              $("#begin").html(startTime);
+		        }
+		        // 출근 처리 완료 후 실행할 내용을 추가하세요.
+		        console.log("출근 처리 완료");
+		      }
+		    });
+		  });
+	}); 
+	
+	$(function() {
+		  $("#out").on("click", function() {
+		    $.ajax({
+		      type: "post",
+		      url: "endTime.jsp",
+		      data: {
+		        id: eNumber
+		      },
+		      success: function(data) {
+		        console.log(data); 
+		        var data2 = data.trim();// 공백 제거
+
+		        if (data2 == "0") {
+		        	//console.log("하하하");
+		          // 이미 퇴근한 상태이므로 알림창을 띄웁니다.
+		          $("<div>", {
+		            title: "알림",
+		            text: "이미 퇴근처리되었습니다."
+		          }).dialog({
+		            modal: true,
+		            buttons: {
+		              OK: function() {
+		                $(this).dialog("close");
+		               
+		              }
+		            }
+		          });
+		          
+		          return; // 더 이상 실행하지 않고 종료합니다.
+		        }else {
+		        	var n = new Date();
+		        	var endTime = n.getHours()+"시"+n.getMinutes()+"분"+n.getSeconds()+"초";
+		              $("#end").html(endTime);
+		        }
+		        // 퇴근 처리 완료 후 실행할 내용을 추가하세요.
+		        console.log("퇴근 처리 완료");
+		      }
+		    });
+		  });
+	}); 
 </script>
+
 <!-- 스크립트 부분 -->
 </head>
 
@@ -326,11 +415,11 @@ if (obj != null) {
 												<div class="text-muted">
 													<p class="mb-2" id="times"></p>
 													<h5 class="mb-1">
-														김사원&nbsp;
-														<%-- ${empVO.lelopt} --%>
-														사원직급
+														<%=name %>&nbsp;
+														<%-- 사원명 --%>
+														<!-- 직급 --><%=position %>
 													</h5>
-													<p class="mb-0">개발팀바꿔야댕</p>
+													<p class="mb-0"><%=dname %></p><!-- 부서 -->
 												</div>
 											</div>
 										</div>
@@ -387,10 +476,35 @@ if (obj != null) {
 												aria-valuemax="100"></div>
 										</div>
 								
-											
-										출근시간:<span id="startHour"></span> <br> 
-										퇴근시간: <span id="quitHour"></span>
+								
+								<%
+								AttendenceDAO dao = new AttendenceDAO();
+								AttendenceVO vo = dao.getStartTime(num);
+								AttendenceVO vo1 = dao.getEndTime(num);
 
+								
+								if( vo != null){
+								%>
+									출근시간:<%=vo.getOfficeGoingHour() %><br>
+								<%
+								}else {
+								%>
+									<div id="begin">출근시간: 출근전</div>
+								<%
+								}
+								%> 
+									<!-- 퇴근 -->
+								<%
+								if( vo1 != null){
+								%>
+									퇴근시간:<%=vo1.getQuittingTime() %><br>
+								<%
+								}else {
+								%>
+									<div id="end">퇴근시간: 퇴근전</div>
+								<%
+								}
+								%> 
 									</div>
 								</div>
 							</div>
@@ -408,9 +522,9 @@ if (obj != null) {
 											<h5 class="font-size-16 mb-0">근태</h5>
 										</div>
 										<button type="button" class="btn btn-light waves-effect"
-											id="in" name="in" onclick="attbtn(1);">출근하기</button>
+											id="in" name="in">출근하기</button>
 										<button type="button" class="btn btn-light waves-effect"
-											id="out" name="out" onclick="attbtn(2);">퇴근하기</button>
+											id="out" name="out">퇴근하기</button>
 										<br>
 
 									</div>

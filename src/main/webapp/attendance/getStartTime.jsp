@@ -20,4 +20,5 @@ vo = dao.getStartTime(enumber);
 
 
 out.println(vo.getOfficeGoingHour());
+
 %>

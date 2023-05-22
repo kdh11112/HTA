@@ -24,7 +24,6 @@ public class AttendenceDAO {
 		StringBuffer sb = new StringBuffer();
 
 
-
 	public AttendenceDAO() {
 		// 2.드라이버 로딩
 		try {
@@ -38,16 +37,15 @@ public class AttendenceDAO {
 			System.out.println("DB연결 실패");
 			e.printStackTrace();
 		}
-
 	}// 기본생성자 end
 
-	public void addOne(AttendenceVO vo) {
+	public int addOne(AttendenceVO vo) {
 
 		sb.setLength(0);
 		sb.append("INSERT INTO ATTENDANCE (attendance_No,working_Date,OFFICE_GOING_HOUR,E_NUMBER) ");
 		sb.append("VALUES(ATTENDANCE_SEQ.nextval,sysdate,sysdate,?) ");// systemtimestamp -- 시간날짜 시간대까지
 																						// 저장함.
-
+		int result = -1; // 절대 올수 없는 값;
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
@@ -59,30 +57,35 @@ public class AttendenceDAO {
 			pstmt.setInt(1, vo.getEnumber() );
 
 			
-			pstmt.executeUpdate();
+			result =pstmt.executeUpdate();
+			System.out.println("insert 가 성공하면 1 : "+ result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return result;
 	}// addOne end
-	public void endTimeAddOne(int id) {
+	
+	public int endTimeAddOne(int id) {
 		
 		sb.setLength(0);
 		sb.append("update ATTENDANCE ");
 		sb.append("set  QUITTING_TIME = sysdate ");
 		sb.append("where E_NUMBER = ? and to_char( office_going_hour ,'yyyy/mm/dd') = to_char(sysdate,'yyyy/mm/dd') ");
 		// 저장함.
-		
+		int result = -1;
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			
-			pstmt.setInt(1, id);
+			pstmt.setInt(1,id);
 			
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
+			System.out.println("update 가 성공하면 1 : "+ result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return result;
 	}// endTimeAddOne end
 
 	
