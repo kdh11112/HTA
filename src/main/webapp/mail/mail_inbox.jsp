@@ -1,3 +1,4 @@
+<%@page import="vo.EmployeeVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="vo.MailVO"%>
 <%@page import="dao.MailDAO"%>
@@ -20,14 +21,30 @@
 
   // Summernote 초기화 함수
   function initializeSummernote() {
-    $('.summernote').summernote({
-      height: 450, // 서머노트 에디터 높이
-      width: 1900,
-      codemirror: {
-        theme: 'monokai' // codemirror options
-      }
-    });
-  }
+	  
+	  $('.summernote').summernote({
+	      height: 450,
+	      width: 1300,
+	      codemirror: {
+	        theme: 'monokai'
+	      },
+	      toolbar: [
+	        // [groupName, [list of button]]
+	        ['fontname', ['fontname']],
+	        ['fontsize', ['fontsize']],
+	        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+	        ['color', ['forecolor', 'color']],
+	        ['table', ['table']],
+	        ['para', ['ul', 'ol', 'paragraph']],
+	        ['height', ['height']],
+	        ['insert', ['picture', 'link', 'video']],
+	        ['view', ['fullscreen', 'help']]
+	      ],
+	      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+	      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+	    });
+
+    };  
 </script>
 </head>
 
@@ -36,13 +53,19 @@
 <h2>임시 받은메일함</h2>
 	<%
 		Object obj = session.getAttribute("vo");
-		if(obj == null)
+		if(obj == null){
 			response.sendRedirect("/HTA_Project_semi/login.jsp");
 		/* 로그인 되어 있을때만 화면에 출력
 		그렇지 않으면 login.jsp 되돌려보내기 */
-	
+		}else{
+			
+		
 		// 전체 게시물 건수를 출력 ?
+			EmployeeVO vo2 = (EmployeeVO)obj;
+			int enumber = vo2.geteNumber();
 			MailDAO dao = new MailDAO();
+			
+			
 			// 총게시물 건수 ? :
 			int totalCount = dao.getTotalCount();				
 			// 한 페이지당 게시물 건수 : 20
@@ -55,6 +78,10 @@
 			// 현재페이지 번호
 			
 			String cp = request.getParameter("cp");
+			String mailtype = request.getParameter("mailtpye");
+			int number = vo2.geteNumber();
+			
+			
 			
 			int currentPage = 0;
 			if(cp != null){
@@ -115,7 +142,7 @@
 				</thead>
 				<tbody>
 		<%
-			ArrayList<MailVO> list = dao.selectAll(startNo, endNo);
+			ArrayList<MailVO> list = dao.selectAllRecive(startNo, endNo, enumber);
 			for(MailVO vo : list){
 		%> 
 					<tr>
@@ -133,9 +160,12 @@
 	 		<td colspan="4">
 			<% for (int i = startPage; i<= endPage ;i++){
 				%>
-				 <a href="mail_all_inbox.jsp?cp=<%=i%>">[<%=i %>]</a>
+				 <%-- <a href="mail_inbox.jsp?cp=<%=i%>">[<%=i %>]</a> --%>
+				 <a href="mail_inbox.jsp?mailtype=1&cp=<%=i%>">[<%=i %>]</a>
+				 
 				 <%
 			}
+		}
 				%>
 			  </td>
 		  </tr>

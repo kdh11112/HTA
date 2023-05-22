@@ -133,29 +133,27 @@
       }
 
       function initializeSummernote() {
-        setTimeout(function() {
           $('.summernote').summernote({
-            height: 450,
-            width: 1300,
-            codemirror: {
-              theme: 'monokai'
-            },
-            toolbar: [
-              // [groupName, [list of button]]
-              ['fontname', ['fontname']],
-              ['fontsize', ['fontsize']],
-              ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-              ['color', ['forecolor', 'color']],
-              ['table', ['table']],
-              ['para', ['ul', 'ol', 'paragraph']],
-              ['height', ['height']],
-              ['insert', ['picture', 'link', 'video']],
-              ['view', ['fullscreen', 'help']]
-            ],
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
-            fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
-          });
-        }, 500);
+              height: 450,
+              width: 1300,
+              codemirror: {
+                theme: 'monokai'
+              },
+              toolbar: [
+                // [groupName, [list of button]]
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                ['color', ['forecolor', 'color']],
+                ['table', ['table']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['picture', 'link', 'video']],
+                ['view', ['fullscreen', 'help']]
+              ],
+              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+              fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+            });
       }
 
       // 페이지 로드가 완료되었을 때 Summernote 초기화
@@ -186,7 +184,7 @@
       </div>
     </div>
     <div class="right_main">
-      <%-- <%@ include file="../mail/mail_all_inbox.jsp" %> --%>
+      <%@ include file="../mail/mail_inbox.jsp" %>
     </div>
   </div>
 </body>

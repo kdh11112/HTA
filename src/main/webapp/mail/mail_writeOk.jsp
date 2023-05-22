@@ -49,7 +49,6 @@
 			//참조인
 			String cc =  request.getParameter("cc");
 			
-			String mBoard = "받은 메일함";
 			
 			//편지함상태는 일단 패스
 			
@@ -64,8 +63,7 @@
 			   	vo.setMTitle(title);
 			   	vo.setMContent(contents);
 			   	vo.setMFile(file);
-			   	vo.setMCc(cc);
-				vo.setMBoard(mBoard);							   
+			   	vo.setMCc(cc);						   
 			   	vo.setENumber(intWriter);
 			   	vo.setENumber2(intReciver);
 			   	
