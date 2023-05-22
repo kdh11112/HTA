@@ -68,7 +68,7 @@
 			
 			// 총게시물 건수 ? :
 			int totalCount = dao.getTotalCount();				
-			// 한 페이지당 게시물 건수 : 20
+			// 한 페이지당 게시물 건수 : 10
 			int recordPerPage = 10;
 			// 총 페이지 수 :						
 			int totalPage = 
@@ -161,7 +161,7 @@
 			<% for (int i = startPage; i<= endPage ;i++){
 				%>
 				 <%-- <a href="mail_inbox.jsp?cp=<%=i%>">[<%=i %>]</a> --%>
-				 <a href="mail_inbox.jsp?mailtype=1&cp=<%=i%>">[<%=i %>]</a>
+				 <a href="mail_inbox.jsp?cp=<%=i%>">[<%=i %>]</a>
 				 
 				 <%
 			}

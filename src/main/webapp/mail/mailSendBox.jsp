@@ -161,7 +161,7 @@
 			<% for (int i = startPage; i<= endPage ;i++){
 				%>
 				 <%-- <a href="mail_inbox.jsp?cp=<%=i%>">[<%=i %>]</a> --%>
-				 <a href="mail_inbox.jsp?mailtype=1&cp=<%=i%>">[<%=i %>]</a>
+				 <a href="mail_inbox.jsp?cp=<%=i%>">[<%=i %>]</a>
 				 
 				 <%
 			}

@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import vo.ApprovalVO;
-import vo.BoardVO;
 import vo.EmployeeVO;
 import vo.MailVO;
 
@@ -70,8 +68,8 @@ public class MailDAO {
 				"from ( select rownum rn, m_number,  m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
 		sb.append(
 				"from ( select m_number, m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
-		// 받는 놈 이 나인가?
-		sb.append("from mail where e_number= ? ");
+								// 받는 놈 이 나인가?
+		sb.append("from mail where e_number2= ? ");
 		sb.append("order by m_number desc ) ");
 		sb.append("where rownum <= ?) ");
 		sb.append("where rn >= ? ");
@@ -122,8 +120,8 @@ public class MailDAO {
 				"from ( select rownum rn, m_number,  m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
 		sb.append(
 				"from ( select m_number, m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
-		// 쓴놈 이 나인가?
-		sb.append("from mail where e_number2 = ? ");
+						// 쓴놈 이 나인가?
+		sb.append("from mail where e_number = ? ");
 		sb.append("order by m_number desc ) ");
 		sb.append("where rownum <= ?) ");
 		sb.append("where rn >= ? ");
@@ -174,8 +172,8 @@ public class MailDAO {
 				"from ( select rownum rn, m_number,  m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
 		sb.append(
 				"from ( select m_number, m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
-		// 쓴놈 이 나인가? 그러면서 받는놈도 나인가?
-		sb.append("from mail where e_number2= ? AND e_number = ? ");
+						// 쓴놈 이 나인가? 그러면서 받는놈도 나인가?
+		sb.append("from mail where e_number= ? AND e_number2 = ? ");
 		sb.append("order by m_number desc ) ");
 		sb.append("where rownum <= ?) ");
 		sb.append("where rn >= ? ");
@@ -228,7 +226,7 @@ public class MailDAO {
 		sb.append(
 				"from ( select m_number, m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
 							// 받는 놈 은 나인가?  + 받은사람 메일함구분은 임시메일함인가? Or 보낸 사람이 나 인가? 보낸사람 메일구분이 4인가?
-		sb.append("from mail where (e_number = ? AND m_rtype = 4 ) OR (e_number2 = ? AND m_wtype = 4 ) ");
+		sb.append("from mail where (e_number2 = ? AND m_rtype = 4 ) OR (e_number = ? AND m_wtype = 4 ) ");
 		sb.append("order by m_number desc ) ");
 		sb.append("where rownum <= ?) ");
 		sb.append("where rn >= ? ");
@@ -283,7 +281,7 @@ public class MailDAO {
 		sb.append(
 				"from ( select m_number, m_title, m_content, m_file, m_cc, m_regdate, m_wtype, m_rtype, e_number2, e_number ");
 							// 받는 놈 은 나인가?  + 받은사람 메일함구분은 휴지통인가? Or 보낸 사람이 나 인가? 보낸사람 메일구분이 5인가?
-		sb.append("from mail where (e_number = ? AND m_rtype = 5 ) OR (e_number2 = ? AND m_wtype = 5 ) ");
+		sb.append("from mail where (e_number2 = ? AND m_rtype = 5 ) OR (e_number = ? AND m_wtype = 5 ) ");
 		sb.append("order by m_number desc ) ");
 		sb.append("where rownum <= ?) ");
 		sb.append("where rn >= ? ");
@@ -367,6 +365,53 @@ public class MailDAO {
 		}
 	}
 
+	
+	public void writeMailTempSave(MailVO vo) {
+		sb.setLength(0);
+
+		sb.append("INSERT INTO MAIL VALUES(MAIL_SEQ.nextval, ?, ?, ?, ?, sysdate, ?, ?, ?, ?) ");
+		// 메일함구분 : 1 받은메일함
+		// 2 내게 쓴 메일함
+		// 3 보낸 메일함
+		// 4 임시보관함
+		// 5 휴지통
+		// 6 완전삭제처리
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+
+			// 메일번호는 시퀀스번호로
+			// pstmt.setInt(1, vo.getMNumber());
+
+			// 2타이틀
+			pstmt.setString(1, vo.getMTitle());
+			// 3컨텐츠
+			pstmt.setString(2, vo.getMContent());
+			// 4파일
+			pstmt.setString(3, vo.getMFile());
+			// 5참조
+			pstmt.setString(4, vo.getMCc());
+			// 6.regdate
+
+			// 7. mWType 작성자의 메일함구분 (임시저장으므로 4(임시보관함))
+			pstmt.setInt(5, 4);
+			// 8. mMType 수신자의 메일함구분(나중에 수신자측에서 업데이트가능)
+			pstmt.setInt(6, vo.getMRType());
+			// 9/.E_number
+			pstmt.setInt(7, vo.getENumber());
+			// 10.E_number2
+			pstmt.setInt(8, vo.getENumber2());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
 	public EmployeeVO getOneReciver(String eId) {
 		EmployeeVO vo = null;
 		sb.append("SELECT e_number FROM employee WHERE e_id=?");

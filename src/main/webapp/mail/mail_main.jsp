@@ -86,7 +86,8 @@
 
       // 버튼 클릭 이벤트 핸들러 등록
       $("#mail_list li").on("click", handleButtonClick);
-      $("#write, #me_write").on("click", handleWriteButtonClick);
+      $("#write").on("click", handleWriteButtonClick);
+      $("#me_write").on("click", handleWriteMeButtonClick);
 
       function handleButtonClick() {
         var buttonId = $(this).attr("id");
@@ -116,6 +117,10 @@
         loadPage("mail_write.jsp");
       }
 
+      function handleWriteMeButtonClick() {
+          loadPage("mail_writeMe.jsp");
+        }
+      
       function loadPage(pageUrl) {
         $.ajax({
           url: pageUrl,

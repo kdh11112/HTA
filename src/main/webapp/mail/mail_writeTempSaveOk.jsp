@@ -1,3 +1,4 @@
+
 <%@page import="vo.MailVO"%>
 <%@page import="dao.MailDAO"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
@@ -23,7 +24,7 @@
   }
 </script>
 <meta charset="UTF-8">
-<title>mail_writeOk.jsp</title>
+<title>mail_writeTempSaveOk.jsp</title>
 </head>
 <body>
  <%
@@ -67,7 +68,7 @@
 			   	vo.setENumber2(intWriter);
 			   	
 			   	
-			   	dao.writeMail(vo);
+			   	dao.writeMailTempSave(vo);
 			   	
 			}
 			 
