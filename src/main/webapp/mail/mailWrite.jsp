@@ -106,7 +106,7 @@ window.addEventListener("message", receiveMessageFromChild, false);
 				<td colspan="2">
 					<input class="btn btn-primary" type="submit" value="보내기" />
 					<input class="btn btn-primary" type="submit" value="예약" />
-					<input class="btn btn-primary" type="submit" value="임시저장" formaction="/HTA_Project_semi/mail/mail_writeTempSaveOk.jsp" />
+					<input class="btn btn-primary" type="submit" value="임시저장" formaction="/HTA_Project_semi/mail/mailWriteTempSaveOk.jsp" />
 				</td>
 			</tr>
 		
