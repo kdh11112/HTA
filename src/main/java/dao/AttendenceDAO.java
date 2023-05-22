@@ -88,12 +88,44 @@ public class AttendenceDAO {
 		return result;
 	}// endTimeAddOne end
 
+	public ArrayList<AttendenceVO> getWoringTime(int id) {
+		ArrayList<AttendenceVO> list = new ArrayList<AttendenceVO>();
+		sb.setLength(0);
+		sb.append("select e_number, working_date,time ");
+		sb.append("from ( select e_number, working_date,  trunc((quitting_time - office_going_hour )*24,0) time ");
+		sb.append("from attendance ");
+		sb.append("where e_number=? ");
+		sb.append("order by attendance.attendance_no desc ) ");
+		sb.append("where rownum <= 5 ");
+		
+		AttendenceVO vo = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int enumber = rs.getInt("e_number");
+				vo = new AttendenceVO();
+				
+				vo.setEnumber(enumber);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
-	public ArrayList<AttendenceVO> getDate(int enumber) {
+	
+	public ArrayList<AttendenceVO> getDate(int id) {
 		//사원별 출퇴근시간가져오기
 		ArrayList<AttendenceVO> list = new ArrayList<AttendenceVO>();
 		sb.setLength(0);
-		sb.append("select OFFICE_GOING_HOUR,QUITTING_TIME,e_number ");
+		sb.append("select e_number,OFFICE_GOING_HOUR,QUITTING_TIME ");
 		sb.append("from attendance ");
 		sb.append("where e_number=? ");
 
@@ -101,7 +133,7 @@ public class AttendenceDAO {
 		AttendenceVO vo =null;
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, enumber);
+			pstmt.setInt(1, id);
 		
 			rs = pstmt.executeQuery();
 
@@ -114,7 +146,7 @@ public class AttendenceDAO {
 				vo.setOfficeGoingHour(startTime);
 				vo.setQuittingTime(endTime);
 				list.add(vo);
-
+				
 			}
 
 		} catch (SQLException e) {

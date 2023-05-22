@@ -18,7 +18,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<link href='../css/main.css' rel='stylesheet' />
+<!-- <link href='../css/main.css' rel='stylesheet' /> -->
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
@@ -29,11 +29,12 @@
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>근태관리</title>
 
-<link rel="stylesheet" href="../attendance/main.css" />
+<!-- <link rel="stylesheet" href="../attendance/main.css" /> -->
 
 <style>
 </style>
@@ -215,13 +216,13 @@ if (obj != null) {
 	EmployeeVO vo = (EmployeeVO) obj;
 	name = vo.geteName();
 	dname = vo.getdName();
-	
-	
+
 	position = vo.geteOfficialResponsibilities();
 	num = vo.geteNumber();%>
-	var eNumber = <%=vo.geteNumber()%>;
+	var eNumber =
+<%=vo.geteNumber()%>
+	;
 <%}%>
-
 	/* function attbtn(type) {
 		if (type == "1") { //만약 출근 버튼을 누르면 jsp파일에 데이터가 넘어가서 데이터의 값을 가진애의 출근시간이 데이터에 넘어감. 
 			// db에저장
@@ -283,88 +284,120 @@ if (obj != null) {
 		//시간정보 넘기기 끝
 
 	} */
+
+	$(function() {
+		$("#in").on(
+				"click",
+				function() {
+					$.ajax({
+						type : "post",
+						url : "startTime.jsp",
+						data : {
+							id : eNumber
+						},
+						success : function(data) {
+							console.log(data);
+							var data2 = data.trim();// 공백 제거
+
+							if (data2 == "0") {
+								//console.log("하하하");
+								// 이미 출근한 상태이므로 알림창을 띄웁니다.
+								$("<div>", {
+									title : "알림",
+									text : "이미 출근처리되었습니다."
+								}).dialog({
+									modal : true,
+									buttons : {
+										OK : function() {
+											$(this).dialog("close");
+
+										}
+									}
+								});
+
+								return; // 더 이상 실행하지 않고 종료합니다.
+							} else {
+								var n = new Date();
+								var startTime = n.getHours() + "시"
+										+ n.getMinutes() + "분" + n.getSeconds()
+										+ "초";
+								$("#begin").html(startTime);
+
+							}
+							// 출근 처리 완료 후 실행할 내용을 추가하세요.
+							console.log("출근 처리 완료");
+						}
+					});
+				});
+	});
+
+	$(function() {
+		$("#out").on(
+				"click",
+				function() {
+					$.ajax({
+						type : "post",
+						url : "endTime.jsp",
+						data : {
+							id : eNumber
+						},
+						success : function(data) {
+							console.log(data);
+							var data2 = data.trim();// 공백 제거
+
+							if (data2 == "0") {
+								//console.log("하하하");
+								// 이미 퇴근한 상태이므로 알림창을 띄웁니다.
+								$("<div>", {
+									title : "알림",
+									text : "이미 퇴근처리되었습니다."
+								}).dialog({
+									modal : true,
+									buttons : {
+										OK : function() {
+											$(this).dialog("close");
+
+										}
+									}
+								});
+
+								return; // 더 이상 실행하지 않고 종료합니다.
+							} else {
+								var n = new Date();
+								var endTime = n.getHours() + "시"
+										+ n.getMinutes() + "분" + n.getSeconds()
+										+ "초";
+								$("#end").html(endTime);
+
+							}
+							// 퇴근 처리 완료 후 실행할 내용을 추가하세요.
+							console.log("퇴근 처리 완료");
+						}
+					});
+				});
+	});
 	
 	$(function() {
-		  $("#in").on("click", function() {
-		    $.ajax({
-		      type: "post",
-		      url: "startTime.jsp",
-		      data: {
-		        id: eNumber
-		      },
-		      success: function(data) {
-		        console.log(data); 
-		        var data2 = data.trim();// 공백 제거
+		  // 페이지 로드 시 값 가져오기
+		  $.ajax({
+		    type: "post",
+		    url: "getWorkTimes.jsp", // 퇴근 시간과 출근 시간을 가져오는 JSP 파일 경로
+		    data : {
+				id : eNumber
+			},
+		    success: function(data) {
+		    	
+		      var workTimes = data;
+		      var startTime = new Date(workTimes.startTime); // 출근 시간
+		      var endTime = new Date(workTimes.endTime); // 퇴근 시간
 
-		        if (data2 == "0") {
-		        	//console.log("하하하");
-		          // 이미 출근한 상태이므로 알림창을 띄웁니다.
-		          $("<div>", {
-		            title: "알림",
-		            text: "이미 출근처리되었습니다."
-		          }).dialog({
-		            modal: true,
-		            buttons: {
-		              OK: function() {
-		                $(this).dialog("close");
-		               
-		              }
-		            }
-		          });
-		          
-		          return; // 더 이상 실행하지 않고 종료합니다.
-		        }else {
-		        	var n = new Date();
-		        	var startTime = n.getHours()+"시"+n.getMinutes()+"분"+n.getSeconds()+"초";
-		              $("#begin").html(startTime);
-		        }
-		        // 출근 처리 완료 후 실행할 내용을 추가하세요.
-		        console.log("출근 처리 완료");
-		      }
-		    });
+		      var workHours = (endTime - startTime) / (1000 * 60 * 60); // 근무 시간 계산 (시간 단위)
+				console.log(workHours);
+		      // 값을 출력하는 div 요소에 출력
+		      $("#work-hours").text("근무 시간: " + workHours + "시간");
+		    }
 		  });
-	}); 
-	
-	$(function() {
-		  $("#out").on("click", function() {
-		    $.ajax({
-		      type: "post",
-		      url: "endTime.jsp",
-		      data: {
-		        id: eNumber
-		      },
-		      success: function(data) {
-		        console.log(data); 
-		        var data2 = data.trim();// 공백 제거
-
-		        if (data2 == "0") {
-		        	//console.log("하하하");
-		          // 이미 퇴근한 상태이므로 알림창을 띄웁니다.
-		          $("<div>", {
-		            title: "알림",
-		            text: "이미 퇴근처리되었습니다."
-		          }).dialog({
-		            modal: true,
-		            buttons: {
-		              OK: function() {
-		                $(this).dialog("close");
-		               
-		              }
-		            }
-		          });
-		          
-		          return; // 더 이상 실행하지 않고 종료합니다.
-		        }else {
-		        	var n = new Date();
-		        	var endTime = n.getHours()+"시"+n.getMinutes()+"분"+n.getSeconds()+"초";
-		              $("#end").html(endTime);
-		        }
-		        // 퇴근 처리 완료 후 실행할 내용을 추가하세요.
-		        console.log("퇴근 처리 완료");
-		      }
-		    });
-		  });
-	}); 
+		});
 </script>
 
 <!-- 스크립트 부분 -->
@@ -415,11 +448,12 @@ if (obj != null) {
 												<div class="text-muted">
 													<p class="mb-2" id="times"></p>
 													<h5 class="mb-1">
-														<%=name %>&nbsp;
+														<%=name%>&nbsp;
 														<%-- 사원명 --%>
-														<!-- 직급 --><%=position %>
+														<!-- 직급 --><%=position%>
 													</h5>
-													<p class="mb-0"><%=dname %></p><!-- 부서 -->
+													<p class="mb-0"><%=dname%></p>
+													<!-- 부서 -->
 												</div>
 											</div>
 										</div>
@@ -466,8 +500,7 @@ if (obj != null) {
 											<h5 class="font-size-16 mb-0">이번달 근무시간</h5>
 										</div>
 										<h5 class="font-size-15">
-											시간<span class="float-end">
-												<!-- 61% -->
+											시간<span class="float-end"> <!-- 61% -->
 											</span>
 										</h5>
 										<div class="progress animated-progess progress-md">
@@ -475,36 +508,35 @@ if (obj != null) {
 												style="width: 61%" aria-valuenow="61" aria-valuemin="0"
 												aria-valuemax="100"></div>
 										</div>
-								
-								
-								<%
-								AttendenceDAO dao = new AttendenceDAO();
-								AttendenceVO vo = dao.getStartTime(num);
-								AttendenceVO vo1 = dao.getEndTime(num);
 
-								
-								if( vo != null){
-								%>
-									출근시간:<%=vo.getOfficeGoingHour() %><br>
-								<%
-								}else {
-								%>
-									<div id="begin">출근시간: 출근전</div>
-								<%
-								}
-								%> 
-									<!-- 퇴근 -->
-								<%
-								if( vo1 != null){
-								%>
-									퇴근시간:<%=vo1.getQuittingTime() %><br>
-								<%
-								}else {
-								%>
-									<div id="end">퇴근시간: 퇴근전</div>
-								<%
-								}
-								%> 
+
+										<%
+										AttendenceDAO dao = new AttendenceDAO();
+										AttendenceVO vo = dao.getStartTime(num);
+										AttendenceVO vo1 = dao.getEndTime(num);
+
+										if (vo != null) {
+										%>
+										출근시간:<%=vo.getOfficeGoingHour()%><br>
+										<%
+										} else {
+										%>
+										<div id="begin">출근시간: 출근전</div>
+										<%
+										}
+										%>
+										<!-- 퇴근 -->
+										<%
+										if (vo1 != null) {
+										%>
+										퇴근시간:<%=vo1.getQuittingTime()%><br>
+										<%
+										} else {
+										%>
+										<div id="end">퇴근시간: 퇴근전</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 							</div>
@@ -555,7 +587,10 @@ if (obj != null) {
 											<h5 class="font-size-16 mb-0">이번 주 근무</h5>
 										</div>
 
-
+						<%
+							ArrayList<AttendenceVO> vo3 = dao.getWoringTime(num);
+							out.println(vo3);
+						%>
 										<div class="mt-4">
 											<div data-simplebar="init" style="max-height: 400px;">
 												<div class="simplebar-wrapper" style="margin: 0px;">
@@ -570,7 +605,7 @@ if (obj != null) {
 																<div class="simplebar-content" style="padding: 0px;">
 																	<div class="table-wrapper">
 																		<div class="table-responsive fixed-solution"
-																			data-pattern="priority-columns" >
+																			data-pattern="priority-columns">
 																			<div class="sticky-table-header"
 																				style="visibility: hidden; width: auto; top: -4.40625px;">
 																				<!-- <table
@@ -811,7 +846,7 @@ if (obj != null) {
 																			<table
 																				class="table table-nowrap align-middle table-hover mb-0"
 																				style="height: 550px;">
-																			<tbody>
+																				<tbody>
 																					<tr>
 																						<td style="width: 50px;" data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
@@ -828,7 +863,7 @@ if (obj != null) {
 																								<a href="#" class="text-dark" id="week1"></a>&nbsp;
 																								<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today1">오늘</span>
+																									id="today1" style="color:blue"id = "work-hours">오늘</span>
 																							</h5>
 
 																						</td>
@@ -841,16 +876,15 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
-																									&nbsp;
+																									class="badge badge-pill badge-soft-secondary font-size-14" 
+																									style="color: blue">근무</span> &nbsp;
 																								</a>
 
 																							</div>
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							8 시간
-																						</td>
+																							</td>
 
 																					</tr>
 																					<!-- 여기까지 반복해주세옹  -->
@@ -869,7 +903,7 @@ if (obj != null) {
 																								<a href="javascript: void(0);" class="text-dark"
 																									id="week2"> </a>&nbsp;<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today2">오늘</span>
+																									id="today2" style="color:blue">오늘</span>
 																							</h5>
 
 																						</td>
@@ -881,15 +915,15 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
-																									&nbsp;data
+																									class="badge badge-pill badge-soft-secondary font-size-14"
+																									style="color: blue">근무</span> &nbsp;
 																								</a>
 
 																							</div>
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							8(강제로 준값이다) 시간</td>
+																						</td>
 
 																					</tr>
 
@@ -908,7 +942,7 @@ if (obj != null) {
 																								<a href="javascript: void(0);" class="text-dark"
 																									id="week3"> </a>&nbsp;<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today3">오늘</span>
+																									id="today3" style="color:blue">오늘</span>
 																							</h5>
 
 																						</td>
@@ -921,8 +955,9 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
-																									&nbsp;${list.get(2).getWorksttsScTm()}
+																									class="badge badge-pill badge-soft-secondary font-size-14"
+																									style="color: blue">근무</span>
+																									&nbsp;
 																								</a>
 
 																							</div>
@@ -948,7 +983,7 @@ if (obj != null) {
 																								<a href="javascript: void(0);" class="text-dark"
 																									id="week4"> </a>&nbsp;<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today4">오늘</span>
+																									id="today4" style="color:blue">오늘</span>
 																							</h5>
 
 																						</td>
@@ -961,7 +996,8 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
+																									class="badge badge-pill badge-soft-secondary font-size-14"
+																									style="color: blue">근무</span>
 																									&nbsp;${list.get(3).getWorksttsScTm()}
 																								</a>
 
@@ -969,8 +1005,7 @@ if (obj != null) {
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							시간
-																						</td>
+																							시간</td>
 
 																					</tr>
 
@@ -989,7 +1024,7 @@ if (obj != null) {
 																								<a href="javascript: void(0);" class="text-dark"
 																									id="week5"> </a>&nbsp;<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today5">오늘</span>
+																									id="today5" style="color:blue">오늘</span>
 																							</h5>
 
 																						</td>
@@ -1002,16 +1037,15 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
-																									&nbsp;
+																									class="badge badge-pill badge-soft-secondary font-size-14"
+																									style="color: blue">근무</span> &nbsp;
 																								</a>
 
 																							</div>
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							시간
-																						</td>
+																							시간</td>
 
 																					</tr>
 
@@ -1030,7 +1064,7 @@ if (obj != null) {
 																								<a href="javascript: void(0);" class="text-dark"
 																									id="week6"> </a>&nbsp;<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today6">오늘</span>
+																									id="today6" style="color:blue">오늘</span>
 																							</h5>
 
 																						</td>
@@ -1057,7 +1091,7 @@ if (obj != null) {
 																								<a href="javascript: void(0);" class="text-dark"
 																									id="week0"> </a><span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today0">오늘</span>
+																									id="today0" style="color:blue">오늘</span>
 																							</h5>
 
 																						</td>
@@ -1243,7 +1277,7 @@ if (obj != null) {
 				<!-- Modal 끝 -->
 
 			</main>
-			<footer class="py-4 bg-light mt-auto" style="bottom:0;"><%@ include
+			<footer class="py-4 bg-light mt-auto" style="bottom: 0;"><%@ include
 					file="../menu/footer.jsp"%></footer>
 		</div>
 	</div>
