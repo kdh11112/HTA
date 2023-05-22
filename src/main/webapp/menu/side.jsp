@@ -16,9 +16,6 @@
 	                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" >
 	                            	<div class="sb-sidenav-menu-heading">결재</div>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">테스트</a>
-	                                </nav>
-	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalForm.jsp">일반결재</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">

@@ -1,3 +1,4 @@
+<%@page import="vo.EmployeeVO"%>
 <%@page import="dao.BoardDAO"%>
 <%@page import="vo.BoardVO"%>
 <%@page import="java.util.ArrayList"%>
@@ -29,6 +30,7 @@
 
 <body class="sb-nav-fixed">
 	<%
+		
 		//전체 게시물 건수를 출력?
 	    BoardDAO dao = new BoardDAO();
 	    int totalCount = dao.getTotalCount();       

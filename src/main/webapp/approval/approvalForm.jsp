@@ -84,14 +84,40 @@
 				  var dataArray = event.data.split(",");
 					for(var i=0; i<dataArray.length; i++){
 						if(title == '자식창1'){
-					    document.getElementById('data-placeholder1').value = dataArray[1]; 
-					    document.getElementById('data-placeholder2').value = dataArray[2]; 						
-					}else if(title == '자식창2'){
-					    document.getElementById('data-placeholder3').value = dataArray[1]; 
-					    document.getElementById('data-placeholder4').value = dataArray[2]; 	
-					}
+						    document.getElementById('placeholder1').value = dataArray[1]; 
+						    document.getElementById('placeholder2').value = dataArray[2]; 						
+						}else if(title == '자식창2'){
+						    document.getElementById('placeholder3').value = dataArray[1]; 
+						    document.getElementById('placeholder4').value = dataArray[2]; 	
+						}
+					}	
 				}
-				}
+				
+				$(function(){
+					$("input[value='임시저장']").on("click",function(){
+						var placeholder1 = document.getElementById('placeholder1').value;
+						var placeholder2 = document.getElementById('placeholder2').value;
+						var placeholder3 = document.getElementById('placeholder3').value;
+						var placeholder4 = document.getElementById('placeholder4').value;
+						var contents = document.getElementById('contents').value;
+						var title = document.getElementById('title').value;
+						$.ajax({
+							url:"approvalFormTemp.jsp",
+							data:{
+								placeholder1:placeholder1,
+								placeholder2:placeholder2,
+								placeholder3:placeholder3,
+								placeholder4:placeholder4,
+								contents:contents,
+								title:title
+							}, 
+							success:function(data){
+								location.href = "approvalListTemporary.jsp";
+							}
+
+						})
+					})
+				})
 			
 		</script>
     </head>
@@ -121,7 +147,7 @@
            	 	<div id="layoutSidenav_content">
             		<form action="approvalFormOk.jsp" method="get">
 		            	<main>
-		                    <div class="container-fluid px-4">
+		                    <div class="container-fluid px-4" >
 		                        <h1 class="mt-4">전자결재 작성</h1>
 									<div class="card mb-4">
 									    <div class="card-header">
@@ -140,14 +166,14 @@
 									        <tr>
 									            <th><%=position %></th>
 									            <!-- <th class="position2" id="data-placeholder2"></th> -->
-									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" readonly></th>
-									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" readonly></th>
+									        	<th class="position2"><input type="text" id="placeholder2" name="placeholder2" readonly></th>
+									            <th class="position3"><input type="text" id="placeholder4" name="placeholder4" readonly></th>
 									            <!-- <input type="text" id="data-placeholder2" name="data-placeholder1"> -->
 									        </tr>
 									        <tr>
 									            <td><%=name %></td>
-									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" readonly></td>
-									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" readonly></td>
+									            <td class="position2"><input type="text" id="placeholder1" name="placeholder1" readonly></td>
+									            <td class="position3"><input type="text" id="placeholder3" name="placeholder3" readonly></td>
 									        </tr>
 									        <tr>
 									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
@@ -162,12 +188,12 @@
 			                            	
 		                            	<tr><td>제목 <input class="titles" type="text" name="title" id="title" style="width: 90%; text-align: left;"/></td></tr>
 										<tr>
-											<td><textarea class="summernote" name="contents"></textarea></td>
+											<td><textarea class="summernote" name="contents" id="contents"></textarea></td>
 										</tr>
 										<tr>
 											<td colspan="2">
 												<input class="btn btn-primary" type="submit" value="제출하기" />
-												<input class="btn btn-info" type="submit" value="임시저장" />
+												<input class="btn btn-info" type="button" value="임시저장" />
 											</td>
 										</tr>
 		                            </table>

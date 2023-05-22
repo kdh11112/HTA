@@ -11,6 +11,7 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
+            
             <!-- Navbar  상단바-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -19,7 +20,22 @@
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="login.jsp">Logout</a></li>
+		      <%--      <%
+		    Object objSession = session.getAttribute("vo");
+		    if (objSession == null) {
+		        // 로그인 안된 상태
+		%> --%>
+		    <li><a class="dropdown-item" href="/HTA_Project_semi/login.jsp">Login</a></li>
+		<%-- <%
+		    } else {
+		        // 로그인 된 상태
+		        session.removeAttribute("vo"); // 세션 뺏기
+		%>
+		    <li><a class="dropdown-item" href="/HTA_Project_semi/index.jsp">Logout</a></li>
+		<%
+		    }
+		%> --%>
+        <!-- <li><a class="dropdown-item" href="/HTA_Project_semi/login.jsp">Logout</a></li> -->
                     </ul>
                 </li>
             </ul>
