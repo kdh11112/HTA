@@ -23,10 +23,7 @@
 	int id = Integer.parseInt(time);
 	
 	dao.endTimeAddOne(id);
-	
-	//dao.endTimeAddOne(vo);
-	
-	
+
 	
 	//dao.close();
 %>

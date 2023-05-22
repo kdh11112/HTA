@@ -727,7 +727,7 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14">근무</span>
+																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
 																									&nbsp;
 																								</a>
 
@@ -735,7 +735,7 @@ if (obj != null) {
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							${list.get(0).getWorksttsTm()} 시간
+																							8 시간
 																						</td>
 
 																					</tr>
@@ -807,7 +807,7 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14">근무</span>
+																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
 																									&nbsp;${list.get(2).getWorksttsScTm()}
 																								</a>
 
@@ -847,7 +847,7 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14">근무</span>
+																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
 																									&nbsp;${list.get(3).getWorksttsScTm()}
 																								</a>
 
@@ -888,7 +888,7 @@ if (obj != null) {
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14">근무</span>
+																									class="badge badge-pill badge-soft-secondary font-size-14" style="color:blue">근무</span>
 																									&nbsp;
 																								</a>
 

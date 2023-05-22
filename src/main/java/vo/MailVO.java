@@ -19,7 +19,8 @@ public class MailVO {
 	public String mFile;
 	public String mCc;
 	public Date mRegdate;
-	public String mBoard;
+	public int mWType = 1;
+	public int mRType = 1;
 	
 	
 	public int eNumber;
