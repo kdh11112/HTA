@@ -81,89 +81,119 @@
     }
   </style>
   <script>
-    $(document).ready(function() {
-      var isMailWriteLoaded = false;
+  $(document).ready(function() {
+	  var isMailWriteLoaded = false;
 
-      // 버튼 클릭 이벤트 핸들러 등록
-      $("#mail_list li").on("click", handleButtonClick);
-      $("#write").on("click", handleWriteButtonClick);
-      $("#me_write").on("click", handleWriteMeButtonClick);
+	  // 버튼 클릭 이벤트 핸들러 등록
+	  $("#mail_list li").on("click", handleButtonClick);
+	  $("#write").on("click", handleWriteButtonClick);
+	  $("#me_write").on("click", handleWriteMeButtonClick);
 
-      function handleButtonClick() {
-        var buttonId = $(this).attr("id");
+	  $("#pagination").on("click", "a", handlePageClick);
+	  
+	  function handleButtonClick() {
+	    var buttonId = $(this).attr("id");
 
-        switch (buttonId) {
-          case "inbox":
-            loadPage("mail_inbox.jsp");
-            break;
-          case "selfMailBox":
-            loadPage("mailSelfBox.jsp");
-            break;
-          case "sendMailBox":
-            loadPage("mailSendBox.jsp");
-            break;
-          case "tempMailBox":
-            loadPage("mailTempBox.jsp");
-            break;
-          case "trashMailBox":
-            loadPage("mailTrashBox.jsp");
-            break;
-          default:
-            break;
-        }
-      }
+	    switch (buttonId) {
+	      case "inbox":
+	        loadPage("mail_inbox.jsp");
+	        break;
+	      case "selfMailBox":
+	        loadPage("mailSelfBox.jsp");
+	        break;
+	      case "sendMailBox":
+	        loadPage("mailSendBox.jsp");
+	        break;
+	      case "tempMailBox":
+	        loadPage("mailTempBox.jsp");
+	        break;
+	      case "trashMailBox":
+	        loadPage("mailTrashBox.jsp");
+	        break;
+	      default:
+	        break;
+	    }
+	  }
 
-      function handleWriteButtonClick() {
-        loadPage("mail_write.jsp");
-      }
+	  function handleWriteButtonClick() {
+	    loadPage("mail_write.jsp");
+	  }
 
-      function handleWriteMeButtonClick() {
-          loadPage("mail_writeMe.jsp");
-        }
-      
-      function loadPage(pageUrl) {
-        $.ajax({
-          url: pageUrl,
-          dataType: "html",
-          success: function(response) {
-            $(".right_main").html(response);
-            if (pageUrl === "mail_write.jsp") {
-              initializeSummernote();
-            }
-          },
-          error: function(xhr, status, error) {
-            console.error(error);
-          }
-        });
-      }
+	  function handleWriteMeButtonClick() {
+	    loadPage("mail_writeMe.jsp");
+	  }
+	  
+	  function handlePageClick(e) {
+		    e.preventDefault();
+		    var page = $(this).attr("data-page");
+		    var buttonId = $(this).closest(".mail_gruop").find("ul li.active").attr("id");
 
-      function initializeSummernote() {
-          $('.summernote').summernote({
-              height: 450,
-              width: 1300,
-              codemirror: {
-                theme: 'monokai'
-              },
-              toolbar: [
-                // [groupName, [list of button]]
-                ['fontname', ['fontname']],
-                ['fontsize', ['fontsize']],
-                ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                ['color', ['forecolor', 'color']],
-                ['table', ['table']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']],
-                ['insert', ['picture', 'link', 'video']],
-                ['view', ['fullscreen', 'help']]
-              ],
-              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
-              fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
-            });
-      }
+		    switch (buttonId) {
+		      case "inbox":
+		        loadPage("mail_inbox.jsp?cp=" + page);
+		        break;
+		      case "selfMailBox":
+		        loadPage("mailSelfBox.jsp?cp=" + page);
+		        break;
+		      case "sendMailBox":
+		        loadPage("mailSendBox.jsp?cp=" + page);
+		        break;
+		      case "tempMailBox":
+		        loadPage("mailTempBox.jsp?cp=" + page);
+		        break;
+		      case "trashMailBox":
+		        loadPage("mailTrashBox.jsp?cp=" + page);
+		        break;
+		      default:
+		        break;
+		    }
+		  }
+	  
+	  
+	  
+	  function loadPage(pageUrl) {
+	    $.ajax({
+	      url: pageUrl,
+	      dataType: "html",
+	      success: function(response) {
+	        $(".right_main").html(response);
+	        if (pageUrl === "mail_write.jsp") {
+	          initializeSummernote();
+	        }
+	      },
+	      error: function(xhr, status, error) {
+	        console.error(error);
+	      }
+	    });
+	  }
 
-      // 페이지 로드가 완료되었을 때 Summernote 초기화
-      initializeSummernote();
-    });
+	  function initializeSummernote() {
+	    $('.summernote').summernote({
+	      height: 450,
+	      width: 1300,
+	      codemirror: {
+	        theme: 'monokai'
+	      },
+	      toolbar: [
+	        // [groupName, [list of button]]
+	        ['fontname', ['fontname']],
+	        ['fontsize', ['fontsize']],
+	        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+	        ['color', ['forecolor', 'color']],
+	        ['table', ['table']],
+	        ['para', ['ul', 'ol', 'paragraph']],
+	        ['height', ['height']],
+	        ['insert', ['picture', 'link', 'video']],
+	        ['view', ['fullscreen', 'help']]
+	      ],
+	      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+	      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+	    });
+	  }
+
+	  // 페이지 로드가 완료되었을 때 Summernote 초기화
+	  initializeSummernote();
+	});
   </script>
 </head>
 <body>
@@ -189,7 +219,8 @@
       </div>
     </div>
     <div class="right_main">
-      <%@ include file="../mail/mail_inbox.jsp" %>
+    	
+      <%@ include file="mail_inbox.jsp" %>  
     </div>
   </div>
 </body>
