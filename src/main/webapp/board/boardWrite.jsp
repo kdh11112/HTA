@@ -71,7 +71,7 @@
                </tr>
                <tr>
                    <th>첨부파일</th>
-                   <td><input type="file" name="file"></td>
+                   <td><input type="file" name="filename"></td>
                </tr>
                <tr>
                    <th>내용</th>
@@ -108,7 +108,7 @@
 				height: 300,                 // 에디터 높이
 				minHeight: null,             // 최소 높이
 				maxHeight: null,             // 최대 높이
-				focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+				focus: true,                 // 에디터 로딩후 포커스를 맞출지 여부
 				// 한글 설정
 				placeholder: '내용을 입력하세요',	//placeholder 설정
 				toolbar: [

@@ -1,3 +1,4 @@
+<%@page import="vo.EmployeeVO"%>
 <%@page import="vo.BoardVO"%>
 <%@page import="dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -61,7 +62,7 @@
 	         	<div class="card mb-4">
       			<h2>게시글 작성</h2>
 	
-	<form action="boardModifyOk.jsp">
+	<form action="boardModifyOk.jsp" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<th>제목 *</th>
@@ -79,6 +80,10 @@
         	<th>작성일시</th>
         	<th><%=vo.getbRegdate() %></th>
         	<input type="hidden" name="bno" value="<%=vo.getbNo() %>"/>
+        </tr>
+        <tr>
+            <th>첨부파일</th>
+            <td><input type="file" name="filename"></td>
         </tr>
 		<tr>
 			<th>내용</th>
