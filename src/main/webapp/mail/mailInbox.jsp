@@ -49,7 +49,7 @@
 
   // 페이지 로드 함수
   function loadPage(page) {
-    var url = "mail_inbox.jsp?cp=" + page;
+    var url = "mailInbox.jsp?cp=" + page;
     $.ajax({
       url: url,
       dataType: "html",

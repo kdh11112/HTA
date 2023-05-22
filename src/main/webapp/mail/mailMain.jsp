@@ -96,7 +96,7 @@
 
 	    switch (buttonId) {
 	      case "inbox":
-	        loadPage("mail_inbox.jsp");
+	        loadPage("mailInbox.jsp");
 	        break;
 	      case "selfMailBox":
 	        loadPage("mailSelfBox.jsp");
@@ -116,11 +116,11 @@
 	  }
 
 	  function handleWriteButtonClick() {
-	    loadPage("mail_write.jsp");
+	    loadPage("mailWrite.jsp");
 	  }
 
 	  function handleWriteMeButtonClick() {
-	    loadPage("mail_writeMe.jsp");
+	    loadPage("mailWriteMe.jsp");
 	  }
 	  
 	  function handlePageClick(e) {
@@ -130,7 +130,7 @@
 
 		    switch (buttonId) {
 		      case "inbox":
-		        loadPage("mail_inbox.jsp?cp=" + page);
+		        loadPage("mailInbox.jsp?cp=" + page);
 		        break;
 		      case "selfMailBox":
 		        loadPage("mailSelfBox.jsp?cp=" + page);
@@ -157,7 +157,7 @@
 	      dataType: "html",
 	      success: function(response) {
 	        $(".right_main").html(response);
-	        if (pageUrl === "mail_write.jsp") {
+	        if (pageUrl === "mailWrite.jsp") {
 	          initializeSummernote();
 	        }
 	      },
@@ -220,7 +220,7 @@
     </div>
     <div class="right_main">
     	
-      <%@ include file="mail_inbox.jsp" %>  
+      <%@ include file="mailInbox.jsp" %>  
     </div>
   </div>
 </body>

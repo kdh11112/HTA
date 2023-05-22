@@ -72,7 +72,7 @@
 			   	
 			}
 			 
-         response.sendRedirect("mail_layOut.jsp");
+         response.sendRedirect("mailLayOut.jsp");
  %>	
  
 </body>
