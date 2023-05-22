@@ -50,7 +50,7 @@
 
 <body>
 
-<h2>보낸메일함</h2>
+<h2>임시 메일함</h2>
 	<%
 		Object obj = session.getAttribute("vo");
 		if(obj == null){
@@ -79,7 +79,7 @@
 			
 			String cp = request.getParameter("cp");
 			String mailtype = request.getParameter("mailtpye");
-			int sendNumber = vo2.geteNumber();
+			int TempNumber = vo2.geteNumber();
 			
 			
 			
@@ -142,7 +142,7 @@
 				</thead>
 				<tbody>
 		<%
-			ArrayList<MailVO> list = dao.selectAllSend(startNo, endNo, sendNumber);
+			ArrayList<MailVO> list = dao.selectAllTempBox(startNo, endNo, TempNumber);
 			for(MailVO vo : list){
 		%> 
 					<tr>

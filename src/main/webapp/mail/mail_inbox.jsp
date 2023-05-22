@@ -50,7 +50,7 @@
 
 <body>
 
-<h2>임시 받은메일함</h2>
+<h2>받은메일함</h2>
 	<%
 		Object obj = session.getAttribute("vo");
 		if(obj == null){
