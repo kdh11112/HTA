@@ -32,14 +32,14 @@ public class ScheduleDAO {
 		
 	}
 	
-	public ArrayList<ScheduleVO> selectAll(int eNumber, String dName){
+	public ArrayList<ScheduleVO> selectAll(String dName, int eNumber){
 		ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
 		sb.setLength(0); // 길이를 0으로
-		sb.append("SELECT S.S_NUMBER, S.S_CONTENTS, S.S_START_DATE, S.S_END_DATE, S.E_NUMBER, S.S_TYPE, E.D_NAME  FROM SCHEDULE S LEFT JOIN EMPLOYEE E ON E.E_NUMBER = S.E_NUMBER WHERE E.E_NUMBER = ? AND E.D_NAME = ? ");
+		sb.append("SELECT * FROM SCHEDULE S LEFT JOIN EMPLOYEE E ON S.E_NUMBER = E.E_NUMBER WHERE S.S_TYPE = '부서' AND E.D_NAME = ? OR S.E_NUMBER = ? ");
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, eNumber);
-			pstmt.setString(2, dName);	
+			pstmt.setString(1, dName);
+			pstmt.setInt(2, eNumber);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int sNumber = rs.getInt("s_number");
@@ -62,7 +62,7 @@ public class ScheduleDAO {
 	public ArrayList<ScheduleVO> personalLoadSchedule(int eNumber, String sType) {
 	    ArrayList<ScheduleVO> list = new ArrayList<ScheduleVO>();
 	    sb.setLength(0);
-	    sb.append("SELECT * FROM SCHEDULE WHERE E_NUMBER = ? AND S_TYPE = ?	 " );
+	    sb.append("SELECT * FROM SCHEDULE WHERE E_NUMBER = ? AND S_TYPE = ?	" );
 
 	    try {
 	        pstmt = conn.prepareStatement(sb.toString());

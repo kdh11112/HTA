@@ -16,7 +16,7 @@
 		eNumber = vo.geteNumber();
 		dName = vo.getdName();
 	    ScheduleDAO dao = new ScheduleDAO();
-	    ArrayList<ScheduleVO> list = dao.selectAll(eNumber,dName);
+	    ArrayList<ScheduleVO> list = dao.selectAll(dName, eNumber);
 %>
 
 [<% for (int i = 0; i < list.size(); i++) { %>
