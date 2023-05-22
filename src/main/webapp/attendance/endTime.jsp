@@ -24,11 +24,6 @@
 			}
 	//아니면 result=0
 
-	//vo.setOfficeGoingHour(endTime);
-	//int id = Integer.parseInt(time);
-	
-	//dao.endTimeAddOne(id);
-
 	//result값이 1이면 성공 0이면 실패
 
 	out.println(result);
