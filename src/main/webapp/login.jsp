@@ -25,34 +25,31 @@
 	        <div id="layoutSidenav_content">
 	            <main>
 		         <div class="container-fluid px-4">
-		         	<h1 class="mt-4">로그인</h1>
+		         	<h1 class="mt-4"></h1>
 		         	<div class="card mb-4">
-		         	<form name="frm" action="register/login_Ok.jsp" method="post">
-						<table>
-							<tr>
-								<th>ID</th>
-								<td><input type="text" name="log_id" id="log_id" /></td>
-							</tr>
-							<tr>
-								<th>PW</th>
-								<td><input type="password" name="log_pw" id="log_pw" /></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<input type="button" value="로그인" id="loginbtn"/>
-									<a href='register/newRegi.jsp'>
-									<input type="button" value="회원가입" />
-									</a>
-								</td>
-							</tr>
-						</table>
-					</form>	
+						<div class="container">
+							<div class="col-lg-4"></div>	
+							<div class="col-lg-4">
+								<div class="jumbotron" style="padding-top: 20px;">
+									<form method="post" action="register/login_Ok.jsp">
+										<h3 style="text-align: center;">로그인 화면</h3>
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="아이디" name="log_id" id="log_id" maxlength="20">
+										</div>
+										<div class="form-group">
+											<input type="password" class="form-control" placeholder="비밀번호" name="log_pw" id="log_pw" maxlength="20">
+										</div>
+										<input type="submit" class="btn btn-primary form-control" value="로그인">
+									</form>
+								</div>	
+							</div>	
+						</div>
 					</div>
 				</div>
 			</main>
 			<footer class="py-4 bg-light mt-auto"><%@ include file="../menu/footer.jsp" %></footer>
 			</div>
-        </div>
+        	</div>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         	<script src="../js/scripts.js"></script><!-- 사이드바 열고 닫기 -->
 			<script>
