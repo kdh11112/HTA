@@ -40,7 +40,7 @@
 
 <div class="conteiner">
 
-	<form action="mail_writeOk.jsp" method="post">
+	<form action="mailWriteOk.jsp" method="post">
 		<table class = "table table-striped">
 			<tr>
 				<th>보내는 사람</th>   <!-- 작성자 e_number -->
