@@ -5,55 +5,14 @@
     <head>
 		<meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-		<!-- include libraries(jQuery, bootstrap) -->
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-		<link rel="shortcut icon" href="#">
-		<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>로그인</title>
-		<!-- <script src ="../js/httpRequest.js"></script> -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-	</head>
-	<body class="sb-nav-fixed">
-	        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
-	        <div id="layoutSidenav"> 
-	        <div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
-	        <div id="layoutSidenav_content">
-	            <main>
-		         <div class="container-fluid px-4">
-		         	<h1 class="mt-4"></h1>
-		         	<div class="card mb-4">
-						<div class="container">
-							<div class="col-lg-4"></div>	
-							<div class="col-lg-4">
-								<div class="jumbotron" style="padding-top: 20px;">
-									<form method="post" action="register/login_Ok.jsp">
-										<h3 style="text-align: center;">로그인</h3>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="아이디" name="log_id" id="log_id" maxlength="20">
-										</div>
-										<div class="form-group">
-											<input type="password" class="form-control" placeholder="비밀번호" name="log_pw" id="log_pw" maxlength="20">
-										</div>
-										<input type="button" class="btn btn-primary form-control" value="로그인" id="loginbtn"/>
-									</form>
-								</div>	
-							</div>	
-						</div>
-					</div>
-				</div>
-			</main>
-			<footer class="py-4 bg-light mt-auto"><%@ include file="../menu/footer.jsp" %></footer>
-			</div>
-        	</div>
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        	<script src="../js/scripts.js"></script><!-- 사이드바 열고 닫기 -->
-			<script>
-	
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/login.css"> 
+    	<script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    	<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+		<script>
 			$(function(){
 			    $("input[value='로그인']").on("click", checklogin);
 			    $('#log_id, #log_pw').on('keypress', function(e){
@@ -63,33 +22,73 @@
 			    });
 			});
 				
-				function checklogin(){
-					var itxt = $("#log_id").val().trim();
-					var ptxt = $("#log_pw").val().trim();
-					if (itxt == '' || ptxt=='') {	//빈칸이라면
-					$("#msg").html('');
-				} else {
-					$.ajax({
-						type: "GET",
-						async: true,	
-			            dataType: "html", //전송받을 데이터 html,xml
-						url: "register/login_Ok.jsp",
-						data: {
-							"e_id": itxt,
-							"e_password" : ptxt
-						},
-						success: function(response){
-							if (response.trim() === 'true') {
-								alert('로그인 완료.');
-								location.replace('index.jsp');
-				          	} else if (response.trim() === 'false') {
-								alert('존재하지 않는 사원입니다.');
-								location.replace('register/newRegi.jsp');
-				            }
-						} 
-					});
-				}
+			function checklogin(){
+				var itxt = $("#log_id").val().trim();
+				var ptxt = $("#log_pw").val().trim();
+				if (itxt == '' || ptxt=='') {	//빈칸이라면
+				$("#msg").html('');
+			} else {
+				$.ajax({
+					type: "POST",
+					async: true,	
+		            dataType: "html", //전송받을 데이터 html,xml
+					url: "register/login_Ok.jsp",
+					data: {
+						"e_id": itxt,
+						"e_password" : ptxt
+					},
+					success: function(response){
+						if (response.trim() === 'true') {
+							alert('로그인 완료.');
+							location.replace('index.jsp');
+			          	} else if (response.trim() === 'false') {
+							alert('존재하지 않는 사원입니다.');
+							location.replace('register/newRegi.jsp');
+			            }
+					} 
+				});
 			}
-			</script>
-</body>
+		}
+		</script>
+	</head>
+	<body>
+	    <div class="page-container">
+        	<div class="login-form-container shadow">
+            	<div class="login-form-right-side">
+                	<div class="top-logo-wrap">
+                	
+                	</div>
+                	<h1>Welcome!</h1>
+                	<p>In computer security, logging in is the process by which an individual gains access to a computer system by identifying and authenticating themselves.</p>
+	            
+	            	</div>
+	            	<div class="login-form-left-side">
+                		<div class="login-top-wrap">
+                    		<span>Don't have an account?</span>
+                    		<a href='register/newRegi.jsp'>
+                    			<button class="create-account-btn shadow-light">Sign Up</button>
+                    		</a>
+                		</div>
+                		<form name="frm" action="register/login_Ok.jsp" method="post">
+                			<table>
+                				<div class="login-input-container">
+                    				<div class="login-input-wrap input-id">
+                        				<i class="far fa-envelope"></i>
+                        				<input placeholder="ID" type="text" name="log_id" id="log_id">
+                    				</div>
+                    				<div class="login-input-wrap input-password" >
+                        				<i class="fas fa-key"></i>
+                        				<input placeholder="Password"  type="password" name="log_pw" id="log_pw">
+                    				</div>
+                				</div>
+                				<div class="login-btn-wrap">
+                    				<input type="button" class="login-btn" value="로그인" id="loginbtn">
+                				</div>
+                			</table>
+                		</form>
+            		</div>
+        		</div>
+    		</div>
+
+	</body>
 </html>
