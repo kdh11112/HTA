@@ -215,17 +215,19 @@ public class MailDAO {
 	// 내게 쓴 메일함 전체갯수
 	public int getTotalCountSelfBox(int enumber) {
 		sb.setLength(0);
-										
-		sb.append("SELECT COUNT(*) from mail where e_number= ? AND e_number2 = ? ");
+													// 쓴놈 이 나인가? 그러면서 받는놈도 나인가?
+		sb.append("SELECT COUNT(*) cnt from mail where e_number= ? AND e_number2 = ? ");
 		
 		int count = 0;
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, enumber);
+			pstmt.setInt(2, enumber);
+			
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				count = rs.getInt("count(*)");
+				count = rs.getInt("cnt");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -300,6 +302,7 @@ public class MailDAO {
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, enumber);
+			pstmt.setInt(2, enumber);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -376,6 +379,7 @@ public class MailDAO {
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			pstmt.setInt(1, enumber);
+			pstmt.setInt(2, enumber);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
