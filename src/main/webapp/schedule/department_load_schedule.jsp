@@ -21,7 +21,9 @@
 		      {
 		        "title": "<%= list.get(i).getSContents() %>",
 		        "start": "<%= list.get(i).getSStarDate() %>",
-		        "end": "<%= list.get(i).getSEndDate() %>"
+		        "end": "<%= list.get(i).getSEndDate() %>",
+		        "backgroundColor":"#ff6060",
+		        "borderColor":"#ff6060"
 		      }<%= (i != list.size() - 1) ? ',' : "" %>
 		<% } %>]
 	<%}%>
