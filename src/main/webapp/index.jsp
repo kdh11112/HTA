@@ -72,7 +72,7 @@ var eNumber = <%=vo.geteNumber()%>
 
 <body>
 
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="width:100%"><%@ include
 			file="../menu/navi.jsp"%></nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp"%></div>

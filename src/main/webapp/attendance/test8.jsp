@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.WorkingTimeVO"%>
 <%@page import="dao.AttendanceReasonDAO"%>
 <%@page import="dao.EmployeeDAO"%>
@@ -650,13 +652,31 @@ if (obj != null) {
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined"
 																							id="todaysp">
+																						<%	
+																							Date d = new Date();
+																							SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+																							String t = sdf.format(d); 
+																							if( vo3.getDay().equals(t) ){
+																						%>
 																							<h5 class="text-truncate font-size-16 mb-1">
 																								<a href="#" class="text-dark" ><%= vo3.getDay() %></a>&nbsp;
 																								<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today1" style="color: blue">^오^</span>
+																									id="today1" style="color: blue">오늘</span>
 																							</h5>
-
+																						<%	
+																							}else{
+																						%>
+																							<h5 class="text-truncate font-size-16 mb-1">
+																								<a href="#" class="text-dark" ><%= vo3.getDay() %></a>&nbsp;
+																								<span
+																									class="badge badge-pill badge-soft-success font-size-12"
+																									id="today1" style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+																							</h5>
+																						
+																						<%
+																							}
+																						%>
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
