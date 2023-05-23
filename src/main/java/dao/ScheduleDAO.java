@@ -150,6 +150,19 @@ public class ScheduleDAO {
 	    }
 	}
 	
+	public void deleteSchedule(String sContents) {
+		  sb.setLength(0);
+		  sb.append("DELETE FROM SCHEDULE WHERE S_CONTENTS = ? " );
+
+		  try {
+		    pstmt = conn.prepareStatement(sb.toString());
+		    pstmt.setString(1, sContents);
+		    pstmt.executeUpdate();
+		  } catch (SQLException e) {
+		    e.printStackTrace();
+		  }
+		}
+	
 	public void close() {
 		// 자원반납
 		try {

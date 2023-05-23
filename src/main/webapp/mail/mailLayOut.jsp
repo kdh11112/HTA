@@ -31,7 +31,7 @@
             <div id="layoutSidenav_content">
             	<main>
                   
-   					<%@ include file="../mail/mail_main.jsp" %>               
+   					<%@ include file="../mail/mailMain.jsp" %>               
                   
                   
                  </main>

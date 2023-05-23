@@ -374,13 +374,13 @@ margin-top: 10px;
                                     </div>
                                     <h5 class="font-size-16 mb-0">이번달 근무시간</h5>
                                 </div>
-                               	<h5 class="font-size-15">${worksttsVO.sumtm}시간<span class="float-end">61%</span></h5>
+                               	<h5 class="font-size-15"><%-- ${worksttsVO.sumtm} --%>시간<span class="float-end">61%</span></h5>
                                                         <div class="progress animated-progess progress-md">
                                                             <div class="progress-bar" role="progressbar" style="width: 61%" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                 
-                                   		 출근시간: ${worksttsVO.worksttsBgngTm}<br>
-                                    	퇴근시간: ${worksttsVO.worksttsEndTm}
+                                   		 출근시간: <%-- ${worksttsVO.worksttsBgngTm} --%><br>
+                                    	퇴근시간: <%-- ${worksttsVO.worksttsEndTm} --%>
                                    
                             </div>
                         </div>

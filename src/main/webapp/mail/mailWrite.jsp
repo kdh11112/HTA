@@ -14,6 +14,39 @@
 <script src="../js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="../css/summernote/summernote-lite.css">
 
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#addrList").click(function(){
+			var url = "/HTA_Project_semi/emp_search/info_lcm.jsp";
+			var option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+			var title = '자식창1';
+			window.open(url,title,option,"window.opener");
+		})
+
+	
+window.addEventListener("message", receiveMessageFromChild, false);
+	
+	
+		
+		function receiveMessageFromChild(event) {
+			var dataArray = event.data.split(",");
+			
+			var reciverId = dataArray[0];
+			var reciverName = dataArray[1];
+			
+			$("#reciverId").val(reciverId); <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
+			$("#reciverName").val(reciverName); <!-- 주소록에서 선택된 수신자 이름을 String으로 value값에 담았음.  -->
+		}
+		
+
+	
+});
+
+</script>
+
+
+
 </head>
 
 <body>
@@ -40,7 +73,7 @@
 
 <div class="conteiner">
 
-	<form action="mail_writeOk.jsp" method="post">
+	<form action="mailWriteOk.jsp" method="post">
 		<table class = "table table-striped">
 			<tr>
 				<th>보내는 사람</th>   <!-- 작성자 e_number -->
@@ -51,9 +84,10 @@
 			
 			<tr>
 				<th>받는 사람</th>   <!-- 수신자 reciver  e_number2 -->
-				<td><input type="text" id="reciverName" name="reciverName" value="<%=name %>" disabled="disabled"/> <!-- 주소록에서 선택된 수신자 이름을 value값에 담았음.  -->
+				<td><input type="text" id="reciverName" name="reciverName" value="" disabled="disabled"/> <!-- 주소록에서 선택된 수신자 이름을 value값에 담았음.  -->
+				<input id="addrList" class="btn btn-primary" type="button" style="margin-left: 10px" value="주소록" />
 				<input type="hidden" name="reciver" value="<%=name/* reciver */ %>" />
-				<input type="hidden" id="reciverId" name="reciverId" value="<%=writer %>"/> <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
+				<input type="hidden" id="reciverId" name="reciverId" value=""/> <!-- 주소록에서 선택된 수신자 eNumber를 String으로 value값에 담았음.  -->
 				
 				</td>
 			</tr>
@@ -72,7 +106,7 @@
 				<td colspan="2">
 					<input class="btn btn-primary" type="submit" value="보내기" />
 					<input class="btn btn-primary" type="submit" value="예약" />
-					<input class="btn btn-primary" type="submit" value="임시저장" formaction="/HTA_Project_semi/mail/mail_writeTempSaveOk.jsp" />
+					<input class="btn btn-primary" type="submit" value="임시저장" formaction="/HTA_Project_semi/mail/mailWriteTempSaveOk.jsp" />
 				</td>
 			</tr>
 		
