@@ -13,6 +13,7 @@
 		<!-- include libraries(jQuery, bootstrap) -->
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
+        <link href="../css/layout.css" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 		<link rel="shortcut icon" href="#">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -20,17 +21,6 @@
 		<script src="../js/summernote/lang/summernote-ko-KR.js"></script>
 		<link rel="stylesheet" href="../css/summernote/summernote-lite.css">
 		<title>게시글</title>
-		<style type="text/css">
-
-			td {
-	        	text-align: left !important;
-	   		} 
-	   		th{
-	   			font-size: 16px;
-	   			width: 150px;
-	   			padding: 0px 15px;
-	   		}
-		</style>
 	</head>
 	<body class="sb-nav-fixed">
 	<%
@@ -45,43 +35,45 @@
 		}
 	
 	%>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
-        <div id="layoutSidenav"> 
-        <div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
-        <div id="layoutSidenav_content">
-            <main>
-	         <div class="container-fluid px-4">
-	         	<h1 class="mt-4">BOARD</h1>
-	         	<div class="card mb-4">
-			<form action="boardWriteOk.jsp" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-       		<input type="hidden" value="board_write" name="command">
-           	<table>
-               <tr>
-                   <th>제목 *</th>
-                   <td><input type="text" name="title"></td>
-               </tr>
-               <tr>
-                   <th>사원명 *</th>
-                   <!-- 글자 수정 못하게 하고싶다면 disabled 줌
-					disabled은 다음 페이지로 값 전달이 안돼서 hidden 넣어서 전달해줘야 함 -->
-                   <td><input type="text" name="ename" value="<%=ename %>" disabled="disabled">
-                   <input type="hidden" name="ename" value="<%=ename %>" />
-                   <input type="hidden" name="enumber" value="<%=enumber %>"/></td>
-               </tr>
-               <tr>
-                   <th>첨부파일</th>
-                   <td><input type="file" name="filename"></td>
-               </tr>
-               <tr>
-                   <th>내용</th>
-                   <td><textarea class="summernote" name="content"  ></textarea></td>
-               </tr>
-           </table>
-           <input name="btn" type="submit" class="btn btn-secondary" value="등록">
-           <input name="btn" type="reset" class="btn btn-secondary" value="다시작성하기" onclick=reset();>
-           <a href="boardList.jsp">
-           <input name="btn" type="button" class="btn btn-secondary" value="취소" ></a>
-		</form>
+     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
+     <div id="layoutSidenav"> 
+		<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
+		<div id="layoutSidenav_content">
+	    <main>
+			<div class="container-fluid px-4">
+				<div class="formBox">
+					<h1 class="mt-4">BOARD</h1>
+						<div class="card mb-4">
+							<form action="boardWriteOk.jsp" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+	       						<input type="hidden" value="board_write" name="command">
+           						<table>
+              							<tr>
+					                   <th>제목 *</th>
+					                   <td><input type="text" name="title"></td>
+					               </tr>
+					               <tr>
+					                   <th>사원명 *</th>
+					                   <!-- 글자 수정 못하게 하고싶다면 disabled 줌
+										disabled은 다음 페이지로 값 전달이 안돼서 hidden 넣어서 전달해줘야 함 -->
+					                   <td><input type="text" name="ename" value="<%=ename %>" disabled="disabled">
+					                   <input type="hidden" name="ename" value="<%=ename %>" />
+					                   <input type="hidden" name="enumber" value="<%=enumber %>"/></td>
+					               </tr>
+					               <tr>
+					                   <th>첨부파일</th>
+					                   <td><input type="file" name="filename"></td>
+					               </tr>
+					               <tr>
+					                   <th>내용</th>
+					                   <td><textarea class="summernote" name="content"  ></textarea></td>
+					               </tr>
+								</table>
+								<input name="btn" type="submit" class="btn btn-secondary" value="등록">
+						        <input name="btn" type="reset" class="btn btn-secondary" value="다시작성하기" onclick=reset();>
+						        <a href="boardList.jsp">
+						        <input name="btn" type="button" class="btn btn-secondary" value="취소" >
+						        </a>
+							</form>
 				</div>
 			</div>
 		</main>

@@ -7,7 +7,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>로그인</title>
-        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="css/login.css"> 
     	<script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

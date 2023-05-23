@@ -86,12 +86,11 @@
      <div id="layoutSidenav_content">
          <main>
 			<div class="container-fluid px-4">
-			<h1 class="mt-4">게시판</h1>
+			<h1 class="mt-4">BOARD</h1>
        		<div class="card mb-4">
        		
        			<table class="table table-striped"
 						style="text-align: center; border: 1ps solid #dddddd">
-       			<h2>게시글 리스트</h2>
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">번호</th>
