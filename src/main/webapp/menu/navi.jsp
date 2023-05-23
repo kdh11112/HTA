@@ -19,6 +19,8 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                       
+                        
                         <li><hr class="dropdown-divider" /></li>
 		      <%--      <%
 		    Object objSession = session.getAttribute("vo");
@@ -27,6 +29,8 @@
 		%> --%>
 		    <li><a class="dropdown-item" href="/HTA_Project_semi/login.jsp">Login</a></li>
 		    <li><a class="dropdown-item" href="/HTA_Project_semi/register/newRegi.jsp">Register</a></li>
+		     <li><a class="dropdown-item" href="/HTA_Project_semi/login.jsp">Logout</a></li>
+
 		<%-- <%
 		    } else {
 		        // 로그인 된 상태
