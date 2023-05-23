@@ -115,10 +115,7 @@
     
     %>
     	<script type="text/javascript">
-    	$("approvalButton")
-			$(function(){
-				$("#stamp1").append("<img src='../img/stamp/e_" + <%=num%> + ".png' />");
-			})
+
 		</script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
         <div id="layoutSidenav"> 
@@ -158,8 +155,8 @@
 									        </tr>
 									        <tr>
 									            <td><img src="<%=vo.geteStampSelf() %>" /></td>
-									            <td class="position2" id="stamp1"></td>
-									            <td class="position3"></td>
+									            <td class="position2" id="stamp1"><img src="<%=vo.geteStamp1() %>" /></td>
+									            <td class="position3" id="stamp2"></td>
 									        </tr>
 									    </table>
 									</div>

@@ -13,7 +13,8 @@
 	String contents = request.getParameter("contents");
 	String title = request.getParameter("title");
 
-	
+	System.out.println(data1);
+	System.out.println(data3);
 	if(data3 == null || data3.equals("")||data1 == null || data1.equals("")||contents == null || contents.equals("")){
 		 response.sendRedirect("approvalForm.jsp");
 		
@@ -37,7 +38,7 @@
 		vo.setaTitle(title);
 		vo.setaContent(contents);
    		dao.addOne(vo0,vo);
-		response.sendRedirect("approvalListTemporary.jsp");  
+		response.sendRedirect("approvalListTemporary.jsp"); 
 
 			
 		}
