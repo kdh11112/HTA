@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset='utf-8' />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport"
@@ -67,7 +66,32 @@ var eNumber = <%=vo.geteNumber()%>
 ;
 <%}%>
 </script>
+<style>
+.card-body{
+	width:100%;
+	height:250px;
+	overflow: auto;
+}
+
+</style>
 </head>
+
+	<script>
+	$(document).ready(function() {
+		$("#main_mail").load("/HTA_Project_semi/mail/mailMain.jsp");
+	});
+	$(document).ready(function() {
+		$("#main_board").load("/HTA_Project_semi/board/boardList.jsp");
+	});
+	$(document).ready(function() {
+		$("#main_approval").load("/HTA_Project_semi/approval/approvalList2.jsp");
+	});
+	$(document).ready(function() {
+		$("#main_schedule").load("/HTA_Project_semi/schedule/schedule_list2.jsp");
+	});
+
+	</script>
+</html>
 
 
 <body>
@@ -107,192 +131,24 @@ var eNumber = <%=vo.geteNumber()%>
 				</div>
 				<div class="card attField">
 					<div class="card-header">전자결재</div>
-					<div class="card-body ">
-						<!-- nav -->
-						<nav class="navbar navbar-expand-lg bg-body-tertiary">
-						  <div class="container-fluid">
-						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						      <span class="navbar-toggler-icon"></span>
-						    </button>
-						    <div class="collapse navbar-collapse" id="navbarNav">
-						      <ul class="navbar-nav">
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">일반결재</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">임시저장함</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">내문서함</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">결재대기함</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">결재완료문서</a>
-						        </li>
-						      </ul>
-						    </div>
-						  </div>
-						</nav>
-						<!-- nav -->
-						<table class="table-primary">
-						<tr>
-						  <td class="table-primary">결재승인부탁드립니다.</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">디자인확인부탁드립니다.</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">맘에안드는데 처음껄로 할게용</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">모던하면서 클래식한 디자인부탁드ㄹㅕ용</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">쥬길까</td>
-						</tr>
-						</table>
+					<div class="card-body " id="main_approval">
+					
 					</div>
 				</div>
 				<div class="card attField">
 					<div class="card-header">사내메일</div>
-					<div class="card-body ">
-						<!-- nav -->
-						<nav class="navbar navbar-expand-lg bg-body-tertiary">
-						  <div class="container-fluid">
-						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						      <span class="navbar-toggler-icon"></span>
-						    </button>
-						    <div class="collapse navbar-collapse" id="navbarNav">
-						      <ul class="navbar-nav">
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">받은메일함</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">보낸메일함</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">내게쓴메일함</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">임시보관함</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">휴지통</a>
-						        </li>
-						      </ul>
-						    </div>
-						  </div>
-						</nav>
-						<!-- nav -->
-						<table class="table-primary">
-						<tr>
-						  <td class="table-primary">헿</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">쥬긴당</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">하입보이</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">뀨</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">쥬길까</td>
-						</tr>
-						</table>
+					<div class="card-body " id="main_mail">
+						
 					</div>
 				</div>
 				<div class="card r_attField">
 					<div class="card-header">게시판</div>
-					<div class="card-body ">
-						<!-- nav -->
-						<nav class="navbar navbar-expand-lg bg-body-tertiary">
-						  <div class="container-fluid">
-						    
-						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						      <span class="navbar-toggler-icon"></span>
-						    </button>
-						    <div class="collapse navbar-collapse" id="navbarNav">
-						      <ul class="navbar-nav">
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">공지사항</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">자유게시판</a>
-						        </li>
-						      </ul>
-						    </div>
-						  </div>
-						</nav>
-						<!-- nav -->
-						<table class="table-primary">
-						<tr>
-						  <td class="table-primary">공지공지</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">프리덤</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">춘식이 고구마</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">춘식이 고구마</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">춘식이 고구마</td>
-						</tr>
-						</table>
+					<div class="card-body " id="main_board">
 					</div>
 				</div>
 				<div class="card r_attField">
 					<div class="card-header">일정관리</div>
-					<div class="card-body ">
-						<!-- nav -->
-						<nav class="navbar navbar-expand-lg bg-body-tertiary">
-						  <div class="container-fluid">
-						    
-						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						      <span class="navbar-toggler-icon"></span>
-						    </button>
-						    <div class="collapse navbar-collapse" id="navbarNav">
-						      <ul class="navbar-nav">
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">전체일정</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">개인일정</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">부서일정</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">회사일정</a>
-						        </li>
-						      </ul>
-						    </div>
-						  </div>
-						</nav>
-						<!-- nav -->
-						<table class="table-primary">
-						<tr>
-						  <td class="table-primary">응애</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">디자인확인부탁드립니다.</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">맘에안드는데 처음껄로 할게용</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">모던하면서 클래식한 디자인부탁드ㄹㅕ용</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">쥬길까</td>
-						</tr>
-						</table>
+					<div class="card-body " id="main_schedule">
 					</div>
 				</div>
 				
