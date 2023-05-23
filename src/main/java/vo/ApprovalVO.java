@@ -23,15 +23,24 @@ public class ApprovalVO {
 	private String eEname2;
 	private String eEof1;
 	private String eEof2;
+	private String eStampSelf;
+	private String eStamp1;
+	private String eStamp2;
 	
 	
 	
 	public ApprovalVO() {}
 
 
+	
+
+
+
+
 	public ApprovalVO(int aNumber, String aName, String aDepartmentName, Date aStartDate, Date aEndDate, String aTitle,
 			String aContent, String aName1st, String aName2nd, String aStatus, String aSave, int eNumber, int eENumber1,
-			int eEnumber2, String eEname1, String eEname2, String eEof1, String eEof2) {
+			int eEnumber2, String eEname1, String eEname2, String eEof1, String eEof2, String eStampSelf,
+			String eStamp1, String eStamp2) {
 		super();
 		this.aNumber = aNumber;
 		this.aName = aName;
@@ -51,7 +60,13 @@ public class ApprovalVO {
 		this.eEname2 = eEname2;
 		this.eEof1 = eEof1;
 		this.eEof2 = eEof2;
+		this.eStampSelf = eStampSelf;
+		this.eStamp1 = eStamp1;
+		this.eStamp2 = eStamp2;
 	}
+
+
+
 
 
 
@@ -279,6 +294,66 @@ public class ApprovalVO {
 
 	public void seteNumber(int eNumber) {
 		this.eNumber = eNumber;
+	}
+
+
+
+
+
+
+
+	public String geteStampSelf() {
+		return eStampSelf;
+	}
+
+
+
+
+
+
+
+	public void seteStampSelf(String eStampSelf) {
+		this.eStampSelf = eStampSelf;
+	}
+
+
+
+
+
+
+
+	public String geteStamp1() {
+		return eStamp1;
+	}
+
+
+
+
+
+
+
+	public void seteStamp1(String eStamp1) {
+		this.eStamp1 = eStamp1;
+	}
+
+
+
+
+
+
+
+	public String geteStamp2() {
+		return eStamp2;
+	}
+
+
+
+
+
+
+
+	public void seteStamp2(String eStamp2) {
+		this.eStamp2 = eStamp2;
 	}
 
 

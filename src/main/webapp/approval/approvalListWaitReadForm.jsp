@@ -14,12 +14,11 @@
   	ApprovalDAO dao3 = new ApprovalDAO();
   	ApprovalVO vo3 = new ApprovalVO();
   	vo3.setaNumber(num);
-
   	EmployeeVO empVO = new EmployeeVO();
   	empVO.seteOfficialResponsibilities(vo.geteOfficialResponsibilities());
+  	empVO.setEstamp(vo.getEstamp());
   	dao3.updateOne(vo3, empVO);
   	response.sendRedirect("approvalListWait.jsp"); 
-  	out.println(num);
-	out.println(vo.geteOfficialResponsibilities());
+
 	}
 %>

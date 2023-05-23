@@ -438,9 +438,10 @@ public class MailDAO {
 				int eTotalVacation = rs.getInt("e_total_vacation");
 				String eServing = rs.getString("e_serving");
 				String dName = rs.getString("d_name");
+				String eStamp = rs.getString("e_stamp");
 				vo = new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2,
 						eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender,
-						eOfficialResponsibilities, eTotalVacation, eServing, dName);
+						eOfficialResponsibilities, eTotalVacation, eServing, dName,eStamp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

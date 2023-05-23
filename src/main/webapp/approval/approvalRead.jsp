@@ -127,21 +127,21 @@
 										    </tr>
 									        <tr>
 									        	<input type="hidden" name="pageNum" value="<%=vo.getaNumber() %>"/>
-									            <th><%=position %></th>
+									            <th><%=vo.getaDepartmentName() %></th>
 									            <!-- <th class="position2" id="data-placeholder2"></th> -->
 									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" value="<%=of1st %>"  readonly></th>
 									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" value="<%=of2rd %>" readonly></th>
 									            <!-- <input type="text" id="data-placeholder2" name="data-placeholder1"> -->
 									        </tr>
 									        <tr>
-									            <td><%=name %></td>
+									            <td><%=vo.getaName() %></td>
 									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" value="<%=vo.getaName1st() %>" readonly></td>
 									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" value="<%=vo.getaName2nd() %>" readonly></td>
 									        </tr>
 									        <tr>
-									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
-									            <td class="position2"></td>
-									            <td class="position3"></td>
+									            <td><img src="<%=vo.geteStampSelf() %>"></td>
+									            <td class="position2"><img src="<%=vo.geteStamp1() %>"></td>
+									            <td class="position3"><img src="<%=vo.geteStamp2() %>"></td>
 									        </tr>
 									    </table>
 									</div>
@@ -156,7 +156,7 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<input class="btn btn-info" type="submit" value="결재" />
+												<!-- <input class="btn btn-info" type="submit" value="결재" /> -->
 											</td>
 										</tr>
 		                            </table>

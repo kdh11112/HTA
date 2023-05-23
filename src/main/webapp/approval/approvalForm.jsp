@@ -85,7 +85,8 @@
 					for(var i=0; i<dataArray.length; i++){
 						if(title == '자식창1'){
 						    document.getElementById('placeholder1').value = dataArray[1]; 
-						    document.getElementById('placeholder2').value = dataArray[2]; 						
+						    document.getElementById('placeholder2').value = dataArray[2]; 
+						   
 						}else if(title == '자식창2'){
 						    document.getElementById('placeholder3').value = dataArray[1]; 
 						    document.getElementById('placeholder4').value = dataArray[2]; 	
@@ -127,6 +128,7 @@
     	String name = null;
     	String dname = null;
     	String position = null;
+    	String stamp = null;
     	int num = 0;
     	LocalDate now = LocalDate.now();
     	if(obj != null){
@@ -135,7 +137,7 @@
     		dname = vo.getdName();
     		position = vo.geteOfficialResponsibilities();
     		num = vo.geteNumber();
-    		
+    		stamp = vo.getEstamp();
     	}
     	
     	
@@ -176,7 +178,7 @@
 									            <td class="position3"><input type="text" id="placeholder3" name="placeholder3" readonly></td>
 									        </tr>
 									        <tr>
-									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
+									            <td><img src="<%=stamp %>"/></td>
 									            <td class="position2" id="stamp1"></td>
 									            <td class="position3" id="stamp2"></td>
 									        </tr>

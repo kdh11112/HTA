@@ -259,7 +259,7 @@ public class ApprovalDAO {
 	public ApprovalVO selectOne(int i) {
 	    sb.setLength(0);
 
-	    sb.append("SELECT a.A_NAME,a.A_DEPARTMENT_NAME,a.A_TITLE,a.A_CONTENT,a.A_NAME_1ST,e.E_OFFICIAL_RESPONSIBILITIES AS e1ST,a.A_NAME_2ND,e2.E_OFFICIAL_RESPONSIBILITIES AS e2RD,a.A_START_DATE from APPROVAL a LEFT JOIN EMPLOYEE e ON a.A_NAME_1ST = e.E_NAME LEFT JOIN EMPLOYEE e2 ON a.A_NAME_2ND = e2.E_NAME WHERE a.A_NUMBER = ?");
+	    sb.append("SELECT a.A_NAME,a.A_DEPARTMENT_NAME,a.A_TITLE,a.A_CONTENT,a.A_NAME_1ST,e.E_OFFICIAL_RESPONSIBILITIES AS e1ST,a.A_NAME_2ND,e2.E_OFFICIAL_RESPONSIBILITIES AS e2RD,a.A_START_DATE,a.A_STAMP_SALF,a.A_STAMP_1ST,a.A_STAMP_2ND from APPROVAL a LEFT JOIN EMPLOYEE e ON a.A_NAME_1ST = e.E_NAME LEFT JOIN EMPLOYEE e2 ON a.A_NAME_2ND = e2.E_NAME WHERE a.A_NUMBER = ?");
 	    ApprovalVO vo = null;
 	    EmployeeVO vo2 = new EmployeeVO();
 	    EmployeeVO vo3 = new EmployeeVO();
@@ -276,7 +276,10 @@ public class ApprovalDAO {
 	            String of1st = rs.getString("e1ST");
 	            String name2rd = rs.getString("A_NAME_2ND");
 	            String of2rd = rs.getString("e2RD");
-	            Date startDate = rs.getDate("A_START_DATE");                    
+	            Date startDate = rs.getDate("A_START_DATE");
+	            String stampSelf = rs.getString("A_STAMP_SALF");
+	            String stamp1st = rs.getString("A_STAMP_1ST");
+	            String stamp2nd = rs.getString("A_STAMP_2ND");
 	            vo = new ApprovalVO();
 	            vo.setaName(name);
 	            vo.setaDepartmentName(dname);
@@ -286,6 +289,9 @@ public class ApprovalDAO {
 	            vo.setaName2nd(name2rd);
 	            vo.setaStartDate(startDate);
 	            vo.seteNumber(i);
+	            vo.seteStampSelf(stampSelf);
+	            vo.seteStamp1(stamp1st);
+	            vo.seteStamp2(stamp2nd);
 	            
 	            vo2.seteOfficialResponsibilities(of1st);
 	            vo3.seteOfficialResponsibilities(of2rd);
@@ -305,7 +311,7 @@ public class ApprovalDAO {
 	
 	public void addOne(ApprovalVO vo,EmployeeVO vo2) {
 		sb.setLength(0);
-		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,'1차결재 대기중',null,?)");
+		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,'1차결재 대기중',null,?,?,null,null)");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -316,6 +322,7 @@ public class ApprovalDAO {
 			pstmt.setString(5,vo.getaName1st());
 			pstmt.setString(6,vo.getaName2nd());
 			pstmt.setInt(7,vo2.geteNumber());
+			pstmt.setString(8,vo2.getEstamp());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -330,17 +337,17 @@ public class ApprovalDAO {
 		System.out.println(vo.getaNumber());
 		sb.append("UPDATE APPROVAL SET ");
 		if(s.geteOfficialResponsibilities().equals("과장")) {
-			sb.append("A_STATUS = '2차결재 대기중' WHERE A_NUMBER = ?");
+			sb.append("A_STATUS = '2차결재 대기중',A_STAMP_1ST = ? WHERE A_NUMBER = ?");
 		}else if(s.geteOfficialResponsibilities().equals("차장") || s.geteOfficialResponsibilities().equals("부사장")) {
-			sb.append("A_STATUS = '결재완료' WHERE A_NUMBER = ?");
+			sb.append("A_STATUS = '결재완료', A_STAMP_2ND = ? WHERE A_NUMBER = ?");
 		}else {
 			sb.append("WHERE A_NUMBER = ?");
 		}
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, vo.getaNumber());
-			
+			pstmt.setInt(2, vo.getaNumber());
+			pstmt.setString(1, s.getEstamp());
 			pstmt.executeUpdate(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
