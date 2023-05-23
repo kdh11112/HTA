@@ -1,3 +1,5 @@
+<%@page import="vo.EmployeeVO"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,13 +45,34 @@ margin-bottom:25px;
 }
 
 </style>
+<script>
+<%
+Object obj = session.getAttribute("vo");
+String name = null;
+String dname = null;
+String position = null;
 
+int num = 0;
+LocalDateTime now = LocalDateTime.now();
+
+if (obj != null) {
+	EmployeeVO vo = (EmployeeVO) obj;
+	name = vo.geteName();
+	dname = vo.getdName();
+
+	position = vo.geteOfficialResponsibilities();
+	num = vo.geteNumber();
+%>
+var eNumber = <%=vo.geteNumber()%>
+;
+<%}%>
+</script>
 </head>
 
 
 <body>
 
-	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="width:100%"><%@ include
 			file="../menu/navi.jsp"%></nav>
 	<div id="layoutSidenav">
 		<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp"%></div>
@@ -64,13 +87,14 @@ margin-bottom:25px;
 
 
 				</div>
+				
 				<!-- 사용자 정보 start-->
 				<div class="card" style="width: 18rem; margin-left: 100px;">
 					<img src=".../../images/after.PNG" class="card-img-top" alt="...">
 					<div class="card-body">
-						<h5 class="card-title">김사원</h5>
-						<p class="card-text">사원</p>
-						<p class="card-text">개발팀</p>
+						<h5 class="card-title"><%=name %></h5>
+						<p class="card-text"><%=position %></p>
+						<p class="card-text"><%=dname %></p>
 					</div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">내 게시글<a href="#"
@@ -271,49 +295,7 @@ margin-bottom:25px;
 						</table>
 					</div>
 				</div>
-				<div class="card r_attField">
-					<div class="card-header">
-					근태관리
-					</div>
-					<div class="card-body ">
-						<!-- nav -->
-						<nav class="navbar navbar-expand-lg bg-body-tertiary">
-						  <div class="container-fluid">
-						    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						      <span class="navbar-toggler-icon"></span>
-						    </button>
-						    <div class="collapse navbar-collapse" id="navbarNav">
-						      <ul class="navbar-nav">
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">개인근태</a>
-						        </li>
-						        <li class="nav-item">
-						          <a class="nav-link active" aria-current="page" href="#">연차관리</a>
-						        </li>
-						      </ul>
-						    </div>
-						  </div>
-						</nav>
-						<!-- nav -->
-						<table class="table-primary">
-						<tr>
-						  <td class="table-primary">응애</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">디자인확인부탁드립니다.</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">맘에안드는데 처음껄로 할게용</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">모던하면서 클래식한 디자인부탁드ㄹㅕ용</td>
-						</tr>
-						<tr>
-						  <td class="table-primary">쥬길까</td>
-						</tr>
-						</table>						
-					</div>
-				</div>
+				
 			</main>
 			<!-- 사용자 정보 end -->
 			<footer class="py-4 bg-light mt-auto"><%@ include

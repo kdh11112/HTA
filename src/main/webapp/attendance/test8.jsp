@@ -1,3 +1,6 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="vo.WorkingTimeVO"%>
 <%@page import="dao.AttendanceReasonDAO"%>
 <%@page import="dao.EmployeeDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -512,10 +515,10 @@ if (obj != null) {
 
 										<%
 										AttendenceDAO dao = new AttendenceDAO();
-										AttendenceVO vo = dao.getStartTime(num);
-										AttendenceVO vo1 = dao.getEndTime(num);
+																		AttendenceVO vo = dao.getStartTime(num);
+																		AttendenceVO vo1 = dao.getEndTime(num);
 
-										if (vo != null) {
+																		if (vo != null) {
 										%>
 										출근시간:<%=vo.getOfficeGoingHour()%><br>
 										<%
@@ -587,10 +590,26 @@ if (obj != null) {
 											<h5 class="font-size-16 mb-0">이번 주 근무</h5>
 										</div>
 
-						<%
-							ArrayList<AttendenceVO> vo3 = dao.getWoringTime(num);
-							out.println(vo3);
-						%>
+										<%-- <!-- 당일근무시간출력 -->
+										<%
+										ArrayList<WorkingTimeVO> list = dao.getWoringTime(num);//메서드호출
+
+										for (WorkingTimeVO vo3 : list) {//for문으로 리스트 출력?
+										%>
+										
+										<table>
+											<tr>
+												<td><%= vo3.getDay() %></td>
+												<td><%= vo3.getTime() %></td>
+											</tr>
+										
+										</table>
+											
+											
+										<%
+										}
+										%> --%>
+										<!-- out.println(vo3); -->
 										<div class="mt-4">
 											<div data-simplebar="init" style="max-height: 400px;">
 												<div class="simplebar-wrapper" style="margin: 0px;">
@@ -608,244 +627,18 @@ if (obj != null) {
 																			data-pattern="priority-columns">
 																			<div class="sticky-table-header"
 																				style="visibility: hidden; width: auto; top: -4.40625px;">
-																				<!-- <table
-																					class="table table-nowrap align-middle table-hover mb-0"
-																					id="id3c6e7ddbeb24f-clone">
-																					<tbody>
-																						<tr>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<h5 class="text-truncate font-size-14 mb-1">
-																									<a href="javascript: void(0);"
-																										class="text-dark"></a>
-																								</h5>
-																								<p class="text-muted mb-0"></p>
-																							</td>
-																							<td style="width: 90px;" data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div>
-																									<ul class="list-inline mb-0 font-size-16">
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-success p-1"><i
-																												class="bx bxs-edit-alt"></i></a></li>
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-danger p-1"><i
-																												class="bx bxs-trash"></i></a></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</tr>
 
-																						<tr>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div class="form-check">
-																									<input class="form-check-input" type="checkbox"
-																										id="tasklistCheck02-clone"> <label
-																										class="form-check-label" for="tasklistCheck02"></label>
-																								</div>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<h5 class="text-truncate font-size-14 mb-1">
-																									<a href="javascript: void(0);"
-																										class="text-dark">New Landing UI</a>
-																								</h5>
-																								<p class="text-muted mb-0">Assigned to Team
-																									A</p>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div>
-																									<ul class="list-inline mb-0 font-size-16">
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-success p-1"><i
-																												class="bx bxs-edit-alt"></i></a></li>
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-danger p-1"><i
-																												class="bx bxs-trash"></i></a></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</tr>
-
-																						<tr>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div class="form-check">
-																									<input class="form-check-input" type="checkbox"
-																										id="tasklistCheck02-clone"> <label
-																										class="form-check-label" for="tasklistCheck02"></label>
-																								</div>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<h5 class="text-truncate font-size-14 mb-1">
-																									<a href="javascript: void(0);"
-																										class="text-dark">Brand logo design</a>
-																								</h5>
-																								<p class="text-muted mb-0">Assigned to Janis</p>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div>
-																									<ul class="list-inline mb-0 font-size-16">
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-success p-1"><i
-																												class="bx bxs-edit-alt"></i></a></li>
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-danger p-1"><i
-																												class="bx bxs-trash"></i></a></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</tr>
-
-																						<tr>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div class="form-check">
-																									<input class="form-check-input" type="checkbox"
-																										id="tasklistCheck04-clone"> <label
-																										class="form-check-label" for="tasklistCheck04"></label>
-																								</div>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<h5 class="text-truncate font-size-14 mb-1">
-																									<a href="javascript: void(0);"
-																										class="text-dark"></a>
-																								</h5>
-																								<p class="text-muted mb-0"></p>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div>
-																									<ul class="list-inline mb-0 font-size-16">
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-success p-1"><i
-																												class="bx bxs-edit-alt"></i></a></li>
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-danger p-1"><i
-																												class="bx bxs-trash"></i></a></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</tr>
-
-																						<tr>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div class="form-check">
-																									<input class="form-check-input" type="checkbox"
-																										id="tasklistCheck05-clone"> <label
-																										class="form-check-label" for="tasklistCheck05"></label>
-																								</div>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<h5 class="text-truncate font-size-14 mb-1">
-																									<a href="javascript: void(0);"
-																										class="text-dark"></a>
-																								</h5>
-																								<p class="text-muted mb-0"></p>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div>
-																									<ul class="list-inline mb-0 font-size-16">
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-success p-1"><i
-																												class="bx bxs-edit-alt"></i></a></li>
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-danger p-1"><i
-																												class="bx bxs-trash"></i></a></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</tr>
-																						<tr>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div class="form-check">
-																									<input class="form-check-input" type="checkbox"
-																										id="tasklistCheck06-clone"> <label
-																										class="form-check-label" for="tasklistCheck06"></label>
-																								</div>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<h5 class="text-truncate font-size-14 mb-1">
-																									<a href="javascript: void(0);"
-																										class="text-dark">Redesign - Landing page</a>
-																								</h5>
-																								<p class="text-muted mb-0">Assigned to Jerry</p>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div>
-																									<ul class="list-inline mb-0 font-size-16">
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-success p-1"><i
-																												class="bx bxs-edit-alt"></i></a></li>
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-danger p-1"><i
-																												class="bx bxs-trash"></i></a></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</tr>
-																						<tr>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div class="form-check">
-																									<input class="form-check-input" type="checkbox"
-																										id="tasklistCheck07-clone"> <label
-																										class="form-check-label" for="tasklistCheck07"></label>
-																								</div>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<h5 class="text-truncate font-size-14 mb-1">
-																									<a href="javascript: void(0);"
-																										class="text-dark">Skote Crypto Dashboard</a>
-																								</h5>
-																								<p class="text-muted mb-0">Assigned to Eric</p>
-																							</td>
-																							<td data-org-colspan="1"
-																								data-columns="id3c6e7ddbeb24f-col-undefined">
-																								<div>
-																									<ul class="list-inline mb-0 font-size-16">
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-success p-1"><i
-																												class="bx bxs-edit-alt"></i></a></li>
-																										<li class="list-inline-item"><a
-																											href="javascript: void(0);"
-																											class="text-danger p-1"><i
-																												class="bx bxs-trash"></i></a></li>
-																									</ul>
-																								</div>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table> -->
 																			</div>
+																			<!-- 당일근무시간출력 -->
+																			<%
+																			ArrayList<WorkingTimeVO> list = dao.getWoringTime(num);//메서드호출
+									
+																			for (WorkingTimeVO vo3 : list) {//for문으로 리스트 출력?
+																			%>
+
 																			<table
 																				class="table table-nowrap align-middle table-hover mb-0"
-																				style="height: 550px;">
+																				style="height: 80px;">
 																				<tbody>
 																					<tr>
 																						<td style="width: 50px;" data-org-colspan="1"
@@ -859,270 +652,65 @@ if (obj != null) {
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined"
 																							id="todaysp">
+																						<%	
+																							Date d = new Date();
+																							SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+																							String t = sdf.format(d); 
+																							if( vo3.getDay().equals(t) ){
+																						%>
 																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="#" class="text-dark" id="week1"></a>&nbsp;
+																								<a href="#" class="text-dark" ><%= vo3.getDay() %></a>&nbsp;
 																								<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today1" style="color:blue"id = "work-hours">오늘</span>
+																									id="today1" style="color: blue">오늘</span>
 																							</h5>
-
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-
-																							<div class="d-flex flex-wrap gap-3">
-
-																								<a href="#" class="text-dark font-size-16"
-																									data-bs-toggle="modal"
-																									data-bs-target="#exampleModal"
-																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14" 
-																									style="color: blue">근무</span> &nbsp;
-																								</a>
-
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							</td>
-
-																					</tr>
-																					<!-- 여기까지 반복해주세옹  -->
-																					<tr>
-																						<td style="width: 50px;" data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<div class="form-check">
-																								<input class="form-check-input" type="checkbox"
-																									id="tasklistCheck01"> <label
-																									class="form-check-label" for="tasklistCheck01"></label>
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
+																						<%	
+																							}else{
+																						%>
 																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="javascript: void(0);" class="text-dark"
-																									id="week2"> </a>&nbsp;<span
-																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today2" style="color:blue">오늘</span>
-																							</h5>
-
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-
-																							<div class="d-flex flex-wrap gap-3">
-																								<a href="#" class="text-dark font-size-16"
-																									data-bs-toggle="modal"
-																									data-bs-target="#exampleModal"
-																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14"
-																									style="color: blue">근무</span> &nbsp;
-																								</a>
-
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																						</td>
-
-																					</tr>
-
-																					<tr>
-																						<td style="width: 50px;" data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<div class="form-check">
-																								<input class="form-check-input" type="checkbox"
-																									id="tasklistCheck01"> <label
-																									class="form-check-label" for="tasklistCheck01"></label>
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="javascript: void(0);" class="text-dark"
-																									id="week3"> </a>&nbsp;<span
-																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today3" style="color:blue">오늘</span>
-																							</h5>
-
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-
-																							<div class="d-flex flex-wrap gap-3">
-
-																								<a href="#" class="text-dark font-size-16"
-																									data-bs-toggle="modal"
-																									data-bs-target="#exampleModal"
-																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14"
-																									style="color: blue">근무</span>
-																									&nbsp;
-																								</a>
-
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							시간</td>
-
-																					</tr>
-
-																					<tr>
-																						<td style="width: 50px;" data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<div class="form-check">
-																								<input class="form-check-input" type="checkbox"
-																									id="tasklistCheck01"> <label
-																									class="form-check-label" for="tasklistCheck01"></label>
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="javascript: void(0);" class="text-dark"
-																									id="week4"> </a>&nbsp;<span
-																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today4" style="color:blue">오늘</span>
-																							</h5>
-
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-
-																							<div class="d-flex flex-wrap gap-3">
-
-																								<a href="#" class="text-dark font-size-16"
-																									data-bs-toggle="modal"
-																									data-bs-target="#exampleModal"
-																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14"
-																									style="color: blue">근무</span>
-																									&nbsp;${list.get(3).getWorksttsScTm()}
-																								</a>
-
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							시간</td>
-
-																					</tr>
-
-																					<tr>
-																						<td style="width: 50px;" data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<div class="form-check">
-																								<input class="form-check-input" type="checkbox"
-																									id="tasklistCheck01"> <label
-																									class="form-check-label" for="tasklistCheck01"></label>
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="javascript: void(0);" class="text-dark"
-																									id="week5"> </a>&nbsp;<span
-																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today5" style="color:blue">오늘</span>
-																							</h5>
-
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-
-																							<div class="d-flex flex-wrap gap-3">
-
-																								<a href="#" class="text-dark font-size-16"
-																									data-bs-toggle="modal"
-																									data-bs-target="#exampleModal"
-																									data-bs-whatever="@mdo"> <span
-																									class="badge badge-pill badge-soft-secondary font-size-14"
-																									style="color: blue">근무</span> &nbsp;
-																								</a>
-
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							시간</td>
-
-																					</tr>
-
-																					<tr>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<div class="form-check">
-																								<input class="form-check-input" type="checkbox"
-																									id="tasklistCheck06"> <label
-																									class="form-check-label" for="tasklistCheck06"></label>
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="javascript: void(0);" class="text-dark"
-																									id="week6"> </a>&nbsp;<span
-																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today6" style="color:blue">오늘</span>
-																							</h5>
-
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<div>
+																								<a href="#" class="text-dark" ><%= vo3.getDay() %></a>&nbsp;
 																								<span
-																									class="badge badge-pill badge-soft-success font-size-12">쉬는날</span>
-																							</div>
-																						</td>
-																					</tr>
-																					<tr>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<div class="form-check">
-																								<input class="form-check-input" type="checkbox"
-																									id="tasklistCheck07"> <label
-																									class="form-check-label" for="tasklistCheck07"></label>
-																							</div>
-																						</td>
-																						<td data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="javascript: void(0);" class="text-dark"
-																									id="week0"> </a><span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today0" style="color:blue">오늘</span>
+																									id="today1" style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 																							</h5>
-
+																						
+																						<%
+																							}
+																						%>
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<span
-																							class="badge badge-pill badge-soft-success font-size-12">쉬는날</span>
+
+																							<div class="d-flex flex-wrap gap-3">
+
+																								<a href="#" class="text-dark font-size-16"
+																									data-bs-toggle="modal"
+																									data-bs-target="#exampleModal"
+																									data-bs-whatever="@mdo"> <span
+																									class="badge badge-pill badge-soft-secondary font-size-14"
+																									style="color: blue">근무</span> &nbsp;
+																								</a>
+
+																							</div>
 																						</td>
+																						<td data-org-colspan="1"
+																							data-columns="id3c6e7ddbeb24f-col-undefined">
+																							<%= vo3.getTime() %>시간
+																						</td>
+
 																					</tr>
 																				</tbody>
 																			</table>
+																			<%
+																			}
+																			%>
 																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
-
-													<!-- <div class="simplebar-placeholder"
-														style="width: auto; height: 800px;"></div> -->
 												</div>
-												<!-- <div class="simplebar-track simplebar-horizontal"
-													style="visibility: hidden;">
-													<div class="simplebar-scrollbar"
-														style="transform: translate3d(0px, 0px, 0px); display: none;"></div>
-												</div>
-												<div class="simplebar-track simplebar-vertical"
-													style="visibility: visible;">
-													<div class="simplebar-scrollbar"
-														style="height: 20px; transform: translate3d(0px, 134px, 0px); display: none;"></div>
-												</div> -->
 											</div>
 										</div>
 									</div>
@@ -1130,152 +718,150 @@ if (obj != null) {
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- Modal 시작 -->
-				<div class="modal fade" id="exampleModal" tabindex="-1"
-					aria-labelledby="exampleModalLabel">
-					<div class="modal-dialog">
+					<!-- Modal 시작 -->
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						aria-labelledby="exampleModalLabel">
+						<div class="modal-dialog">
 
-						<div class="modal-content">
-							<div class="modal-header">
+							<div class="modal-content">
+								<div class="modal-header">
 
-								<button type="button" class="btn-close" data-bs-dismiss="modal"
-									aria-label="Close"></button>
-							</div>
-							<div class="modal-body">
-								<div>
-									<div class="card-body">
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div>
+										<div class="card-body">
 
-										<ul class="nav nav-pills nav-justified" role="tablist">
+											<ul class="nav nav-pills nav-justified" role="tablist">
 
-											<li class="nav-item waves-effect waves-light"><a
-												class="nav-link active" data-bs-toggle="tab"
-												href="#profile-1" role="tab"> <span
-													class="d-block d-sm-none"><i class="far fa-user"></i></span>
-													<span class="d-none d-sm-block">연차</span>
-											</a></li>
-											<li class="nav-item waves-effect waves-light"><a
-												class="nav-link" data-bs-toggle="tab" href="#messages-1"
-												role="tab"> <span class="d-block d-sm-none"><i
-														class="far fa-envelope"></i></span> <span
-													class="d-none d-sm-block">외근</span>
-											</a></li>
-											<li class="nav-item waves-effect waves-light"><a
-												class="nav-link" data-bs-toggle="tab" href="#settings-1"
-												role="tab"> <span class="d-block d-sm-none"><i
-														class="fas fa-cog"></i></span> <span class="d-none d-sm-block">원격근무</span>
-											</a></li>
-										</ul>
+												<li class="nav-item waves-effect waves-light"><a
+													class="nav-link active" data-bs-toggle="tab"
+													href="#profile-1" role="tab"> <span
+														class="d-block d-sm-none"><i class="far fa-user"></i></span>
+														<span class="d-none d-sm-block">연차</span>
+												</a></li>
+												<li class="nav-item waves-effect waves-light"><a
+													class="nav-link" data-bs-toggle="tab" href="#messages-1"
+													role="tab"> <span class="d-block d-sm-none"><i
+															class="far fa-envelope"></i></span> <span
+														class="d-none d-sm-block">외근</span>
+												</a></li>
+												<li class="nav-item waves-effect waves-light"><a
+													class="nav-link" data-bs-toggle="tab" href="#settings-1"
+													role="tab"> <span class="d-block d-sm-none"><i
+															class="fas fa-cog"></i></span> <span class="d-none d-sm-block">원격근무</span>
+												</a></li>
+											</ul>
 
-										<!-- Tab panes -->
-										<div class="tab-content p-3 text-muted">
+											<!-- Tab panes -->
+											<div class="tab-content p-3 text-muted">
 
-											<div class="tab-pane active" id="profile-1" role="tabpanel">
-												<i class="bx bx-time-five"></i> <select
-													class="form-select se">
-													<option>오전반차</option>
-													<option>오후반차</option>
-													<option>연차</option>
-												</select> <br> <i class="bx bx-edit-alt"></i> <input id=""
-													name="" placeholder="휴가 사유" class="form-control se"
-													type="text" value="">
+												<div class="tab-pane active" id="profile-1" role="tabpanel">
+													<i class="bx bx-time-five"></i> <select
+														class="form-select se">
+														<option>오전반차</option>
+														<option>오후반차</option>
+														<option>연차</option>
+													</select> <br> <i class="bx bx-edit-alt"></i> <input id=""
+														name="" placeholder="휴가 사유" class="form-control se"
+														type="text" value="">
+												</div>
+
+												<div class="tab-pane" id="messages-1" role="tabpanel">
+													<i class="bx bx-time-five"></i> <select id="" name=""
+														title="" tabindex="-1" aria-hidden="true"
+														data-select2-id="4"
+														class="form-control select2 select2-hidden-accessible se">
+														<option value="">오전 9:00</option>
+														<option value="">오전 9:30</option>
+														<option value="">오전 10:00</option>
+														<option value="">오전 10:30</option>
+														<option value="">오전 11:00</option>
+														<option value="">오전 11:30</option>
+													</select> &nbsp;-&nbsp; <select id="" name="" title="" tabindex="-1"
+														aria-hidden="true" data-select2-id="4"
+														class="form-control select2 select2-hidden-accessible se">
+														<option value="">오후 12:00</option>
+														<option value="">오후 12:30</option>
+														<option value="">오후 01:00</option>
+														<option value="">오후 01:30</option>
+														<option value="">오후 02:00</option>
+														<option value="">오후 02:30</option>
+														<option value="">오후 03:00</option>
+														<option value="">오후 03:30</option>
+														<option value="">오후 04:00</option>
+														<option value="">오후 04:30</option>
+														<option value="">오후 05:00</option>
+														<option value="">오후 05:30</option>
+														<option value="">오후 06:00</option>
+														<option value="">오후 06:30</option>
+														<option value="">오후 07:00</option>
+														<option value="">오후 07:30</option>
+														<option value="">오후 08:00</option>
+														<option value="">오후 08:30</option>
+														<option value="">오후 09:00</option>
+														<option value="">오후 09:30</option>
+														<option value="">오후 10:00</option>
+														<option value="">오후 10:30</option>
+													</select>
+
+												</div>
+												<div class="tab-pane" id="settings-1" role="tabpanel">
+													<i class="bx bx-time-five"></i> <select id="" name=""
+														title="" tabindex="-1" aria-hidden="true"
+														data-select2-id="4"
+														class="form-control select2 select2-hidden-accessible se">
+														<option value="">오전 9:00</option>
+														<option value="">오전 9:30</option>
+														<option value="">오전 10:00</option>
+														<option value="">오전 10:30</option>
+														<option value="">오전 11:00</option>
+														<option value="">오전 11:30</option>
+													</select> &nbsp;-&nbsp; <select id="" name="" title="" tabindex="-1"
+														aria-hidden="true" data-select2-id="4"
+														class="form-control select2 select2-hidden-accessible se">
+														<option value="">오후 12:00</option>
+														<option value="">오후 12:30</option>
+														<option value="">오후 01:00</option>
+														<option value="">오후 01:30</option>
+														<option value="">오후 02:00</option>
+														<option value="">오후 02:30</option>
+														<option value="">오후 03:00</option>
+														<option value="">오후 03:30</option>
+														<option value="">오후 04:00</option>
+														<option value="">오후 04:30</option>
+														<option value="">오후 05:00</option>
+														<option value="">오후 05:30</option>
+														<option value="">오후 06:00</option>
+														<option value="">오후 06:30</option>
+														<option value="">오후 07:00</option>
+														<option value="">오후 07:30</option>
+														<option value="">오후 08:00</option>
+														<option value="">오후 08:30</option>
+														<option value="">오후 09:00</option>
+														<option value="">오후 09:30</option>
+														<option value="">오후 10:00</option>
+														<option value="">오후 10:30</option>
+													</select>
+
+												</div>
 											</div>
 
-											<div class="tab-pane" id="messages-1" role="tabpanel">
-												<i class="bx bx-time-five"></i> <select id="" name=""
-													title="" tabindex="-1" aria-hidden="true"
-													data-select2-id="4"
-													class="form-control select2 select2-hidden-accessible se">
-													<option value="">오전 9:00</option>
-													<option value="">오전 9:30</option>
-													<option value="">오전 10:00</option>
-													<option value="">오전 10:30</option>
-													<option value="">오전 11:00</option>
-													<option value="">오전 11:30</option>
-												</select> &nbsp;-&nbsp; <select id="" name="" title="" tabindex="-1"
-													aria-hidden="true" data-select2-id="4"
-													class="form-control select2 select2-hidden-accessible se">
-													<option value="">오후 12:00</option>
-													<option value="">오후 12:30</option>
-													<option value="">오후 01:00</option>
-													<option value="">오후 01:30</option>
-													<option value="">오후 02:00</option>
-													<option value="">오후 02:30</option>
-													<option value="">오후 03:00</option>
-													<option value="">오후 03:30</option>
-													<option value="">오후 04:00</option>
-													<option value="">오후 04:30</option>
-													<option value="">오후 05:00</option>
-													<option value="">오후 05:30</option>
-													<option value="">오후 06:00</option>
-													<option value="">오후 06:30</option>
-													<option value="">오후 07:00</option>
-													<option value="">오후 07:30</option>
-													<option value="">오후 08:00</option>
-													<option value="">오후 08:30</option>
-													<option value="">오후 09:00</option>
-													<option value="">오후 09:30</option>
-													<option value="">오후 10:00</option>
-													<option value="">오후 10:30</option>
-												</select>
-
-											</div>
-											<div class="tab-pane" id="settings-1" role="tabpanel">
-												<i class="bx bx-time-five"></i> <select id="" name=""
-													title="" tabindex="-1" aria-hidden="true"
-													data-select2-id="4"
-													class="form-control select2 select2-hidden-accessible se">
-													<option value="">오전 9:00</option>
-													<option value="">오전 9:30</option>
-													<option value="">오전 10:00</option>
-													<option value="">오전 10:30</option>
-													<option value="">오전 11:00</option>
-													<option value="">오전 11:30</option>
-												</select> &nbsp;-&nbsp; <select id="" name="" title="" tabindex="-1"
-													aria-hidden="true" data-select2-id="4"
-													class="form-control select2 select2-hidden-accessible se">
-													<option value="">오후 12:00</option>
-													<option value="">오후 12:30</option>
-													<option value="">오후 01:00</option>
-													<option value="">오후 01:30</option>
-													<option value="">오후 02:00</option>
-													<option value="">오후 02:30</option>
-													<option value="">오후 03:00</option>
-													<option value="">오후 03:30</option>
-													<option value="">오후 04:00</option>
-													<option value="">오후 04:30</option>
-													<option value="">오후 05:00</option>
-													<option value="">오후 05:30</option>
-													<option value="">오후 06:00</option>
-													<option value="">오후 06:30</option>
-													<option value="">오후 07:00</option>
-													<option value="">오후 07:30</option>
-													<option value="">오후 08:00</option>
-													<option value="">오후 08:30</option>
-													<option value="">오후 09:00</option>
-													<option value="">오후 09:30</option>
-													<option value="">오후 10:00</option>
-													<option value="">오후 10:30</option>
-												</select>
-
-											</div>
 										</div>
-
 									</div>
 								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">닫기</button>
+									<button type="button" class="btn btn-primary">근무 등록하기</button>
+								</div>
 							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">닫기</button>
-								<button type="button" class="btn btn-primary">근무 등록하기</button>
-							</div>
+
 						</div>
-
 					</div>
-				</div>
-				<!-- Modal 끝 -->
-
+					<!-- Modal 끝 -->
 			</main>
 			<footer class="py-4 bg-light mt-auto" style="bottom: 0;"><%@ include
 					file="../menu/footer.jsp"%></footer>

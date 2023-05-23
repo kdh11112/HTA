@@ -74,11 +74,11 @@
                 				<div class="login-input-container">
                     				<div class="login-input-wrap input-id">
                         				<i class="far fa-envelope"></i>
-                        				<input placeholder="ID" type="text" name="log_id" id="log_id">
+                        				<input placeholder="ID" type="text" name="log_id" id="log_id" value="KDH">
                     				</div>
                     				<div class="login-input-wrap input-password" >
                         				<i class="fas fa-key"></i>
-                        				<input placeholder="Password"  type="password" name="log_pw" id="log_pw">
+                        				<input placeholder="Password"  type="password" name="log_pw" id="log_pw" value="1234">
                     				</div>
                 				</div>
                 				<div class="login-btn-wrap">
