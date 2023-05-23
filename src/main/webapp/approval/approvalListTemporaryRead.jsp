@@ -56,11 +56,6 @@
 		    }
 		    
 		    #con { pointer-events: none !important; }
-		    
-		      .myImg[src=""], .myImg[src="null"] {
-			    display: none;
-			  }
-		    
 		</style>
 
     </head>
@@ -72,6 +67,7 @@
     	String position = null;
     	String of1st = null;
     	String of2rd = null;
+    	String stamp = null;
     	int num = 0;
     	LocalDate now = LocalDate.now();
     	if(obj != null){
@@ -80,18 +76,18 @@
     		dname = vo.getdName();
     		position = vo.geteOfficialResponsibilities();
     		num = vo.geteNumber();
+    		stamp = vo.getEstamp();
     		
     	} 
     	
     	String pageNum = request.getParameter("pageNum");
-    	
+
     	if(pageNum != null){
     		int no = Integer.parseInt(pageNum);
     		
     		ApprovalDAO dao = new ApprovalDAO();
     		
     		ApprovalVO vo = dao.selectOne(no);
-    		
     		of1st = (String)ApprovalDAO.map.get("of1st");
     		of2rd = (String)ApprovalDAO.map.get("of2rd");
     		
@@ -100,17 +96,30 @@
     		
 
     	
-    	
     
     %>
     	<script type="text/javascript">
-
+			$(function(){
+				$("input[value='제출하기']").on("click",function(){
+					/*  var elem = document.getElementById("stampSelf");
+					 elem.style.display=""; */
+					 var stamp = "<%=stamp%>";
+					 console.log(stamp);
+					 $("#imgTd1").append($("<img>").attr("src",stamp));
+					 
+					 
+					document.frm.method="get";
+					document.frm.action="approvalListTemporaryReadOk.jsp";
+					 document.frm.submit();  
+				})
+				
+			})
 		</script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
         <div id="layoutSidenav"> 
         	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
            	 	<div id="layoutSidenav_content">
-            		<form action="approvalFormOk.jsp" method="get">
+            		<form action="approvalListTemporaryReadOk.jsp" name="frm" method="get">
 		            	<main>
 		                    <div class="container-fluid px-4">
 		                        <h1 class="mt-4">전자결재 작성</h1>
@@ -129,22 +138,22 @@
 										        <td rowspan="4">결재</td>
 										    </tr>
 									        <tr>
-									        	<input type="hidden" name="pageNum" value="<%=vo.getaNumber() %>"/>
+									        	<input type="hidden" name="pageNum" value="<%=pageNum %>"/>
 									            <th><%=vo.getaDepartmentName() %></th>
 									            <!-- <th class="position2" id="data-placeholder2"></th> -->
-									        	<th class="position2"><input type="text" id="placeholder2" name="placeholder2" value="<%=of1st %>"  readonly></th>
-									            <th class="position3"><input type="text" id="placeholder4" name="placeholder4" value="<%=of2rd %>" readonly></th>
+									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" value="<%=of1st %>"  readonly></th>
+									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" value="<%=of2rd %>" readonly></th>
 									            <!-- <input type="text" id="data-placeholder2" name="data-placeholder1"> -->
 									        </tr>
 									        <tr>
 									            <td><%=vo.getaName() %></td>
-									            <td class="position2"><input type="text" id="placeholder1" name="placeholder1" value="<%=vo.getaName1st() %>" readonly></td>
-									            <td class="position3"><input type="text" id="placeholder3" name="dplaceholder3" value="<%=vo.getaName2nd() %>" readonly></td>
+									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" value="<%=vo.getaName1st() %>" readonly></td>
+									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" value="<%=vo.getaName2nd() %>" readonly></td>
 									        </tr>
 									        <tr>
-									            <td><img src="<%=vo.geteStampSelf() %>" class="myImg"></td>
-									            <td><img src="<%=vo.geteStamp1() %>" class="myImg"></td>
-									            <td><img src="<%=vo.geteStamp2() %>" class="myImg"></td>
+									            <td id="imgTd1" style="height: 50px"></td>
+									            <td class="position2"></td>
+									            <td class="position3"></td>
 									        </tr>
 									    </table>
 									</div>
@@ -152,14 +161,14 @@
 		                            <table class="table table-striped">
 		                            	
 			                            	
-		                            	<tr><td>제목 <input class="titles" type="text" name="title" value="<%=vo.getaTitle() %>" id="title" style="width: 90%; text-align: left;" readonly/></td></tr>
+		                            	<tr><td>제목 <input class="titles" type="text" name="title" value="<%=vo.getaTitle() %>" id="title" style="width: 90%; text-align: left;" /></td></tr>
 										<tr>
-											<td><textarea class="summernote" id="con" name="contents" readonly="readonly" readonly><%=vo.getaContent()%></textarea></td>
+											<td><textarea class="summernote" id="con" name="contents"><%=vo.getaContent()%></textarea></td>
 											<td><input type="hidden" name="contentsHidden" value="<%=vo.getaContent() %>"/></td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<!-- <input class="btn btn-info" type="submit" value="결재" /> -->
+												 <input class="btn btn-info" type="button" value="제출하기" />
 											</td>
 										</tr>
 		                            </table>
@@ -180,7 +189,6 @@
 		<script type="text/javascript">
 		$(document).ready(function() {
 		    $('.summernote').summernote({
-		        disableDragAndDrop: true,
 		        height: 300,
 		        minHeight: null,
 		        maxHeight: null,
@@ -197,7 +205,7 @@
 		        fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
 		        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 		    });
-		    $('#con').summernote('disable');
+
 		});
 		</script>
     </body>

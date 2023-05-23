@@ -88,7 +88,7 @@
                                     %>
                                     	<tr style="line-height: 2;">
                                     		<td><%=vo.getaNumber() %></td>
-                                    		<td><a href="approvalRead.jsp?pageNum=<%=vo.getaNumber() %>"> <%=vo.getaTitle() %></a></td>
+                                    		<td><a href="approvalListTemporaryRead.jsp?pageNum=<%=vo.getaNumber() %>"> <%=vo.getaTitle() %></a></td>
                                     		<td><%=vo.getaName() %></td>
                                     		<td><%=vo.getaStartDate() %></td>
                                     		<td><%=vo.getaStatus() %></td>

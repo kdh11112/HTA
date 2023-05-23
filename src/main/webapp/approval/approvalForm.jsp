@@ -55,13 +55,48 @@
 		    
 		</style>
 		<script type="text/javascript">
+			
+		$(function(){
+			
+
+			$("input[value='제출하기']").on("click",function(){	
+
+				let placeholder1 = document.getElementById("placeholder1").value; 
+				let placeholder3 = document.getElementById("placeholder3").value; 
+				let contents = document.getElementById("contents").value;
+				let title = document.getElementById("title").value;
+				
+				
+				console.log(placeholder1);
+				if(placeholder1 == ""){
+					alert("1차 승인자를 지정해주세요");
+				}else if(placeholder3 == ""){
+					alert("2차 승인자를 지정해주세여")
+				}else if(title == ""){
+					alert("제목을 써주세요")
+				}else if(contents == ""){
+					alert("내용을 써주세여")
+				}
+				else{
+				//버튼으로 서브밋을 처리하는방법
+				document.frm.method="get";
+				document.frm.action="approvalFormOk.jsp";
+				document.frm.submit();
+					
+				}
+				
+			
+			})
+		})
+		
+		
 				var url = null;
 				var option = null;
 				var title = null;
 			$(function(){
 				$(".position2").on("click",function(){
 					url = "../emp_search/info.jsp";
-					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					option = "width = 825px, height = 650px, top = 200, left = 200, location = no";
 					title = '자식창1';
 					window.open(url,title,option,"window.opener");
 				})
@@ -72,7 +107,7 @@
 			$(function(){
 				$(".position3").on("click",function(){
 					url = "../emp_search/info.jsp";
-					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					option = "width = 825px, height = 650px, top = 200, left = 200, location = no";
 					title = '자식창2';
 					window.open(url,title,option,"window.opener");
 				})
@@ -92,6 +127,11 @@
 						    document.getElementById('placeholder4').value = dataArray[2]; 	
 						}
 					}	
+						if(document.getElementById('placeholder1').value == document.getElementById('placeholder3').value){
+							parent.window.alert("동일 인물입니다");
+							document.getElementById('placeholder3').value = '';
+							document.getElementById('placeholder4').value = '';
+						}
 				}
 				
 				$(function(){
@@ -113,7 +153,7 @@
 								title:title
 							}, 
 							success:function(data){
-								location.href = "approvalListTemporary.jsp";
+								 location.href = "approvalListTemporary.jsp"; 
 							}
 
 						})
@@ -147,7 +187,7 @@
         <div id="layoutSidenav"> 
         	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
            	 	<div id="layoutSidenav_content">
-            		<form action="approvalFormOk.jsp" method="get">
+            		<form action="approvalFormOk.jsp" name="frm" method="get">
 		            	<main>
 		                    <div class="container-fluid px-4" >
 		                        <h1 class="mt-4">전자결재 작성</h1>
@@ -194,7 +234,7 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<input class="btn btn-primary" type="submit" value="제출하기" />
+												<input class="btn btn-primary" type="button" value="제출하기" />
 												<input class="btn btn-info" type="button" value="임시저장" />
 											</td>
 										</tr>

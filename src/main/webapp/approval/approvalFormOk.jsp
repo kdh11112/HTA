@@ -12,18 +12,7 @@
 	String data4 = request.getParameter("placeholder4");
 	String contents = request.getParameter("contents");
 	String title = request.getParameter("title");
-	/* String Stamp = request.getParameter("stamp"); */
 
-/* 	System.out.println(data1);
-	System.out.println(data3);
-	System.out.println(title);
-	System.out.println(contents); 
-	System.out.println(Stamp);  */
-	
-	if(data3 == null || data3.equals("")||data1 == null || data1.equals("")||contents == null || contents.equals("")){
-		response.sendRedirect("approvalForm.jsp");
-		
-	}else{
 		Object obj = session.getAttribute("vo");
 		String name = null;
 		String dname = null;
@@ -44,12 +33,11 @@
 		vo.setaName2nd(data3);
 		vo.setaTitle(title);
 		vo.setaContent(contents);
-		/* vo.seteStampSelf(Stamp); */
     	dao.addOne(vo,vo0);
  		response.sendRedirect("approvalList.jsp");  
 
 			
-		}
+		
 	}
 	
 %>
