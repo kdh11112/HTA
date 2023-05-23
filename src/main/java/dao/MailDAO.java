@@ -83,14 +83,8 @@ public class MailDAO {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 	// 받은메일함
-	public ArrayList<MailVO> selectAllRecive(int startNo, int endNo, int number) {
+	public ArrayList<MailVO> selectAllRecive(int startNo, int endNo, int enumber) {
 		// 최근 데이터 10개만 가져오기
 		ArrayList<MailVO> list = new ArrayList<>();
 		sb.setLength(0);
@@ -109,7 +103,7 @@ public class MailDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, number);
+			pstmt.setInt(1, enumber);
 			pstmt.setInt(2, endNo);
 			pstmt.setInt(3, startNo);
 
@@ -140,8 +134,31 @@ public class MailDAO {
 		return list;
 	}
 
+	
+	// 보낸메일함 전체갯수
+	public int getTotalCountSend(int enumber) {
+		sb.setLength(0);
+										
+		sb.append("SELECT COUNT(*) from mail where e_number = ? ");
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, enumber);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				count = rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
 	// 보낸메일함
-	public ArrayList<MailVO> selectAllSend(int startNo, int endNo, int number) {
+	public ArrayList<MailVO> selectAllSend(int startNo, int endNo, int enumber) {
 
 		// 최근 데이터 10개만 가져오기
 		ArrayList<MailVO> list = new ArrayList<>();
@@ -161,7 +178,7 @@ public class MailDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, number);
+			pstmt.setInt(1, enumber);
 			pstmt.setInt(2, endNo);
 			pstmt.setInt(3, startNo);
 
@@ -191,9 +208,35 @@ public class MailDAO {
 
 		return list;
 	}
+	
+	
+	
+	// 내게 쓴 메일함 전체갯수
+	public int getTotalCountSelfBox(int enumber) {
+		sb.setLength(0);
+										
+		sb.append("SELECT COUNT(*) from mail where e_number= ? AND e_number2 = ? ");
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, enumber);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				count = rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
+	
 
 	// 내게 쓴 메일함
-	public ArrayList<MailVO> selectAllSelfBox(int startNo, int endNo, int number) {
+	public ArrayList<MailVO> selectAllSelfBox(int startNo, int endNo, int enumber) {
 
 		// 최근 데이터 10개만 가져오기
 		ArrayList<MailVO> list = new ArrayList<>();
@@ -213,8 +256,8 @@ public class MailDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, number);
-			pstmt.setInt(2, number);
+			pstmt.setInt(1, enumber);
+			pstmt.setInt(2, enumber);
 			pstmt.setInt(3, endNo);
 			pstmt.setInt(4, startNo);
 
@@ -244,9 +287,32 @@ public class MailDAO {
 
 		return list;
 	}
+	
+	
+	// 임시 보관함 전체갯수
+	public int getTotalCountTempBox(int enumber) {
+		sb.setLength(0);
+										
+		sb.append("SELECT COUNT(*) from mail where (e_number2 = ? AND m_rtype = 4 ) OR (e_number = ? AND m_wtype = 4 ) ");
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, enumber);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				count = rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 
 	// 임시 보관함
-	public ArrayList<MailVO> selectAllTempBox(int startNo, int endNo, int number) {
+	public ArrayList<MailVO> selectAllTempBox(int startNo, int endNo, int enumber) {
 
 		// 최근 데이터 10개만 가져오기
 		ArrayList<MailVO> list = new ArrayList<>();
@@ -266,8 +332,8 @@ public class MailDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, number);
-			pstmt.setInt(2, number);
+			pstmt.setInt(1, enumber);
+			pstmt.setInt(2, enumber);
 			pstmt.setInt(3, endNo);
 			pstmt.setInt(4, startNo);
 
@@ -299,9 +365,31 @@ public class MailDAO {
 	}
 	
 	
+	// 휴지통 전체갯수
+	public int getTotalCountTrashBox(int enumber) {
+		sb.setLength(0);
+										
+		sb.append("SELECT COUNT(*) from mail where (e_number2 = ? AND m_rtype = 5 ) OR (e_number = ? AND m_wtype = 5 ) ");
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, enumber);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				count = rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
 	
 	// 휴지통
-	public ArrayList<MailVO> selectAllTrashBox(int startNo, int endNo, int number) {
+	public ArrayList<MailVO> selectAllTrashBox(int startNo, int endNo, int enumber) {
 
 		// 최근 데이터 10개만 가져오기
 		ArrayList<MailVO> list = new ArrayList<>();
@@ -321,8 +409,8 @@ public class MailDAO {
 
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, number);
-			pstmt.setInt(2, number);
+			pstmt.setInt(1, enumber);
+			pstmt.setInt(2, enumber);
 			pstmt.setInt(3, endNo);
 			pstmt.setInt(4, startNo);
 

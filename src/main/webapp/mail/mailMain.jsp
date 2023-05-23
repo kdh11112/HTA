@@ -95,8 +95,8 @@
 	    var buttonId = $(this).attr("id");
 
 	    switch (buttonId) {
-	      case "inbox":
-	        loadPage("mailInbox.jsp");
+	      case "ReciveMailbox":
+	        loadPage("mailRecivebox.jsp");
 	        break;
 	      case "selfMailBox":
 	        loadPage("mailSelfBox.jsp");
@@ -129,8 +129,8 @@
 		    var buttonId = $(this).closest(".mail_gruop").find("ul li.active").attr("id");
 
 		    switch (buttonId) {
-		      case "inbox":
-		        loadPage("mailInbox.jsp?cp=" + page);
+		      case "ReciveMailbox":
+		        loadPage("mailRecivebox.jsp?cp=" + page);
 		        break;
 		      case "selfMailBox":
 		        loadPage("mailSelfBox.jsp?cp=" + page);
@@ -201,7 +201,7 @@
     <div class="top_menu">
       <div class="mail_gruop" style="flex: 1;">
         <ul id="mail_list">
-          <li id="inbox">받은 메일함</li>
+          <li id="ReciveMailbox">받은 메일함</li>
           <li id="selfMailBox">내게 쓴 메일함</li>
           <li id="sendMailBox">보낸 메일함</li>
           <li id="tempMailBox">임시보관함</li>
@@ -220,7 +220,7 @@
     </div>
     <div class="right_main">
     	
-      <%@ include file="mailInbox.jsp" %>  
+      <%@ include file="mailRecivebox.jsp" %>  
     </div>
   </div>
 </body>

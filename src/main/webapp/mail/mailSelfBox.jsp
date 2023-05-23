@@ -82,7 +82,7 @@
 		MailDAO dao = new MailDAO();
 
 		// 총게시물 건수 ? :
-		int totalCount = dao.getTotalCount();
+		int totalCount = dao.getTotalCountSelfBox(enumber);
 		// 한 페이지당 게시물 건수 : 10
 		int recordPerPage = 10;
 		// 총 페이지 수 :
@@ -90,8 +90,6 @@
 
 		// 현재페이지 번호
 		String cp = request.getParameter("cp");
-		String mailtype = request.getParameter("mailtpye");
-		int number = vo2.geteNumber();
 
 		int currentPage = 0;
 		if (cp != null) {
@@ -147,7 +145,7 @@
 		</thead>
 		<tbody>
 			<%
-			ArrayList<MailVO> list = dao.selectAllSelfBox(startNo, endNo, number);
+			ArrayList<MailVO> list = dao.selectAllSelfBox(startNo, endNo, enumber);
 			for (MailVO vo : list) {
 			%>
 			<tr>
