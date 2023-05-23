@@ -16,24 +16,18 @@
 	<!-- include libraries(jQuery, bootstrap) -->
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 	<link href="../css/styles.css" rel="stylesheet" />
+	<link href="../css/layout.css" rel="stylesheet">
 	<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 	<link rel="shortcut icon" href="#">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>	
-	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	      rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+		
 	<title>게시글보기</title>
-	<style>
-		table{
-			width: 900px;
-			margin: auto;
-			border-bottom: 1px solid black;
-			
-		}
-		table, th, td{
-			border-top : 1px solid black;
-			border-collapse: collapse;
-			text-align : center;
-		}
-	</style>
+
 </head>
 <body class="sb-nav-fixed">
 <%
@@ -89,51 +83,68 @@
     <div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid px-4">
-				<h1 class="mt-4">게시판</h1>
+				<h1 class="mt-4">BOARD</h1>
 				<div class="card mb-4">
-				<h2>게시글 보기</h2>
 				<table>
-					<tr>
-						<th>작성자</th>
-						<td><%=vo.getbWriter() %></td>
-						<th>조회수</th>
-						<th><%=vo.getbView() %></th>
-						<th>작성일시</th>
-						<th><%=vo.getbRegdate() %></th>
-						<%-- <!-- 수정후 입력 누르면 글번호 사라져서 파라미터에 글번호 다시 추가해주기 위해 -->
-						<input type="hidden" name="bno" value="<%=vo.getbNo() %>"/> --%>
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td colspan="5"><%=vo.getbTitle() %></td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<%
-						String real = "D:\\dev\\eclipse\\web_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\HTA_Project_semi\\upload";
-						File viewFile = new File(real+"\\"+bNo+"photo.jpg");
-						if(viewFile.exists()){ 
-						%>
+				<colgroup>
+                    <col style="width:150px">
+                    <col style="width:850px">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>제목</th>
+                        <td><%=vo.getbTitle() %></td>
+                    </tr>
+                    <tr>
+                        <th>조회수</th>
+                        <td><%=vo.getbView() %></td>
+                    </tr>
+                    <tr>
+                        <th>작성자</th>
+                        <td><%=vo.getbWriter() %></td>
+                    </tr>
+                    <tr>
+                        <th>작성일시</th>
+                        <td><%=vo.getbRegdate()%></td>
+                    </tr>
+                    <input type="hidden" name="bno" value="<%=vo.getbNo() %>"/>
+                    <tr>
+                        <th>내용</th>
+                        <td>
+                            <div name="contents" id="summernote" readonly>
+                            <%
+								String real = "D:\\dev\\eclipse\\web_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\HTA_Project_semi\\upload";
+								File viewFile = new File(real+"\\"+bNo+"photo.jpg");
+								if(viewFile.exists()){ 
+							%>
 						<br />
 							<tr>
-								<td colspan="6"><br><br><img src = "../upload/<%=bNo %>photo.jpg" width="300px" height="300px"><br><br><br />
-						<% }
-						else {%><td colspan="6"><br><br><%} %> <br />
-						<td colspan="5"><%=vo.getbContent() %></td>
-					</tr>
-					<tr>
+								<td colspan="6"><br><br><img src = "../upload/<%=bNo %>photo.jpg" width="300px" height="300px"><br/><br/><br />
+							<% }
+							else {
+							%>
+							<%
+								} 
+							%>
+							<br /><br />
+							<%=vo.getbContent() %>
+							</div>
+	                      </td>
+                    </tr>
+                    <tr>
 						<td colspan="6">
-						<a href="boardList.jsp"><input type="button" value="목록" /></a>
-						<a href="boardModify.jsp?bno=<%=vo.getbNo()%>"><input type="button" value="수정" /></a>
-						<a href="boardDeleteOk.jsp?bno=<%=vo.getbNo()%>"><input type="button" value="삭제" /></a>
+						<a href="boardList.jsp"><input type="button" class="btn btn-secondary" value="목록" /></a>
+						<a href="boardModify.jsp?bno=<%=vo.getbNo()%>"><input type="button" class="btn btn-secondary" value="수정" /></a>
+						<a href="boardDeleteOk.jsp?bno=<%=vo.getbNo()%>"><input type="button" class="btn btn-secondary" value="삭제" /></a>
 						</td>
 					</tr>	
-				</table>
-				<input name="bno" type="hidden" value="<%= vo.getbNo() %>" />
-	<%
-	}
-		}
-	%>
+                </tbody>
+            	</table>
+				<input name="bno" type="hidden" value="<%= vo.getbNo() %>" /> 
+							<%
+							}
+								}
+							%>
 				</div>
 			</div>
 		</main>

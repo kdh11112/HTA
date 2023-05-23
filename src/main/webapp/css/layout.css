@@ -1,0 +1,155 @@
+@charset "UTF-8";
+ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: "Noto Sans KR";
+}
+a {
+    text-decoration:none;
+    color:inherit;
+}
+table {
+    border: none;
+    border-collapse: collapse;
+    border-top: 1px solid #d9d9d9;
+}
+ 
+table tr th {
+    background-color: #f8f8f8;
+}
+ 
+table tr th, table tr td {
+    padding: 15px;
+    border-bottom: 1px solid #d9d9d9;
+}
+ 
+table tr td input[type="text"], table tr td input[type="password"],
+    table tr td select {
+    height: 30px;
+    border: 1px solid #d9d9d9;
+    padding: 5px;
+    border-radius: 3px;
+    width: 50%;
+}
+ 
+table tr td select {
+    width: 120px;
+}
+ 
+.formBox {
+    width: 1000px;
+    margin: 100px auto;
+}
+ 
+.formBox h2 {
+    margin-bottom: 50px;
+    text-align: center;
+}
+ 
+.formBox .btns {
+    text-align: center;
+    margin-top: 50px;
+}
+ 
+.formBox .btns * {
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    line-height:50px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-weight: 500;
+    background-color: rgb(109, 109, 109);
+    color: #fff;
+}
+ 
+.formBox #contents {
+    width:100%;
+    min-height:400px;
+    resize: none;
+    border: 1px solid #d9d9d9;
+    padding: 5px;
+}
+ 
+.formBox .btns #join {
+    background-color: rgb(1, 121, 177);
+}
+ 
+.formBox .pagination {
+    margin-top: 50px;
+    text-align: center;
+}
+.formBox .pagination a {
+    display: inline-block;
+    width:30px;
+    height:30px;
+    background-color: #000;
+    color:#fff;
+    font-size: 14px;
+    line-height: 30px;
+    border-radius: 3px;
+}
+ 
+ 
+#list tbody td {
+    text-align: center;
+}
+#list tbody tr:hover {
+    background-color:#000;
+    color:#fff;    
+}
+ 
+.formBox .pagination a.clicked {
+    background-color: rgb(1, 121, 177);
+}
+.formBox .pagination a .material-icons {
+    width:30px;
+    height:30px;
+    line-height: 30px;
+    vertical-align: top;
+}
+.searchBox {
+    text-align: center;
+    width:100%;
+    background-color: #f8f8f8;
+    border: 1px solid #d9d9d9;
+    padding:30px 0;
+    margin-top:50px;
+}
+.searchBox .searchWord{
+    height:40px;
+    min-width:300px;
+    display: inline-block;
+    margin:0;
+    padding:0;
+    border:1px solid #d9d9d9;
+    vertical-align: top;
+}
+.searchBox .select{
+    height:40px;
+    line-height: 40px;
+    display: inline-block;
+    margin:0;
+    padding:0;
+    border:1px solid #d9d9d9;
+    padding:0 40px 0 20px;
+    appearance: none;
+    background: url("../images/bgSelect.png") no-repeat right 0 top 50%;
+    background-size: 32px;
+    
+}
+.searchBox input[type="submit"] {
+    height:40px;
+    background-color: #000;
+    color:#fff;
+    border-radius: 3px;
+    padding:0 20px;
+    border-color:#000;
+}
