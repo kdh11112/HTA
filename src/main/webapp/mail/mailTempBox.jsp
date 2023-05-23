@@ -50,7 +50,24 @@
 
   // 페이지 로드 함수
   function loadPage(page) {
-    var url = "mailTempBox.jsp?cp=" + page;
+    var url = "mailRecivebox.jsp?cp=" + page;
+    console.log(url);
+    $.ajax({
+      url: url,
+      dataType: "html",
+      success: function(response) {
+        $(".right_main").html(response);
+        initializeSummernote(); // Summernote 초기화
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      }
+    });
+  }
+  
+  // 메일 디테일 페이지 로드 함수
+  function loadMailDetail(mno) {
+    var url = "mailDetail.jsp?pages=" + mno;
     $.ajax({
       url: url,
       dataType: "html",
@@ -143,32 +160,31 @@
 				<th style="background-color: #eeeeee; text-align: center;">작성일</th>
 			</tr>
 		</thead>
-		<tbody>
-			<%
-			ArrayList<MailVO> list = dao.selectAllTempBox(startNo, endNo, enumber);
-			
-			for (MailVO vo : list) {
-			%>
-			<tr>
-				<td><%=vo.getMNumber()%></td>
-				<td><a href="#"
-					onclick="loadPage(<%=vo.getMNumber()%>); return false;"><%=vo.getMTitle()%></a></td>
-				<td><%=vo.getENumber()%></td>
-				<td><%=vo.getMRegdate()%></td>
-			</tr>
-			<%
-			}
-			%>
-			<tr>
-				<td colspan="4">
-					<%
-					for (int i = startPage; i <= endPage; i++) {
-					%> <a href="#" onclick="loadPage(<%=i%>); return false;">[<%=i%>]
-				</a> <%
- }
- }
- %>
-				</td>
+  <tbody>
+    <%
+      ArrayList<MailVO> list = dao.selectAllTempBox(startNo, endNo, enumber);
+      for (MailVO vo : list) {
+    %>
+    <tr>
+      <td><%= vo.getMNumber() %></td>
+      <td><a href="#" onclick="loadMailDetail(<%= vo.getMNumber() %>); return false;"><%= vo.getMTitle() %></a></td>
+      <td><%= vo.getENumber() %></td>
+      <td><%= vo.getMRegdate() %></td>
+    </tr>
+    <%
+      }
+    %>
+    <tr>
+      <td colspan="4">
+        <%
+          for (int i = startPage; i <= endPage; i++) {
+        %>
+        <a href="#" onclick="loadPage(<%= i %>); return false;">[<%= i %>]</a>
+        <%
+          }
+        }
+        %>
+      </td>
 			</tr>
 		</tbody>
 	</table>

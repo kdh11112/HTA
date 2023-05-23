@@ -50,6 +50,23 @@
   // 페이지 로드 함수
   function loadPage(page) {
     var url = "mailRecivebox.jsp?cp=" + page;
+    console.log(url);
+    $.ajax({
+      url: url,
+      dataType: "html",
+      success: function(response) {
+        $(".right_main").html(response);
+        initializeSummernote(); // Summernote 초기화
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      }
+    });
+  }
+  
+  // 메일 디테일 페이지 로드 함수
+  function loadMailDetail(mno) {
+    var url = "mailDetail.jsp?pages=" + mno;
     $.ajax({
       url: url,
       dataType: "html",
@@ -82,7 +99,6 @@
     MailDAO dao = new MailDAO();
 
     // 총게시물 건수 ? :
-    
     int totalCount = dao.getTotalCountRecive(enumber);
     // 한 페이지당 게시물 건수 : 10
     int recordPerPage = 10;
@@ -151,7 +167,7 @@
     %>
     <tr>
       <td><%= vo.getMNumber() %></td>
-      <td><a href="#" onclick="loadPage(<%= vo.getMNumber() %>); return false;"><%= vo.getMTitle() %></a></td>
+      <td><a href="#" onclick="loadMailDetail(<%= vo.getMNumber() %>); return false;"><%= vo.getMTitle() %></a></td>
       <td><%= vo.getENumber() %></td>
       <td><%= vo.getMRegdate() %></td>
     </tr>
