@@ -60,9 +60,7 @@ $(document).ready(function() {
              },
              success: function (response) {
                 // 삭제 성공 시 처리할 내용 작성
-                console.log("일정이 삭제되었습니다.");
-                console.log(info.event._def.title);	 
-                calendar.refetchEvents(); // 일정 목록 다시 가져오기
+                window.location.reload();
              },
              error: function () {
                 // 삭제 실패 시 처리할 내용 작성
@@ -77,14 +75,10 @@ $(document).ready(function() {
     $("#select").change(function() {
         var selectedValue = $(this).val(); // 선택된 일정 유형의 값을 가져옴
         // 가져온 값으로 원하는 동작 수행
-		if(selectedValue == "부서"){
+		if(selectedValue == "전체"){
 	        $.ajax({
-	            url: "department_load_schedule.jsp",
-	            data : {
-	            	schedule_Type: selectedValue
-	            },
+	            url: "load_schedule.jsp",
 	            success: function(response) {
-	            	console.log("부서 : " + response);
 	                var data = JSON.parse(response);
 	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
 	                calendar.render(); // 달력 다시 렌더링
@@ -97,17 +91,18 @@ $(document).ready(function() {
 	            	schedule_Type: selectedValue
 	            },
 	            success: function(response) {
-	            	console.log("개인 : " + response);
 	                var data = JSON.parse(response);
 	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
 	                calendar.render(); // 달력 다시 렌더링
 	            }
 	        });
-		}else if(selectedValue == "전체"){
+		}else if(selectedValue == "부서"){
 			$.ajax({
-	            url: "load_schedule.jsp",
+	            url: "department_load_schedule.jsp",
+	            data : {
+	            	schedule_Type: selectedValue
+	            },
 	            success: function(response) {
-	            	console.log("전체 : " + response);
 	                var data = JSON.parse(response);
 	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
 	                calendar.render(); // 달력 다시 렌더링
