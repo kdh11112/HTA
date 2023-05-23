@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import vo.BoardVO;
 import vo.EmployeeVO;
 import vo.MailVO;
 
@@ -485,6 +486,8 @@ public class MailDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	
 	public void writeMailTempSave(MailVO vo) {
@@ -528,6 +531,43 @@ public class MailDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public MailVO SelectOneMail(int mno) {
+		
+		sb.setLength(0);
+		MailVO vo = new MailVO();
+		
+		sb.append("select * from MAIL where m_number= ?");
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, mno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+	
+				int mNumber = rs.getInt("M_Number");
+				String mTitle = rs.getString("m_Title");
+				String mContent = rs.getString("m_Content");
+				String mFile = rs.getString("m_File");
+				String mCc = rs.getString("m_Cc");
+				Date mRegdate = rs.getDate("m_Regdate");
+				int mWType = rs.getInt("m_wtype");
+				int mRType = rs.getInt("m_rtype");
+
+				int eNumber2 = rs.getInt("e_Number2");
+				int eNumber = rs.getInt("e_Number");
+				
+				vo = new MailVO(mNumber, mTitle, mContent, mFile, mCc, mRegdate, mWType, mRType, eNumber2, eNumber);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return vo;
 	}
 	
 	

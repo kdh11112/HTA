@@ -141,6 +141,48 @@ public class EmployeeDAO {
 	}	//getOne() end
 	
 	
+	//메일 작성자,수신자 구하기
+		public EmployeeVO getOne(int number) {
+			EmployeeVO vo = null;
+			sb.setLength(0);
+			sb.append("SELECT * FROM employee WHERE e_number=? ");
+			
+			try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1,number);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int eNumber = rs.getInt("e_number");
+				String eName = rs.getString("e_name");
+				String eId = rs.getString("e_id");
+				String ePassword = rs.getString("e_password");
+				String ePhonenumber = rs.getString("e_phone_number");
+				int ePostalCode = rs.getInt("e_postal_code");
+				String eAddress1 = rs.getString("e_address1");
+				String eAddress2 = rs.getString("e_address2");
+				String eBirth = rs.getString("e_birth");
+				String eDateJoiningCompany = rs.getString("e_date_joining_company");
+				String eRetirementDate = rs.getString("e_retirement_date");
+				String eAccountInformation = rs.getString("e_account_information");
+				String eGender = rs.getString("e_gender");
+				String eOfficialResponsibilities = rs.getString("e_official_responsibilities");
+				int eTotalVacation = rs.getInt("e_total_vacation");
+				String eServing = rs.getString("e_serving");
+				String dName = rs.getString("d_name");
+				String eStamp = rs.getString("e_stamp");
+				vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName,eStamp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return vo;
+			
+		}	
+	
+	
+	
 	// 로그인 시 IP와 PW 입력하면 vo 객체를 리턴
 	public EmployeeVO getOne(String eId, String ePassword) {
 		EmployeeVO vo = null;
