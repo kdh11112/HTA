@@ -31,11 +31,11 @@
 						<table>
 							<tr>
 								<th>ID</th>
-								<td><input type="text" name="log_id" id="log_id" /></td>
+								<td><input type="text" name="log_id" id="log_id" value="KDH" /></td>
 							</tr>
 							<tr>
 								<th>PW</th>
-								<td><input type="password" name="log_pw" id="log_pw" /></td>
+								<td><input type="password" name="log_pw" id="log_pw" value="1234" /></td>
 							</tr>
 							<tr>
 								<td colspan="2">

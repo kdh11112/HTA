@@ -34,10 +34,10 @@
 									<form method="post" action="register/login_Ok.jsp">
 										<h3 style="text-align: center;">로그인</h3>
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="아이디" name="log_id" id="log_id" maxlength="20">
+											<input type="text" class="form-control" placeholder="아이디" name="log_id" id="log_id" maxlength="20" value="KDH" >
 										</div>
 										<div class="form-group">
-											<input type="password" class="form-control" placeholder="비밀번호" name="log_pw" id="log_pw" maxlength="20">
+											<input type="password" class="form-control" placeholder="비밀번호" name="log_pw" id="log_pw" maxlength="20" value="1234" >
 										</div>
 										<input type="button" class="btn btn-primary form-control" value="로그인" id="loginbtn"/>
 									</form>

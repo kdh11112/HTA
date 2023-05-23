@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import vo.AttendenceVO;
-import vo.BoardVO;
-import vo.EmployeeVO;
+import vo.WorkingTimeVO;
 
 public class AttendenceDAO {
 	// 1.환경변수
@@ -88,17 +88,20 @@ public class AttendenceDAO {
 		return result;
 	}// endTimeAddOne end
 
-	public ArrayList<AttendenceVO> getWoringTime(int id) {
-		ArrayList<AttendenceVO> list = new ArrayList<AttendenceVO>();
+	
+	//근무 시간 구하기
+	public ArrayList<WorkingTimeVO> getWoringTime(int id) {
+		ArrayList<WorkingTimeVO> list = new ArrayList<WorkingTimeVO>();
+		
 		sb.setLength(0);
-		sb.append("select e_number, working_date,time ");
+		sb.append("select e_number, to_char(working_date,'YYYY/MM/DD') working_date ,time ");
 		sb.append("from ( select e_number, working_date,  trunc((quitting_time - office_going_hour )*24,0) time ");
 		sb.append("from attendance ");
 		sb.append("where e_number=? ");
-		sb.append("order by attendance.attendance_no desc ) ");
+		sb.append("order by attendance.attendance_no asc ) ");
 		sb.append("where rownum <= 5 ");
 		
-		AttendenceVO vo = null;
+		WorkingTimeVO vo = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -106,12 +109,12 @@ public class AttendenceDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				int enumber = rs.getInt("e_number");
-				vo = new AttendenceVO();
-				
-				vo.setEnumber(enumber);
+				String day = rs.getString("working_date");
+				String time = rs.getString("time");
+				vo = new WorkingTimeVO(day, time);
 				
 				list.add(vo);
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -226,6 +229,18 @@ public class AttendenceDAO {
 			e.printStackTrace();
 		}
 	}// endTimeAddOne end
+	
+	// 8.자원반납
+		public void close() {
+				try {
+					if(rs!=null)rs.close();
+					if(conn!=null)conn.close();
+					if(pstmt!=null)pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 
 }
 
