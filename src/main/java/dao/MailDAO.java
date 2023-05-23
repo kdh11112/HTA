@@ -41,7 +41,9 @@ public class MailDAO {
 	// 전체 페이징 처리
 	public int getTotalCount() {
 		sb.setLength(0);
-		sb.append("SELECT COUNT(*) FROM MAIL");
+		
+		sb.append("SELECT COUNT(*) FROM MAIL ");
+		
 		int count = 0;
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
@@ -56,6 +58,37 @@ public class MailDAO {
 		return count;
 	}
 
+	
+
+	// 페이징처리 => 페이지별 처리 필요.
+	// 받은메일함 전체갯수
+	public int getTotalCountRecive(int number) {
+		sb.setLength(0);
+										
+		sb.append("SELECT COUNT(*) FROM mail WHERE e_number2 = ?");
+		
+		int count = 0;
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, number);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				count = rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	// 받은메일함
 	public ArrayList<MailVO> selectAllRecive(int startNo, int endNo, int number) {
 		// 최근 데이터 10개만 가져오기
