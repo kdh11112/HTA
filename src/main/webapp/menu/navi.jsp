@@ -26,6 +26,7 @@
 		        // 로그인 안된 상태
 		%> --%>
 		    <li><a class="dropdown-item" href="/HTA_Project_semi/login.jsp">Login</a></li>
+		    <li><a class="dropdown-item" href="/HTA_Project_semi/register/newRegi.jsp">Register</a></li>
 		<%-- <%
 		    } else {
 		        // 로그인 된 상태

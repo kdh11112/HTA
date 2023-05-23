@@ -148,7 +148,22 @@
     	} else {
     		document.getElementById("nameError").innerHTML = "";
     	}
-
+    	
+    	// 아이디 확인
+    	if(id === ""){
+    		document.getElementById("idError").innerHTML = "아이디를 입력해주세요.";
+    		check = false;
+    	} else {
+    		document.getElementById("idError").innerHTML = "";
+    	}
+    	
+    	// 아이디 확인
+    	if(postcode === ""){
+    		document.getElementById("addressError").innerHTML = "주소를 입력해주세요.";
+    		check = false;
+    	} else {
+    		document.getElementById("addressError").innerHTML = "";
+    	}
     	
     	// 비밀번호 확인
     	if (password !== passwordCheck) {
@@ -181,9 +196,11 @@
 
     	if (check) {
     		document.getElementById("nameError").innerHTML = "";
+    		document.getElementById("idError").innerHTML = "";
     		document.getElementById("passwordError").innerHTML = "";
     		document.getElementById("passwordCheckError").innerHTML = "";
     		document.getElementById("genderError").innerHTML = "";
+    		document.getElementById("addressError").innerHTML = "";
 			console.log("check : " + check);
 			
     		$.ajax({
@@ -222,7 +239,7 @@
         <div class="body__container">
 			<div class="input__wrapper neu__input">
                	<div class="name">
-                    <input type="text" id="name" placeholder="이름을 입력해 주세요." value="test">
+                    <input type="text" id="name" placeholder="이름을 입력해 주세요." >
                     <div id="nameError" class="error"></div>
                 </div>
                 
@@ -244,8 +261,8 @@
                	
                    <div class="id">
                     <input type="text" id="id" placeholder="아이디을 입력해 주세요."><br />
-                    <input type="button" value="아이디 중복확인" id="idoverlapbtn" />
                     <div id="idError" class="error"></div>
+                    <input type="button" value="아이디 중복확인" id="idoverlapbtn" />
                    </div>
                    
                    <div class="password">
@@ -266,11 +283,11 @@
                	</form>
                	
                	<div class="address">
-					<input id="postcode" type="text" placeholder="주소를 입력해주세요." value="63534"/> <br /> 
+					<input id="postcode" type="text" placeholder="주소를 입력해 주세요." /> <br /> 
+					<div id="addressError" class="error"></div>
 					<input type="button" value="우편번호찾기" id="addrbtn" class="btn" /><br /> 
-					<input type="text" id="address1" size="53" placeholder="도로명 주소" value="제주특별자치도 서귀포시 가가로 14"/><br /> 
-					<input type="text" id="address2" size="50" placeholder="상세 주소" value="test"/>
-					<div id="addressError" class="adress"></div>
+					<input type="text" id="address1" size="53" placeholder="도로명 주소" /><br /> 
+					<input type="text" id="address2" size="50" placeholder="상세 주소" />
 				</div>
 				
                	<div class="phone__wrapper">
@@ -284,7 +301,6 @@
                	<div class="auth__wrapper">
                    	<div class="auth">
                    		<div id="certificationNumber">000000</div>
-                       <!-- <span id="auth__number">000000</span> -->
                        	<button class="btn" disabled id="sendMessage" onclick="getToken()">인증 번호</button>
                    	</div>
                    </div>
