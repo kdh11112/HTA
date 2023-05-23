@@ -37,6 +37,7 @@ $(document).ready(function() {
        url: "load_schedule.jsp",
        success: function(response) {
          var data = JSON.parse(response);
+         console.log(response);
          calendar.setOption('events', data); // 달력의 events 옵션 업데이트
          calendar.render(); // 달력 다시 렌더링
        }
@@ -79,6 +80,7 @@ $(document).ready(function() {
 	        $.ajax({
 	            url: "load_schedule.jsp",
 	            success: function(response) {
+	            	console.log(response);
 	                var data = JSON.parse(response);
 	                calendar.setOption('events', data); // 달력의 events 옵션 업데이트
 	                calendar.render(); // 달력 다시 렌더링

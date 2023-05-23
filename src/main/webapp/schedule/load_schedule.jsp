@@ -15,8 +15,10 @@
 		EmployeeVO vo = (EmployeeVO)obj;
 		eNumber = vo.geteNumber();
 		dName = vo.getdName();
+		String sType = request.getParameter("schedule_Type");
 	    ScheduleDAO dao = new ScheduleDAO();
 	    ArrayList<ScheduleVO> list = dao.selectAll(dName, eNumber);
+	    ArrayList<ScheduleVO> list2 = dao.departmentLoadSchedule(dName,sType);
 	    dao.close();
 %>
 
@@ -26,5 +28,15 @@
     "start": "<%= list.get(i).getSStarDate() %>",
     "end": "<%= list.get(i).getSEndDate() %>"
   }<%= (i != list.size() - 1) ? ',' : "" %>
+<% } %>
+
+<% for (int i = 0; i < list2.size(); i++) { %>
+  {
+    "title": "<%= list2.get(i).getSContents() %>",
+    "start": "<%= list2.get(i).getSStarDate() %>",
+    "end": "<%= list2.get(i).getSEndDate() %>",
+    "backgroundColor":"#ff6060",
+	"borderColor":"#ff6060"
+  }<%= (i != list2.size() - 1) ? ',' : "" %>
 <% } %>]
 <%}%>
