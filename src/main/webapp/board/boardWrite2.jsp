@@ -44,36 +44,45 @@
 				<div class="formBox">
 					<h1 class="mt-4">BOARD</h1>
 						<div class="card mb-4">
-							<form action="boardWriteOk.jsp" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+							<form action="boardWriteOk.jsp" method="post" id="joinForm" accept-charset="UTF-8" enctype="multipart/form-data">
 	       						<input type="hidden" value="board_write" name="command">
-           						<table>
-              							<tr>
-					                   <th>제목 *</th>
-					                   <td><input type="text" name="title"></td>
-					               </tr>
-					               <tr>
-					                   <th>사원명 *</th>
-					                   <!-- 글자 수정 못하게 하고싶다면 disabled 줌
-										disabled은 다음 페이지로 값 전달이 안돼서 hidden 넣어서 전달해줘야 함 -->
-					                   <td><input type="text" name="ename" value="<%=ename %>" disabled="disabled">
-					                   <input type="hidden" name="ename" value="<%=ename %>" />
-					                   <input type="hidden" name="enumber" value="<%=enumber %>"/></td>
-					               </tr>
-					               <tr>
-					                   <th>첨부파일</th>
-					                   <td><input type="file" name="filename"></td>
-					               </tr>
-					               <tr>
-					                   <th>내용</th>
-					                   <td><textarea class="summernote" name="content"  ></textarea></td>
-					               </tr>
-								</table>
+	       						<table>
+					                <colgroup>
+					                    <col style="width:150px">
+					                    <col style="width:850px">
+					                </colgroup>
+					                <tbody>
+					                    <tr>
+					                        <th>제목</th>
+					                        <td><input type="text" name="title" id="subject"></td>
+					                    </tr>
+					                    <tr>
+					                        <th>사원명</th>
+					                        <td>
+					                        <input type="text" name="ename" value="<%=ename %>" disabled="disabled">
+					                   		<input type="hidden" name="ename" value="<%=ename %>" />
+					                   		<input type="hidden" name="enumber" value="<%=enumber %>"/>
+					                   		</td>
+					                    </tr>
+					                    <tr>
+					                        <th>첨부파일</th>
+					                        <td><input type="file" name="filename"></td>
+					                    </tr>
+					                    <tr>
+					                        <th>내용</th>
+					                        <td>
+					                            <textarea name="content" id="summernote" class="summernote" ></textarea>
+					                        </td>
+					                    </tr>
+					                </tbody>
+					            </table>
 								<input name="btn" type="submit" class="btn btn-secondary" value="등록">
 						        <input name="btn" type="reset" class="btn btn-secondary" value="다시작성하기" onclick=reset();>
 						        <a href="boardList.jsp">
 						        <input name="btn" type="button" class="btn btn-secondary" value="취소" >
 						        </a>
 							</form>
+						</div>
 				</div>
 			</div>
 		</main>
