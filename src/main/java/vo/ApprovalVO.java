@@ -17,16 +17,30 @@ public class ApprovalVO {
 	private String aSave;
 	private int eNumber;
 	
+	private int eENumber1;
+	private int eEnumber2;
+	private String eEname1;
+	private String eEname2;
+	private String eEof1;
+	private String eEof2;
+	private String eStampSelf;
+	private String eStamp1;
+	private String eStamp2;
 	
 	
 	
 	public ApprovalVO() {}
 
 
+	
+
+
 
 
 	public ApprovalVO(int aNumber, String aName, String aDepartmentName, Date aStartDate, Date aEndDate, String aTitle,
-			String aContent, String aName1st, String aName2nd, String aStatus, String aSave, int eNumber) {
+			String aContent, String aName1st, String aName2nd, String aStatus, String aSave, int eNumber, int eENumber1,
+			int eEnumber2, String eEname1, String eEname2, String eEof1, String eEof2, String eStampSelf,
+			String eStamp1, String eStamp2) {
 		super();
 		this.aNumber = aNumber;
 		this.aName = aName;
@@ -40,9 +54,81 @@ public class ApprovalVO {
 		this.aStatus = aStatus;
 		this.aSave = aSave;
 		this.eNumber = eNumber;
+		this.eENumber1 = eENumber1;
+		this.eEnumber2 = eEnumber2;
+		this.eEname1 = eEname1;
+		this.eEname2 = eEname2;
+		this.eEof1 = eEof1;
+		this.eEof2 = eEof2;
+		this.eStampSelf = eStampSelf;
+		this.eStamp1 = eStamp1;
+		this.eStamp2 = eStamp2;
 	}
 
 
+
+
+
+
+
+	public int geteENumber1() {
+		return eENumber1;
+	}
+
+
+	public void seteENumber1(int eENumber1) {
+		this.eENumber1 = eENumber1;
+	}
+
+
+	public int geteEnumber2() {
+		return eEnumber2;
+	}
+
+
+	public void seteEnumber2(int eEnumber2) {
+		this.eEnumber2 = eEnumber2;
+	}
+
+
+	public String geteEname1() {
+		return eEname1;
+	}
+
+
+	public void seteEname1(String eEname1) {
+		this.eEname1 = eEname1;
+	}
+
+
+	public String geteEname2() {
+		return eEname2;
+	}
+
+
+	public void seteEname2(String eEname2) {
+		this.eEname2 = eEname2;
+	}
+
+
+	public String geteEof1() {
+		return eEof1;
+	}
+
+
+	public void seteEof1(String eEof1) {
+		this.eEof1 = eEof1;
+	}
+
+
+	public String geteEof2() {
+		return eEof2;
+	}
+
+
+	public void seteEof2(String eEof2) {
+		this.eEof2 = eEof2;
+	}
 
 
 	public int getaNumber() {
@@ -213,13 +299,63 @@ public class ApprovalVO {
 
 
 
-	@Override
-	public String toString() {
-		return "ApprovalVO [aNumber=" + aNumber + ", aName=" + aName + ", aDepartmentName=" + aDepartmentName
-				+ ", aStartDate=" + aStartDate + ", aEndDate=" + aEndDate + ", aTitle=" + aTitle + ", aContent="
-				+ aContent + ", aName1st=" + aName1st + ", aName2nd=" + aName2nd + ", aStatus=" + aStatus + ", aSave="
-				+ aSave + ", eNumber=" + eNumber + "]";
+
+
+
+	public String geteStampSelf() {
+		return eStampSelf;
 	}
+
+
+
+
+
+
+
+	public void seteStampSelf(String eStampSelf) {
+		this.eStampSelf = eStampSelf;
+	}
+
+
+
+
+
+
+
+	public String geteStamp1() {
+		return eStamp1;
+	}
+
+
+
+
+
+
+
+	public void seteStamp1(String eStamp1) {
+		this.eStamp1 = eStamp1;
+	}
+
+
+
+
+
+
+
+	public String geteStamp2() {
+		return eStamp2;
+	}
+
+
+
+
+
+
+
+	public void seteStamp2(String eStamp2) {
+		this.eStamp2 = eStamp2;
+	}
+
 
 	
 }

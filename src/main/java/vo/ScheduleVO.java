@@ -13,5 +13,5 @@ public class ScheduleVO {
 	String sStarDate;
 	String sEndDate;
 	int eNumber;
-	
+	String sType;
 } 

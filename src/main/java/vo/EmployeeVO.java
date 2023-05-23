@@ -18,15 +18,18 @@ public class EmployeeVO {
 	private int eTotalVacation;
 	private String eServing;
 	private String dName;
+	private String estamp;
 	
 	public EmployeeVO() {
 		
 	}
 	
+	
+
 	public EmployeeVO(int eNumber, String eName, String eId, String ePassword, String ePhonenumber, int ePostalCode,
 			String eAddress1, String eAddress2, String eBirth, String eDateJoiningCompany, String eRetirementDate,
 			String eAccountInformation, String eGender, String eOfficialResponsibilities, int eTotalVacation,
-			String eServing, String dName) {
+			String eServing, String dName, String estamp) {
 		super();
 		this.eNumber = eNumber;
 		this.eName = eName;
@@ -45,7 +48,10 @@ public class EmployeeVO {
 		this.eTotalVacation = eTotalVacation;
 		this.eServing = eServing;
 		this.dName = dName;
+		this.estamp = estamp;
 	}
+
+
 
 	public int geteNumber() {
 		return eNumber;
@@ -183,7 +189,15 @@ public class EmployeeVO {
 		this.dName = dName;
 	}
 
-	
-	
-	
+
+
+	public String getEstamp() {
+		return estamp;
+	}
+
+
+	public void setEstamp(String estamp) {
+		this.estamp = estamp;
+	}
+
 }

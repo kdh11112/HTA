@@ -32,8 +32,8 @@
     	
     	ApprovalDAO dao = new ApprovalDAO();
     	ApprovalVO vo2 = new ApprovalVO();
-
-    	int totalCount = dao.getTotalCount(eNum);
+    	String status = null;
+    	int totalCount = dao.getTotalCount("결재완료",eNum);
     	
     	//페이징 10개씩
     	int recordPerPage = 10;
@@ -41,6 +41,7 @@
     	
     	String pageNum = request.getParameter("pageNum");
     	int currentPage = 0;
+    	/* int pageNumInt = Integer.parseInt(pageNum); */
     	if(pageNum != null){
     		currentPage = Integer.parseInt(pageNum);
     	}else{
@@ -65,7 +66,7 @@
             <div id="layoutSidenav_content">
             	<main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">내 문서함</h1>
+                        <h1 class="mt-4">결재 완료</h1>
                         <div class="card mb-4">
                             <div class="card-header">
                                 여기에 뭘 넣어볼까?
@@ -82,10 +83,9 @@
                                         </tr>
                                     </thead>
                                     <%
-                                    	/* ArrayList<ApprovalVO> list = dao.selectAll(startNo,endNo,eNum,vo2.getaName1st(),vo2.getaName2nd()); */
-                                    	ArrayList<ApprovalVO> list = dao.selectAll(startNo,endNo,eNum);
+                                    	
+                                    	ArrayList<ApprovalVO> list = dao.selectComple(startNo,endNo,eNum);
                                     	for(ApprovalVO vo : list){
-                                    		
                                     	
                                     %>
                                     	<tr style="line-height: 2;">
@@ -104,7 +104,7 @@
                                 	<nav aria-label="Page navigation example">
 									  <ul class="pagination">
 									    <li class="page-item">
-									      <a class="page-link" href="approvalList.jsp?pageNum=<%=prevPage %>" aria-label="Previous">
+									      <a class="page-link" href="approvalListComplete.jsp?pageNum=<%=prevPage %>" aria-label="Previous">
 									        <span aria-hidden="true">&laquo;</span>
 									      </a>
 									    </li>
@@ -113,19 +113,18 @@
                                 			
                                 	%>
 									    <li class="page-item">
-									  <a class="page-link" href="approvalList.jsp?pageNum=<%=i%>"> <%=i %></a>
+									  <a class="page-link" href="approvalListComplete.jsp?pageNum=<%=i%>"> <%=i %></a>
 									    </li>
                                 	<%
                                 		}
                                 	%>
 									    <li class="page-item">
-									      <a class="page-link" href="approvalList.jsp?pageNum=<%=nextPage %>" aria-label="Next">
+									      <a class="page-link" href="approvalListComplete.jsp?pageNum=<%=nextPage %>" aria-label="Next">
 									        <span aria-hidden="true">&raquo;</span>
 									      </a>
 									    </li>
 									  </ul>
-									</nav>
-                                			
+									</nav>	
                                 	</td>
                                 </tr>
                             </div>

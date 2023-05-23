@@ -55,13 +55,48 @@
 		    
 		</style>
 		<script type="text/javascript">
+			
+		$(function(){
+			
+
+			$("input[value='제출하기']").on("click",function(){	
+
+				let placeholder1 = document.getElementById("placeholder1").value; 
+				let placeholder3 = document.getElementById("placeholder3").value; 
+				let contents = document.getElementById("contents").value;
+				let title = document.getElementById("title").value;
+				
+				
+				console.log(placeholder1);
+				if(placeholder1 == ""){
+					alert("1차 승인자를 지정해주세요");
+				}else if(placeholder3 == ""){
+					alert("2차 승인자를 지정해주세여")
+				}else if(title == ""){
+					alert("제목을 써주세요")
+				}else if(contents == ""){
+					alert("내용을 써주세여")
+				}
+				else{
+				//버튼으로 서브밋을 처리하는방법
+				document.frm.method="get";
+				document.frm.action="approvalFormOk.jsp";
+				document.frm.submit();
+					
+				}
+				
+			
+			})
+		})
+		
+		
 				var url = null;
 				var option = null;
 				var title = null;
 			$(function(){
 				$(".position2").on("click",function(){
 					url = "../emp_search/info.jsp";
-					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					option = "width = 825px, height = 650px, top = 200, left = 200, location = no";
 					title = '자식창1';
 					window.open(url,title,option,"window.opener");
 				})
@@ -72,7 +107,7 @@
 			$(function(){
 				$(".position3").on("click",function(){
 					url = "../emp_search/info.jsp";
-					option = "width = 825px, height = 650px, top = 100, left = 200, location = no";
+					option = "width = 825px, height = 650px, top = 200, left = 200, location = no";
 					title = '자식창2';
 					window.open(url,title,option,"window.opener");
 				})
@@ -84,14 +119,46 @@
 				  var dataArray = event.data.split(",");
 					for(var i=0; i<dataArray.length; i++){
 						if(title == '자식창1'){
-					    document.getElementById('data-placeholder1').value = dataArray[1]; 
-					    document.getElementById('data-placeholder2').value = dataArray[2]; 						
-					}else if(title == '자식창2'){
-					    document.getElementById('data-placeholder3').value = dataArray[1]; 
-					    document.getElementById('data-placeholder4').value = dataArray[2]; 	
-					}
+						    document.getElementById('placeholder1').value = dataArray[1]; 
+						    document.getElementById('placeholder2').value = dataArray[2]; 
+						   
+						}else if(title == '자식창2'){
+						    document.getElementById('placeholder3').value = dataArray[1]; 
+						    document.getElementById('placeholder4').value = dataArray[2]; 	
+						}
+					}	
+						if(document.getElementById('placeholder1').value == document.getElementById('placeholder3').value){
+							parent.window.alert("동일 인물입니다");
+							document.getElementById('placeholder3').value = '';
+							document.getElementById('placeholder4').value = '';
+						}
 				}
-				}
+				
+				$(function(){
+					$("input[value='임시저장']").on("click",function(){
+						var placeholder1 = document.getElementById('placeholder1').value;
+						var placeholder2 = document.getElementById('placeholder2').value;
+						var placeholder3 = document.getElementById('placeholder3').value;
+						var placeholder4 = document.getElementById('placeholder4').value;
+						var contents = document.getElementById('contents').value;
+						var title = document.getElementById('title').value;
+						$.ajax({
+							url:"approvalFormTemp.jsp",
+							data:{
+								placeholder1:placeholder1,
+								placeholder2:placeholder2,
+								placeholder3:placeholder3,
+								placeholder4:placeholder4,
+								contents:contents,
+								title:title
+							}, 
+							success:function(data){
+								 location.href = "approvalListTemporary.jsp"; 
+							}
+
+						})
+					})
+				})
 			
 		</script>
     </head>
@@ -101,6 +168,7 @@
     	String name = null;
     	String dname = null;
     	String position = null;
+    	String stamp = null;
     	int num = 0;
     	LocalDate now = LocalDate.now();
     	if(obj != null){
@@ -109,7 +177,7 @@
     		dname = vo.getdName();
     		position = vo.geteOfficialResponsibilities();
     		num = vo.geteNumber();
-    		
+    		stamp = vo.getEstamp();
     	}
     	
     	
@@ -119,9 +187,9 @@
         <div id="layoutSidenav"> 
         	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
            	 	<div id="layoutSidenav_content">
-            		<form action="approvalFormOk.jsp" method="get">
+            		<form action="approvalFormOk.jsp" name="frm" method="get">
 		            	<main>
-		                    <div class="container-fluid px-4">
+		                    <div class="container-fluid px-4" >
 		                        <h1 class="mt-4">전자결재 작성</h1>
 									<div class="card mb-4">
 									    <div class="card-header">
@@ -140,19 +208,19 @@
 									        <tr>
 									            <th><%=position %></th>
 									            <!-- <th class="position2" id="data-placeholder2"></th> -->
-									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" readonly></th>
-									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" readonly></th>
+									        	<th class="position2"><input type="text" id="placeholder2" name="placeholder2" readonly></th>
+									            <th class="position3"><input type="text" id="placeholder4" name="placeholder4" readonly></th>
 									            <!-- <input type="text" id="data-placeholder2" name="data-placeholder1"> -->
 									        </tr>
 									        <tr>
 									            <td><%=name %></td>
-									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" readonly></td>
-									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" readonly></td>
+									            <td class="position2"><input type="text" id="placeholder1" name="placeholder1" readonly></td>
+									            <td class="position3"><input type="text" id="placeholder3" name="placeholder3" readonly></td>
 									        </tr>
 									        <tr>
-									            <td><img src="../img/stamp/e_<%=num%>.png" /></td>
-									            <td class="position2"></td>
-									            <td class="position3"></td>
+									            <td><img src="<%=stamp %>"/></td>
+									            <td class="position2" id="stamp1"></td>
+									            <td class="position3" id="stamp2"></td>
 									        </tr>
 									    </table>
 									</div>
@@ -162,12 +230,12 @@
 			                            	
 		                            	<tr><td>제목 <input class="titles" type="text" name="title" id="title" style="width: 90%; text-align: left;"/></td></tr>
 										<tr>
-											<td><textarea class="summernote" name="contents"></textarea></td>
+											<td><textarea class="summernote" name="contents" id="contents"></textarea></td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<input class="btn btn-primary" type="submit" value="제출하기" />
-												<input class="btn btn-info" type="submit" value="임시저장" />
+												<input class="btn btn-primary" type="button" value="제출하기" />
+												<input class="btn btn-info" type="button" value="임시저장" />
 											</td>
 										</tr>
 		                            </table>

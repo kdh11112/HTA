@@ -60,7 +60,8 @@ public class EmployeeDAO {
 				int eTotalVacation = rs.getInt("e_total_vacation");
 				String eServing = rs.getString("e_serving");
 				String dName = rs.getString("d_name");
-				EmployeeVO vo = new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName);
+				String eStamp = rs.getString("e_stamp");
+				EmployeeVO vo = new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName,eStamp);
 				list.add(vo);
 			}
 		} catch (SQLException e) {
@@ -129,7 +130,8 @@ public class EmployeeDAO {
 			int eTotalVacation = rs.getInt("e_total_vacation");
 			String eServing = rs.getString("e_serving");
 			String dName = rs.getString("d_name");
-			vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName);
+			String eStamp = rs.getString("e_stamp");
+			vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName,eStamp);
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -168,7 +170,8 @@ public class EmployeeDAO {
 			int eTotalVacation = rs.getInt("e_total_vacation");
 			String eServing = rs.getString("e_serving");
 			String dName = rs.getString("d_name");
-			vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName);
+			String eStamp = rs.getString("e_stamp");
+			vo= new EmployeeVO(eNumber, eName, eId, ePassword, ePhonenumber, ePostalCode, eAddress1, eAddress2, eBirth, eDateJoiningCompany, eRetirementDate, eAccountInformation, eGender, eOfficialResponsibilities, eTotalVacation, eServing, dName,eStamp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

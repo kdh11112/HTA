@@ -18,8 +18,21 @@
 	
 	vo.setEnumber(enumber);
 
-	dao.addOne(vo);
+	// id ==> 30 인 사원의 출근기록이 있는지 확인 
+	AttendenceVO vo2 = dao.getStartTime(enumber);
+	int result =0;
+	if(vo2 ==null){
+		result = dao.addOne(vo);
+	}else{
+		result=0;
+	}
+	// 있으면 0을 리턴한다.
 	
+	
+	// 없다면 insert 
+	
+	
+	out.println(result);
 	
 	
 	//dao.close();

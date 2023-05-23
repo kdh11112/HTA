@@ -7,8 +7,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+  $(document).ready(function() {
+    initializeSummernote(); // Summernote 초기화 함수 호출
+  });
+
+  // Summernote 초기화 함수
+  function initializeSummernote() {
+    $('.summernote').summernote({
+      height: 450, // 서머노트 에디터 높이
+      width: 1900,
+      codemirror: {
+        theme: 'monokai' // codemirror options
+      }
+    });
+  }
+</script>
 <meta charset="UTF-8">
-<title>mail_writeOk.jsp</title>
+<title>mail_writeTempSaveOk.jsp</title>
 </head>
 <body>
  <%
@@ -33,7 +49,6 @@
 			//참조인
 			String cc =  request.getParameter("cc");
 			
-			String mBoard = "받은 메일함";
 			
 			//편지함상태는 일단 패스
 			
@@ -48,17 +63,16 @@
 			   	vo.setMTitle(title);
 			   	vo.setMContent(contents);
 			   	vo.setMFile(file);
-			   	vo.setMCc(cc);
-				vo.setMBoard(mBoard);							   
-			   	vo.setENumber(intWriter);
-			   	vo.setENumber2(intReciver);
+			   	vo.setMCc(cc);						   
+			   	vo.setENumber(intReciver);
+			   	vo.setENumber2(intWriter);
 			   	
 			   	
-			   	dao.writeMail(vo);
+			   	dao.writeMailTempSave(vo);
 			   	
 			}
 			 
-         response.sendRedirect("mail_layOut.jsp");
+         response.sendRedirect("mailLayOut.jsp");
  %>	
  
 </body>

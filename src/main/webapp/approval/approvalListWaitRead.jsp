@@ -56,11 +56,6 @@
 		    }
 		    
 		    #con { pointer-events: none !important; }
-		    
-		      .myImg[src=""], .myImg[src="null"] {
-			    display: none;
-			  }
-		    
 		</style>
 
     </head>
@@ -73,6 +68,7 @@
     	String of1st = null;
     	String of2rd = null;
     	int num = 0;
+    	String stamp = null;
     	LocalDate now = LocalDate.now();
     	if(obj != null){
     		EmployeeVO vo = (EmployeeVO)obj;
@@ -84,7 +80,7 @@
     	} 
     	
     	String pageNum = request.getParameter("pageNum");
-    	
+
     	if(pageNum != null){
     		int no = Integer.parseInt(pageNum);
     		
@@ -95,9 +91,24 @@
     		of1st = (String)ApprovalDAO.map.get("of1st");
     		of2rd = (String)ApprovalDAO.map.get("of2rd");
     		
+/*     		String level = vo.getaStatus();
+    		// 1 : 기안작성중
+    		// 2 : 1 결제대기
+    		// 3 : 2 보류
+    		// 4 : 2 결제완료 
+    		
+    		// ,, 
+    		
+    		XXXDAO dao3 = new XXXDAO();
+    		
+    		String filePath =   dao3.getImageFilePath(12); */
+    		
+    		
+    		// 사원정보 : 결재도장 파일 경로 
+    		
+    		
     	
     	if(vo != null){
-    		
 
     	
     	
@@ -110,7 +121,7 @@
         <div id="layoutSidenav"> 
         	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
            	 	<div id="layoutSidenav_content">
-            		<form action="approvalFormOk.jsp" method="get">
+            		<form action="approvalListWaitReadForm.jsp" method="get">
 		            	<main>
 		                    <div class="container-fluid px-4">
 		                        <h1 class="mt-4">전자결재 작성</h1>
@@ -129,22 +140,23 @@
 										        <td rowspan="4">결재</td>
 										    </tr>
 									        <tr>
-									        	<input type="hidden" name="pageNum" value="<%=vo.getaNumber() %>"/>
+									        	<input type="hidden" name="pageNum" value="<%=no %>"/>
+									        	
 									            <th><%=vo.getaDepartmentName() %></th>
 									            <!-- <th class="position2" id="data-placeholder2"></th> -->
-									        	<th class="position2"><input type="text" id="placeholder2" name="placeholder2" value="<%=of1st %>"  readonly></th>
-									            <th class="position3"><input type="text" id="placeholder4" name="placeholder4" value="<%=of2rd %>" readonly></th>
+									        	<th class="position2"><input type="text" id="data-placeholder2" name="data-placeholder2" value="<%=of1st %>"  readonly></th>
+									            <th class="position3"><input type="text" id="data-placeholder4" name="data-placeholder4" value="<%=of2rd %>" readonly></th>
 									            <!-- <input type="text" id="data-placeholder2" name="data-placeholder1"> -->
 									        </tr>
 									        <tr>
 									            <td><%=vo.getaName() %></td>
-									            <td class="position2"><input type="text" id="placeholder1" name="placeholder1" value="<%=vo.getaName1st() %>" readonly></td>
-									            <td class="position3"><input type="text" id="placeholder3" name="dplaceholder3" value="<%=vo.getaName2nd() %>" readonly></td>
+									            <td class="position2"><input type="text" id="data-placeholder1" name="data-placeholder1" value="<%=vo.getaName1st() %>" readonly></td>
+									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" value="<%=vo.getaName2nd() %>" readonly></td>
 									        </tr>
 									        <tr>
-									            <td><img src="<%=vo.geteStampSelf() %>" class="myImg"></td>
-									            <td><img src="<%=vo.geteStamp1() %>" class="myImg"></td>
-									            <td><img src="<%=vo.geteStamp2() %>" class="myImg"></td>
+									            <td><img src="<%=vo.geteStampSelf() %>" /></td>
+									            <td class="position2" id="stamp1"><img src="<%=vo.geteStamp1() %>" /></td>
+									            <td class="position3" id="stamp2"></td>
 									        </tr>
 									    </table>
 									</div>
@@ -159,7 +171,8 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<!-- <input class="btn btn-info" type="submit" value="결재" /> -->
+												<input class="btn btn-info" type="submit" value="결재" />
+												<!-- <input class="btn btn-info" type="button" value="결재버튼" onclick="approvalButton();"/> -->
 											</td>
 										</tr>
 		                            </table>

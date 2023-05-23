@@ -16,29 +16,28 @@
 	                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" >
 	                            	<div class="sb-sidenav-menu-heading">결재</div>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">테스트</a>
-	                                </nav>
-	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalForm.jsp">일반결재</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">임시저장함</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalListTemporary.jsp">임시저장함</a>
 	                                </nav>
 	                                <div class="sb-sidenav-menu-heading">결재함</div>
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalList.jsp">내 문서함</a>
 	                                </nav>
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" href="/HTA_Project_semi/approval/center.jsp">결재완료문서</a>
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalListWait.jsp">결재 대기함</a>
+	                                </nav>
+	                                <nav class="sb-sidenav-menu-nested nav">
+	                                    <a class="nav-link" href="/HTA_Project_semi/approval/approvalListComplete.jsp">결재완료문서</a>
 	                                </nav>
 	                            </div>
 	                            
 	                            
 
-	                        <a class="nav-link" href="/HTA_Project_semi/mail/mail_layOut.jsp">사내메일함</a>
-	                        <a class="nav-link" href="/HTA_Project_semi/attendance/test6.jsp">근태관리</a>
-	                        <a class="nav-link" href="../schedule/schedule_list.jsp">일정관리</a>
-
+	                        <a class="nav-link" href="/HTA_Project_semi/mail/mailLayOut.jsp">사내메일함</a>
+	                        <a class="nav-link" href="/HTA_Project_semi/attendance/test8.jsp">근태관리</a>
+	                        <a class="nav-link" href="/HTA_Project_semi/schedule/schedule_list.jsp">일정관리</a>
    							<a class="nav-link" href="/HTA_Project_semi/board/boardList.jsp">게시판</a>
    							<a class="nav-link" href="/HTA_Project_semi/login.jsp">로그인</a>
 	                            
