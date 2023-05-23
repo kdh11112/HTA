@@ -140,17 +140,7 @@
             }
           });
         } else if (selectedValue == "회사") {
-          $.ajax({
-            url: "company_load_schedule.jsp",
-            data : {
-              schedule_Type: selectedValue
-            },
-            success: function(response) {
-              var data = JSON.parse(response);
-              calendar.setOption('events', data); // 달력의 events 옵션 업데이트
-              calendar.render(); // 달력 다시 렌더링
-            }
-          });
+          alert("회사일정이 없습니다")
         }
       });
     });
