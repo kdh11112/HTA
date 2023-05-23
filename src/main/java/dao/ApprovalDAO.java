@@ -334,7 +334,6 @@ public class ApprovalDAO {
 	
 	public void updateOne(ApprovalVO vo,EmployeeVO s) {
 		sb.setLength(0);
-		System.out.println(vo.getaNumber());
 		sb.append("UPDATE APPROVAL SET ");
 		if(s.geteOfficialResponsibilities().equals("과장")) {
 			sb.append("A_STATUS = '2차결재 대기중',A_STAMP_1ST = ? WHERE A_NUMBER = ?");
@@ -355,9 +354,22 @@ public class ApprovalDAO {
 		
 	}
 	
+	public void updateTemp(int i,String s) {
+		sb.setLength(0);
+		sb.append("UPDATE APPROVAL SET A_STATUS = '1차결재 대기중',A_STAMP_SALF = ? WHERE A_NUMBER = ? ");
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setString(1, s);
+			pstmt.setInt(2, i);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void addOne(EmployeeVO vo2,ApprovalVO vo) {
 		sb.setLength(0);
-		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,'임시',null,?)");
+		sb.append("INSERT INTO APPROVAL VALUES(APPROVAL_SEQ.NEXTVAL,?,?,SYSDATE,SYSDATE,?,?,?,?,'임시',null,?,null,null,null)");
 		
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
