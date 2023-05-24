@@ -27,9 +27,9 @@
 		    if (objSession == null) {
 		        // 로그인 안된 상태
 		%> --%>
-		    <li><a class="dropdown-item" href="/HTA_Project_semi/login.jsp">Login</a></li>
+		    <li><a class="dropdown-item" href="/HTA_Project_semi/login2.jsp">Login</a></li>
 		    <li><a class="dropdown-item" href="/HTA_Project_semi/register/newRegi.jsp">Register</a></li>
-		     <li><a class="dropdown-item" href="/HTA_Project_semi/login.jsp">Logout</a></li>
+		     <li><a class="dropdown-item" href="/HTA_Project_semi/login2.jsp">Logout</a></li>
 
 		<%-- <%
 		    } else {

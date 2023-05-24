@@ -30,10 +30,28 @@
 		  $("#select").change(function() {
 		    var selectedValue = $(this).val(); // 선택된 일정 유형의 값을 가져옴
 		    // 가져온 값으로 원하는 동작 수행
-		    console.log(selectedValue);
 		  });
 		});
-	
+	$(function(){
+		$("#add_button").on("click",function(){
+			var contents_text = document.getElementById("contents_text").value;
+			if(contents_text == null || contents_text == "" || contents_text =="null"){
+				$("#contents_text").append("<textarea>").attr("placeholder","값을 입력해주세요");
+			}else{
+				
+				document.frm.method="get";
+				document.frm.action="schedule_add.jsp";
+				document.frm.submit(); 
+				window.opener.location.reload();
+	            
+			}
+			
+			
+		})
+		window.onunload = function() {
+	      // 추가버튼을 누르면 부모 윈도우 새로고침
+	    };
+	})
 
 </script>
 
@@ -85,7 +103,7 @@
     <!-- 날짜 설정 -->
     
     <div id=page><span id="title">일정추가</span>
-		<form action="schedule_add.jsp">
+		<form action="schedule_add.jsp" name="frm">
 		<div>
 				<input type="hidden" name="" />
 				<input type="hidden" name="" />
@@ -104,10 +122,10 @@
 		<div id="end_date_txt">종료일&nbsp;&nbsp;&nbsp;<input class="control_dateTime" type="datetime-local"  name="end_date" required /></div>
 		</div>
 		<div id="content_area"><span>일정내용</span>
-			 <p><textarea cols="34" rows="10" name="contents"></textarea></p>			
+			 <p><textarea cols="34" rows="10" name="contents" id="contents_text"></textarea></p>			
 		</div>
 		<div >
-			<input type="submit" value="추가" id="add_button" />
+			<input type="button" value="추가" id="add_button" />
 			<input type="button" value="취소" id="cancel_button" />
 		</div>
 	</form>

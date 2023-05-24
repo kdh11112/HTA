@@ -17,6 +17,7 @@
 	#calendar{
 		margin:auto;
 	}
+	
 </style>
 
 <body>
@@ -51,36 +52,48 @@
       loadAllEvents();
 
       function loadAllEvents() {
-        // 개인 일정 가져오기
-        $.ajax({
-          url: "/HTA_Project_semi/schedule/personal_load_schedule.jsp",
-          data: {
-            schedule_Type: "개인"
-          },
-          success: function(response) {
-            var personalData = JSON.parse(response);
+    	  // 개인 일정 가져오기
+    	  $.ajax({
+    	    url: "/HTA_Project_semi/schedule/personal_load_schedule.jsp",
+    	    data: {
+    	      schedule_Type: "개인"
+    	    },
+    	    success: function(response) {
+    	      var personalData = JSON.parse(response);
 
-            // 부서 일정 가져오기
-            $.ajax({
-              url: "/HTA_Project_semi/schedule/department_load_schedule.jsp",
-              data: {
-                schedule_Type: "부서"
-              },
-              success: function(response) {
-                var departmentData = JSON.parse(response);
-                var allData = personalData.concat(departmentData);
-                calendar.setOption('events', allData); // 달력의 events 옵션 업데이트
-                calendar.render(); // 달력 다시 렌더링
-              }
-            });
-          }
-        });
-      }
+    	      // 부서 일정 가져오기
+    	      $.ajax({
+    	        url: "/HTA_Project_semi/schedule/department_load_schedule.jsp",
+    	        data: {
+    	          schedule_Type: "부서"
+    	        },
+    	        success: function(response) {
+    	          var departmentData = JSON.parse(response);
+
+    	          // 회사 일정 가져오기
+    	          $.ajax({
+    	            url: "/HTA_Project_semi/schedule/company_load_schedule.jsp",
+    	            data: {
+    	              schedule_Type: "회사"
+    	            },
+    	            success: function(response) {
+    	              var companyData = JSON.parse(response);
+
+    	              var allData = personalData.concat(departmentData).concat(companyData);
+    	              calendar.setOption('events', allData); // 달력의 events 옵션 업데이트
+    	              calendar.render(); // 달력 다시 렌더링
+    	            }
+    	          });
+    	        }
+    	      });
+    	    }
+    	  });
+    	}
 
       function openWindow(date) {
         // 작은 윈도우 창 열기
         var windowFeatures = "width=320,height=550,scrollbars=yes";
-        var windowObject = window.open("flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
+        var windowObject = window.open("/HTA_Project_semi/schedule/flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
         windowObject.focus();
       }
 

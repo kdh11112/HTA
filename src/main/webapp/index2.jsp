@@ -77,17 +77,17 @@ var eNumber = <%=vo.geteNumber()%>
 	<script>
 	$(document).ready(function() {
 		$("#main_mail").load("/HTA_Project_semi/mail/mailRecivebox2.jsp");
-	});
-	$(document).ready(function() {
 		$("#main_board").load("/HTA_Project_semi/board/boardList2.jsp");
-	});
-	$(document).ready(function() {
 		$("#main_approval").load("/HTA_Project_semi/approval/approvalList2.jsp");
-	});	
-	$(document).ready(function() {
 		$("#main_schedule").load("/HTA_Project_semi/schedule/mainpage_calendar_load.jsp");
-	});
 
+	});
+	$(function(){
+		$("#main_mail").on("click",function(){
+			console.log("test");
+		})
+	})
+	
 	</script>
 
 
