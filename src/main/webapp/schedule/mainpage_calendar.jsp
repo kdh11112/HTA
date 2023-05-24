@@ -17,14 +17,16 @@
 	#calendar{
 		margin:auto;
 	}
-	
+	.fc .fc-toolbar{
+		display:none;
+	}
 </style>
 
 <body>
 
-  <main>
+
     <div id='calendar'></div>
-  </main>
+
 
   <script>
     var calendar;

@@ -40,7 +40,10 @@ bottom:1119px;
 width:600px;
 margin-bottom:25px;
 }
-
+.card-header{
+	background:#212529;
+	color:white;
+}
 </style>
 <script>
 <%
@@ -69,6 +72,9 @@ var eNumber = <%=vo.geteNumber()%>
 	width:100%;
 	height:300px;
 	overflow: hidden;
+}
+main{
+	height:500px;
 }
 
 </style>
@@ -100,9 +106,7 @@ var eNumber = <%=vo.geteNumber()%>
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">메인페이지입니다.</h1>
 					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item active">메인페이지</li>
 					</ol>
 					<div class="identity"></div>
 
