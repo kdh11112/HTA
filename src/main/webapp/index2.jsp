@@ -92,9 +92,22 @@ main{
 
 	});
 	$(function(){
-		$("#main_mail").on("click",function(){
-			console.log("test");
+		$("#header_approval").on("click",function(){
+			location.href="approval/approvalList.jsp"
 		})
+		
+		$("#header_mail").on("click",function(){
+			location.href="mail/mailLayOut.jsp"
+		})
+		
+		$("#header_board").on("click",function(){
+			location.href="board/boardList.jsp"
+		})
+		
+		$("#header_schedule").on("click",function(){
+			location.href="schedule/schedule_list.jsp"
+		})
+		
 	})
 	
 	</script>
@@ -134,24 +147,24 @@ main{
 					</ul>
 				</div>
 				<div class="card attField" style="bottom:720px;">
-					<div class="card-header">전자결재</div>
+					<div class="card-header" id="header_approval">전자결재</div>
 					<div class="card-body " id="main_approval">
 					
 					</div>
 				</div>
 				<div class="card attField" style="bottom:711px;">
-					<div class="card-header">사내메일</div>
+					<div class="card-header" id="header_mail">사내메일</div>
 					<div class="card-body " id="main_mail">
 						
 					</div>
 				</div>
 				<div class="card r_attField" style="bottom:1456px;">
-					<div class="card-header">게시판</div>
+					<div class="card-header" id="header_board">게시판</div>
 					<div class="card-body " id="main_board">
 					</div>
 				</div>
 				<div class="card r_attField" style="bottom:1448px;">
-					<div class="card-header">일정관리</div>
+					<div class="card-header" id="header_schedule">일정관리</div>
 					<div class="card-body " id="main_schedule">
 					</div>
 				</div>
