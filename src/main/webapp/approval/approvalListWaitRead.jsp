@@ -56,6 +56,10 @@
 		    }
 		    
 		    #con { pointer-events: none !important; }
+		    
+		    .isHidden {
+			  display: none;
+			}
 		</style>
 
     </head>
@@ -76,7 +80,7 @@
     		dname = vo.getdName();
     		position = vo.geteOfficialResponsibilities();
     		num = vo.geteNumber();
-    		
+    		stamp = vo.getEstamp();
     	} 
     	
     	String pageNum = request.getParameter("pageNum");
@@ -117,14 +121,19 @@
     	<script type="text/javascript">
 			$(function(){
 				$("input[value='결재']").on("click",function(){
-					 var stamp = "<%=vo.geteStampSelf() %>";
-					 $("#stamp1").append($("<img>").attr("src",stamp));
+/* 					  var elem = document.getElementById("stamp1");
+					 elem.style.display="";  */
+					 var stamps = "<%=stamp %>";
+					 $("#stamp1").append($("<img>").attr("src",stamps));
 					 
 					 
 					document.frm.method="get";
 					document.frm.action="approvalListWaitReadForm.jsp";
 					document.frm.submit();  
 				})
+				
+
+
 				
 			})
 		</script>
@@ -166,8 +175,10 @@
 									        </tr>
 									        <tr>
 									            <td><img src="<%=vo.geteStampSelf() %>" style="height: 50px"/></td>
-<%-- 									            <td class="position2" id="stamp1"><img src="<%=vo.geteStamp1() %>" /></td> --%>
-									            <td class="position2" id="stamp1"></td>
+ 									        	<%-- <td class="position2" id="stamp1"><img src="<%=vo.geteStamp1() %>" /></td> --%>
+									            <td class="position2" id="stamp1"><img id="stamp" <% if (vo.geteStamp1() == null) { %>class="isHidden"<% } else { %>src="<%=vo.geteStamp1() %>"<% } %> id="sty" ></td>
+									            
+									            <%-- <img src="<%=vo.geteStamp1() %>" > --%>
 									            <td class="position3" id="stamp2"></td>
 									        </tr>
 									    </table>
