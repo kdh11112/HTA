@@ -21,6 +21,9 @@
 			String sType = request.getParameter("schedule_Type");
 			out.println("<script>window.close();</script>");
 			ScheduleDAO dao = new ScheduleDAO();
+			if(contents == null){
+				out.println("<script>alert('내용을 입력해주세요')</script>");
+			}
 			dao.addSchedule(contents, start_date, end_date, eNumber,sType);
 			dao.close();
 		}
@@ -42,6 +45,9 @@
 			ScheduleDAO dao = new ScheduleDAO();
 			dao.addDepartmentSchedule(contents, start_date, end_date, eNumber, sType);
 			dao.close();
+			if(contents == null){
+				out.println("<script>alert('내용을 입력해주세요')</script>");
+			}
 		}
 	}
 %>

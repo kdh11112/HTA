@@ -13,13 +13,14 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
+<style>
+	#calendar{
+		margin:auto;
+	}
+</style>
+
 <body>
-  <select name="schedule_Type" id="select">
-    <option value="전체" id="">전체일정</option>
-    <option value="개인" id="personal_schedule">개인일정</option>
-    <option value="부서" id="department_schedule">부서일정</option>
-    <option value="회사" id="company_schedule">회사일정</option>
-  </select>
+
   <main>
     <div id='calendar'></div>
   </main>
@@ -30,11 +31,6 @@
     $(document).ready(function() {
       var calendarEl = document.getElementById('calendar');
       calendar = new FullCalendar.Calendar(calendarEl, {
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-        },
         slotMinTime: '09:00:00', // 주간 뷰의 시작 시간 설정
         slotMaxTime: '18:00:00', // 주간 뷰의 종료 시간 설정
         dateClick: function(info) {

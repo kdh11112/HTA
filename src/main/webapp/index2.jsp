@@ -20,8 +20,6 @@
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 <link rel="shortcut icon" href="#">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <title>Insert title here</title>
 
 <script
@@ -85,13 +83,12 @@ var eNumber = <%=vo.geteNumber()%>
 	});
 	$(document).ready(function() {
 		$("#main_approval").load("/HTA_Project_semi/approval/approvalList2.jsp");
-	});
+	});	
 	$(document).ready(function() {
-		$("#main_schedule").load("/HTA_Project_semi/schedule/schedule_list2.jsp");
+		$("#main_schedule").load("/HTA_Project_semi/schedule/mainpage_calendar_load.jsp");
 	});
 
 	</script>
-</html>
 
 
 <body>
