@@ -67,7 +67,7 @@
   
   // 메일 디테일 페이지 로드 함수
   function loadMailDetail(mno) {
-    var url = "mailDetail.jsp?pages=" + mno;
+    var url = "mailTempDetail.jsp?pages=" + mno;
     $.ajax({
       url: url,
       dataType: "html",
