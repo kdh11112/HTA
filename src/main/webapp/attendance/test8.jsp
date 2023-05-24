@@ -109,7 +109,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 
 		var thisWeek = [];
 
-		for (var i = 0; i < 7; i++) {
+		/* 	for (var i = 0; i < 7; i++) {
 			var resultDay = new Date(theYear, theMonth, theDate
 					+ (i - theDayOfWeek));
 			// var yyyy = resultDay.getFullYear();
@@ -117,7 +117,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 			var dd = resultDay.getDate();
 			var ddd = resultDay.getDay();
 
-			/*  console.log("theDate: "+ theDate); */
+			console.log("theDate: "+ theDate);
 			mm = String(mm).length === 1 ? '0' + mm : mm;
 			dd = String(dd).length === 1 ? '0' + dd : dd;
 
@@ -151,7 +151,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 		}
 		document.getElementById('week2').innerHTML = thisWeek[2];
 		var date2 = thisWeek[2].substr(3, 2);
-		/* console.log("date2  : "+ date2); */
+		console.log("date2  : "+ date2);
 
 		if (theDate == date2) {
 			$('#today2').show();
@@ -160,7 +160,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 		}
 		document.getElementById('week3').innerHTML = thisWeek[3];
 		var date3 = thisWeek[3].substr(3, 2);
-		/* console.log("date3  : "+ date3); */
+		console.log("date3  : "+ date3);
 
 		if (theDate == date3) {
 			$('#today3').show();
@@ -169,7 +169,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 		}
 		document.getElementById('week4').innerHTML = thisWeek[4];
 		var date4 = thisWeek[4].substr(3, 2);
-		/* console.log("date4  : "+ date4); */
+		console.log("date4  : "+ date4);
 
 		if (theDate == date4) {
 			$('#today4').show();
@@ -178,7 +178,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 		}
 		document.getElementById('week5').innerHTML = thisWeek[5];
 		var date5 = thisWeek[5].substr(3, 2);
-		/* console.log("date5  : "+ date5); */
+		console.log("date5  : "+ date5);
 
 		if (theDate == date5) {
 			$('#today5').show();
@@ -187,8 +187,8 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 		}
 		document.getElementById('week6').innerHTML = thisWeek[6];
 		var date6 = thisWeek[6].substr(3, 2);
-		/* console.log("date6  : "+ date6);
-		 */
+		console.log("date6  : "+ date6);
+		
 		if (theDate == date6) {
 			$('#today6').show();
 		} else {
@@ -196,7 +196,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 		}
 		document.getElementById('week0').innerHTML = thisWeek[0];
 		var date0 = thisWeek[0].substr(3, 2);
-		/* console.log("date0  : "+ date0); */
+		console.log("date0  : "+ date0);
 
 		if (theDate == date0) {
 			$('#today0').show();
@@ -204,7 +204,7 @@ String Today = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util
 			$('#today0').hide();
 		}
 
-		/* console.log(thisWeek[0]); */
+		console.log(thisWeek[0]); */
 
 	}
 <%Object obj = session.getAttribute("vo");
@@ -642,7 +642,7 @@ if (obj != null) {
 																			ArrayList<WorkingTimeVO> list = dao.getWoringTime(num);//메서드호출
 																			ArrayList<AttendenceVO> list1 =  dao.getDate(num);
 																			ArrayList<WorkingTimeVO> list2 =  dao.getWoringTime(num);
-																		for (int i=0; i<1; i++) {//for문으로 리스트 출력?
+																		for (int i=0; i<list.size(); i++) {//for문으로 리스트 출력?
 																			%>
 
 																			<table
