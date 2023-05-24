@@ -215,7 +215,7 @@ public class ApprovalDAO {
 		sb.append("SELECT * FROM (SELECT ROWNUM AS RNUM,A_NUMBER, A_TITLE, A_NAME, A_START_DATE, A_STATUS, en, A_NAME_1ST,ee, en2, A_NAME_2ND, ee2 from (SELECT a.A_NUMBER, a.A_TITLE, a.A_NAME, a.A_START_DATE, a.A_STATUS, e.E_NUMBER AS en, a.A_NAME_1ST, e.E_OFFICIAL_RESPONSIBILITIES AS ee, e2.E_NUMBER AS en2, a.A_NAME_2ND, e2.E_OFFICIAL_RESPONSIBILITIES AS ee2 FROM APPROVAL a LEFT JOIN EMPLOYEE e ON a.A_NAME_1ST = e.E_NAME LEFT JOIN EMPLOYEE e2  ON a.A_NAME_2ND = e2.E_NAME ORDER BY A_NUMBER DESC) WHERE ROWNUM <= ?) WHERE RNUM >= ? ");
 		if(s.equals("과장")) {			
 			sb.append("AND en = ? AND A_STATUS ='1차결재 대기중' ");
-		}else if(s.equals("차장")) {
+		}else if(s.equals("차장") || s.equals("부사장")) {
 			sb.append("AND en2 = ? AND A_STATUS ='2차결재 대기중' ");
 		}else {
 			sb.append("AND en = ? ");
