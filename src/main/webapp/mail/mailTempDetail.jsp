@@ -17,7 +17,7 @@
 
 <style>
 
-#con { pointer-events: none !important; }
+
 </style>
 </head>
 
@@ -58,7 +58,7 @@
 		
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="title" id="" style="width: 350px" value="<%= vo2.getMTitle() %>" disabled="disabled" /></td>
+				<td><input type="text" name="title" id="" style="width: 350px" value="<%= vo2.getMTitle() %>" /></td>
 			</tr>
 		
 			<tr>
@@ -77,7 +77,14 @@
 		
 			<tr>
 				<th>내용</th>
-				<td><textarea  class="summernote" name="contents" id="con" disabled="disabled"/><%= vo2.getMContent() %></textarea></td>
+				<td><textarea  class="summernote" name="contents" id="con" /><%= vo2.getMContent() %></textarea></td>
+			</tr>
+		
+			<tr>
+				<td colspan="2">
+					<input class="btn btn-primary" type="submit" value="보내기" />
+					<input class="btn btn-primary" type="submit" value="임시저장" formaction="/HTA_Project_semi/mail/mailWriteTempSaveOk.jsp" />
+				</td>
 			</tr>
 		
 		
@@ -100,13 +107,25 @@
             width: 1300,
             codemirror: {
               theme: 'monokai'
-            }
-            ,
-            toolbar: false
+            },
+          toolbar: [
+  	        // [groupName, [list of button]]
+  	        ['fontname', ['fontname']],
+  	        ['fontsize', ['fontsize']],
+  	        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+  	        ['color', ['forecolor', 'color']],
+  	        ['table', ['table']],
+  	        ['para', ['ul', 'ol', 'paragraph']],
+  	        ['height', ['height']],
+  	        ['insert', ['picture', 'link', 'video']],
+  	        ['view', ['fullscreen', 'help']]
+  	      ],
+  	      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+  	      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72']
+            
             
           });
        
-$('#con').summernote('disable');
          
           
           

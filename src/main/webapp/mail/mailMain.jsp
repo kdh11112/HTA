@@ -31,7 +31,7 @@
     .top_menu {
       display: flex;
       flex-direction: row-reverse;
-      background: #9bffff;
+      background: white;
     }
     
     .write_mail {
