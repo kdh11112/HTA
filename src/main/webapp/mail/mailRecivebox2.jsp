@@ -162,7 +162,7 @@
         <%
           for (int i = startPage; i <= endPage; i++) {
         %>
-        <a href="#" onclick="loadPage(<%= i %>); return false;">[<%= i %>]</a>
+      
         <%
           }
         }

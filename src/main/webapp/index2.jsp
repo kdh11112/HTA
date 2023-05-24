@@ -76,7 +76,10 @@ var eNumber = <%=vo.geteNumber()%>
 main{
 	height:500px;
 }
-
+#main_schedule{
+	margin-left:-100px;
+	width:800px;
+}
 </style>
 </head>
 
