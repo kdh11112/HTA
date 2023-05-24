@@ -23,7 +23,7 @@
     <body class="sb-nav-fixed">
             	
                   
-   					<%@ include file="../schedule/calendar.jsp" %>               
+   					<%@ include file="../schedule/mainpage_calendar.jsp" %>               
                   
                   
                  
