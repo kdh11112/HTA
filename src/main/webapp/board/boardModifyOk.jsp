@@ -1,3 +1,4 @@
+<%@page import="dao.AddfileDAO"%>
 <%@page import="vo.AddfileVO"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -10,9 +11,16 @@
 <%
 	
 	//1.파라미터 값 가져오기
+	request.setCharacterEncoding("UTF-8");
 		String b = request.getParameter("bno");
 		String title = request.getParameter("title");
 		String contents = request.getParameter("content");
+		/* String fname = request.getParameter("fname");
+		String floc = request.getParameter("floc"); */
+		
+		out.println("b : "+ b);
+		out.println("title: "+ title);
+		out.println("contents : "+ contents);
 		
 	//2.bno가 null이 아닐 때
 		if(b!=null){
@@ -21,15 +29,14 @@
 			BoardDAO dao = new BoardDAO();
 	//4.vo 객체	
 			BoardVO bvo = new BoardVO();
-			AddfileVO fvo = new AddfileVO();
+			/* AddfileDAO fdao = new AddfileDAO();
+			AddfileVO fvo = new AddfileVO(); */
 	//5.setter로 값 지정
 			bvo.setbNo(bno);
 			bvo.setbTitle(title);
 			bvo.setbContent(contents);
-			
 	//6.dao.updateOne(vo);
 			dao.updateOne(bvo);
-			
 	//7.list.jsp로 리다이렉트
 			response.sendRedirect("boardList.jsp"); 
 		}
