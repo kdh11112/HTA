@@ -80,7 +80,7 @@
       function openWindow(date) {
         // 작은 윈도우 창 열기
         var windowFeatures = "width=320,height=550,scrollbars=yes";
-        var windowObject = window.open("flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
+        var windowObject = window.open("/HTA_Project_semi/schedule/flatpickr.html?date=" + date, "작은 윈도우 창", windowFeatures);
         windowObject.focus();
       }
 
