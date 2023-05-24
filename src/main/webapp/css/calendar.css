@@ -25,6 +25,23 @@
   color: #1285ed;
   text-decoration: none;
 }
+#span1{
+	color: #3788d8;
+}
+#span2{
+	color: #FF6060;
+}
+#span3{
+	color: #66E6B6;
+}
+#info_schedule_color{
+	position: absolute;
+	margin-top: 110px;
+	margin-left: 320px;
+	font-weight: bold;
+	font-size: 15px;
+}
+
 a{
 	color:black;
 	text-decoration:none;

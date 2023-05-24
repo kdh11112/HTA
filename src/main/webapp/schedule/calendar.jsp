@@ -16,22 +16,19 @@
 <style>
 	#span1{
 		color: #3788d8;
-		font-weight: bold;
 	}
 	#span2{
 		color: #FF6060;
-		font-weight: bold;
 	}
 	#span3{
 		color: #66E6B6;
-		font-weight: bold;
 	}
 	#info_color{
 	position: absolute;
-	margin-top: 110px;
-	margin-left: 320px;
+	margin-top: 140px;
+	margin-left: 550px;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 14px;
 	}
 </style>
 <body>
