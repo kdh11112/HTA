@@ -222,7 +222,7 @@
     			},
     			success: function(response){
     					alert("가입이 완료되었습니다.");
-    					location.replace('../login.jsp');
+    					location.replace('../login2.jsp');
     			} 
     		})
     	} 

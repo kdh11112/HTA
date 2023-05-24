@@ -70,7 +70,7 @@
 <%
   Object obj = session.getAttribute("vo");
   if (obj == null) {
-    response.sendRedirect("/HTA_Project_semi/login.jsp");
+    response.sendRedirect("/HTA_Project_semi/login2.jsp");
     /* 로그인 되어 있을때만 화면에 출력
     그렇지 않으면 login.jsp 되돌려보내기 */
   } else {

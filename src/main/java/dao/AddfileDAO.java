@@ -80,4 +80,17 @@ public class AddfileDAO {
 		
 	}
 	
+	/*
+	 * public AddfileVO selectOne(int b_no) { AddfileVO vo = null; //vo초기화
+	 * sb.setLength(0); sb.append("SELECT * FROM addfile WHERE b_no = ? ");
+	 * 
+	 * try { pstmt= conn.prepareStatement(sb.toString()); pstmt.setInt(1, b_no);
+	 * 
+	 * rs= pstmt.executeQuery();
+	 * 
+	 * while(rs.next()) { int bNo = rs.getInt("bNo"); String fName =
+	 * rs.getString("fName"); String fLoc = rs.getString("fLoc"); vo = new
+	 * AddfileVO(bNo, fName, fLoc); } } catch (SQLException e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); } return vo; }
+	 */
 }

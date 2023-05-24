@@ -1,3 +1,5 @@
+<%@page import="vo.AddfileVO"%>
+<%@page import="dao.AddfileDAO"%>
 <%@page import="vo.EmployeeVO"%>
 <%@page import="vo.BoardVO"%>
 <%@page import="dao.BoardDAO"%>
@@ -44,8 +46,10 @@
 			int bno = Integer.parseInt(b);
 	//4. dao 객체 
 			BoardDAO dao = new BoardDAO();
+			/* AddfileDAO fdao = new AddfileDAO(); */
 	//5. dao를 통해서 지정한 게시물 가져오기(vo): dao.selectOne(bno);
 			BoardVO vo = dao.selectOne(bno);
+			/* AddfileVO fvo = fdao.selectOne(bno); */
 	//6. 화면에 출력(테이블 형태로 출력)
 			if(vo!=null){
 	//7. 자원반납 dao.close();
@@ -62,7 +66,7 @@
 	         	<div class="card mb-4">
       			<h2>게시글 작성</h2>
 	
-	<form action="boardModifyOk.jsp" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+	<form action="boardModifyOk.jsp" method="post" >
 	<table>
 		<tr>
 			<th>제목 *</th>
@@ -77,14 +81,16 @@
 			<th><%=vo.getbView() %></th>        
         </tr>
         <tr>
-        	<th>작성일시</th>
-        	<th><%=vo.getbRegdate() %></th>
-        	<input type="hidden" name="bno" value="<%=vo.getbNo() %>"/>
+        	<th>작성일시  :   <%= vo.getbNo() %></th>
+        	<th><%=vo.getbRegdate() %>
+        
+        	<input type="hidden" name="bno" value="<%=vo.getbNo() %>" />
+        	</th>
         </tr>
-        <tr>
+<!--         <tr>
             <th>첨부파일</th>
             <td><input type="file" name="filename"></td>
-        </tr>
+        </tr> -->
 		<tr>
 			<th>내용</th>
 			<td><textarea class="summernote" name="content"><%=vo.getbContent() %></textarea></td>
@@ -94,9 +100,9 @@
 			<a href="boardList.jsp">
 			<input type="button" value="목록" />
 			</a>
-			<a href="boardModifyOk.jsp">
+			<!-- <a href="boardModifyOk.jsp"> -->
 			<input type="submit" value="수정" />
-			</a>
+			<!-- </a> -->
 			</td>
 		</tr>
 		<%
