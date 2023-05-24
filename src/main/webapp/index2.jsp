@@ -69,8 +69,8 @@ var eNumber = <%=vo.geteNumber()%>
 <style>
 .card-body{
 	width:100%;
-	height:250px;
-	overflow: auto;
+	height:300px;
+	overflow: hidden;
 }
 
 </style>
@@ -78,10 +78,10 @@ var eNumber = <%=vo.geteNumber()%>
 
 	<script>
 	$(document).ready(function() {
-		$("#main_mail").load("/HTA_Project_semi/mail/mailMain.jsp");
+		$("#main_mail").load("/HTA_Project_semi/mail/mailRecivebox2.jsp");
 	});
 	$(document).ready(function() {
-		$("#main_board").load("/HTA_Project_semi/board/boardList.jsp");
+		$("#main_board").load("/HTA_Project_semi/board/boardList2.jsp");
 	});
 	$(document).ready(function() {
 		$("#main_approval").load("/HTA_Project_semi/approval/approvalList2.jsp");
@@ -129,24 +129,24 @@ var eNumber = <%=vo.geteNumber()%>
 
 					</ul>
 				</div>
-				<div class="card attField">
+				<div class="card attField" style="bottom:720px;">
 					<div class="card-header">전자결재</div>
 					<div class="card-body " id="main_approval">
 					
 					</div>
 				</div>
-				<div class="card attField">
+				<div class="card attField" style="bottom:711px;">
 					<div class="card-header">사내메일</div>
 					<div class="card-body " id="main_mail">
 						
 					</div>
 				</div>
-				<div class="card r_attField">
+				<div class="card r_attField" style="bottom:1456px;">
 					<div class="card-header">게시판</div>
 					<div class="card-body " id="main_board">
 					</div>
 				</div>
-				<div class="card r_attField">
+				<div class="card r_attField" style="bottom:1448px;">
 					<div class="card-header">일정관리</div>
 					<div class="card-body " id="main_schedule">
 					</div>
