@@ -115,13 +115,24 @@
     
     %>
     	<script type="text/javascript">
-
+			$(function(){
+				$("input[value='결재']").on("click",function(){
+					 var stamp = "<%=vo.geteStampSelf() %>";
+					 $("#stamp1").append($("<img>").attr("src",stamp));
+					 
+					 
+					document.frm.method="get";
+					document.frm.action="approvalListWaitReadForm.jsp";
+					document.frm.submit();  
+				})
+				
+			})
 		</script>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark"><%@ include file="../menu/navi.jsp" %></nav>
         <div id="layoutSidenav"> 
         	<div id="layoutSidenav_nav"><%@ include file="../menu/side.jsp" %></div>  
            	 	<div id="layoutSidenav_content">
-            		<form action="approvalListWaitReadForm.jsp" method="get">
+            		<form action="approvalListWaitReadForm.jsp" name="frm" method="get">
 		            	<main>
 		                    <div class="container-fluid px-4">
 		                        <h1 class="mt-4">전자결재 작성</h1>
@@ -154,8 +165,9 @@
 									            <td class="position3"><input type="text" id="data-placeholder3" name="data-placeholder3" value="<%=vo.getaName2nd() %>" readonly></td>
 									        </tr>
 									        <tr>
-									            <td><img src="<%=vo.geteStampSelf() %>" /></td>
-									            <td class="position2" id="stamp1"><img src="<%=vo.geteStamp1() %>" /></td>
+									            <td><img src="<%=vo.geteStampSelf() %>" style="height: 50px"/></td>
+<%-- 									            <td class="position2" id="stamp1"><img src="<%=vo.geteStamp1() %>" /></td> --%>
+									            <td class="position2" id="stamp1"></td>
 									            <td class="position3" id="stamp2"></td>
 									        </tr>
 									    </table>
@@ -171,7 +183,7 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<input class="btn btn-info" type="submit" value="결재" />
+												<input class="btn btn-info" type="button" value="결재" />
 												<!-- <input class="btn btn-info" type="button" value="결재버튼" onclick="approvalButton();"/> -->
 											</td>
 										</tr>

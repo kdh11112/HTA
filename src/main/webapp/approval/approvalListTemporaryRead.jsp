@@ -110,7 +110,7 @@
 					 
 					document.frm.method="get";
 					document.frm.action="approvalListTemporaryReadOk.jsp";
-					 document.frm.submit();  
+					document.frm.submit();  
 				})
 				
 			})

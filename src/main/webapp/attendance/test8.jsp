@@ -287,99 +287,128 @@ if (obj != null) {
 		//시간정보 넘기기 끝
 
 	} */
+	$(function() {
+		  $("#in").on("click", function() {
+		    $.ajax({
+		      type: "post",
+		      url: "startTime.jsp",
+		      data: {
+		        id: eNumber
+		      },
+		      success: function(data) {
+		        console.log(data);
+		        var data2 = data.trim(); // Remove whitespace
+
+		        if (data2 == "0") {
+		          // Already started work, display a notification dialog
+		          $("<div>", {
+		            title: "알림",
+		            text: "이미 출근처리되었습니다."
+		          }).dialog({
+		            modal: true,
+		            buttons: {
+		              OK: function() {
+		                $(this).dialog("close");
+		              }
+		            }
+		          });
+		        } else {
+		          // Confirm start work and display the start time
+		          $("<div>", {
+		            title: "출근하시겠습니까?",
+		            text: "출근하시겠습니까?"
+		          }).dialog({
+		            modal: true,
+		            buttons: {
+		              OK: function() {
+		                $(this).dialog("close");
+
+		                // Get current time and update the "begin" element
+		                var n = new Date();
+		                var startTime =
+		                  n.getHours() +
+		                  "시" +
+		                  n.getMinutes() +
+		                  "분" +
+		                  n.getSeconds() +
+		                  "초";
+		                $("#begin").html(startTime);
+
+		                // Additional code to be executed after starting work
+		                console.log("출근 처리 완료");
+		              },
+		              Cancel: function() {
+		                $(this).dialog("close");
+		              }
+		            }
+		          });
+		        }
+		      }
+		    });
+		  });
+		});
 
 	$(function() {
-		$("#in").on(
-				"click",
-				function() {
-					$.ajax({
-						type : "post",
-						url : "startTime.jsp",
-						data : {
-							id : eNumber
-						},
-						success : function(data) {
-							console.log(data);
-							var data2 = data.trim();// 공백 제거
+		  $("#out").on("click", function() {
+		    $.ajax({
+		      type: "post",
+		      url: "endTime.jsp",
+		      data: {
+		        id: eNumber
+		      },
+		      success: function(data) {
+		        console.log(data);
+		        var data2 = data.trim(); // Remove whitespace
 
-							if (data2 == "0") {
-								//console.log("하하하");
-								// 이미 출근한 상태이므로 알림창을 띄웁니다.
-								$("<div>", {
-									title : "알림",
-									text : "이미 출근처리되었습니다."
-								}).dialog({
-									modal : true,
-									buttons : {
-										OK : function() {
-											$(this).dialog("close");
+		        if (data2 == "0") {
+		          // Already ended work, display a notification dialog
+		          $("<div>", {
+		            title: "알림",
+		            text: "이미 퇴근처리되었습니다."
+		          }).dialog({
+		            modal: true,
+		            buttons: {
+		              OK: function() {
+		                $(this).dialog("close");
+		              }
+		            }
+		          });
+		        } else {
+		          // Confirm end work and display the end time
+		          $("<div>", {
+		            title: "퇴근하시겠습니까?",
+		            text: "퇴근하시겠습니까?"
+		          }).dialog({
+		            modal: true,
+		            buttons: {
+		              OK: function() {
+		                $(this).dialog("close");
 
-										}
-									}
-								});
+		                // Get current time and update the "end" element
+		                var n = new Date();
+		                var endTime =
+		                  n.getHours() +
+		                  "시" +
+		                  n.getMinutes() +
+		                  "분" +
+		                  n.getSeconds() +
+		                  "초";
+		                $("#end").html(endTime);
 
-								return; // 더 이상 실행하지 않고 종료합니다.
-							} else {
-								var n = new Date();
-								var startTime = n.getHours() + "시"
-										+ n.getMinutes() + "분" + n.getSeconds()
-										+ "초";
-								$("#begin").html(startTime);
+		                // Additional code to be executed after ending work
+		                console.log("퇴근 처리 완료");
+		              },
+		              Cancel: function() {
+		                $(this).dialog("close");
+		              }
+		            }
+		          });
+		        }
+		      }
+		    });
+		  });
+		});
 
-							}
-							// 출근 처리 완료 후 실행할 내용을 추가하세요.
-							console.log("출근 처리 완료");
-						}
-					});
-				});
-	});
-
-	$(function() {
-		$("#out").on(
-				"click",
-				function() {
-					$.ajax({
-						type : "post",
-						url : "endTime.jsp",
-						data : {
-							id : eNumber
-						},
-						success : function(data) {
-							console.log(data);
-							var data2 = data.trim();// 공백 제거
-
-							if (data2 == "0") {
-								//console.log("하하하");
-								// 이미 퇴근한 상태이므로 알림창을 띄웁니다.
-								$("<div>", {
-									title : "알림",
-									text : "이미 퇴근처리되었습니다."
-								}).dialog({
-									modal : true,
-									buttons : {
-										OK : function() {
-											$(this).dialog("close");
-
-										}
-									}
-								});
-
-								return; // 더 이상 실행하지 않고 종료합니다.
-							} else {
-								var n = new Date();
-								var endTime = n.getHours() + "시"
-										+ n.getMinutes() + "분" + n.getSeconds()
-										+ "초";
-								$("#end").html(endTime);
-
-							}
-							// 퇴근 처리 완료 후 실행할 내용을 추가하세요.
-							console.log("퇴근 처리 완료");
-						}
-					});
-				});
-	});
-	
 	$(function() {
 		  // 페이지 로드 시 값 가져오기
 		  $.ajax({
