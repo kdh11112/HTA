@@ -61,12 +61,7 @@
     %>
 
             <div id="layoutSidenav_content">
-            	<main>
-                    <div class="container-fluid px-4">
-                        
-                        <div class="card mb-4">
-                          
-                            <div class="card-body">
+
                                 <table class="table table-striped .w-auto">
                                     <thead>
                                         <tr>
@@ -99,24 +94,24 @@
                                 	<td colspan="4">
                                 	<nav aria-label="Page navigation example">
 									  <ul class="pagination">
-									    <li class="page-item">
+<%-- 									    <li class="page-item">
 									      <a class="page-link" href="approvalList.jsp?pageNum=<%=prevPage %>" aria-label="Previous">
 									        <span aria-hidden="true">&laquo;</span>
 									      </a>
-									    </li>
+									    </li> --%>
                                 	<%
                                 		for(int i=startPage; i<=endPage; i++){
                                 			
                                 	%>
-									    <li class="page-item">
+<%-- 									    <li class="page-item">
 									  <a class="page-link" href="approvalList.jsp?pageNum=<%=i%>"> <%=i %></a>
-									    </li>
+									    </li> --%>
                                 	<%
                                 		}
                                 	%>
-									    <li class="page-item">
+<%-- 									    <li class="page-item">
 									      <a class="page-link" href="approvalList.jsp?pageNum=<%=nextPage %>" aria-label="Next">
-									        <span aria-hidden="true">&raquo;</span>
+									        <span aria-hidden="true">&raquo;</span> --%>
 									      </a>
 									    </li>
 									  </ul>
@@ -124,10 +119,7 @@
                                 			
                                 	</td>
                                 </tr>
-                            </div>
-                        </div>
-                    </div>
-                 </main>
+ 
 				<footer class="py-4 bg-light mt-auto"></footer>
             </div>
         </div>

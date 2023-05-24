@@ -80,9 +80,7 @@
 		}
 
 	%>
-         <main>
-			<div class="container-fluid px-4">
-       		<div class="card mb-4">
+
        		
        			<table class="table table-striped"
 						style="text-align: center; border: 1ps solid #dddddd">
@@ -121,9 +119,7 @@
 					}
 				%>
 				</td>
-       	</div>
-       </div>
-       	</main>
+
        </div>
 	</div>
 
