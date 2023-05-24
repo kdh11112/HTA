@@ -126,12 +126,6 @@
        	</main>
        </div>
 	</div>
-	<!--  애니메이션 담당 JQUERY -->
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<!--  부트스트랩 JS -->
-	<script src="js/bootstrap.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="../js/scripts.js"></script><!-- 사이드바 열고 닫기 -->
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
