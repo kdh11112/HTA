@@ -128,10 +128,19 @@ public class AttendenceDAO {
 		//사원별 출퇴근시간가져오기
 		ArrayList<AttendenceVO> list = new ArrayList<AttendenceVO>();
 		sb.setLength(0);
-		sb.append("select e_number,OFFICE_GOING_HOUR,QUITTING_TIME ");
+		/*
+		 * sb.
+		 * append("select e_number,to_char(OFFICE_GOING_HOUR,'HH24:MI:SS') office_Going_Hour ,to_char(QUITTING_TIME,'HH24:MI:SS') quitting_Time "
+		 * ); sb.append("from attendance "); sb.append("where e_number=? ");
+		 * sb.append("group by ");
+		 */
+		sb.append("select e_number, working_date, OFFICE_GOING_HOUR, quitting_Time ");
+		sb.append("from ( select e_number, working_date, to_char(OFFICE_GOING_HOUR,'HH24:MI:SS') OFFICE_GOING_HOUR,to_char(QUITTING_TIME,'HH24:MI:SS') quitting_Time  ");
 		sb.append("from attendance ");
 		sb.append("where e_number=? ");
-
+		sb.append("order by attendance.attendance_no asc ) ");
+		sb.append("where rownum <= 5 ");
+		
 		
 		AttendenceVO vo =null;
 		try {

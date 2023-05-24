@@ -641,8 +641,7 @@ if (obj != null) {
 																			<%
 																			ArrayList<WorkingTimeVO> list = dao.getWoringTime(num);//메서드호출
 																			ArrayList<AttendenceVO> list1 =  dao.getDate(num);
-																			ArrayList<WorkingTimeVO> list2 =  dao.getWoringTime(num);
-																		for (int i=0; i<1; i++) {//for문으로 리스트 출력?
+																			//for (WorkingTimeVO vo3 : list) {//for문으로 리스트 출력?
 																			%>
 
 																			<table
@@ -665,26 +664,26 @@ if (obj != null) {
 																							Date d = new Date();
 																							SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 																							String t = sdf.format(d); 
-																							if( list2.get(i).getDay().equals(t) ){
+																							/* if( vo3.getDay().equals(t) ){ */
 																						%>
 																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="#" class="text-dark" ><%= list2.get(i).getDay() %></a>&nbsp;
+																								<a href="#" class="text-dark" ><%-- <%= vo3.getDay() %> --%></a>&nbsp;
 																								<span
 																									class="badge badge-pill badge-soft-success font-size-12"
 																									id="today1" style="color: blue">오늘</span>
 																							</h5>
 																						<%	
-																							}else{
+																						/* 	}else{ */
 																						%>
 																							<h5 class="text-truncate font-size-16 mb-1">
-																								<a href="#" class="text-dark" ><%= list2.get(i).getDay() %></a>&nbsp;
+																								<a href="#" class="text-dark" ><%-- <%= vo3.getDay() %> --%></a>&nbsp;
 																								<span
 																									class="badge badge-pill badge-soft-success font-size-12"
-																									id="today1" style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- &nbsp; --></span>
+																									id="today1" style="color: blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 																							</h5>
 																						
 																						<%
-																							}
+																						/* 	} */
 																						%>
 																						</td>
 																						<td data-org-colspan="1"
@@ -692,58 +691,38 @@ if (obj != null) {
 
 																							<div class="d-flex flex-wrap gap-3">
 																							<%
-																							
+																							//	ArrayList<AttendenceVO> list1 =  dao.getDate(num);
+																								//for(AttendenceVO vo4 : list1){
 																							%>
 																								<a href="#" class="text-dark font-size-16"
 																									data-bs-toggle="modal"
 																									data-bs-target="#exampleModal"
 																									data-bs-whatever="@mdo"> <span
 																									class="badge badge-pill badge-soft-secondary font-size-14"
-																									style="color: blue">근무<%=list1.get(i).getOfficeGoingHour() %> ~ <%=list1.get(i).getQuittingTime() %></span>&nbsp;
+																									style="color: blue">근무 <%= list1.get(0).getOfficeGoingHour() %></span> &nbsp;
 																								</a>
-																								<%-- <%
-																								}
-																								%> --%>
+																								<%
+																								//}
+																								%>
 
 																							</div>
 																						</td>
 																						<td data-org-colspan="1"
 																							data-columns="id3c6e7ddbeb24f-col-undefined">
-																							<%=list.get(i).getTime() %>시간
+																							<%-- <%= vo3.getTime() %> --%>시간
 																						</td>
 
 																					</tr>
 																					
-																			<%-- <%
-																			}
-																			%>  --%>
-																					<%-- <tr>
-																						<td  data-org-colspan="1"
-																							data-columns="id3c6e7ddbeb24f-col-undefined"><%=list.get(0).getDay() %></td>
-																						<td><%=list1.get(0).getOfficeGoingHour() %> ~ <%=list1.get(0).getQuittingTime() %></td>
-																					</tr>
-																					<tr>
-																						<td><%=list.get(1).getDay() %></td>
-																						<td><%=list1.get(1).getOfficeGoingHour() %> ~ <%=list1.get(0).getQuittingTime() %></td>
-																					</tr>
-																						<tr>
-																						<td><%=list.get(2).getDay() %></td>
-																						<td><%=list1.get(2).getOfficeGoingHour() %> ~ <%=list1.get(0).getQuittingTime() %></td>
-																					</tr>
-																						<tr>
-																						<td><%=list.get(1).getDay() %></td>
-																						<td><%=list1.get(1).getOfficeGoingHour() %> ~ <%=list1.get(0).getQuittingTime() %></td>
-																					</tr>
-																						<tr>
-																						<td><%=list.get(1).getDay() %></td>
-																						<td><%=list1.get(1).getOfficeGoingHour() %> ~ <%=list1.get(0).getQuittingTime() %></td>
-																					</tr> --%>
+																					
+																					
+																			<%
+																			//}
+																			%>
 																					
 																				</tbody>
 																			</table>
-																			<%
-																			}
-																			%>
+																			
 																		</div>
 																	</div>
 																</div>
