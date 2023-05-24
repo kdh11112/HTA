@@ -39,14 +39,18 @@
 				$("#contents_text").append("<textarea>").attr("placeholder","값을 입력해주세요");
 			}else{
 				
-			document.frm.method="get";
-			document.frm.action="schedule_add.jsp";
-			document.frm.submit(); 
+				document.frm.method="get";
+				document.frm.action="schedule_add.jsp";
+				document.frm.submit(); 
+				window.opener.location.reload();
+	            
 			}
 			
 			
 		})
-		
+		window.onunload = function() {
+	      // 추가버튼을 누르면 부모 윈도우 새로고침
+	    };
 	})
 
 </script>

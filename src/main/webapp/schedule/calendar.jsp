@@ -13,6 +13,27 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
+<style>
+	#span1{
+		color: #3788d8;
+		font-weight: bold;
+	}
+	#span2{
+		color: #FF6060;
+		font-weight: bold;
+	}
+	#span3{
+		color: #66E6B6;
+		font-weight: bold;
+	}
+	#info_color{
+	position: absolute;
+	margin-top: 110px;
+	margin-left: 320px;
+	font-weight: bold;
+	font-size: 15px;
+	}
+</style>
 <body>
   <select name="schedule_Type" id="select">
     <option value="전체" id="">전체일정</option>
@@ -21,6 +42,11 @@
     <option value="회사" id="company_schedule">회사일정</option>
   </select>
   <main>
+  <div id="info_color">
+  	<span>개인일정<span id="span1">■</span></span>
+  	<span>부서일정<span id="span2">■</span></span>
+  	<span>회사일정<span id="span3">■</span></span>
+    </div>
     <div id='calendar'></div>
   </main>
 
@@ -55,31 +81,43 @@
       loadAllEvents();
 
       function loadAllEvents() {
-        // 개인 일정 가져오기
-        $.ajax({
-          url: "/HTA_Project_semi/schedule/personal_load_schedule.jsp",
-          data: {
-            schedule_Type: "개인"
-          },
-          success: function(response) {
-            var personalData = JSON.parse(response);
+    	  // 개인 일정 가져오기
+    	  $.ajax({
+    	    url: "/HTA_Project_semi/schedule/personal_load_schedule.jsp",
+    	    data: {
+    	      schedule_Type: "개인"
+    	    },
+    	    success: function(response) {
+    	      var personalData = JSON.parse(response);
 
-            // 부서 일정 가져오기
-            $.ajax({
-              url: "/HTA_Project_semi/schedule/department_load_schedule.jsp",
-              data: {
-                schedule_Type: "부서"
-              },
-              success: function(response) {
-                var departmentData = JSON.parse(response);
-                var allData = personalData.concat(departmentData);
-                calendar.setOption('events', allData); // 달력의 events 옵션 업데이트
-                calendar.render(); // 달력 다시 렌더링
-              }
-            });
-          }
-        });
-      }
+    	      // 부서 일정 가져오기
+    	      $.ajax({
+    	        url: "/HTA_Project_semi/schedule/department_load_schedule.jsp",
+    	        data: {
+    	          schedule_Type: "부서"
+    	        },
+    	        success: function(response) {
+    	          var departmentData = JSON.parse(response);
+
+    	          // 회사 일정 가져오기
+    	          $.ajax({
+    	            url: "/HTA_Project_semi/schedule/company_load_schedule.jsp",
+    	            data: {
+    	              schedule_Type: "회사"
+    	            },
+    	            success: function(response) {
+    	              var companyData = JSON.parse(response);
+
+    	              var allData = personalData.concat(departmentData).concat(companyData);
+    	              calendar.setOption('events', allData); // 달력의 events 옵션 업데이트
+    	              calendar.render(); // 달력 다시 렌더링
+    	            }
+    	          });
+    	        }
+    	      });
+    	    }
+    	  });
+    	}
 
       function openWindow(date) {
         // 작은 윈도우 창 열기
@@ -139,7 +177,17 @@
             }
           });
         } else if (selectedValue == "회사") {
-          alert("회사일정이 없습니다")
+        	 $.ajax({
+                 url: "/HTA_Project_semi/schedule/company_load_schedule.jsp",
+                 data : {
+                   schedule_Type: selectedValue
+                 },
+                 success: function(response) {
+                   var data = JSON.parse(response);
+                   calendar.setOption('events', data); // 달력의 events 옵션 업데이트
+                   calendar.render(); // 달력 다시 렌더링
+                 }
+               });
         }
       });
     });
