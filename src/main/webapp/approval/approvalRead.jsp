@@ -142,7 +142,7 @@
 									            <td class="position3"><input type="text" id="placeholder3" name="dplaceholder3" value="<%=vo.getaName2nd() %>" readonly></td>
 									        </tr>
 									        <tr>
-									            <td><img src="<%=vo.geteStampSelf() %>" class="myImg"></td>
+									            <td style="height: 50px"><img src="<%=vo.geteStampSelf() %>" class="myImg" ></td>
 									            <td><img src="<%=vo.geteStamp1() %>" class="myImg"></td>
 									            <td><img src="<%=vo.geteStamp2() %>" class="myImg"></td>
 									        </tr>
